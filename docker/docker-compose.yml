@@ -26,6 +26,8 @@ services:
         container_name: mariadb_e0ywpailjm0esoom
         image: mariadb:latest
         restart: always
+        ports:
+            - 3306:3306
         volumes:
             - ../../.database/my_app:/var/lib/mysql
 #            - ./mariadb/conf/mariadb:/etc/mysql

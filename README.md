@@ -14,6 +14,8 @@ https://skyflow.io/
 ## Installation
 
 ```
+git clone git@github.com:saroumougame/coding-sensei.git
+cd coding-sensei
 skyflow compose:up 
 skyflow compose:composer:run "composer update"
 skyflow compose:symfony:sh

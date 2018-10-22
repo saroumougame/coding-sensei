@@ -13,7 +13,7 @@ class AppComponent extends React.Component {
     render(){
         return (
             <div className="app-component">
-                <h1>AppComponent is ready !</h1>
+                <h2>Composant React</h2>
             </div>
         )
     }

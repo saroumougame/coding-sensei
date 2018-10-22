@@ -5,11 +5,10 @@
 Coding-sensei est une platform pour apprendre le php ...
 
 ### Prerequis
-```
+
 Docker
-Skyflow 
-```
-https://skyflow.io/
+
+Skyflow  https://skyflow.io/doc#doc-for-default-module-get-started
 
 ## Installation
 
@@ -30,6 +29,8 @@ bin/console doctrine:database:create --if-not-exists // penser a conf le .env
 - App URL : http://localhost:8889/
 - MariaDB url: 0.0.0.0:3306
 - Db : coding 
+- user : coding
+- mdp : coding
 - DATABASE_URL=mysql://coding:coding@0.0.0.0:3306/coding
 
 

@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import withTheme from '@material-ui/core/styles/withTheme';
 import withWidth, { isWidthDown } from '@material-ui/core/withWidth';
@@ -101,7 +102,62 @@ class ContentToolbar extends React.Component {
 
     return (
       <Toolbar>
-        <IconButton
+        
+
+        <Typography variant="title" color="inherit" noWrap>
+          {setTitle(menuItems, location.pathname) || 'Route Not Found'}
+        </Typography>
+
+        <span className="portal-flex" />
+
+        <Button variant="raised" >
+          Ce connecter
+        </Button>
+      </Toolbar>
+    );
+  }
+}
+
+function mapStateToProps(state) {
+  return {
+    layout: {
+      sidenavOpen: state.layout.sidenavOpen
+    }
+  };
+}
+
+ContentToolbar.propTypes = {
+  width: PropTypes.string.isRequired,
+  layout: PropTypes.shape({
+    sidenavOpen: PropTypes.bool
+  }).isRequired,
+  theme: PropTypes.shape({}).isRequired,
+  toggleSidenav: PropTypes.func.isRequired,
+  toggleNotifications: PropTypes.func.isRequired,
+  updateLayout: PropTypes.func.isRequired,
+  changeTheme: PropTypes.func.isRequired,
+  changeThemeDirection: PropTypes.func.isRequired,
+  location: PropTypes.shape({}).isRequired
+};
+
+export default compose(
+  withRouter,
+  withWidth(),
+  withTheme(),
+  connect(mapStateToProps, {
+    toggleSidenav,
+    toggleNotifications,
+    updateLayout,
+    changeTheme,
+    changeThemeDirection
+  })
+)(ContentToolbar);
+
+/*
+<Button variant="raised" className={classes.button}>
+        Default
+      </Button>
+<IconButton
           color="inherit"
           aria-label="open sidenav"
           style={{ display: showBurgerMenu ? 'block' : 'none' }}
@@ -109,11 +165,13 @@ class ContentToolbar extends React.Component {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="title" color="inherit" noWrap>
-          {setTitle(menuItems, location.pathname) || 'Route Not Found'}
-        </Typography>
-        <span className="portal-flex" />
-        <IconButton
+
+
+        [...]
+
+
+        
+ <IconButton
           color="inherit"
           aria-label="change theme"
           onClick={this.handleOpenThemeClick}
@@ -173,42 +231,5 @@ class ContentToolbar extends React.Component {
         >
           <NotificationsIcon />
         </IconButton>
-      </Toolbar>
-    );
-  }
-}
 
-function mapStateToProps(state) {
-  return {
-    layout: {
-      sidenavOpen: state.layout.sidenavOpen
-    }
-  };
-}
-
-ContentToolbar.propTypes = {
-  width: PropTypes.string.isRequired,
-  layout: PropTypes.shape({
-    sidenavOpen: PropTypes.bool
-  }).isRequired,
-  theme: PropTypes.shape({}).isRequired,
-  toggleSidenav: PropTypes.func.isRequired,
-  toggleNotifications: PropTypes.func.isRequired,
-  updateLayout: PropTypes.func.isRequired,
-  changeTheme: PropTypes.func.isRequired,
-  changeThemeDirection: PropTypes.func.isRequired,
-  location: PropTypes.shape({}).isRequired
-};
-
-export default compose(
-  withRouter,
-  withWidth(),
-  withTheme(),
-  connect(mapStateToProps, {
-    toggleSidenav,
-    toggleNotifications,
-    updateLayout,
-    changeTheme,
-    changeThemeDirection
-  })
-)(ContentToolbar);
+*/

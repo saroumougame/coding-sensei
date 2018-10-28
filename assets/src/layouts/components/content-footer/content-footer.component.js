@@ -26,11 +26,9 @@ const ContentFooter = (props) => {
           color="inherit"
           noWrap
         >
-          <small>&copy; 2018 Oxygenna</small>
+          <small>&copy; 2018 Conding Sensei</small>
         </Typography>
         <span className="portal-flex" />
-        <FontAwesome name="facebook" className={classes.coloredIcon} />
-        <FontAwesome name="twitter" className={classes.coloredIcon} />
       </Toolbar>
     </AppBar>
   );

@@ -26,7 +26,8 @@ import themes from './themes';
 export const configuredTheme = themes[0].theme;
 
 export const configuredLayout = {
-  currentLayout: 'classic',
+  // front = réel OU classic = dev menu
+  currentLayout: 'front',
   notificationsOpen: false
 };
 
@@ -38,7 +39,7 @@ export const menuItems = [{
   title: 'Dashboards',
   icon: <HomeIcon style={iconStyle} />,
   children: [{
-    title: 'Analytics',
+    title: 'Conding Sensei',
     href: '/',
     icon: <DashboardIcon style={iconStyle} />
   }, {
@@ -52,6 +53,10 @@ export const menuItems = [{
   }, {
     title: 'Project',
     href: '/dashboards/project',
+    icon: <EventNoteIcon style={iconStyle} />
+  }, {
+    title: 'Analytics',
+    href: '/dashboards/analytics',
     icon: <EventNoteIcon style={iconStyle} />
   }
 ]

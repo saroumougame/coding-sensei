@@ -13,8 +13,8 @@ class AppContainer extends React.Component {
     }
 }
 
-/*
+
 ReactDOM.render(
 <AppContainer/>,
     document.querySelector('#app-container')
-);*/
+);

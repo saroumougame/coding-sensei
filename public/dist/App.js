@@ -21090,6 +21090,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Container_AppContainer_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Container/AppContainer/AppContainer.jsx */ "./src/Container/AppContainer/AppContainer.jsx");
 
 
+
+react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Component_AppComponent_AppComponent_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById('app'));
+
 /***/ }),
 
 /***/ "./src/Component/AppComponent/AppComponent.jsx":
@@ -21169,7 +21172,11 @@ function (_React$Component) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 /***/ }),
 

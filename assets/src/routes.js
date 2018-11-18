@@ -2,9 +2,9 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import asyncComponent from './components/async.component';
+
 import Front from './layouts/layout-front/layout-front.component';
 import Classic from './layouts/layout-classic/layout-classic.component';
-
 import Compact from './layouts/layout-compact/layout-compact.component';
 import Toolbar from './layouts/layout-toolbar/layout-toolbar.component';
 import Boxed from './layouts/layout-boxed/layout-boxed.component';
@@ -139,6 +139,8 @@ export default ({ childProps, layout }) => {
     <Switch>
 
       <AppRoute path="/" exact component={AsyncLanding} props={childProps} layout={activeLayout} />
+
+
       <AppRoute path="/dashboards/analytics" exact component={AsyncAnalyticsDashboard} props={childProps} layout={activeLayout} />
       <AppRoute path="/dashboards/ecommerce" exact component={AsyncEcommerceDashboard} props={childProps} layout={activeLayout} />
       <AppRoute path="/dashboards/crypto" exact component={AsyncCryptoDashboard} props={childProps} layout={activeLayout} />

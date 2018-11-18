@@ -18,3 +18,7 @@
 ###< symfony/web-server-bundle ###
 
 assets/node_modules/
+
+*.lock
+
+\.idea/

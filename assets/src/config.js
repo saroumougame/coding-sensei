@@ -27,7 +27,7 @@ export const configuredTheme = themes[0].theme;
 
 export const configuredLayout = {
   // front = réel OU classic = dev menu
-  currentLayout: 'front',
+  currentLayout: 'classic',
   notificationsOpen: false
 };
 

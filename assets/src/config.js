@@ -27,7 +27,7 @@ export const configuredTheme = themes[0].theme;
 
 export const configuredLayout = {
   // front = réel OU classic = dev menu
-  currentLayout: 'classic',
+  currentLayout: 'front',
   notificationsOpen: false
 };
 
@@ -43,6 +43,11 @@ export const menuItems = [{
     href: '/',
     icon: <DashboardIcon style={iconStyle} />
   }, {
+    title: 'Ecole',
+    href: '/ecole',
+    icon: <ShoppingCartIcon style={iconStyle} />
+  },
+    {
     title: 'Ecommerce',
     href: '/dashboards/ecommerce',
     icon: <ShoppingCartIcon style={iconStyle} />

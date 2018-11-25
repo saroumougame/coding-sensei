@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import {NavLink, withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
@@ -33,6 +33,9 @@ import { menuItems } from '../../../config';
 import themes from '../../../themes';
 
 function setTitle(items, currentPath) {
+
+  return 'coding-sensei';
+
   for (let i = 0; i < items.length; i += 1) {
     if (items[i].href && items[i].href === currentPath) {
       return items[i].title;
@@ -102,11 +105,12 @@ class ContentToolbar extends React.Component {
 
     return (
       <Toolbar>
-        
 
-        <Typography variant="title" color="inherit" noWrap>
-          {setTitle(menuItems, location.pathname) || 'Route Not Found'}
-        </Typography>
+        <NavLink to="/">
+          <Typography variant="title" color="inherit" noWrap>
+            {setTitle(menuItems, location.pathname) || 'Route Not Found'}
+          </Typography>
+        </NavLink>
 
         <span className="portal-flex" />
 

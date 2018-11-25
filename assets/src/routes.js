@@ -5,6 +5,7 @@ import asyncComponent from './components/async.component';
 
 import Front from './layouts/layout-front/layout-front.component';
 import Classic from './layouts/layout-classic/layout-classic.component';
+import Back   from './layouts/layout-back/layout-back.component';
 import Compact from './layouts/layout-compact/layout-compact.component';
 import Toolbar from './layouts/layout-toolbar/layout-toolbar.component';
 import Boxed from './layouts/layout-boxed/layout-boxed.component';
@@ -15,6 +16,7 @@ import NoLayout from './layouts/layout-none/layout-none.component';
 
 //  MAIN APP ROUTES
 const AsyncLanding= asyncComponent(() => import('./containers/landing/landing.component'));
+const AsyncEcole= asyncComponent(() => import('./containers/ecole/ecole.component'));
 
 // DASHBOARD ROUTE
 const AsyncAnalyticsDashboard = asyncComponent(() => import('./containers/dashboards/analytics/analytics.component'));
@@ -76,6 +78,10 @@ const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
   />
 );
 
+const BackLayout = props => (
+  <Back>{props.children}</Back>
+);
+
 const ClassicLayout = props => (
   <Classic>{props.children}</Classic>
 );
@@ -108,9 +114,15 @@ const TabbedLayout = props => (
 
 // TODO: Consider looping through an object containing all routes
 export default ({ childProps, layout }) => {
-  console.log(layout);
+
+
   let activeLayout;
+
   switch (layout.currentLayout) {
+
+  case 'back':
+      activeLayout = BackLayout;
+      break;
   case 'classic':
     activeLayout = ClassicLayout;
     break;
@@ -131,6 +143,7 @@ export default ({ childProps, layout }) => {
     break;
   case 'front':
     activeLayout = FrontLayout;
+    break;
   default:
     activeLayout = FrontLayout;
   }
@@ -139,7 +152,7 @@ export default ({ childProps, layout }) => {
     <Switch>
 
       <AppRoute path="/" exact component={AsyncLanding} props={childProps} layout={activeLayout} />
-
+      <AppRoute path="/ecole" exact component={AsyncEcole} props={childProps} layout={activeLayout} />
 
       <AppRoute path="/dashboards/analytics" exact component={AsyncAnalyticsDashboard} props={childProps} layout={activeLayout} />
       <AppRoute path="/dashboards/ecommerce" exact component={AsyncEcommerceDashboard} props={childProps} layout={activeLayout} />

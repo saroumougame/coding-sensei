@@ -29,6 +29,7 @@ import scss from './theming.module.scss';
 import ColorPicker from './color-picker.component';
 
 const Theming = (props) => {
+
   const {
     theme
   } = props;

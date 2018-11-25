@@ -30,6 +30,7 @@ class MenuSidenavItem extends React.Component {
       }
 
       const listItemAttrs = {};
+
       if (href && !children) {
         listItemAttrs.to = href;
         listItemAttrs.component = NavLink;

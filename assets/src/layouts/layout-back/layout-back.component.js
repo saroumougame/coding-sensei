@@ -16,10 +16,10 @@ import MenuSidenav from '../components/menu-sidenav/menu-sidenav.component';
 // Actions
 import { toggleSidenav, setSidenavOpen, toggleSidenavVariant } from '../../actions/layout.actions';
 
-import scss from './layout-classic.module.scss';
-import styles from './layout-classic.style';
+import scss from './layout-back.component.scss';
+import styles from './layout-back.component.style';
 
-class ClassicLayout extends React.Component {
+class BackLayout extends React.Component {
   // Set the initial layout state when the layout is initialised
   constructor(props) {
     super(props);
@@ -72,7 +72,7 @@ function mapStateToProps(state) {
   };
 }
 
-ClassicLayout.propTypes = {
+BackLayout.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   children: PropTypes.shape({}).isRequired,
   width: PropTypes.string.isRequired,
@@ -88,4 +88,4 @@ export default compose(
     toggleSidenavVariant,
     setSidenavOpen
   })
-)(ClassicLayout);
+)(BackLayout);

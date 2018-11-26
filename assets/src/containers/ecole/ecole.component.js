@@ -80,10 +80,9 @@ class Ecole extends Component  {
               {this.fabButtonIcon()}
             </Button>
               <div>
-              <Button variant="fab" disabled aria-label="Delete" className={classes.button} onClick={() => {this.clickDelete()}}>
+              <Button variant="fab" aria-label="Delete" className={scss['btn_fab-right']} onClick={() => {this.clickDelete()}}>
                 <DeleteIcon />
               </Button>
-              {this.getCountSelected()}
               </div>
             </div>
             {this.SelectPaperContent()}
@@ -114,7 +113,7 @@ Ecole.propTypes = {
 
 export default compose(
   withStyles(styles, { withTheme: true }),
-  connect(mapStateToProps, {showformaction})
+  connect(mapStateToProps, {showformaction, deleteProffAction})
 )(Ecole);
 
 

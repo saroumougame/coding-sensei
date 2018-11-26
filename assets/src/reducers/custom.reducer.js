@@ -51,7 +51,18 @@ const layoutReducer = (state = defaultState, action) => {
       };
       break;
     case DELETE_PROFF_ACTION:
-      return state;
+      let newUser = [];
+      state.users.map((i) => {
+
+        if(state.tabSelected.indexOf(i.id) == -1){
+          console.log(i.id);
+          newUser.push(i);
+        }
+      });
+      return {...state,
+        users: newUser
+      };
+
       break;
     default:
       return state;

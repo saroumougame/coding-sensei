@@ -23,11 +23,7 @@ class TableauEcole extends Component  {
     this.rows = [];
 
   }
-  componentWillMount() {
-    this.props.data.proffs.map(i => {
-      this.rows.push(i);
-    });
-  }
+
 
   onChangeSelect = (row) => {
     let newTabSelect = this.props.data.tabSelected;
@@ -48,6 +44,8 @@ class TableauEcole extends Component  {
   }
 
   render() {
+    this.rows = this.props.data.proffs;
+
     let { classes } = this.props;
     return (
               <Table className={classes.table}>
@@ -70,10 +68,15 @@ class TableauEcole extends Component  {
                         <TableCell numeric>{row.matiere}</TableCell>
                         <TableCell numeric>{row.eleves}</TableCell>
                         <TableCell numeric>{row.autre}</TableCell>
-                        <TableCell ><Checkbox
+                        <TableCell >
+                          <Checkbox
                           checked = {this.isChecked(row.id)}
                           onChange={() => this.onChangeSelect(row)}
                         /></TableCell>
+                        <Button variant="outlined" href="#outlined-buttons" className={classes.button}>
+                          Modifier
+                        </Button>
+
                       </TableRow>
                     );
                   })}

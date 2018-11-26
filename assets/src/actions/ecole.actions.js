@@ -24,5 +24,5 @@ export const removeSelectaction = id => ({
 });
 
 export const deleteProffAction = () => ({
-  type: SHOW_FORM_ACTION,
+  type: DELETE_PROFF_ACTION,
 });

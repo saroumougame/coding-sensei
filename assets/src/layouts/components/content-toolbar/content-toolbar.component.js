@@ -31,6 +31,7 @@ import { menuItems } from '../../../config';
 
 // Themes
 import themes from '../../../themes';
+import scss from '../../layout-front/layout-front.module.scss';
 
 function setTitle(items, currentPath) {
 
@@ -104,19 +105,24 @@ class ContentToolbar extends React.Component {
     const showBurgerMenu = isWidthDown('sm', width) || !layout.sidenavOpen;
 
     return (
-      <Toolbar>
+      <Toolbar className={scss['navbar']} >
 
         <NavLink to="/">
-          <Typography variant="title" color="inherit" noWrap>
+          <div className={scss['navbar-title']}>
             {setTitle(menuItems, location.pathname) || 'Route Not Found'}
-          </Typography>
+          </div>
         </NavLink>
 
         <span className="portal-flex" />
+        <div className={scss['navbar-buttonSection']}>
 
         <Button variant="raised" >
-          Ce connecter
+          Se connecter
         </Button>
+        <Button variant="raised" >
+          S'inscrire
+        </Button>
+        </div>
       </Toolbar>
     );
   }
@@ -174,7 +180,7 @@ export default compose(
         [...]
 
 
-        
+
  <IconButton
           color="inherit"
           aria-label="change theme"

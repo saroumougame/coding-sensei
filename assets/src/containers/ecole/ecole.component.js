@@ -73,8 +73,11 @@ class Ecole extends Component  {
     <div className={[ scss['portal-pages__header']]}>
       <section className={scss['portal-pages__header']}>
         <div className={scss['portal-pages__container']}>
-          <h2>Gestion des professeurs</h2>
-          <Paper className={classes.root}>
+
+          <Paper className={scss['ecole-paper']}>
+            <div className={scss['ecole-paper-title']}>
+              <h2>Gestion des professeurs</h2>
+            </div>
             <div className={scss['ecole-tableHeader']}>
             <Button variant="fab" color="primary" className={scss['btn_fab']} onClick={() => {this.addClick();}}>
               {this.fabButtonIcon()}

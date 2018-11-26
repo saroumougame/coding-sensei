@@ -6,7 +6,7 @@ import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
 import withWidth, { isWidthUp, isWidthDown } from '@material-ui/core/withWidth';
 import AppBar from '@material-ui/core/AppBar';
-
+import logoImage from '../../assets/images/imgFrontBackG.jpg';
 import Sidenav from '../components/sidenav/sidenav.component';
 import NotificationSidenav from '../components/notification-sidenav/notification-sidenav.component';
 import ContentToolbar from '../components/content-toolbar/content-toolbar.component';
@@ -45,15 +45,16 @@ class ClassicLayout extends React.Component {
     return (
       <div className={classNames(scss['layout-classic-wrapper'], classes.wrapper)}>
         <main className={scss['layout-classic-main']}>
-          <AppBar color="default" position="static">
+          <AppBar color="#f8ede9" position="static">
             <ContentToolbar />
           </AppBar>
           <div className={scss['layout-classic-content-wrapper']}>
             <div className={scss['layout-classic-content']}>
+             < img src={logoImage} className={scss['front-image-background']} alt="logo" />
               {children}
             </div>
           </div>
-          <ContentFooter />
+          <ContentFooter className={scss['layout-classic-footer']}/>
         </main>
         <NotificationSidenav />
       </div>

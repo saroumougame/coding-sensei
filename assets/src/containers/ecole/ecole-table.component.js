@@ -55,7 +55,7 @@ class TableauEcole extends Component  {
                     <TableCell numeric>Matière</TableCell>
                     <TableCell numeric>Nombre de classes</TableCell>
                     <TableCell numeric>Nombre d'éléves</TableCell>
-                    <TableCell numeric>Options</TableCell>
+                    <TableCell >Options</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -69,13 +69,15 @@ class TableauEcole extends Component  {
                         <TableCell numeric>{row.eleves}</TableCell>
                         <TableCell numeric>{row.autre}</TableCell>
                         <TableCell >
-                          <Checkbox
-                          checked = {this.isChecked(row.id)}
-                          onChange={() => this.onChangeSelect(row)}
-                        /></TableCell>
-                        <Button variant="outlined" href="#outlined-buttons" className={classes.button}>
-                          Modifier
-                        </Button>
+                            <Checkbox
+                            checked = {this.isChecked(row.id)}
+                            onChange={() => this.onChangeSelect(row)}
+                            />
+                            <Button variant="outlined" href="#outlined-buttons" className={classes.button}>
+                              Modifier
+                            </Button>
+                        </TableCell>
+
 
                       </TableRow>
                     );

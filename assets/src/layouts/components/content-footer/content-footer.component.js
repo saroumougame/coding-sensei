@@ -26,7 +26,7 @@ const ContentFooter = (props) => {
           color="inherit"
           noWrap
         >
-          <small>&copy; 2018 Conding Sensei</small>
+          <small>&copy; 2018 Conding Sensei - Le site qui vous forme par la pratique.</small>
         </Typography>
         <span className="portal-flex" />
       </Toolbar>

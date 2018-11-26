@@ -62,7 +62,14 @@
     display: flex;
     width: 50%;
     height: 50%;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
 }
+.front-paper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+}
+

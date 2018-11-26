@@ -116,12 +116,16 @@ class ContentToolbar extends React.Component {
         <span className="portal-flex" />
         <div className={scss['navbar-buttonSection']}>
 
-        <Button variant="raised" >
-          Se connecter
-        </Button>
-        <Button variant="raised" >
-          S'inscrire
-        </Button>
+          <NavLink to="/login">
+          <Button variant="raised" >
+            Se connecter
+          </Button>
+          </NavLink>
+          <NavLink to="/inscription">
+          <Button variant="raised" >
+            S'inscrire
+          </Button>
+          </NavLink>
         </div>
       </Toolbar>
     );

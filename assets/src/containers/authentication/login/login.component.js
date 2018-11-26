@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import classNames from 'classnames';
-
+import {NavLink, withRouter} from 'react-router-dom';
 import withWidth from '@material-ui/core/withWidth';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -37,34 +37,39 @@ const Login = (props) => {
       alignItems="center"
       className={classes.background}
     >
-      <Grid item sm={10} xs={12} className={scss.panel}>
-        <Grid direction={panelDirection} container spacing={0}>
+      <Grid item sm={10} xs={12}  className={scss.panel}>
+        <Grid direction={panelDirection} container justify="space-around"  spacing={0}>
           <Grid
             item
-            sm={6}
+            sm={5}
             xs={12}
           >
             <Card className={classNames(scss.card, classes['primary-card'])}>
               <CardContent className={scss['signup-content']}>
                 <img src={logoImage} className={scss['signup-logo']} alt="logo" />
                 <Typography variant="headline" component="h2" gutterBottom>
-                  Portal Admin Panel
+                  Portail de Connexion
                 </Typography>
                 <Typography component="p" gutterBottom>
-                  Welcome to our admin panel. Please login using the form or register for a new account using the button below.
+                  Bienvenu sur conding-sensei. Connecte toi pour commencer à apprendre.
                 </Typography>
                 <Typography component="p" gutterBottom>
-                  Portal is an amazing and easy to use Admin template. If you have any questions feel free to contact us in our support forum.
+                  Une fois connecté tu pourra t'entrainer, suivre des exercices et apprendre à coder.
+                </Typography>
+                <Typography component="p" gutterBottom>
+                  Si tu n'a pas de compte, nous t'invitons à en crée un via le bouton si dessous et rejoindre l'aventure au plus vite !
                 </Typography>
               </CardContent>
+              <NavLink to="/inscription">
               <CardActions>
-                <Button fullWidth href="/register" color="secondary" variant="raised">Create an account</Button>
+                <Button fullWidth href="/inscription" color="default" variant="raised">Crée un compte</Button>
               </CardActions>
+              </NavLink>
             </Card>
           </Grid>
           <Grid
             item
-            sm={6}
+            sm={5}
             xs={12}
           >
             <Card className={scss.card}>
@@ -81,8 +86,8 @@ const Login = (props) => {
                 />
               </CardContent>
               <CardActions className={scss['login-actions']}>
-                <Button href="/login" color="primary" variant="raised">Login</Button>
-                <Button href="/forgot-password">Forgot Password</Button>
+                <Button href="/login" color="default" variant="raised">Login</Button>
+                <Button href="/login">Forgot Password</Button>
               </CardActions>
             </Card>
           </Grid>

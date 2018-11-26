@@ -153,6 +153,9 @@ export default ({ childProps, layout }) => {
 
       <AppRoute path="/" exact component={AsyncLanding} props={childProps} layout={activeLayout} />
       <AppRoute path="/ecole" exact component={AsyncEcole} props={childProps} layout={activeLayout} />
+      <AppRoute path="/login" exact component={AsyncLogin} props={childProps} layout={activeLayout} />
+      <AppRoute path="/inscription" exact component={AsyncEcole} props={childProps} layout={activeLayout} />
+
 
       <AppRoute path="/dashboards/analytics" exact component={AsyncAnalyticsDashboard} props={childProps} layout={activeLayout} />
       <AppRoute path="/dashboards/ecommerce" exact component={AsyncEcommerceDashboard} props={childProps} layout={activeLayout} />
@@ -180,7 +183,7 @@ export default ({ childProps, layout }) => {
       <AppRoute path="/elements/steppers" exact component={AsyncSteppersExample} props={childProps} layout={activeLayout} />
       <AppRoute path="/elements/buttons" exact component={AsyncButtonExample} props={childProps} layout={activeLayout} />
       <AppRoute path="/elements/progress" exact component={AsyncProgressExample} props={childProps} layout={activeLayout} />
-      <AppRoute path="/login" exact component={AsyncLogin} props={childProps} layout={NoLayout} />
+
       <AppRoute path="/register" exact component={AsyncRegister} props={childProps} layout={NoLayout} />
       <AppRoute path="/profile" exact component={AsyncProfile} props={childProps} layout={activeLayout} />
       <AppRoute path="/lock" exact component={AsyncLock} props={childProps} layout={NoLayout} />

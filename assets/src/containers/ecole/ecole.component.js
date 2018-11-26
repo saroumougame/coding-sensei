@@ -6,6 +6,7 @@ import compose from 'recompose/compose';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { Remove  } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
 import scss from './ecole.module.scss';
@@ -25,12 +26,13 @@ import Typography from '@material-ui/core/Typography';
 import { NavLink } from 'react-router-dom';
 import TableauEcole from './ecole-table.component';
 import EcoleAddProffForm from './ecole-addProffForm.component';
-import { showformaction } from '../../actions/ecole.actions';
+import { showformaction, deleteProffAction } from '../../actions/ecole.actions';
 
 class Ecole extends Component  {
 
   constructor() {
     super();
+
   }
 
   addClick = () => {
@@ -52,7 +54,17 @@ class Ecole extends Component  {
     return (<AddIcon/>);
   }
   return (<Remove/>);
-}
+  };
+
+  getCountSelected = () => {
+
+    let count = this.props.data.tabSelected.length;
+    return count;
+  };
+
+  clickDelete = () => {
+    return this.props.deleteProffAction();
+  };
 
   render() {
     let { classes } = this.props;
@@ -63,9 +75,17 @@ class Ecole extends Component  {
         <div className={scss['portal-pages__container']}>
           <h2>Gestion des professeurs</h2>
           <Paper className={classes.root}>
+            <div className={scss['ecole-tableHeader']}>
             <Button variant="fab" color="primary" className={scss['btn_fab']} onClick={() => {this.addClick();}}>
               {this.fabButtonIcon()}
             </Button>
+              <div>
+              <Button variant="fab" disabled aria-label="Delete" className={classes.button} onClick={() => {this.clickDelete()}}>
+                <DeleteIcon />
+              </Button>
+              {this.getCountSelected()}
+              </div>
+            </div>
             {this.SelectPaperContent()}
           </Paper>
 
@@ -81,6 +101,7 @@ function mapStateToProps(state) {
     data: {
       expanded: state.customData.expanded,
       proffs: state.customData.users,
+      tabSelected: state.customData.tabSelected,
     }
   };
 }
@@ -88,6 +109,7 @@ function mapStateToProps(state) {
 Ecole.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   showformaction: PropTypes.func.isRequired,
+  deleteProffAction: PropTypes.func.isRequired,
 };
 
 export default compose(

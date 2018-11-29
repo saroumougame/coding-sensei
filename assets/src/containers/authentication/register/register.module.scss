@@ -15,10 +15,17 @@
 
 .signup-content {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .signup-logo {
-  height: 64px;
+  height: 100px;
+  position: relative;
+  top: -20px;
 }
 
 @keyframes portal-login {
@@ -30,4 +37,30 @@
     transform: translateY(0px);
     opacity: 1;
   }
+}
+
+.inscription-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.inscription-image {
+  max-width: 200px;
+}
+
+.inscription-form-container {
+  height: 100%;
+}
+.inscription-back-button {
+  margin-top: 15px;
+  margin-left: 15px;
+}
+.form_inscription{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  width: 80%;
 }

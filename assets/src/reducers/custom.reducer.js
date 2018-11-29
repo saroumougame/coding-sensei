@@ -12,7 +12,7 @@ const defaultState = {
   ]
 };
 
-const layoutReducer = (state = defaultState, action) => {
+const customReducer = (state = defaultState, action) => {
   switch (action.type) {
     case ADD_PROFF_ACTION:
       let userTab = state.users;
@@ -69,4 +69,4 @@ const layoutReducer = (state = defaultState, action) => {
   }
 };
 
-export default layoutReducer;
+export default customReducer;

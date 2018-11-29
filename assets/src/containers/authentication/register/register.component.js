@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
+import { connect } from 'react-redux';
+import {NavLink, withRouter, Redirect} from 'react-router-dom';
 import classNames from 'classnames';
-
 import withWidth from '@material-ui/core/withWidth';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -11,110 +12,135 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import Radio from '@material-ui/core/Radio';
+import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
-
 import themeStyles from './register.theme.style';
 import scss from './register.module.scss';
+import ecole_image from '../../../assets/images/ecole_chaise.jpg';
+import proff_image from '../../../assets/images/proff.jpg';
+import eleve_image from '../../../assets/images/eleve.jpg';
+import logoImage from '../../../assets/images/imgFrontBackG.jpg';
+import { inscriptionEtapeAction } from '../../../actions/auth.actions';
+import RegisterForm from './registerForm.component';
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    height: 140,
+    width: 100,
+  },
+  control: {
+    padding: theme.spacing.unit * 2,
+  },
+});
 
-import logoImage from '../../../assets/images/portal-logo.png';
+class Register extends React.Component {
+  state = {
+    spacing: '16',
+  };
 
-const Register = (props) => {
-  const {
-    classes,
-    width
-  } = props;
+  componentWillMount() {
 
-  // Flip container to column on mobile screens.
-  const panelDirection = width === 'xs' ? 'column' : 'row';
+    if(this.props.match.params.formulaire != undefined){
+      this.props.inscriptionEtapeAction(2);
+    }else {
+      this.props.inscriptionEtapeAction(1);
+    }
 
-  return (
-    <Grid
-      container
-      direction="row"
-      spacing={0}
-      justify="center"
-      alignItems="center"
-      className={classes.background}
-    >
-      <Grid item sm={10} xs={12} className={scss.panel}>
-        <Grid direction={panelDirection} container spacing={0}>
-          <Grid
-            item
-            sm={6}
-            xs={12}
-          >
-            <Card className={classNames(scss.card, classes['primary-card'])}>
-              <CardContent className={scss['signup-content']}>
-                <img src={logoImage} className={scss['signup-logo']} alt="logo" />
-                <Typography variant="headline" component="h2" gutterBottom>
-                  Register
-                </Typography>
-                <Typography component="p" gutterBottom>
-                  Welcome It takes a couple of minutes to sign up for a free account. Just fill in your details to gain access the admin panel and view the dashboard. By creating an account, you agree to our Terms & Conditions and Privacy Policy.
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button fullWidth href="/login" color="secondary" variant="raised">I'm already registered</Button>
-              </CardActions>
-            </Card>
-          </Grid>
-          <Grid
-            item
-            sm={6}
-            xs={12}
-          >
-            <Card className={scss.card}>
-              <CardContent>
-                <Grid container>
-                  <Grid item sm={6} xs={12}>
-                    <TextField
-                      label="Firstname"
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid item sm={6} xs={12}>
-                    <TextField
-                      label="Lastname"
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      label="Email Address"
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      label="Password"
-                      fullWidth
-                      type="password"
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      label="Repeat Password"
-                      fullWidth
-                      type="password"
-                    />
-                  </Grid>
-                </Grid>
-              </CardContent>
-              <CardActions>
-                <Button fullWidth href="/register" color="primary" variant="raised">Register</Button>
-              </CardActions>
-            </Card>
+  }
+
+  render() {
+
+    const { classes } = this.props;
+    const { spacing } = this.state;
+
+    return (
+
+      <div className={scss['inscription-content']}>
+      <Grid className={classes.root} spacing={16}>
+        <Grid item xs={12}>
+          <Grid container className={classes.demo} justify="center" spacing={Number(spacing)}>
+
+              <Grid item>
+                <Card >
+                  <CardContent>
+                    <Typography variant="headline" component="h2" gutterBottom>
+                      Vous éte une Ecole / Structure.
+                    </Typography>
+                    <NavLink strict to="/inscription/structure">
+                    <Button  color="default" variant="raised">S'inscrire</Button>
+                    <Button >Plus d'informations</Button>
+                    </NavLink>
+                  </CardContent>
+                </Card>
+              </Grid>
+
+
+            <Grid item>
+              <Card >
+                <CardContent>
+                  <Typography variant="headline" component="h2" gutterBottom>
+                    Vous éte un Professeur.
+                  </Typography>
+                  <NavLink to="/inscription/professeur" >
+                  <Button color="default" variant="raised">S'inscrire</Button>
+                  <Button >Plus d'informations</Button>
+                  </NavLink>
+                </CardContent>
+              </Card>
+            </Grid>
+
+
+
+            <Grid item>
+              <Card >
+                <CardContent>
+                  <Typography variant="headline" component="h2" gutterBottom>
+                    Vous éte un éleve.
+                  </Typography>
+
+                  <NavLink to="/inscription/eleve" >
+                  <Button color="default" variant="raised">S'inscrire</Button>
+                  <Button >Plus d'informations</Button>
+                  </NavLink>
+                </CardContent>
+              </Card>
+            </Grid>
+
           </Grid>
         </Grid>
       </Grid>
-    </Grid>
-  );
-};
+      </div>
+    );
+  }
+}
+
+function mapStateToProps(state) {
+  return {
+    data: {
+      etape: state.authData.etape_inscription,
+    }
+  };
+}
+
 
 Register.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  width: PropTypes.string.isRequired
+  width: PropTypes.string.isRequired,
+  inscriptionEtapeAction:PropTypes.func.isRequired,
+
 };
 
-export default compose(withWidth(), withStyles(themeStyles, { withTheme: true }))(Register);
+export default compose(
+  withWidth(),
+  withStyles(themeStyles, { withTheme: true }),
+  connect(mapStateToProps, {inscriptionEtapeAction})
+  )(Register);
+/*
+                < img src={ecole_image} className={scss['inscription-image']} alt="logo" />
+                */

@@ -91,7 +91,7 @@ class ContentToolbar extends React.Component {
       direction: checked === true ? 'rtl' : 'ltr'
     });
     this.setState({ themeMenuEl: null, themeMenuOpen: false });
-  }
+  };
 
 
   render() {
@@ -122,10 +122,11 @@ class ContentToolbar extends React.Component {
           </Button>
           </NavLink>
           <NavLink to="/inscription">
-          <Button variant="raised" >
+          <Button  variant="raised" >
             S'inscrire
           </Button>
           </NavLink>
+
         </div>
       </Toolbar>
     );

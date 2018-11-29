@@ -53,6 +53,7 @@ const AsyncProgressExample = asyncComponent(() => import('./containers/elements/
 // AUTHENTICATION ROUTES
 const AsyncLogin = asyncComponent(() => import('./containers/authentication/login/login.component'));
 const AsyncRegister = asyncComponent(() => import('./containers/authentication/register/register.component'));
+const AsyncRegisterForm = asyncComponent(() => import('./containers/authentication/register/registerForm.component'));
 const AsyncProfile = asyncComponent(() => import('./containers/authentication/profile/profile.component'));
 const AsyncLock = asyncComponent(() => import('./containers/authentication/lock/lock.component'));
 const AsyncForgot = asyncComponent(() => import('./containers/authentication/forgot-password/forgot-password.component'));
@@ -154,7 +155,8 @@ export default ({ childProps, layout }) => {
       <AppRoute path="/" exact component={AsyncLanding} props={childProps} layout={activeLayout} />
       <AppRoute path="/ecole" exact component={AsyncEcole} props={childProps} layout={activeLayout} />
       <AppRoute path="/login" exact component={AsyncLogin} props={childProps} layout={activeLayout} />
-      <AppRoute path="/inscription" exact component={AsyncEcole} props={childProps} layout={activeLayout} />
+      <AppRoute path="/inscription" exact component={AsyncRegister} props={childProps} layout={activeLayout} />
+      <AppRoute path={"/inscription/:formulaire"} exact component={AsyncRegisterForm} props={childProps} layout={activeLayout} />
 
 
       <AppRoute path="/dashboards/analytics" exact component={AsyncAnalyticsDashboard} props={childProps} layout={activeLayout} />

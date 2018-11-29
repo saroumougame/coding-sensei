@@ -11,12 +11,9 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-
 import { withStyles } from '@material-ui/core/styles';
-
 import themeStyles from './login.theme.style';
 import scss from './login.module.scss';
-
 import logoImage from '../../../assets/images/portal-logo.png';
 
 const Login = (props) => {

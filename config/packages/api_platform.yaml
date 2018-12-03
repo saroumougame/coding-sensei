@@ -4,3 +4,8 @@ api_platform:
     graphql:
         graphiql:
             enabled: true
+    swagger:
+         api_keys:
+             apiKey:
+                name: Authorization
+                type: header

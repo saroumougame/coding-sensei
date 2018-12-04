@@ -7,5 +7,5 @@ module.exports = {
     port: '8889',
     env: 'dev',
     https: 'no',
-    container_name: 'symfony_e0ywpailjm0esoon',
+    container_name: 'symfony_adboghh30jp9s2ij7',
 };

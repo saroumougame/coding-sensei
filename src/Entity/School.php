@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -32,6 +34,16 @@ class School
      * @ORM\Column(type="integer")
      */
     private $adminUserId;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Promotion", mappedBy="school")
+     */
+    private $promotion;
+
+    public function __construct()
+    {
+        $this->promotion = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -70,6 +82,37 @@ class School
     public function setAdminUserId(int $adminUserId): self
     {
         $this->adminUserId = $adminUserId;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Promotion[]
+     */
+    public function getPromotion(): Collection
+    {
+        return $this->promotion;
+    }
+
+    public function addPromotion(Promotion $promotion): self
+    {
+        if (!$this->promotion->contains($promotion)) {
+            $this->promotion[] = $promotion;
+            $promotion->setSchool($this);
+        }
+
+        return $this;
+    }
+
+    public function removePromotion(Promotion $promotion): self
+    {
+        if ($this->promotion->contains($promotion)) {
+            $this->promotion->removeElement($promotion);
+            // set the owning side to null (unless already changed)
+            if ($promotion->getSchool() === $this) {
+                $promotion->setSchool(null);
+            }
+        }
 
         return $this;
     }

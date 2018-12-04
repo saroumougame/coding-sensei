@@ -27,7 +27,7 @@ services:
         image: mariadb:latest
         restart: always
         volumes:
-            - ../../.database/my_app:/var/lib/mysql
+             - ../../.database/my_app:/var/lib/mysql
 #            - ./mariadb/conf/mariadb:/etc/mysql
         environment:
             MYSQL_DATABASE: coding

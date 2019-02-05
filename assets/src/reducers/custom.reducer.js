@@ -30,6 +30,7 @@ const customReducer = (state = defaultState, action) => {
       if(state.expanded) {
         newepand = false;
       }
+
       return {
         ...state,
         expanded: newepand,
@@ -59,6 +60,7 @@ const customReducer = (state = defaultState, action) => {
           newUser.push(i);
         }
       });
+
       return {...state,
         users: newUser
       };

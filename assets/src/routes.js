@@ -18,6 +18,8 @@ import NoLayout from './layouts/layout-none/layout-none.component';
 const AsyncLanding= asyncComponent(() => import('./containers/landing/landing.component'));
 const AsyncEcole= asyncComponent(() => import('./containers/ecole/ecole.component'));
 
+//const AsyncProfesseur = asyncComponent(() => import('./containers/professeur/professeur.component'));
+
 // DASHBOARD ROUTE
 const AsyncAnalyticsDashboard = asyncComponent(() => import('./containers/dashboards/analytics/analytics.component'));
 const AsyncEcommerceDashboard = asyncComponent(() => import('./containers/dashboards/ecommerce/ecommerce.component'));
@@ -157,7 +159,10 @@ export default ({ childProps, layout }) => {
       <AppRoute path="/login" exact component={AsyncLogin} props={childProps} layout={activeLayout} />
       <AppRoute path="/inscription" exact component={AsyncRegister} props={childProps} layout={activeLayout} />
       <AppRoute path={"/inscription/:formulaire"} exact component={AsyncRegisterForm} props={childProps} layout={activeLayout} />
-
+      <AppRoute path="/eleve" exact component={AsyncRegister} props={childProps} layout={activeLayout} />
+      /*
+      <AppRoute path="/professeur" exact component={AsyncRegister} props={childProps} layout={activeLayout} />
+      */
 
       <AppRoute path="/dashboards/analytics" exact component={AsyncAnalyticsDashboard} props={childProps} layout={activeLayout} />
       <AppRoute path="/dashboards/ecommerce" exact component={AsyncEcommerceDashboard} props={childProps} layout={activeLayout} />
@@ -195,5 +200,6 @@ export default ({ childProps, layout }) => {
       <AppRoute path="/pages/typography" exact component={AsyncTypography} props={childProps} layout={activeLayout} />
       <AppRoute path="/pages/colors" exact component={AsyncColors} props={childProps} layout={activeLayout} />
       <AppRoute component={AsyncNotFound} layout={activeLayout} />
-    </Switch>);
+    </Switch>)
+    ;
 };

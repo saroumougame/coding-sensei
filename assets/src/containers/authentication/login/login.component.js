@@ -15,6 +15,9 @@ import { withStyles } from '@material-ui/core/styles';
 import themeStyles from './login.theme.style';
 import scss from './login.module.scss';
 import logoImage from '../../../assets/images/portal-logo.png';
+import LoginForm from  './loginForm.component';
+
+
 
 const Login = (props) => {
   const {
@@ -69,24 +72,7 @@ const Login = (props) => {
             sm={5}
             xs={12}
           >
-            <Card className={scss.card}>
-              <CardContent>
-                <TextField
-                  label="Email Address"
-                  fullWidth
-                />
-                <TextField
-                  label="Password"
-                  fullWidth
-                  margin="normal"
-                  type="password"
-                />
-              </CardContent>
-              <CardActions className={scss['login-actions']}>
-                <Button href="/login" color="default" variant="raised">Login</Button>
-                <Button href="/login">Forgot Password</Button>
-              </CardActions>
-            </Card>
+            <LoginForm />
           </Grid>
         </Grid>
       </Grid>

@@ -25,4 +25,5 @@ export const removeSelectaction = id => ({
 
 export const deleteProffAction = () => ({
   type: DELETE_PROFF_ACTION,
+
 });

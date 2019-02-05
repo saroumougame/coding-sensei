@@ -15,7 +15,7 @@ Skyflow  https://skyflow.io/doc#doc-for-default-module-get-started
 ```
 git clone git@github.com:saroumougame/coding-sensei.git
 cd coding-sensei
-skyflow compose:up 
+skyflow compose:up ||  docker-compose -f docker/docker-compose.yml up -d
 skyflow compose:composer:run "composer update"
 skyflow compose:symfony:sh
 bin/console doctrine:database:create --if-not-exists // penser a conf le .env
@@ -63,3 +63,4 @@ cd ./assets
 yarn install
 yarn run build
 ```
+

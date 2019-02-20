@@ -18,10 +18,6 @@ class Correction
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $ExerciceId;
 
     /**
      * @ORM\Column(type="json_array", nullable=true)
@@ -33,22 +29,16 @@ class Correction
      */
     private $outData;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Exercice", inversedBy="correction")
+     */
+    private $exercice;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getExerciceId(): ?int
-    {
-        return $this->ExerciceId;
-    }
-
-    public function setExerciceId(int $ExerciceId): self
-    {
-        $this->ExerciceId = $ExerciceId;
-
-        return $this;
-    }
 
     public function getInData()
     {
@@ -70,6 +60,18 @@ class Correction
     public function setOutData($outData): self
     {
         $this->outData = $outData;
+
+        return $this;
+    }
+
+    public function getExercice(): ?Exercice
+    {
+        return $this->exercice;
+    }
+
+    public function setExercice(?Exercice $exercice): self
+    {
+        $this->exercice = $exercice;
 
         return $this;
     }

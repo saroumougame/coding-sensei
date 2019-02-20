@@ -1,0 +1,26 @@
+il faut crée des clef -> dans un dossier config/jwt.   aller voir sur le répos jwt.
+
+
+copier les config dans le env.local *
+
+
+dans le header authorization:
+bearer token
+
+
+
+
+
+*************************************************** EXTRA ******************
+
+voir pour supprimer forUser ou en paralléle;*
+
+
+
+
+****************************************************** FRONT *********************************************
+
+
+On renvois le token dans le header. 
+Le stoquer en local storage. 
+Attention au temps ( les jwt ont une exiration ).

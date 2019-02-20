@@ -18,15 +18,6 @@ class ExerciceGroupe
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $exerciceId;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $classeId;
 
     /**
      * @ORM\Column(type="string", length=30)
@@ -38,34 +29,22 @@ class ExerciceGroupe
      */
     private $description;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Classe", inversedBy="exerciceGroupe")
+     */
+    private $classe;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Exercice", inversedBy="exerciceGroupes")
+     */
+    private $exercice;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getExerciceId(): ?int
-    {
-        return $this->exerciceId;
-    }
-
-    public function setExerciceId(int $exerciceId): self
-    {
-        $this->exerciceId = $exerciceId;
-
-        return $this;
-    }
-
-    public function getClasseId(): ?int
-    {
-        return $this->classeId;
-    }
-
-    public function setClasseId(int $classeId): self
-    {
-        $this->classeId = $classeId;
-
-        return $this;
-    }
+    
 
     public function getName(): ?string
     {
@@ -87,6 +66,30 @@ class ExerciceGroupe
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getClasse(): ?Classe
+    {
+        return $this->classe;
+    }
+
+    public function setClasse(?Classe $classe): self
+    {
+        $this->classe = $classe;
+
+        return $this;
+    }
+
+    public function getExercice(): ?Exercice
+    {
+        return $this->exercice;
+    }
+
+    public function setExercice(?Exercice $exercice): self
+    {
+        $this->exercice = $exercice;
 
         return $this;
     }

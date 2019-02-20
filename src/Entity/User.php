@@ -29,9 +29,43 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Reponse", inversedBy="user")
+     */
+    private $reponse;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Notation", inversedBy="user")
+     */
+    private $notation;
+
     public function __construct()
     {
         parent::__construct();
         // your own logic
+    }
+
+    public function getReponse(): ?Reponse
+    {
+        return $this->reponse;
+    }
+
+    public function setReponse(?Reponse $reponse): self
+    {
+        $this->reponse = $reponse;
+
+        return $this;
+    }
+
+    public function getNotation(): ?Notation
+    {
+        return $this->notation;
+    }
+
+    public function setNotation(?Notation $notation): self
+    {
+        $this->notation = $notation;
+
+        return $this;
     }
 }

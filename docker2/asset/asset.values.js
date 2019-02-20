@@ -2,5 +2,5 @@
 
 module.exports = {
     output_directory: 'public',
-    container_name: 'asset_e0ywpailjm0esook',
+    container_name: 'asset_adboghh30jp9s2ij4',
 };

@@ -48,7 +48,7 @@ const Login = (props) => {
               <CardContent className={scss['signup-content']}>
                 <img src={logoImage} className={scss['signup-logo']} alt="logo" />
                 <Typography variant="headline" component="h2" gutterBottom>
-                  Portail de Connexion
+                  Portail de Connexion 
                 </Typography>
                 <Typography component="p" gutterBottom>
                   Bienvenu sur conding-sensei. Connecte toi pour commencer à apprendre.

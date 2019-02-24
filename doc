@@ -24,3 +24,23 @@ voir pour supprimer forUser ou en paralléle;*
 On renvois le token dans le header. 
 Le stoquer en local storage. 
 Attention au temps ( les jwt ont une exiration ).
+
+
+
+eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1NTEwMTMxMjcsImV4cCI6MTU1MTAxNjcyNywicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoibmljb2xhcyJ9.tKaMkt7M3nqs0rkfFEu5m-JpIkmZIS7fIU8x7f4ViufyEHf7VC1VcnUCgXpa2DQQLUZeJ_taLFGrGQAMuT6eNvdqmY2sxAy-KkaW60jKCALvZtFzVYIl-Cz1ygRuKjUdUcMjsKsWDgzXjkwcRM76cptcPLYKFT7efxBLxUq9mqjiS-1HCebXlWC7NPAvLQ7E23UcrY1osXhZ2HypyKmJejyGMxZVyv1Lz4HGo8jHvNPS_qoPQooI-wVEhnxZ5SBzskPMQX-gBGKl2xJ7ddd3Bl0B_EwyTMwRFPcBnjvZ118YD43A2pmr4hwTuzjN9u_tcmk205CIjgrBoAmnM1wRVB4eHFEwj3qDCkHOtteYpwL5R09FlLjjxubhzLlypDTubpJXuTREIdR2Z5iuStCheYPMZ6QKX3w5WtPAthyQ7BpzLrzEW72lwIHvqspU6ejcxn05EpnatGzS8-LV06EzZSUHw9Aw2PAJi0-4PpaHIQsEslHXqN1CwIOc-rVOzfDXTwVBIoc6I3EAtuwCxxR3poYHaEGPMJeJC6dchjBbrbhVQMHNEHz8BnJAy0dLg-0LpDDQainwvANkoRVAAAwGx0tcwbsHmtFoziTYRlZgmBuHTXGHwM-NY7WhrHFgBygXMp2k_LFqTG8zsmzddZfnOeW_1z8f0CpzjABdjsyDpbs
+
+
+*************************************************************
+
+
+TODO :
+
+
+#Back
+
+Bloquer toute les routes de fosUser sauf /login_register
+Mettre toute les validations / les roles sur l'api
+
+#front 
+
+Auth

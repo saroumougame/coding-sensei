@@ -22,3 +22,7 @@
 ###< ide ###
 
 composer\.lock
+
+\.docker-sync/
+
+skyflow/

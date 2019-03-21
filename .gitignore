@@ -26,3 +26,5 @@ composer\.lock
 \.docker-sync/
 
 skyflow/
+
+\.DS_Store

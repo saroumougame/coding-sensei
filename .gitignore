@@ -26,3 +26,17 @@ assets/node_modules/
 *.lock
 
 \.idea/
+
+
+###> ide ###
+.idea
+.idea/
+###< ide ###
+
+composer\.lock
+
+\.docker-sync/
+
+skyflow/
+
+\.DS_Store

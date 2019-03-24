@@ -1,5 +1,3 @@
-'use strict';
-
 // composer
 
 module.exports = {

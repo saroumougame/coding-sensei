@@ -35,7 +35,12 @@ services:
         ports:
             - 8089:80
         volumes:
-            - ../:/coding
+#            - ../:/coding
+            - app-sync-coding:/coding
             - ./symfony/conf/apache2:/etc/apache2
             - ./symfony/conf/php7/php.ini:/etc/php7/php.ini
 # <------ symfony <------
+
+volumes:
+  app-sync-coding:
+    external: true

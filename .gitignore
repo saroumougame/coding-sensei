@@ -40,3 +40,5 @@ composer\.lock
 skyflow/
 
 \.DS_Store
+
+docker/

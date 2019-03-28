@@ -6,6 +6,8 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
+/assets/node_modules/
+
 ###> symfony/phpunit-bridge ###
 .phpunit
 /phpunit.xml
@@ -14,6 +16,16 @@
 ###> symfony/web-server-bundle ###
 /.web-server-pid
 ###< symfony/web-server-bundle ###
+
+###> lexik/jwt-authentication-bundle ###
+/config/jwt/*.pem
+###< lexik/jwt-authentication-bundle ###
+
+assets/node_modules/
+
+*.lock
+
+\.idea/
 
 
 ###> ide ###
@@ -29,4 +41,5 @@ skyflow/
 
 \.DS_Store
 
+docker/
 assets/node_modules/

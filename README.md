@@ -15,7 +15,7 @@ Skyflow  https://skyflow.io/doc#doc-for-default-module-get-started
 ```
 git clone git@github.com:saroumougame/coding-sensei.git
 cd coding-sensei
-skyflow compose:up 
+skyflow compose:up ||  docker-compose -f docker/docker-compose.yml up -d
 skyflow compose:composer:run "composer update"
 skyflow compose:symfony:sh
 bin/console doctrine:database:create --if-not-exists // penser a conf le .env
@@ -36,7 +36,7 @@ bin/console doctrine:database:create --if-not-exists // penser a conf le .env
 
 ## Commande Utile
 
-Symfony :
+#### Symfony :
 ```
 skyflow compose:symfony:sh  // Acces au container symfony 
 
@@ -47,10 +47,20 @@ bin/console doctrine:schema:update --force // Update la BD
 ```
 
 
-React :
+#### React :
+
+dev:
 
 ```
-skyflow asset:compile
-skyflow asset:build // build le dossier asset pour le mettre dans public
-skyflow asset:watch // pour voir vos modif en temp reel sans avoir a build a chaque fois commande a faire sur un autre terminal
+cd ./assets
+yarn install
+yarn run start
 ```
+
+buid:
+```
+cd ./assets
+yarn install
+yarn run build
+```
+

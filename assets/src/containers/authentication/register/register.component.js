@@ -65,7 +65,7 @@ class Register extends React.Component {
       <Grid className={classes.root} spacing={16}>
         <Grid item xs={12}>
           <Grid container className={classes.demo} justify="center" spacing={Number(spacing)}>
-
+{/* 
               <Grid item>
                 <Card >
                   <CardContent>
@@ -80,7 +80,7 @@ class Register extends React.Component {
                 </Card>
               </Grid>
 
-
+*/}
             <Grid item>
               <Card >
                 <CardContent>

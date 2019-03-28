@@ -32,7 +32,7 @@ import ecole_image from '../../../assets/images/ecole_chaise.jpg';
 import proff_image from '../../../assets/images/proff.jpg';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import logoImage from '../../../assets/images/imgFrontBackG.jpg';
-import { inscriptionEtapeAction } from '../../../actions/auth.actions';
+import { inscriptionEtapeAction, inscriptionNomProff, inscriptionEmailProff, inscriptionPasswordProff, inscriptionPasswordDoubleProff } from '../../../actions/auth.actions';
 import { Remove } from '@material-ui/icons';
 
 const ITEM_HEIGHT = 48;
@@ -92,6 +92,32 @@ class RegisterForm extends React.Component {
     console.log(e);
   };
 
+  submitFormProfesseur = (e) => {
+      e.preventDefault();
+      console.log(this.props.data.auth_nom);
+      console.log(this.props.data.auth_email);
+      console.log(this.props.data.auth_password);
+      console.log(this.props.data.auth_password_double);
+      //this.props.loginAction(this.props.data.email, this.props.data.password);
+  }
+
+
+  handleNomChange = (e) => {
+    this.props.inscriptionNomProff(e.target.value);
+  }
+
+  handleEmailChange = (e) => {
+    this.props.inscriptionEmailProff(e.target.value);
+  }
+
+  handlePasswordChange = (e) => {
+    this.props.inscriptionPasswordProff(e.target.value);
+  }
+
+  handlePasswordDoubleChange = (e) => {
+    this.props.inscriptionPasswordDoubleProff(e.target.value);
+  }
+
   getForm = () => {
     let { classes } = this.props;
 
@@ -143,7 +169,6 @@ class RegisterForm extends React.Component {
             label="Je valide les conditions d'utilisation."
           />
         </div>
-
       );
     }else if(this.props.match.params.formulaire == "professeur"){
       return (
@@ -152,31 +177,40 @@ class RegisterForm extends React.Component {
             id="nom"
             label="Nom"
             className={classes.textField}
+            value={this.props.data.auth_nom}
+            onChange={this.handleNomChange}
             margin="normal"
           />
           <TextField
-            id="matiere"
-            label="Matiere"
+            id="email"
+            label="email"
             className={classes.textField}
+            value={this.props.data.auth_email}
+            onChange={this.handleEmailChange}
+            margin="normal"
+          />
+          <TextField
+            id="mot de passe"
+            label="mot de passe"
+            className={classes.textField}
+            type="password"
+            value={this.props.data.auth_password}
+            onChange={this.handlePasswordChange}
+            margin="normal"
+          />
+          <TextField
+            id="mot de passe²"
+            label="mot de passe²"
+            className={classes.textField}
+            type="password"
+            value={this.props.data.auth_password_double}
+            onChange={this.handlePasswordDoubleChange}
             margin="normal"
           />
 
-          <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="select-multiple">Option d'inscription</InputLabel>
-            <Select
-              value={this.state.select}
-              onChange={this.handleChangeSelectProff}
-              input={<Input id="select-multiple" />}
-              MenuProps={MenuProps}
-            >
-              {names.map(name => (
-                <MenuItem key={name} value={name} >
-                  {name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-
+            <CardActions onClick={this.submitFormProfesseur} >
+              <Button fullWidth  color="default" variant="raised">Crée un compte</Button>
+            </CardActions>
         </div>
       );
     }else if(this.props.match.params.formulaire == "eleve"){
@@ -224,18 +258,8 @@ class RegisterForm extends React.Component {
               Une fois inscrit tu pourra t'entrainer, suivre des exercices et apprendre à coder.
             </Typography>
             {this.getForm()}
-            <form  noValidate autoComplete="off">
-
-
-
-            </form>
 
           </CardContent>
-          <NavLink to="/inscription">
-            <CardActions>
-              <Button fullWidth href="/inscription" color="default" variant="raised">Crée un compte</Button>
-            </CardActions>
-          </NavLink>
         </Card>
       </div>
     );
@@ -245,8 +269,12 @@ class RegisterForm extends React.Component {
 function mapStateToProps(state) {
   return {
     data: {
-      etape: state.authData.etape_inscription,
-      type: state.authData.inscriptionType
+      etape:                state.authData.etape_inscription,
+      type:                 state.authData.inscriptionType,
+      auth_email:           state.authData.auth_email,
+      auth_nom :            state.authData.auth_nom,
+      auth_password:        state.authData.auth_password,
+      auth_password_double: state.authData.auth_password_double,
     }
   };
 }
@@ -262,5 +290,5 @@ RegisterForm.propTypes = {
 export default compose(
   withWidth(),
   withStyles(themeStyles, { withTheme: true }),
-  connect(mapStateToProps, {inscriptionEtapeAction})
+  connect(mapStateToProps, {inscriptionEtapeAction, inscriptionNomProff, inscriptionEmailProff, inscriptionPasswordProff, inscriptionPasswordDoubleProff})
 )(RegisterForm);

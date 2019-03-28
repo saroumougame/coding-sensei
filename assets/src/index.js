@@ -4,7 +4,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
 import App from './app.component';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import thunk from 'redux-thunk';
+import { createStore, applyMiddleware } from 'redux';
 import portalApp from './reducers';
 import registerServiceWorker from './registerServiceWorker';
 import WebFont from 'webfontloader';
@@ -15,7 +16,8 @@ WebFont.load({
   }
 });
 
-const store = createStore(portalApp);
+const store = createStore(portalApp, applyMiddleware(thunk));
+export {store};
 
 ReactDOM.render(
   <Provider store={store}>

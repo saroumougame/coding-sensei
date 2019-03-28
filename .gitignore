@@ -28,3 +28,5 @@ composer\.lock
 skyflow/
 
 \.DS_Store
+
+assets/node_modules/

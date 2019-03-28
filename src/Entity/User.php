@@ -9,6 +9,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
@@ -29,33 +30,24 @@ class User extends BaseUser
      */
     protected $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Reponse", inversedBy="user")
-     */
-    private $reponse;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Notation", inversedBy="user")
      */
     private $notation;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Reponse", mappedBy="user")
+     */
+    private $reponses;
+
     public function __construct()
     {
         parent::__construct();
+        $this->reponses = new ArrayCollection();
         // your own logic
     }
 
-    public function getReponse(): ?Reponse
-    {
-        return $this->reponse;
-    }
-
-    public function setReponse(?Reponse $reponse): self
-    {
-        $this->reponse = $reponse;
-
-        return $this;
-    }
 
     public function getNotation(): ?Notation
     {
@@ -65,6 +57,37 @@ class User extends BaseUser
     public function setNotation(?Notation $notation): self
     {
         $this->notation = $notation;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Reponse[]
+     */
+    public function getReponses(): Collection
+    {
+        return $this->reponses;
+    }
+
+    public function addReponse(Reponse $reponse): self
+    {
+        if (!$this->reponses->contains($reponse)) {
+            $this->reponses[] = $reponse;
+            $reponse->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReponse(Reponse $reponse): self
+    {
+        if ($this->reponses->contains($reponse)) {
+            $this->reponses->removeElement($reponse);
+            // set the owning side to null (unless already changed)
+            if ($reponse->getUser() === $this) {
+                $reponse->setUser(null);
+            }
+        }
 
         return $this;
     }

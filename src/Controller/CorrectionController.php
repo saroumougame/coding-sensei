@@ -27,19 +27,14 @@ class CorrectionController extends AbstractController
     {
 
 
-//        $code = $data->getAwnserCode();
-//
+        $code = $data->getAwnserCode();
 
-$phpfunction = base64_decode("");
-
-
-//        $phpfunction = stripslashes(substr(base64_decode($code), 2, -2));
+        $phpfunction = stripslashes(substr(base64_decode($code), 2, -2));
 
 
+        $evalReponse = $this->compileProcedural($phpfunction);
 
-        $evalReponse = $this->compilefonction($phpfunction);
-
-
+        $correctionCode = $this->correctionCode($evalReponse);
 
         $this->majExoDb($data);
 
@@ -50,7 +45,7 @@ $phpfunction = base64_decode("");
 
 
 
-    public function compileProcedural($phpfunction){
+    private function compileProcedural($phpfunction){
 
         ob_start();
         $evalReponse = eval($phpfunction);
@@ -63,7 +58,7 @@ $phpfunction = base64_decode("");
     }
 
 
-    public function compilefonction($phpfunction){
+    private function compilefonction($phpfunction){
 
 
         ob_start();
@@ -77,7 +72,7 @@ $phpfunction = base64_decode("");
     }
 
 
-    public function majExoDb($dataExo)
+    private function majExoDb($dataExo)
     {
         $em = $this->getDoctrine()->getManager();
         $reponseExo = $this->getDoctrine()->getRepository(Reponse::class)->find($dataExo->getId());
@@ -86,6 +81,14 @@ $phpfunction = base64_decode("");
         $reponseExo->setAwnserCode($dataExo->getAwnserCode());
         $em->persist($reponseExo);
         $em->flush();
+
+    }
+
+
+
+    private function correctionCode($result){
+
+        return $result;
 
     }
 

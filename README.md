@@ -57,6 +57,17 @@ yarn install
 yarn run start
 ```
 
+
+```
+	
+php bin/console doctrine:schema:update --force
+php bin/console fos:user:create testuser test@example.com p@ssword
+php bin/console fos:user:promote testuser ROLE_READER
+
+curl -X POST http://127.0.0.1:8000/login_check -d _username=test@example.com -d _password=p@ssword
+
+
+``
 buid:
 ```
 cd ./assets

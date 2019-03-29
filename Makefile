@@ -2,7 +2,7 @@ OS := $(shell uname)
 
 start_dev:
 ifeq ($(OS),Darwin)
-	docker volume create --name=app-sync-coding
+	docker volume create --name=app-sync-coding2
 	docker-compose -f docker/docker-compose-dev.yml up -d
 	docker-sync start
 else

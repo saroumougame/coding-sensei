@@ -68,6 +68,7 @@ class CorrectionController extends AbstractController
 
         $result = call_user_func('lol', 'toto');
 
+
         return $result;
     }
 
@@ -93,6 +94,10 @@ class CorrectionController extends AbstractController
     }
 
 }
+
+
+
+
 
 //$phpfunction = '<? $array = array(\"1\" => \"PHP code tester Sandbox Online\",
 //              \"foo\" => \"bar\", 5 , 5 => 89009,

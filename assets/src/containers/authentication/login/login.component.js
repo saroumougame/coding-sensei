@@ -16,16 +16,54 @@ import themeStyles from './login.theme.style';
 import scss from './login.module.scss';
 import logoImage from '../../../assets/images/portal-logo.png';
 import LoginForm from  './loginForm.component';
+import Snackbar from '@material-ui/core/Snackbar';
 
 
+class PositionedSnackbar extends React.Component {
+  state = {
+    open: true,
+    vertical: 'top',
+    horizontal: 'right',
+  };
 
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
+  render() {
+    const { vertical, horizontal, open } = this.state;
+    return (
+        <Snackbar
+          anchorOrigin={{ vertical, horizontal }}
+          open={open}
+          onClose={this.handleClose}
+          ContentProps={{
+            'aria-describedby': 'message-id',
+          }}
+          message={<span id="message-id">Vous n'avez pas access a cette page.</span>}
+        />
+    );
+  }
+}
+
+const getSnack = (myParam) => {
+  if(myParam == 'access') {
+    return (
+      <PositionedSnackbar />
+      );
+    return;
+  }
+}
 const Login = (props) => {
   const {
     classes,
     width
   } = props;
-
+  console.log(props);
   // Flip container to column on mobile screens.
+const urlParams = new URLSearchParams(window.location.search);
+const myParam = urlParams.get('error');
+console.log(myParam);
   const panelDirection = width === 'xs' ? 'column' : 'row';
 
   return (
@@ -37,6 +75,8 @@ const Login = (props) => {
       alignItems="center"
       className={classes.background}
     >
+    {getSnack(myParam)}
+   
       <Grid item sm={10} xs={12}  className={scss.panel}>
         <Grid direction={panelDirection} container justify="space-around"  spacing={0}>
           <Grid

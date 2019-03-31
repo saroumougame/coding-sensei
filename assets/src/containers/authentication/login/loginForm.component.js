@@ -22,6 +22,7 @@ import themeStyles from './login.theme.style';
 import scss from './login.module.scss';
 import logoImage from '../../../assets/images/portal-logo.png';
 
+import { loginonEmail, loginonPassword } from '../../../actions/auth.actions';
 
 
 
@@ -43,27 +44,48 @@ class LoginForm extends React.Component {
     }
   };
 
+  handleEmailChange = (e) => {
+    this.props.loginonEmail(e.target.value);
+  }
+
+  handlePasswordChange = (e) => {
+    this.props.loginonPassword(e.target.value);
+  }
+
+  submitFormLogin = (e)=> {
+    console.log(this.props.data.auth_login_email);
+    console.log(this.props.data.auth_login_password);
+
+  }
+
   render() {
     const { classes } = this.props;
     if(!this.state.changePassord){
       return (
+        
 
                 <Card className={scss.card}>
                   <CardContent>
                     <TextField
                       label="Email Address"
+                      value={this.props.data.auth_login_email}
                       fullWidth
+                      type="email"
+                      onChange={this.handleEmailChange}
                     />
                     <TextField
                       label="Password"
                       fullWidth
+                      value={this.props.data.auth_login_password}
                       margin="normal"
                       type="password"
+                      onChange={this.handlePasswordChange}
                     />
                   </CardContent>
+
                   <CardActions className={scss['login-actions']}>
-                    <Button href="/login" color="default" variant="raised">Login</Button>
-                    <Button onClick={() => {this.changePassword();}} > Forgot Password</Button>
+                    <Button  onClick={this.submitFormLogin} color="default" variant="raised">Login</Button>
+                    <Button  > Forgot Password</Button>
                   </CardActions>
                 </Card>
       );
@@ -90,6 +112,14 @@ class LoginForm extends React.Component {
 }
 
 
+function mapStateToProps(state) {
+  return {
+    data: {
+      auth_login_email:           state.authData.auth_login_email,
+      auth_login_password:        state.authData.auth_login_password,
+    }
+  };
+}
 
 LoginForm.propTypes = {
   classes: PropTypes.shape({}).isRequired,
@@ -99,4 +129,5 @@ LoginForm.propTypes = {
 export default compose(
   withWidth(),
   withStyles(themeStyles, { withTheme: true }),
+  connect(mapStateToProps, {loginonEmail, loginonPassword }),
 )(LoginForm);

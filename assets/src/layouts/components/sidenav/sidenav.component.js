@@ -40,19 +40,20 @@ const Sidenav = (props) => {
         onClose={props.toggleSidenav}
         classes={{
           docked: dockedClass,
-          paper: scss[`portal-sidenav-${layout.currentLayout}`]
+          paper: scss[`yaaa`],
         }}
       >
         {/* top toolbar with logo */}
         <AppBar
           color="default"
-          position="static"
+          position="relative"
+          
         >
-          <Toolbar>
+          <Toolbar > 
             <img src={logoImage} className={scss['portal-toolbar-brand']} alt="logo" />
             {layout.currentLayout !== 'compact' && layout.currentLayout !== 'funky' &&
               <Typography variant="title" color="inherit" noWrap>
-                Portal
+                Bienvenue
               </Typography>
             }
           </Toolbar>
@@ -62,7 +63,7 @@ const Sidenav = (props) => {
         {/* sidenav footer */}
         <AppBar
           color="default"
-          position="static"
+          position="relative"
         >
           <Toolbar disableGutters>
             <span className="portal-flex" />

@@ -1,11 +1,10 @@
-# app/config/packages/security.yaml
 security:
     encoders:
         FOS\UserBundle\Model\UserInterface: bcrypt
 
     role_hierarchy:
-        ROLE_USER : ROLE_USER
-        ROLE_ADMIN: [ROLE_USER, ROLE_ADMIN]
+        ROLE_READER: ROLE_USER
+        ROLE_ADMIN: ROLE_READER
 
     providers:
         fos_userbundle:
@@ -19,23 +18,30 @@ security:
             provider: fos_userbundle
             form_login:
                 check_path: /login_check
+                username_parameter: _username
+                password_parameter: _password
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
-        
+                require_previous_session: false
+
         main:
-            pattern:   ^/
+            pattern: ^/
             provider: fos_userbundle
             stateless: true
             anonymous: true
+            lexik_jwt: ~
             guard:
                 authenticators:
                     - lexik_jwt_authentication.jwt_token_authenticator
 
+
+        # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
-            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
     access_control:
-        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api, roles: [ ROLE_USER ] }
-        - { path: ^/api, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/books, roles: [ ROLE_READER ] }
+#        - { path: ^/, roles: [ ROLE_READER ] }

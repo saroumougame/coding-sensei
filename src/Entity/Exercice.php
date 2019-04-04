@@ -49,8 +49,6 @@ class Exercice
      */
     private $exerciceClasses;
 
-
-
     /**
      * @ORM\Column(type="string", nullable=true)
      */

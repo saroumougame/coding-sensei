@@ -28,8 +28,7 @@ class CorrectionController extends AbstractController
 
         $code = $data->getAwnserCode();
 
-        $phpfunction = stripslashes(substr(base64_decode($code), 2, -2));
-
+        $phpfunction = stripslashes((base64_decode($code)));
         $typeInData = $data->getExercice()->getInData();
         $fonction = $data->getExercice()->getFonction();
 
@@ -39,11 +38,9 @@ class CorrectionController extends AbstractController
 
         }else{
 
-
-            $evalReponse = $this->compilefonction($phpfunction,$typeInData,$fonction);
+            $evalReponse = $this->compilefonction($phpfunction,$typeInData['arg'],$fonction);
 
         }
-
 
         $correctionCode = $this->correctionCode($evalReponse, $data);
 
@@ -73,11 +70,11 @@ class CorrectionController extends AbstractController
 
     private function compilefonction($phpfunction,$typeInData,$fonction){
 
-
         ob_start();
         $evalReponse = eval($phpfunction);
         $evalReponse = ob_get_contents();
         ob_clean();
+
 
         $result = call_user_func($fonction, $typeInData);
 
@@ -97,15 +94,13 @@ class CorrectionController extends AbstractController
 
     }
 
-
-
     private function correctionCode($result, $data){
 
         $typeOutData = $data->getExercice()->getOutData();
 
         if ( gettype($result) == $typeOutData['type']){
 
-            if ( $data === $result){
+            if ( $typeOutData['data'] === $result){
 
                 return "exerxice correct";
 

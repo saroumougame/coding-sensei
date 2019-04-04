@@ -26,19 +26,20 @@ class CorrectionController extends AbstractController
     public function __invoke(Reponse $data)
     {
 
-
         $code = $data->getAwnserCode();
 
         $phpfunction = stripslashes(substr(base64_decode($code), 2, -2));
 
-
         $evalReponse = $this->compileProcedural($phpfunction);
 
-        $correctionCode = $this->correctionCode($evalReponse);
+        $correctionCode = $this->correctionCode($evalReponse, $data);
 
         $this->majExoDb($data);
 
-        $response = array("reponse" => $evalReponse);
+        $response = array("reponse" => $evalReponse, "correctionCode" => $correctionCode);
+
+        dump($response);
+        exit();
 
         return $response;
     }
@@ -51,7 +52,6 @@ class CorrectionController extends AbstractController
         $evalReponse = eval($phpfunction);
         $evalReponse = ob_get_contents();
         ob_clean();
-
 
         return $evalReponse;
 
@@ -67,7 +67,6 @@ class CorrectionController extends AbstractController
         ob_clean();
 
         $result = call_user_func('lol', 'toto');
-
 
         return $result;
     }
@@ -87,9 +86,23 @@ class CorrectionController extends AbstractController
 
 
 
-    private function correctionCode($result){
+    private function correctionCode($result, $data){
+        
+        $typeOutData = $data->getExercice()->getOutData();
 
-        return $result;
+        if ( gettype($result) == $typeOutData['type']){
+
+            if ( $data === $result){
+
+                return "exerxice correct";
+
+            }else{
+
+                return "information retourner courespond pas au resultat attendue";
+            }
+        }else{
+            return "Type retourner incorect";
+        }
 
     }
 

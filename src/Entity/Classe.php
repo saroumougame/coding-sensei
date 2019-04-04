@@ -37,9 +37,9 @@ class Classe
     private $promotion;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ExerciceGroupe", mappedBy="classe")
+     * @ORM\OneToMany(targetEntity="App\Entity\ExerciceClasse", mappedBy="classe")
      */
-    private $exerciceGroupe;
+    private $exerciceClasse;
 
     public function __construct()
     {
@@ -89,14 +89,14 @@ class Classe
     }
 
     /**
-     * @return Collection|ExerciceGroupe[]
+     * @return Collection|ExerciceClasse[]
      */
     public function getExerciceGroupe(): Collection
     {
         return $this->exerciceGroupe;
     }
 
-    public function addExerciceGroupe(ExerciceGroupe $exerciceGroupe): self
+    public function addExerciceGroupe(ExerciceClasse $exerciceGroupe): self
     {
         if (!$this->exerciceGroupe->contains($exerciceGroupe)) {
             $this->exerciceGroupe[] = $exerciceGroupe;
@@ -106,7 +106,7 @@ class Classe
         return $this;
     }
 
-    public function removeExerciceGroupe(ExerciceGroupe $exerciceGroupe): self
+    public function removeExerciceGroupe(ExerciceClasse $exerciceGroupe): self
     {
         if ($this->exerciceGroupe->contains($exerciceGroupe)) {
             $this->exerciceGroupe->removeElement($exerciceGroupe);

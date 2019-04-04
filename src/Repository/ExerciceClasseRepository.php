@@ -2,21 +2,21 @@
 
 namespace App\Repository;
 
-use App\Entity\ExerciceGroupe;
+use App\Entity\ExerciceClasse;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method ExerciceGroupe|null find($id, $lockMode = null, $lockVersion = null)
- * @method ExerciceGroupe|null findOneBy(array $criteria, array $orderBy = null)
- * @method ExerciceGroupe[]    findAll()
- * @method ExerciceGroupe[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method ExerciceClasse|null find($id, $lockMode = null, $lockVersion = null)
+ * @method ExerciceClasse|null findOneBy(array $criteria, array $orderBy = null)
+ * @method ExerciceClasse[]    findAll()
+ * @method ExerciceClasse[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ExerciceGroupeRepository extends ServiceEntityRepository
+class ExerciceClasseRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, ExerciceGroupe::class);
+        parent::__construct($registry, ExerciceClasse::class);
     }
 
 //    /**

@@ -7,9 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ApiResource()
- * @ORM\Entity(repositoryClass="App\Repository\ExerciceGroupeRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ExerciceClasseRepository")
  */
-class ExerciceGroupe
+class ExerciceClasse
 {
     /**
      * @ORM\Id()
@@ -17,7 +17,6 @@ class ExerciceGroupe
      * @ORM\Column(type="integer")
      */
     private $id;
-
 
     /**
      * @ORM\Column(type="string", length=30)
@@ -93,4 +92,7 @@ class ExerciceGroupe
 
         return $this;
     }
+
+
+
 }

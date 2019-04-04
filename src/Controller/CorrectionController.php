@@ -30,7 +30,20 @@ class CorrectionController extends AbstractController
 
         $phpfunction = stripslashes(substr(base64_decode($code), 2, -2));
 
-        $evalReponse = $this->compileProcedural($phpfunction);
+        $typeInData = $data->getExercice()->getInData();
+        $fonction = $data->getExercice()->getFonction();
+
+
+        if (is_null($typeInData) || is_null($fonction)){
+            $evalReponse = $this->compileProcedural($phpfunction);
+
+        }else{
+
+
+            $evalReponse = $this->compilefonction($phpfunction,$typeInData,$fonction);
+
+        }
+
 
         $correctionCode = $this->correctionCode($evalReponse, $data);
 
@@ -58,7 +71,7 @@ class CorrectionController extends AbstractController
     }
 
 
-    private function compilefonction($phpfunction){
+    private function compilefonction($phpfunction,$typeInData,$fonction){
 
 
         ob_start();
@@ -66,7 +79,7 @@ class CorrectionController extends AbstractController
         $evalReponse = ob_get_contents();
         ob_clean();
 
-        $result = call_user_func('lol', 'toto');
+        $result = call_user_func($fonction, $typeInData);
 
         return $result;
     }
@@ -87,7 +100,7 @@ class CorrectionController extends AbstractController
 
 
     private function correctionCode($result, $data){
-        
+
         $typeOutData = $data->getExercice()->getOutData();
 
         if ( gettype($result) == $typeOutData['type']){

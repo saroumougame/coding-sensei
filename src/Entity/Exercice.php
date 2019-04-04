@@ -49,6 +49,14 @@ class Exercice
      */
     private $exerciceClasses;
 
+
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private  $fonction;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -141,6 +149,22 @@ class Exercice
     public function setExerciceClasses($exerciceClasses): void
     {
         $this->exerciceClasses = $exerciceClasses;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFonction()
+    {
+        return $this->fonction;
+    }
+
+    /**
+     * @param mixed $fonction
+     */
+    public function setFonction($fonction): void
+    {
+        $this->fonction = $fonction;
     }
 
 

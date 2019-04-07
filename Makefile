@@ -16,3 +16,6 @@ ifeq ($(OS),Darwin)
 else
 	docker-compose -f docker/docker-compose.yml down
 endif
+
+sh:
+	docker exec -it symfony_adboghi91jp9t4z28 sh

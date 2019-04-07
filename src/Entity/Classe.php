@@ -20,7 +20,6 @@ class Classe
      */
     private $id;
 
-
     /**
      * @ORM\Column(type="integer")
      */
@@ -41,9 +40,17 @@ class Classe
      */
     private $exerciceClasse;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Eleve", mappedBy="classe")
+     */
+    private $eleves;
+
+
+
     public function __construct()
     {
-        $this->exerciceGroupe = new ArrayCollection();
+        $this->exerciceClasse = new ArrayCollection();
+        $this->eleves = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -118,4 +125,55 @@ class Classe
 
         return $this;
     }
+
+    /**
+     * @return Collection|Eleve[]
+     */
+    public function getEleves(): Collection
+    {
+        return $this->eleves;
+    }
+
+    public function addElefe(Eleve $elefe): self
+    {
+        if (!$this->eleves->contains($elefe)) {
+            $this->eleves[] = $elefe;
+            $elefe->setClasse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeElefe(Eleve $elefe): self
+    {
+        if ($this->eleves->contains($elefe)) {
+            $this->eleves->removeElement($elefe);
+            // set the owning side to null (unless already changed)
+            if ($elefe->getClasse() === $this) {
+                $elefe->setClasse(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExerciceClasse()
+    {
+        return $this->exerciceClasse;
+    }
+
+    /**
+     * @param mixed $exerciceClasse
+     */
+    public function setExerciceClasse($exerciceClasse): void
+    {
+        $this->exerciceClasse = $exerciceClasse;
+    }
+
+
+
+
 }

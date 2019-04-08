@@ -29,12 +29,12 @@ class ExerciceClasse
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Classe", inversedBy="exerciceGroupe")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Classe", inversedBy="exerciceClasse")
      */
     private $classe;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Exercice", inversedBy="exerciceGroupes")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Exercice", inversedBy="exerciceClasse")
      */
     private $exercice;
 

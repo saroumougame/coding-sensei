@@ -22,10 +22,6 @@ class Classe
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $teacherId;
 
     /**
      * @ORM\Column(type="string", length=30)
@@ -64,6 +60,11 @@ class Classe
      */
     private $eleves;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="classes")
+     */
+    private $teacher;
+
 
 
     public function __construct()
@@ -77,18 +78,6 @@ class Classe
         return $this->id;
     }
 
-
-    public function getTeacherId(): ?int
-    {
-        return $this->teacherId;
-    }
-
-    public function setTeacherId(int $teacherId): self
-    {
-        $this->teacherId = $teacherId;
-
-        return $this;
-    }
 
     public function getName(): ?string
     {
@@ -151,6 +140,18 @@ class Classe
     public function getEleves(): Collection
     {
         return $this->eleves;
+    }
+
+    public function getTeacher(): ?User
+    {
+        return $this->teacher;
+    }
+
+    public function setTeacher(?User $teacher): self
+    {
+        $this->teacher = $teacher;
+
+        return $this;
     }
 
 //    public function addElefe(Eleve $elefe): self

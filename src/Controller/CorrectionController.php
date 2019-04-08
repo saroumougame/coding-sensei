@@ -48,8 +48,6 @@ class CorrectionController extends AbstractController
 
         $response = array("reponse" => $evalReponse, "correctionCode" => $correctionCode);
 
-        dump($response);
-        exit();
 
         return $response;
     }

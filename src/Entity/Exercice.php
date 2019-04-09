@@ -4,9 +4,25 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use App\Controller\ReponseUserController;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     collectionOperations={
+ *         "get",
+ *         "post",
+ *     },
+ *     itemOperations={
+ *         "get",
+ *          "delete",
+ *          "put",
+ *         "get_publication"={
+ *         "method"="GET",
+ *         "path"="/Exercice/{id}/user/reponse",
+ *         "controller"=ReponseUserController::class,
+ *     }
+ *     },
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\ExerciceRepository")
  */
 class Exercice

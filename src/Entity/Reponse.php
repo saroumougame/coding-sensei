@@ -18,7 +18,7 @@ use App\Controller\CorrectionController;
  *         "get",
  *          "delete",
  *          "put",
- *         "post_publication"={
+ *         "put_publication"={
  *         "method"="PUT",
  *         "path"="/reponse/{id}/exercice/correction",
  *         "controller"=CorrectionController::class,

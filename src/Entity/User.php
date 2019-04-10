@@ -15,10 +15,25 @@ use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use App\Controller\UserExercicesController;
 /**
  * @ORM\Entity
- * @ApiResource
+ * @ApiResource(
+ *     collectionOperations={
+ *         "get",
+ *         "post",
+ *     },
+ *     itemOperations={
+ *         "get",
+ *          "delete",
+ *          "put",
+ *         "get_publication"={
+ *         "method"="GET",
+ *         "path"="/user/{id}/exercices",
+ *         "controller"=UserExercicesController::class,
+ *     }
+ *     },
+ * )
  * @ORM\Table(name="fos_user")
  */
 class User extends BaseUser

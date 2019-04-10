@@ -30,7 +30,7 @@ class ReponseUserController extends AbstractController
 
 // en attente de l'auten;
         $user = $this->getDoctrine()->getRepository(User::class)->find(2); // $user->getId()
-        
+
        // $user = $this->getUser();
 
         $reponse = $this->getDoctrine()->getRepository(Reponse::class)->findOneBy(array('exercice' => $data->getId(),'user' => $user->getId()));

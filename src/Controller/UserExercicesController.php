@@ -36,23 +36,25 @@ class UserExercicesController extends AbstractController
 
         if (is_null($classe)){
 
-            $reponse = array("message" => "le user ne fait partie daucune classe c peut etre pas un eleve");
+            $exo = array("message" => "le user ne fait partie daucune classe c peut etre pas un eleve");
 
         }else{
 
             $reponse = $this->getDoctrine()->getRepository(ExerciceClasse::class)->findBy(array("classe" => $classe->getClasse()->getId()));
 
+
+            $exo = array();
+
+            foreach ($reponse as $exercice){
+
+                $exercices = $exercice->getExercice();
+
+                array_push($exo, $exercices);
+
+            }
+
         }
 
-      $exo = array();
-
-foreach ($reponse as $exercice){
-
-    $exercices = $exercice->getExercice();
-
-    array_push($exo, $exercices);
-
-}
 
         return $exo;
     }

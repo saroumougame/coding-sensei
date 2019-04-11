@@ -11,6 +11,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
 import TextField from '@material-ui/core/TextField';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -32,7 +33,7 @@ import ecole_image from '../../../assets/images/ecole_chaise.jpg';
 import proff_image from '../../../assets/images/proff.jpg';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import logoImage from '../../../assets/images/imgFrontBackG.jpg';
-import { inscriptionEtapeAction, inscriptionNomProff, inscriptionEmailProff, inscriptionPasswordProff, inscriptionPasswordDoubleProff } from '../../../actions/auth.actions';
+import { inscriptionEtapeAction, inscriptionNomProff, inscriptionEmailProff, inscriptionPasswordProff, inscriptionPasswordDoubleProff, register } from '../../../actions/auth.actions';
 import { Remove } from '@material-ui/icons';
 
 const ITEM_HEIGHT = 48;
@@ -59,11 +60,22 @@ class RegisterForm extends React.Component {
 
   constructor() {
     super();
+
    this.state = {
       conditionutilisation: true,
-     select: '',
+      select: '',
+      open: false,
+      vertical: 'top',
+      horizontal: 'right',
+      snackMessage: 'Une erreur est survenue'
     };
   }
+
+
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
 
   componentWillMount() {
   }
@@ -94,10 +106,28 @@ class RegisterForm extends React.Component {
 
   submitFormProfesseur = (e) => {
       e.preventDefault();
+
       console.log(this.props.data.auth_nom);
       console.log(this.props.data.auth_email);
       console.log(this.props.data.auth_password);
       console.log(this.props.data.auth_password_double);
+
+      if(this.props.data.auth_password == '' 
+        || this.props.data.auth_email == '' 
+        ||  this.props.data.auth_nom == '' 
+        || this.props.data.auth_password_double == '') {
+        console.log('chanmps vide');
+        this.setState({ open: true,  snackMessage: 'Vous devez remplir tout les champs.' });
+        return;
+      }
+      if(this.props.data.auth_password != this.props.data.auth_password_double) {
+        this.setState({ open: true,  snackMessage: 'Les deux mots de passe ne correspondent pas.' });
+        return;
+      }
+
+       this.props.register(this.props.data.auth_nom, this.props.data.auth_email, this.props.data.auth_password);
+      //this.setState({ open: true,  snackMessage: 'Vous éte bien inscrit, vous pouvez desormer vous connecter.' });
+
       //this.props.loginAction(this.props.data.email, this.props.data.password);
   }
 
@@ -236,10 +266,22 @@ class RegisterForm extends React.Component {
 
   render() {
     console.log(this.props.data.type);
-
+    const { vertical, horizontal, open } = this.state;
     return (
 
       <div className={scss['inscription-content']}>
+      
+      <Snackbar
+          variant="error"
+          anchorOrigin={{ vertical, horizontal }}
+          open={open}
+          onClose={this.handleClose}
+          ContentProps={{
+            'aria-describedby': 'message-id',
+          }}
+          message={<span id="message-id">{this.state.snackMessage}</span>}
+        />
+
         <Card>
           <NavLink strict to="/inscription">
           <Button variant="fab" color="primary" className={scss['inscription-back-button']}>
@@ -290,5 +332,5 @@ RegisterForm.propTypes = {
 export default compose(
   withWidth(),
   withStyles(themeStyles, { withTheme: true }),
-  connect(mapStateToProps, {inscriptionEtapeAction, inscriptionNomProff, inscriptionEmailProff, inscriptionPasswordProff, inscriptionPasswordDoubleProff})
+  connect(mapStateToProps, {inscriptionEtapeAction, inscriptionNomProff, inscriptionEmailProff, inscriptionPasswordProff, inscriptionPasswordDoubleProff, register})
 )(RegisterForm);

@@ -5,7 +5,9 @@ import {
   AUTH_NOM_PROFF,
   AUTH_NOM_EMAIL,
   AUTH_NOM_PASSWORD,
-  AUTH_NOM_PASSWORD_DEUX
+  AUTH_NOM_PASSWORD_DEUX,
+  AUTH_LOGIN_EMAIL,
+  AUTH_LOGIN_PASSWORD,
 } from '../actions/auth.actions';
 
 
@@ -18,6 +20,9 @@ const defaultState = {
   auth_nom :            '',
   auth_password:        '',
   auth_password_double: '',
+  auth_login_email:     '',
+  auth_login_password:  '',
+  logged:               false,
 };
 
 const authReducer = (state = defaultState, action) => {
@@ -53,6 +58,18 @@ const authReducer = (state = defaultState, action) => {
           auth_password_double: action.payload,
       };
       break;
+    case AUTH_LOGIN_EMAIL:
+      return {
+        ...state,
+          auth_login_email: action.payload,
+      };
+      break;
+     case AUTH_LOGIN_PASSWORD:
+      return {
+        ...state,
+          auth_login_password: action.payload,
+      };
+      break;     
     default:
       return state;
   }

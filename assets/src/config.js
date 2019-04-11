@@ -26,8 +26,8 @@ import themes from './themes';
 export const configuredTheme = themes[0].theme;
 
 export const configuredLayout = {
-  // front = réel OU classic = dev menu
-  currentLayout: 'classic',
+  // front = réel OU classic = dev menu || non enfait on gére ça dans les route
+  currentLayout: 'front',
   notificationsOpen: false
 };
 
@@ -36,16 +36,12 @@ const iconStyle = {
 };
 
 export const menuItems = [{
-  title: 'Dashboards',
+  title: 'Administration',
   icon: <HomeIcon style={iconStyle} />,
   children: [{
-    title: 'Conding Sensei',
-    href: '/',
+    title: 'Account',
+    href: '/account/proff',
     icon: <DashboardIcon style={iconStyle} />
-  }, {
-    title: 'Ecole',
-    href: '/ecole',
-    icon: <ShoppingCartIcon style={iconStyle} />
   },
     {
     title: 'Ecommerce',
@@ -66,14 +62,14 @@ export const menuItems = [{
   }
 ]
 }, {
-  title: 'Theming',
+  title: 'Mon Ecole',
   href: '/theming',
   icon: <BuildIcon style={iconStyle} />
 }, {
-  title: 'APPS',
+  title: 'Cours',
   type: 'header'
 }, {
-  title: 'Apps',
+  title: 'Cours - Tp',
   icon: <DesktopWindowsIcon style={iconStyle} />,
   children: [{
     title: 'Email',
@@ -104,7 +100,7 @@ export const menuItems = [{
     href: '/apps/chat',
     icon: <ChatIcon style={iconStyle} />
   }]
-}, {
+}/*, {
   title: 'USER INTERFACE',
   type: 'header'
 }, {
@@ -208,4 +204,6 @@ export const menuItems = [{
     title: '500',
     href: '/errors/500'
   }]
-}];
+}
+*/
+];

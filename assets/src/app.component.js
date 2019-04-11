@@ -42,7 +42,7 @@ class App extends React.Component {
     return (
       <JssProvider jss={jss} generateClassName={generateClassName}>
         <MuiThemeProvider theme={materialTheme}>
-          <Routes childProps={childProps} layout={layoutConfig} />
+          <Routes logged={this.props.logged} childProps={childProps} layout={layoutConfig} />
         </MuiThemeProvider>
       </JssProvider>
     );
@@ -52,7 +52,8 @@ class App extends React.Component {
 function mapStateToProps(state) {
   return {
     themeConfig: state.theme,
-    layoutConfig: state.layout
+    layoutConfig: state.layout,
+    logged:       state.authData.logged,
   };
 }
 

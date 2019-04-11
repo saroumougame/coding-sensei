@@ -10,7 +10,7 @@ ARG DOCUMENT_ROOT=/$APPLICATION_NAME/public
 ARG PHP_MODULES="apache2 curl json gd mcrypt \
 intl sqlite3 gmp mbstring xml zip \
 cli imagick xsl imap pdo pdo_mysql fileinfo sodium \
-ctype soap simplexml tokenizer session dom iconv"
+ctype soap simplexml tokenizer session dom iconv pecl-xdebug"
 
 ENV APPLICATION_NAME ${APPLICATION_NAME}
 ENV SERVER_NAME ${SERVER_NAME}
@@ -23,6 +23,9 @@ RUN for module in $PHP_MODULES; do apk add --no-cache php7-"$module" ; done
 
 RUN mkdir -p /run/apache2
 RUN rm -rf /var/cache/apk/*
+
+
+ADD xdebug.ini /etc/php/conf.d/
 
 WORKDIR $APPLICATION_NAME
 

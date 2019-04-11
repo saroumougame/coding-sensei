@@ -42,7 +42,16 @@ export const menuItems = [{
     title: 'Account',
     href: '/account/proff',
     icon: <DashboardIcon style={iconStyle} />
+  }, {
+    title: 'Ecole',
+    href: '/ecole',
+    icon: <ShoppingCartIcon style={iconStyle} />
+  }, {
+      title: 'Exercice',
+      href: '/exercice',
+      icon: <TextFormatIcon style={iconStyle} />
   },
+
     {
     title: 'Ecommerce',
     href: '/dashboards/ecommerce',

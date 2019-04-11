@@ -17,6 +17,7 @@ import NoLayout from './layouts/layout-none/layout-none.component';
 //  MAIN APP ROUTES
 const AsyncLanding= asyncComponent(() => import('./containers/landing/landing.component'));
 const AsyncEcole= asyncComponent(() => import('./containers/ecole/ecole.component'));
+const AsyncExercice= asyncComponent(() => import('./containers/exercice/exercice.component'));
 const AccountProff= asyncComponent(() => import('./containers/account/professeur/account.component'))
 
 //AsyncLogin
@@ -187,6 +188,8 @@ export default ({ logged , childProps, layout }) => {
       <AppRoute path="/inscription" exact component={AsyncRegister} props={childProps} layout={activeLayout} />
       <AppRoute path={"/inscription/:formulaire"} exact component={AsyncRegisterForm} props={childProps} layout={activeLayout} />
       <AppRoute path="/eleve" exact component={AsyncRegister} props={childProps} layout={activeLayout} />
+        <AppRoute path="/exercice" exact component={AsyncExercice} props={childProps} layout={activeLayout} />
+
 
       
       <AppprotectedRoute path="/account"  logged={logged} exact component={AsyncAccount} props={childProps} layout={CompactLayout} />*

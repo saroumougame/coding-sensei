@@ -22,6 +22,9 @@ use App\Controller\CorrectionController;
  *         "method"="PUT",
  *         "path"="/reponse/{id}/exercice/correction",
  *         "controller"=CorrectionController::class,
+ *     "swagger_context" = {
+ *          "summary" = "Compile le code, le code doit etre passer en encode64 , recupere le hydra en cas derreur sinon retourn reponse et correctionCode",
+ *     }
  *     }
  *     },
  * )

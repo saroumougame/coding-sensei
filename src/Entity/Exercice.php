@@ -20,6 +20,9 @@ use App\Controller\ReponseUserController;
  *         "method"="GET",
  *         "path"="/Exercice/{id}/user/reponse",
  *         "controller"=ReponseUserController::class,
+ *     "swagger_context" = {
+ *          "summary" = "retourne la reponse de luser courant en fonction de lexercice donner SI ELLE EXISTE PAS ELLE CREE UNE REPONSE VIDE",
+ *     }
  *     }
  *     },
  * )

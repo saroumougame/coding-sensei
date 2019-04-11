@@ -28,8 +28,9 @@ class ReponseUserController extends AbstractController
     public function __invoke(Exercice $data) // retourn la reponse d'un user en fonfction d'un exercice
     {
 
+       $user = $this->getUser();
 // en attente de l'auten;
-        $user = $this->getDoctrine()->getRepository(User::class)->find(2); // $user->getId()
+        $user = $this->getDoctrine()->getRepository(User::class)->find($user->getId()); // $user->getId()
 
        // $user = $this->getUser();
 

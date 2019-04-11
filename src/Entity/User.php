@@ -31,6 +31,9 @@ use App\Controller\UserExercicesController;
  *         "method"="GET",
  *         "path"="/user/{id}/exercices",
  *         "controller"=UserExercicesController::class,
+ *     "swagger_context" = {
+ *          "summary" = "RETOURNE LES EXERCICE DUN ELEVE DONNER APRES CA SERA CELUIS CONNECTER",
+ *     }
  *     }
  *     },
  * )

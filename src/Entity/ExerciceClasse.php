@@ -19,6 +19,9 @@ use App\Controller\ExerciceClassesController;
  *         "method"="GET",
  *         "path"="/classes/{id}/exercices",
  *         "controller"=ExerciceClassesController::class,
+ *       "swagger_context" = {
+ *          "summary" = "RETOURNE LES EXERCICE DUNE classe donner ",
+ *     }
  *     }
  *     },
  * )

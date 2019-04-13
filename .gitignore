@@ -42,3 +42,4 @@ skyflow/
 \.DS_Store
 
 docker/
+assets/node_modules/

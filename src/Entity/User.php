@@ -9,15 +9,34 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use App\Controller\UserExercicesController;
 /**
  * @ORM\Entity
- * @ApiResource
+ * @ApiResource(
+ *     collectionOperations={
+ *         "get",
+ *         "post",
+ *     },
+ *     itemOperations={
+ *         "get",
+ *          "delete",
+ *          "put",
+ *         "get_publication"={
+ *         "method"="GET",
+ *         "path"="/user/{id}/exercices",
+ *         "controller"=UserExercicesController::class,
+ *     "swagger_context" = {
+ *          "summary" = "RETOURNE LES EXERCICE DUN ELEVE DONNER APRES CA SERA CELUIS CONNECTER",
+ *     }
+ *     }
+ *     },
+ * )
  * @ORM\Table(name="fos_user")
  */
 class User extends BaseUser
@@ -29,10 +48,6 @@ class User extends BaseUser
      */
     protected $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Reponse", inversedBy="user")
-     */
-    private $reponse;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Notation", inversedBy="user")
@@ -40,27 +55,17 @@ class User extends BaseUser
     private $notation;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Reponse", mappedBy="user")
      */
-    private $prenom;
+    private $reponses;
 
     public function __construct()
     {
         parent::__construct();
+        $this->reponses = new ArrayCollection();
         // your own logic
     }
 
-    public function getReponse(): ?Reponse
-    {
-        return $this->reponse;
-    }
-
-    public function setReponse(?Reponse $reponse): self
-    {
-        $this->reponse = $reponse;
-
-        return $this;
-    }
 
     public function getNotation(): ?Notation
     {
@@ -74,15 +79,53 @@ class User extends BaseUser
         return $this;
     }
 
-    public function getPrenom(): ?string
+    /**
+     * @return Collection|Reponse[]
+     */
+    public function getReponses(): Collection
     {
-        return $this->prenom;
+        return $this->reponses;
     }
 
-    public function setPrenom(?string $prenom): self
+    public function addReponse(Reponse $reponse): self
     {
-        $this->prenom = $prenom;
+        if (!$this->reponses->contains($reponse)) {
+            $this->reponses[] = $reponse;
+            $reponse->setUser($this);
+        }
 
         return $this;
     }
+
+    public function removeReponse(Reponse $reponse): self
+    {
+        if ($this->reponses->contains($reponse)) {
+            $this->reponses->removeElement($reponse);
+            // set the owning side to null (unless already changed)
+            if ($reponse->getUser() === $this) {
+                $reponse->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+
+
 }

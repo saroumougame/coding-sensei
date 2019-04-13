@@ -4,12 +4,30 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
-
+use App\Controller\ExerciceClassesController;
 /**
- * @ApiResource()
- * @ORM\Entity(repositoryClass="App\Repository\ExerciceGroupeRepository")
+ * @ApiResource(
+ *     collectionOperations={
+ *         "get",
+ *         "post",
+ *     },
+ *     itemOperations={
+ *         "get",
+ *          "delete",
+ *          "put",
+ *         "post_publication"={
+ *         "method"="GET",
+ *         "path"="/classes/{id}/exercices",
+ *         "controller"=ExerciceClassesController::class,
+ *       "swagger_context" = {
+ *          "summary" = "RETOURNE LES EXERCICE DUNE classe donner ",
+ *     }
+ *     }
+ *     },
+ * )
+ * @ORM\Entity(repositoryClass="App\Repository\ExerciceClasseRepository")
  */
-class ExerciceGroupe
+class ExerciceClasse
 {
     /**
      * @ORM\Id()
@@ -17,7 +35,6 @@ class ExerciceGroupe
      * @ORM\Column(type="integer")
      */
     private $id;
-
 
     /**
      * @ORM\Column(type="string", length=30)
@@ -30,12 +47,12 @@ class ExerciceGroupe
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Classe", inversedBy="exerciceGroupe")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Classe", inversedBy="exerciceClasse")
      */
     private $classe;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Exercice", inversedBy="exerciceGroupes")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Exercice", inversedBy="exerciceClasse")
      */
     private $exercice;
 
@@ -93,4 +110,7 @@ class ExerciceGroupe
 
         return $this;
     }
+
+
+
 }

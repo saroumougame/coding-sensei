@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\ExerciceGroupe;
+use App\Entity\Eleve;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method ExerciceGroupe|null find($id, $lockMode = null, $lockVersion = null)
- * @method ExerciceGroupe|null findOneBy(array $criteria, array $orderBy = null)
- * @method ExerciceGroupe[]    findAll()
- * @method ExerciceGroupe[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Eleve|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Eleve|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Eleve[]    findAll()
+ * @method Eleve[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ExerciceGroupeRepository extends ServiceEntityRepository
+class EleveRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, ExerciceGroupe::class);
+        parent::__construct($registry, Eleve::class);
     }
 
-//    /**
-//     * @return ExerciceGroupe[] Returns an array of ExerciceGroupe objects
-//     */
+    // /**
+    //  * @return Eleve[] Returns an array of Eleve objects
+    //  */
     /*
     public function findByExampleField($value)
     {
@@ -37,7 +37,7 @@ class ExerciceGroupeRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?ExerciceGroupe
+    public function findOneBySomeField($value): ?Eleve
     {
         return $this->createQueryBuilder('e')
             ->andWhere('e.exampleField = :val')

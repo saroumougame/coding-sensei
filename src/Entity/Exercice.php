@@ -3,12 +3,29 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Controller\ReponseUserController;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     collectionOperations={
+ *         "get",
+ *         "post",
+ *     },
+ *     itemOperations={
+ *         "get",
+ *          "delete",
+ *          "put",
+ *         "get_publication"={
+ *         "method"="GET",
+ *         "path"="/Exercice/{id}/user/reponse",
+ *         "controller"=ReponseUserController::class,
+ *     "swagger_context" = {
+ *          "summary" = "retourne la reponse de luser courant en fonction de lexercice donner SI ELLE EXISTE PAS ELLE CREE UNE REPONSE VIDE",
+ *     }
+ *     }
+ *     },
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\ExerciceRepository")
  */
 class Exercice
@@ -22,36 +39,40 @@ class Exercice
 
 
     /**
+     * @ORM\Column(type="json_array", nullable=true)
+     */
+    private $inData;
+
+    /**
+     * @ORM\Column(type="json_array")
+     */
+    private $outData;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $name;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $description;
 
     /**
-     * @ORM\Column(type="json_array", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $langagueSpecs;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ExerciceGroupe", mappedBy="exercice")
+     * @ORM\OneToMany(targetEntity="App\Entity\ExerciceClasse", mappedBy="exercice")
      */
-    private $exerciceGroupes;
+    private $exerciceClasses;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Correction", mappedBy="exercice")
+     * @ORM\Column(type="string", nullable=true)
      */
-    private $correction;
+    private  $fonction;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Reponse", mappedBy="exercice")
-     */
-    private $reponse;
-
-    public function __construct()
-    {
-        $this->exerciceGroupes = new ArrayCollection();
-        $this->correction = new ArrayCollection();
-        $this->reponse = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -59,121 +80,110 @@ class Exercice
     }
 
 
-
-    public function getDescription(): ?string
+    public function getInData()
     {
-        return $this->description;
+        return $this->inData;
     }
 
-    public function setDescription(?string $description): self
+    public function setInData($inData): self
     {
-        $this->description = $description;
+        $this->inData = $inData;
 
         return $this;
     }
 
+    public function getOutData()
+    {
+        return $this->outData;
+    }
+
+    public function setOutData($outData): self
+    {
+        $this->outData = $outData;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name): void
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description): void
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getLangagueSpecs()
     {
         return $this->langagueSpecs;
     }
 
-    public function setLangagueSpecs($langagueSpecs): self
+    /**
+     * @param mixed $langagueSpecs
+     */
+    public function setLangagueSpecs($langagueSpecs): void
     {
         $this->langagueSpecs = $langagueSpecs;
-
-        return $this;
     }
 
     /**
-     * @return Collection|ExerciceGroupe[]
+     * @return mixed
      */
-    public function getExerciceGroupes(): Collection
+    public function getExerciceClasses()
     {
-        return $this->exerciceGroupes;
-    }
-
-    public function addExerciceGroupe(ExerciceGroupe $exerciceGroupe): self
-    {
-        if (!$this->exerciceGroupes->contains($exerciceGroupe)) {
-            $this->exerciceGroupes[] = $exerciceGroupe;
-            $exerciceGroupe->setExercice($this);
-        }
-
-        return $this;
-    }
-
-    public function removeExerciceGroupe(ExerciceGroupe $exerciceGroupe): self
-    {
-        if ($this->exerciceGroupes->contains($exerciceGroupe)) {
-            $this->exerciceGroupes->removeElement($exerciceGroupe);
-            // set the owning side to null (unless already changed)
-            if ($exerciceGroupe->getExercice() === $this) {
-                $exerciceGroupe->setExercice(null);
-            }
-        }
-
-        return $this;
+        return $this->exerciceClasses;
     }
 
     /**
-     * @return Collection|Correction[]
+     * @param mixed $exerciceClasses
      */
-    public function getCorrection(): Collection
+    public function setExerciceClasses($exerciceClasses): void
     {
-        return $this->correction;
-    }
-
-    public function addCorrection(Correction $correction): self
-    {
-        if (!$this->correction->contains($correction)) {
-            $this->correction[] = $correction;
-            $correction->setExercice($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCorrection(Correction $correction): self
-    {
-        if ($this->correction->contains($correction)) {
-            $this->correction->removeElement($correction);
-            // set the owning side to null (unless already changed)
-            if ($correction->getExercice() === $this) {
-                $correction->setExercice(null);
-            }
-        }
-
-        return $this;
+        $this->exerciceClasses = $exerciceClasses;
     }
 
     /**
-     * @return Collection|Reponse[]
+     * @return mixed
      */
-    public function getReponse(): Collection
+    public function getFonction()
     {
-        return $this->reponse;
+        return $this->fonction;
     }
 
-    public function addReponse(Reponse $reponse): self
+    /**
+     * @param mixed $fonction
+     */
+    public function setFonction($fonction): void
     {
-        if (!$this->reponse->contains($reponse)) {
-            $this->reponse[] = $reponse;
-            $reponse->setExercice($this);
-        }
-
-        return $this;
+        $this->fonction = $fonction;
     }
 
-    public function removeReponse(Reponse $reponse): self
-    {
-        if ($this->reponse->contains($reponse)) {
-            $this->reponse->removeElement($reponse);
-            // set the owning side to null (unless already changed)
-            if ($reponse->getExercice() === $this) {
-                $reponse->setExercice(null);
-            }
-        }
 
-        return $this;
-    }
+
 }

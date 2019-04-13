@@ -18,10 +18,13 @@ use App\Controller\CorrectionController;
  *         "get",
  *          "delete",
  *          "put",
- *         "post_publication"={
+ *         "put_publication"={
  *         "method"="PUT",
  *         "path"="/reponse/{id}/exercice/correction",
  *         "controller"=CorrectionController::class,
+ *     "swagger_context" = {
+ *          "summary" = "Compile le code, le code doit etre passer en encode64 , recupere le hydra en cas derreur sinon retourn reponse et correctionCode",
+ *     }
  *     }
  *     },
  * )
@@ -38,7 +41,7 @@ class Reponse
 
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=5000, nullable=true)
      */
     private $awnserCode;
 
@@ -48,9 +51,10 @@ class Reponse
     private $exercice;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="reponse")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="reponses")
      */
     private $user;
+
 
     public function __construct()
     {
@@ -62,7 +66,7 @@ class Reponse
         return $this->id;
     }
 
-    
+
 
     public function getAwnserCode(): ?string
     {
@@ -88,34 +92,19 @@ class Reponse
         return $this;
     }
 
-    /**
-     * @return Collection|User[]
-     */
-    public function getUser(): Collection
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function addUser(User $user): self
+    public function setUser($user)
     {
-        if (!$this->user->contains($user)) {
-            $this->user[] = $user;
-            $user->setReponse($this);
-        }
+        $this->user = $user;
 
         return $this;
     }
 
-    public function removeUser(User $user): self
-    {
-        if ($this->user->contains($user)) {
-            $this->user->removeElement($user);
-            // set the owning side to null (unless already changed)
-            if ($user->getReponse() === $this) {
-                $user->setReponse(null);
-            }
-        }
 
-        return $this;
-    }
+
+
 }

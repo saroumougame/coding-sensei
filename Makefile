@@ -2,7 +2,7 @@ OS := $(shell uname)
 
 start_dev:
 ifeq ($(OS),Darwin)
-	docker volume create --name=app-sync-coding
+	docker volume create --name=app-sync-coding2
 	docker-compose -f docker/docker-compose-dev.yml up -d
 	docker-sync start
 else
@@ -16,3 +16,6 @@ ifeq ($(OS),Darwin)
 else
 	docker-compose -f docker/docker-compose.yml down
 endif
+
+sh:
+	docker exec -it symfony_adboghi91jp9t4z28 sh

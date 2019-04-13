@@ -13,6 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Classe
 {
+
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -20,11 +22,6 @@ class Classe
      */
     private $id;
 
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $teacherId;
 
     /**
      * @ORM\Column(type="string", length=30)
@@ -36,14 +33,44 @@ class Classe
      */
     private $promotion;
 
+
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ExerciceGroupe", mappedBy="classe")
+     * @ORM\OneToMany(targetEntity="App\Entity\ExerciceClasse", mappedBy="classe")
      */
-    private $exerciceGroupe;
+    private $exerciceClasse;
+
+    /**
+     * @return mixed
+     */
+    public function getExerciceClasse()
+    {
+        return $this->exerciceClasse;
+    }
+
+    /**
+     * @param mixed $exerciceClasse
+     */
+    public function setExerciceClasse($exerciceClasse): void
+    {
+        $this->exerciceClasse = $exerciceClasse;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Eleve", mappedBy="classe")
+     */
+    private $eleves;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="classes")
+     */
+    private $teacher;
+
+
 
     public function __construct()
     {
-        $this->exerciceGroupe = new ArrayCollection();
+        $this->exerciceClasse = new ArrayCollection();
+        $this->eleves = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -51,18 +78,6 @@ class Classe
         return $this->id;
     }
 
-
-    public function getTeacherId(): ?int
-    {
-        return $this->teacherId;
-    }
-
-    public function setTeacherId(int $teacherId): self
-    {
-        $this->teacherId = $teacherId;
-
-        return $this;
-    }
 
     public function getName(): ?string
     {
@@ -88,34 +103,84 @@ class Classe
         return $this;
     }
 
+//    /**
+//     * @return Collection|ExerciceClasse[]
+//     */
+//    public function getExerciceClasse(): Collection
+//    {
+//        return $this->ExerciceClasse;
+//    }
+//
+//    public function addExerciceClasse(ExerciceClasse $exerciceClasse): self
+//    {
+//        if (!$this->exerciceClasse->contains($exerciceClasse)) {
+//            $this->exerciceClasse[] = $exerciceClasse;
+//            $exerciceClasse->setClasse($this);
+//        }
+//
+//        return $this;
+//    }
+//
+//    public function removeExerciceClasse(ExerciceClasse $exerciceClasse): self
+//    {
+//        if ($this->exerciceClasse->contains($exerciceClasse)) {
+//            $this->exerciceClasse->removeElement($exerciceClasse);
+//            // set the owning side to null (unless already changed)
+//            if ($exerciceClasse->getClasse() === $this) {
+//                $exerciceClasse->setClasse(null);
+//            }
+//        }
+//
+//        return $this;
+//    }
+
     /**
-     * @return Collection|ExerciceGroupe[]
+     * @return Collection|Eleve[]
      */
-    public function getExerciceGroupe(): Collection
+    public function getEleves(): Collection
     {
-        return $this->exerciceGroupe;
+        return $this->eleves;
     }
 
-    public function addExerciceGroupe(ExerciceGroupe $exerciceGroupe): self
+    public function getTeacher(): ?User
     {
-        if (!$this->exerciceGroupe->contains($exerciceGroupe)) {
-            $this->exerciceGroupe[] = $exerciceGroupe;
-            $exerciceGroupe->setClasse($this);
-        }
+        return $this->teacher;
+    }
+
+    public function setTeacher(?User $teacher): self
+    {
+        $this->teacher = $teacher;
 
         return $this;
     }
 
-    public function removeExerciceGroupe(ExerciceGroupe $exerciceGroupe): self
-    {
-        if ($this->exerciceGroupe->contains($exerciceGroupe)) {
-            $this->exerciceGroupe->removeElement($exerciceGroupe);
-            // set the owning side to null (unless already changed)
-            if ($exerciceGroupe->getClasse() === $this) {
-                $exerciceGroupe->setClasse(null);
-            }
-        }
+//    public function addElefe(Eleve $elefe): self
+//    {
+//        if (!$this->eleves->contains($elefe)) {
+//            $this->eleves[] = $elefe;
+//            $elefe->setClasse($this);
+//        }
+//
+//        return $this;
+//    }
+//
+//    public function removeElefe(Eleve $elefe): self
+//    {
+//        if ($this->eleves->contains($elefe)) {
+//            $this->eleves->removeElement($elefe);
+//            // set the owning side to null (unless already changed)
+//            if ($elefe->getClasse() === $this) {
+//                $elefe->setClasse(null);
+//            }
+//        }
+//
+//        return $this;
+//    }
 
-        return $this;
-    }
+//
+
+
+
+
+
 }

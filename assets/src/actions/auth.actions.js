@@ -7,7 +7,8 @@ export const AUTH_NOM_PASSWORD_DEUX 	= "FORM PASSWORD DOUBLE PROFF";
 export const AUTH_LOGIN_EMAIL         = "FORM LOGIN EMAIL";
 export const AUTH_LOGIN_PASSWORD      = "FORM LOGIN PASSWORD";
 export const LOGIN                    = "LOGIN";
-
+export const REGISTER                 = "REGISTER";
+export const SNACK_REGISTER           = "SNACK_REGISTER";
 
 export const inscriptionEtapeAction = etape => ({
   type: INSCRIPTION_ETAPES,
@@ -46,6 +47,15 @@ export const loginonPassword = password => ({
   payload: password
 });
 
+export const registerAction = success => ({
+  type: REGISTER,
+  payload: success
+});
+
+export const snackDelete = () => ({
+  type: SNACK_REGISTER,
+})
+
 
 export const register = (nom, email, password) => {
   const API_URL = 'http://localhost:8089';
@@ -63,7 +73,6 @@ export const register = (nom, email, password) => {
     formBody.push(encodedKey + "=" + encodedValue);
   }
   formBody = formBody.join("&");
-
   return dispatch => { 
     fetch(API_URL + '/register/', {
       method: 'POST',
@@ -74,21 +83,14 @@ export const register = (nom, email, password) => {
     })
     .then(response => response)
     .then(json => {
-      console.log(json);
-      if(json.status == 1){
-
+      console.log(json.status);
+      if(json.status == 200){
+        dispatch(registerAction(false))
+      }else if(json.status == 401){
+        dispatch(registerAction(true))
       }
-      
 
     })
     .catch((e) => dispatch());
   }
 };
-/*
-http://localhost:8089/register/
-
-fos_user_registration_form[email]
-fos_user_registration_form[username]
-fos_user_registration_form[plainPassword][first]
-fos_user_registration_form[plainPassword][second]
-*/

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import { connect } from 'react-redux';
-import {NavLink, withRouter} from 'react-router-dom';
+import {NavLink, withRouter, Redirect} from 'react-router-dom';
 import classNames from 'classnames';
 import withWidth from '@material-ui/core/withWidth';
 import Grid from '@material-ui/core/Grid';
@@ -33,7 +33,7 @@ import ecole_image from '../../../assets/images/ecole_chaise.jpg';
 import proff_image from '../../../assets/images/proff.jpg';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import logoImage from '../../../assets/images/imgFrontBackG.jpg';
-import { inscriptionEtapeAction, inscriptionNomProff, inscriptionEmailProff, inscriptionPasswordProff, inscriptionPasswordDoubleProff, register } from '../../../actions/auth.actions';
+import { inscriptionEtapeAction, inscriptionNomProff, inscriptionEmailProff, inscriptionPasswordProff, inscriptionPasswordDoubleProff, register, snackDelete } from '../../../actions/auth.actions';
 import { Remove } from '@material-ui/icons';
 
 const ITEM_HEIGHT = 48;
@@ -71,13 +71,16 @@ class RegisterForm extends React.Component {
     };
   }
 
-
-
   handleClose = () => {
     this.setState({ open: false });
   };
 
+  handleCloseRegister = () => {
+    this.props.snackDelete();
+  };
+
   componentWillMount() {
+    //console.log('auth_success?-'+this.props.data.register_process);
   }
 
   getType = () => {
@@ -101,22 +104,21 @@ class RegisterForm extends React.Component {
     }else if (e.target.value == option2){
 
     }
-    console.log(e);
   };
+
+  getRedirectConnect = () => {
+    if(this.props.data.register_snack == true) {
+       return <Redirect to='/' />;
+    }
+  }
 
   submitFormProfesseur = (e) => {
       e.preventDefault();
-
-      console.log(this.props.data.auth_nom);
-      console.log(this.props.data.auth_email);
-      console.log(this.props.data.auth_password);
-      console.log(this.props.data.auth_password_double);
 
       if(this.props.data.auth_password == '' 
         || this.props.data.auth_email == '' 
         ||  this.props.data.auth_nom == '' 
         || this.props.data.auth_password_double == '') {
-        console.log('chanmps vide');
         this.setState({ open: true,  snackMessage: 'Vous devez remplir tout les champs.' });
         return;
       }
@@ -124,11 +126,7 @@ class RegisterForm extends React.Component {
         this.setState({ open: true,  snackMessage: 'Les deux mots de passe ne correspondent pas.' });
         return;
       }
-
        this.props.register(this.props.data.auth_nom, this.props.data.auth_email, this.props.data.auth_password);
-      //this.setState({ open: true,  snackMessage: 'Vous éte bien inscrit, vous pouvez desormer vous connecter.' });
-
-      //this.props.loginAction(this.props.data.email, this.props.data.password);
   }
 
 
@@ -265,7 +263,7 @@ class RegisterForm extends React.Component {
 
 
   render() {
-    console.log(this.props.data.type);
+    {this.getRedirectConnect()}
     const { vertical, horizontal, open } = this.state;
     return (
 
@@ -280,6 +278,17 @@ class RegisterForm extends React.Component {
             'aria-describedby': 'message-id',
           }}
           message={<span id="message-id">{this.state.snackMessage}</span>}
+        />
+
+      <Snackbar
+          variant="error"
+          anchorOrigin={{ vertical, horizontal }}
+          open={this.props.data.register_snack}
+          onClose={this.handleCloseRegister}
+          ContentProps={{
+            'aria-describedby': 'message-id',
+          }}
+          message={<span id="message-id">{this.props.data.register_message}</span>}
         />
 
         <Card>
@@ -300,7 +309,6 @@ class RegisterForm extends React.Component {
               Une fois inscrit tu pourra t'entrainer, suivre des exercices et apprendre à coder.
             </Typography>
             {this.getForm()}
-
           </CardContent>
         </Card>
       </div>
@@ -317,20 +325,20 @@ function mapStateToProps(state) {
       auth_nom :            state.authData.auth_nom,
       auth_password:        state.authData.auth_password,
       auth_password_double: state.authData.auth_password_double,
+      register_snack      : state.authData.register_snack,
+      register_message    : state.authData.register_message,
     }
   };
 }
-
 
 RegisterForm.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   width: PropTypes.string.isRequired,
   inscriptionEtapeAction:PropTypes.func.isRequired,
-
 };
 
 export default compose(
   withWidth(),
   withStyles(themeStyles, { withTheme: true }),
-  connect(mapStateToProps, {inscriptionEtapeAction, inscriptionNomProff, inscriptionEmailProff, inscriptionPasswordProff, inscriptionPasswordDoubleProff, register})
+  connect(mapStateToProps, {inscriptionEtapeAction, inscriptionNomProff, inscriptionEmailProff, inscriptionPasswordProff, inscriptionPasswordDoubleProff, register, snackDelete})
 )(RegisterForm);

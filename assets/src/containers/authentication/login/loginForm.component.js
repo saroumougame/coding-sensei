@@ -84,8 +84,8 @@ class LoginForm extends React.Component {
                   </CardContent>
 
                   <CardActions className={scss['login-actions']}>
-                    <Button  onClick={this.submitFormLogin} color="default" variant="raised">Login</Button>
-                    <Button  > Forgot Password</Button>
+                    <Button onClick={this.submitFormLogin} color="default" variant="raised">Login</Button>
+                    <Button> Forgot Password</Button>
                   </CardActions>
                 </Card>
       );

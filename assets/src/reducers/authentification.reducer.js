@@ -8,9 +8,17 @@ import {
   AUTH_LOGIN_PASSWORD,
   REGISTER,
   SNACK_REGISTER,
+  LOGIN,
+  LOGIN_SNACK,
+  LOGIN_SNACK_CLOSE,
+  LOGIN_SPINNER_START,
+  LOGIN_SPINNER_STOP
 } from '../actions/auth.actions';
+import { createBrowserHistory } from 'history';
 
 
+
+const history = createBrowserHistory();
 // trois étapes d'inscription.
 // type: 0 null - 1 structure - 2 proff - 3 eleve
 const defaultState = {
@@ -25,6 +33,9 @@ const defaultState = {
   logged:               false,
   register_snack:       false,
   register_message:     '',
+  login_snack:          false, 
+  login_message:        '',
+  login_spinner:        false,
 };
 
 const authReducer = (state = defaultState, action) => {
@@ -93,6 +104,54 @@ const authReducer = (state = defaultState, action) => {
           register_snack:   false,
           register_message: ''
       };
+      break;
+    case LOGIN_SNACK:
+          return {
+        ...state,
+          login_snack:   true,
+          login_message: action.payload,
+      };
+      break;
+    case LOGIN_SNACK_CLOSE:
+           return {
+        ...state,
+          login_snack:   false,
+          login_message: '',
+      };
+      break; 
+    case LOGIN:
+      console.log(action.payload);
+
+      if(action.payload == false){
+          return {
+          ...state,
+            login_snack:   true,
+            login_message: 'Les identifiants rentrés sont incorrect.',
+            login_spinner:   false,
+        };
+      }
+
+       return {
+          ...state,
+            login_snack:   true,
+            login_message: 'Bravo, tu es désormais connecté.',
+            login_spinner:   false,
+        };
+      // auth 
+      // redirection || ==
+
+    break;  
+    case LOGIN_SPINNER_START:
+              return {
+          ...state,
+            login_spinner:   true,
+        };
+      break;
+    case LOGIN_SPINNER_STOP:
+              return {
+          ...state,
+            login_spinner:   false,
+        };
       break;
     default:
       return state;

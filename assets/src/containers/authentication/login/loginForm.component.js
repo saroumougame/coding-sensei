@@ -21,9 +21,11 @@ import { withStyles } from '@material-ui/core/styles';
 import themeStyles from './login.theme.style';
 import scss from './login.module.scss';
 import logoImage from '../../../assets/images/portal-logo.png';
+import Loader from 'react-loader-spinner'
 
-import { loginonEmail, loginonPassword } from '../../../actions/auth.actions';
+import Snackbar from '@material-ui/core/Snackbar';
 
+import { loginonEmail, loginonPassword, login, login_snack, login_snack_close, login_spinner_start } from '../../../actions/auth.actions';
 
 
 class LoginForm extends React.Component {
@@ -32,9 +34,16 @@ class LoginForm extends React.Component {
     super();
     this.state = {
       changePassword: false,
+      open: false,
+      vertical: 'top',
+      horizontal: 'right',
+      textSnack: ''
 
     };
   }
+  handleClose = () => {
+    this.setState({ open: false });
+  };
 
   changePassword = () => {
     if(this.state.changePassord) {
@@ -53,19 +62,48 @@ class LoginForm extends React.Component {
   }
 
   submitFormLogin = (e)=> {
-    console.log(this.props.data.auth_login_email);
-    console.log(this.props.data.auth_login_password);
+    if(this.props.data.auth_login_email == '' || this.props.data.auth_login_password == ''){
+      this.props.login_snack( 'Vous devez remplir tout les champs');
+      return;
+    }
+    // tester l'email
+    this.props.login_spinner_start();
+    this.props.login(this.props.data.auth_login_email, this.props.data.auth_login_password);
+  }
 
+  getSpinner = () => {
+    console.log(this.props.data.login_spinner);
+    if(this.props.data.login_spinner){ 
+    return (
+      <Loader 
+       type="Triangle"
+       color="#00BFFF"
+       height="100" 
+       width="100"
+    />   
+      );
+    }
+    return;
   }
 
   render() {
     const { classes } = this.props;
+    const { vertical, horizontal, open, textSnack } = this.state;
     if(!this.state.changePassord){
       return (
         
-
                 <Card className={scss.card}>
+               <Snackbar
+                        anchorOrigin={{ vertical, horizontal }}
+                        open={this.props.data.login_snack}
+                        onClose={this.props.login_snack_close}
+                        ContentProps={{
+                          'aria-describedby': 'message-id',
+                        }}
+                        message={<span id="message-id">{this.props.data.login_message}</span>}
+                      />
                   <CardContent>
+                {this.getSpinner()}
                     <TextField
                       label="Email Address"
                       value={this.props.data.auth_login_email}
@@ -117,6 +155,9 @@ function mapStateToProps(state) {
     data: {
       auth_login_email:           state.authData.auth_login_email,
       auth_login_password:        state.authData.auth_login_password,
+      login_snack:                state.authData.login_snack,
+      login_message:              state.authData.login_message,
+      login_spinner:              state.authData.login_spinner,
     }
   };
 }
@@ -129,5 +170,5 @@ LoginForm.propTypes = {
 export default compose(
   withWidth(),
   withStyles(themeStyles, { withTheme: true }),
-  connect(mapStateToProps, {loginonEmail, loginonPassword }),
+  connect(mapStateToProps, {loginonEmail, loginonPassword, login, login_snack, login_snack_close, login_spinner_start }),
 )(LoginForm);

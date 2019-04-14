@@ -59,12 +59,10 @@ const Login = (props) => {
     classes,
     width
   } = props;
-  console.log(props);
   // Flip container to column on mobile screens.
 const urlParams = new URLSearchParams(window.location.search);
 const myParam = urlParams.get('error');
-console.log(myParam);
-  const panelDirection = width === 'xs' ? 'column' : 'row';
+const panelDirection = width === 'xs' ? 'column' : 'row';
 
   return (
     <Grid
@@ -102,7 +100,7 @@ console.log(myParam);
               </CardContent>
               <NavLink to="/inscription">
               <CardActions>
-                <Button fullWidth href="/inscription" color="default" variant="raised">Crée un compte</Button>
+                <Button fullWidth color="default" variant="raised">Crée un compte</Button>
               </CardActions>
               </NavLink>
             </Card>

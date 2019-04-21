@@ -9,3 +9,11 @@ Registration
 
 Prenom			  == user_registration_prenom
 Code_ecole	      == 0(indépandant) -- 1-10000(ecoles)
+
+---------------------------------------------------------------------
+
+
+auth
+nom:     nicolas
+email:   n.tiesenhausen@gmail.com
+mdp:     nico

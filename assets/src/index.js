@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
+import {  Router } from 'react-router-dom';
 import './index.css';
 import App from './app.component';
 import { Provider } from 'react-redux';
@@ -9,6 +9,7 @@ import { createStore, applyMiddleware } from 'redux';
 import portalApp from './reducers';
 import registerServiceWorker from './registerServiceWorker';
 import WebFont from 'webfontloader';
+import history from './history';
 
 WebFont.load({
   google: {
@@ -21,7 +22,7 @@ export {store};
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
+    <Router history={history} >
       <App />
     </Router>
   </Provider>,

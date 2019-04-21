@@ -32,15 +32,16 @@ class LoginForm extends React.Component {
 
   constructor() {
     super();
+
     this.state = {
       changePassword: false,
       open: false,
       vertical: 'top',
       horizontal: 'right',
       textSnack: ''
-
     };
   }
+
   handleClose = () => {
     this.setState({ open: false });
   };
@@ -72,7 +73,6 @@ class LoginForm extends React.Component {
   }
 
   getSpinner = () => {
-    console.log(this.props.data.login_spinner);
     if(this.props.data.login_spinner){ 
     return (
       <Loader 

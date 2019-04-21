@@ -85,8 +85,13 @@ const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
 );
 
 const AppprotectedRoute = ({ logged: logged, component: Component, redir: redir, layout: Layout, ...rest }) => {
-  if(logged){
+  var token = localStorage.getItem('token');
 
+  if(typeof(token) != 'undefined' && token != null){
+    logged = true;
+  }
+
+  if(logged){
   return(
     <Route
       {...rest}
@@ -97,6 +102,7 @@ const AppprotectedRoute = ({ logged: logged, component: Component, redir: redir,
       )}
     />);
   }
+
   return <Redirect  to={{
     pathname : '/login',
     search: "?error=access",
@@ -145,7 +151,7 @@ const TabbedLayout = props => (
 // TODO: Consider looping through an object containing all routes
 export default ({ logged , childProps, layout }) => {
 
-  console.log('yaya - '+logged);
+  console.log('logged - '+logged);
   let activeLayout;
 
   switch (layout.currentLayout) {
@@ -180,7 +186,6 @@ export default ({ logged , childProps, layout }) => {
 
   return (
     <Switch>
-
       <AppRoute path="/" exact component={AsyncLanding} props={childProps} layout={activeLayout} />
       <AppRoute path="/ecole" exact component={AsyncEcole} props={childProps} layout={activeLayout} />
       <AppRoute path="/login" exact component={AsyncLogin} props={childProps} layout={activeLayout} />
@@ -191,10 +196,8 @@ export default ({ logged , childProps, layout }) => {
       
       <AppprotectedRoute path="/account"  logged={logged} exact component={AsyncAccount} props={childProps} layout={CompactLayout} />*
       <AppprotectedRoute path="/account/proff" logged={logged}  exact component={AccountProff} props={childProps} layout={CompactLayout} />
-      /*
-      <AppRoute path="/professeur" exact component={AsyncRegister} redir={AsyncLogin} props={childProps} layout={CompactLayout} />
-      */
-
+      <AppprotectedRoute path="/professeur" exact component={AsyncRegister} redir={AsyncLogin} props={childProps} layout={CompactLayout} />
+      
       <AppRoute path="/dashboards/analytics" exact component={AsyncAnalyticsDashboard} props={childProps} layout={CompactLayout} />
       <AppRoute path="/dashboards/ecommerce" exact component={AsyncEcommerceDashboard} props={childProps} layout={CompactLayout} />
       <AppRoute path="/dashboards/crypto" exact component={AsyncCryptoDashboard} props={childProps} layout={CompactLayout} />

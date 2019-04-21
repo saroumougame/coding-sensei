@@ -8,16 +8,25 @@ import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 
 import { MuiThemeProvider, createMuiTheme, createGenerateClassName, jssPreset } from '@material-ui/core/styles';
-
+import { logginWithTokenAction } from './actions/user.actions.js';
 import Routes from './routes';
 
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 const generateClassName = createGenerateClassName();
 
 class App extends React.Component {
+
   componentWillReceiveProps(nextProps) {
     if (document.body) {
       document.body.dir = nextProps.themeConfig.contentTheme.direction;
+    }
+  }
+
+  componentDidMount() {
+  var token = localStorage.getItem('token');
+
+    if(typeof(token) != 'undefined' && token != null){
+      this.props.logginWithTokenAction();
     }
   }
 
@@ -53,7 +62,7 @@ function mapStateToProps(state) {
   return {
     themeConfig: state.theme,
     layoutConfig: state.layout,
-    logged:       state.authData.logged,
+    logged:       state.userData.logged,
   };
 }
 
@@ -68,5 +77,5 @@ App.propTypes = {
 
 export default compose(
   withRouter,
-  connect(mapStateToProps)
+  connect(mapStateToProps, {logginWithTokenAction})
 )(App);

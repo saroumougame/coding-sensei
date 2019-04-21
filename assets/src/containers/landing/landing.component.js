@@ -20,6 +20,7 @@ const Landing = (props) => {
     <div className={[ scss['portal-pages__header']]}>
      <section className={scss['portal-pages__header']}>
        <div className={scss['portal-pages__container']}>
+       {/*
          <Card className={scss['front-paper']}>
            <CardContent>
              <Typography className={classes.title} color="textSecondary" gutterBottom>
@@ -77,6 +78,7 @@ const Landing = (props) => {
              </NavLink>
            </CardActions>
          </Card>
+       */}
        </div>
      </section>
     </div>

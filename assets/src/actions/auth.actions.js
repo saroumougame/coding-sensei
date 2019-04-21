@@ -1,9 +1,10 @@
+import history from '../history';
 export  const INSCRIPTION_ETAPES = "changer_étapes";
 
-export const AUTH_NOM_PROFF  			    = "FORM NOM PROFF";
-export const AUTH_NOM_EMAIL  			    = "FORM EMAIL PROFF";
-export const AUTH_NOM_PASSWORD  		  = "FORM PASSWORD PROFF";
-export const AUTH_NOM_PASSWORD_DEUX 	= "FORM PASSWORD DOUBLE PROFF";
+export const AUTH_NOM_PROFF           = "FORM NOM PROFF";
+export const AUTH_NOM_EMAIL           = "FORM EMAIL PROFF";
+export const AUTH_NOM_PASSWORD        = "FORM PASSWORD PROFF";
+export const AUTH_NOM_PASSWORD_DEUX   = "FORM PASSWORD DOUBLE PROFF";
 export const AUTH_LOGIN_EMAIL         = "FORM LOGIN EMAIL";
 export const AUTH_LOGIN_PASSWORD      = "FORM LOGIN PASSWORD";
 export const LOGIN                    = "LOGIN";
@@ -13,7 +14,6 @@ export const LOGIN_SNACK              = "LOGIN_SNACK";
 export const LOGIN_SNACK_CLOSE        = "LOGIN_SNACK_CLOSE";
 export const LOGIN_SPINNER_START      = "LOGIN_SPINNER_START";
 export const LOGIN_SPINNER_STOP       = "LOGIN_SPINNER_STOP";
-
        const API_URL                  = 'http://localhost:8089';
 
 export const inscriptionEtapeAction = etape => ({
@@ -119,23 +119,24 @@ export const login = (email, password) => {
     fetch(API_URL + '/login_check', {
       method: 'POST',
       headers: {
+        'Accept': 'application/json',
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       body: formBody
     })
-    .then(response => response)
+    .then(response => response.json() )
     .then(json => {
 
-      console.log(json);
-
-      if(json.status == 200){
-        console.log('iciiiciici');
+      if(typeof(json.token) != 'undefined'){
+        localStorage.setItem('token', json.token);
         dispatch(loginAction(true));
-      }else if(json.status == 401){
-         console.log('iciiiciici');
+        history.push('/account');
+      }else {
         dispatch(loginAction(false));
       }
+
       return dispatch(login_spinner_stop());
+
 
 
     })

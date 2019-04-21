@@ -14,11 +14,7 @@ import {
   LOGIN_SPINNER_START,
   LOGIN_SPINNER_STOP
 } from '../actions/auth.actions';
-import { createBrowserHistory } from 'history';
 
-
-
-const history = createBrowserHistory();
 // trois étapes d'inscription.
 // type: 0 null - 1 structure - 2 proff - 3 eleve
 const defaultState = {
@@ -30,7 +26,6 @@ const defaultState = {
   auth_password_double: '',
   auth_login_email:     '',
   auth_login_password:  '',
-  logged:               false,
   register_snack:       false,
   register_message:     '',
   login_snack:          false, 
@@ -120,10 +115,9 @@ const authReducer = (state = defaultState, action) => {
       };
       break; 
     case LOGIN:
-      console.log(action.payload);
 
       if(action.payload == false){
-          return {
+        return {
           ...state,
             login_snack:   true,
             login_message: 'Les identifiants rentrés sont incorrect.',
@@ -131,7 +125,7 @@ const authReducer = (state = defaultState, action) => {
         };
       }
 
-       return {
+        return {
           ...state,
             login_snack:   true,
             login_message: 'Bravo, tu es désormais connecté.',
@@ -139,7 +133,6 @@ const authReducer = (state = defaultState, action) => {
         };
       // auth 
       // redirection || ==
-
     break;  
     case LOGIN_SPINNER_START:
               return {

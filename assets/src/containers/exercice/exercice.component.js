@@ -11,6 +11,7 @@ import { Remove  } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
 import scss from './exercice.module.scss';
 import styles from './exercice.style';
+
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -76,16 +77,13 @@ class Exercice extends Component  {
 
           <Paper className={scss['exercice-paper']}>
             <div className={scss['exercice-paper-title']}>
-              <h2>Gestion des professeurs</h2>
+              <h2>Gestion des exerice</h2>
             </div>
             <div className={scss['exercice-tableHeader']}>
             <Button variant="fab" color="primary" className={scss['btn_fab']} onClick={() => {this.addClick();}}>
               {this.fabButtonIcon()}
             </Button>
               <div>
-              <Button variant="fab" aria-label="Delete" className={scss['btn_fab-right']} onClick={() => {this.clickDelete()}}>
-                <DeleteIcon />
-              </Button>
               </div>
             </div>
             {this.SelectPaperContent()}

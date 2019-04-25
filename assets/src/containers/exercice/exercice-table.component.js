@@ -7,34 +7,35 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox'
-import AddIcon from '@material-ui/icons/Add';
+
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import scss from './exercice.module.scss';
 import styles from './exercice.style';
 import { addSelectaction, removeSelectaction } from '../../actions/exercice.actions';
+import DeleteIcon from '@material-ui/icons/Delete';
+
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import Chip from '@material-ui/core/Chip';
+
+const API = 'http://localhost:8089/api/';
+const DEFAULT_QUERY = 'exercices';
+
 
 class TableauExercice extends Component  {
-
-  constructor() {
-    super();
-    this.rows = [];
-
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      exos: [],
+      isLoading: false,
+      show: ''
+    };
   }
-
-
-  onChangeSelect = (row) => {
-    let newTabSelect = this.props.data.tabSelected;
-
-    if(newTabSelect.indexOf(row.id) == -1){
-     return this.props.addSelectaction(row.id);
-    }else {
-      return this.props.removeSelectaction(row.id);
-    }
-
-  };
 
   isChecked(id){
     if(this.props.data.tabSelected.indexOf(id) != -1){
@@ -43,41 +44,81 @@ class TableauExercice extends Component  {
     return false;
   }
 
-  render() {
-    this.rows = this.props.data.proffs;
 
+  componentWillMount() {
+    this.setState({ isLoading: true });
+    fetch(API + DEFAULT_QUERY)
+      .then(response => response.json())
+      .then(exos => 
+        this.setState({ exos : exos,isLoading: false })
+      );
+  }
+
+
+  onDeleteExo(exo){
+    var response =fetch(API+ DEFAULT_QUERY +'/'+ exo.id, {
+      method: 'DELETE',
+      headers: {'Content-Type': 'application/json'},
+    }).then(response => {
+      response.json()
+      this.componentWillMount();
+    });
+   
+  }
+
+
+  render() {
+  
+    //this.props.data.proffs;
     let { classes } = this.props;
+    const { exos, isLoading } = this.state;
+    var dataExo = exos['hydra:member'];
+
+    console.log(isLoading);
+  
+    console.log(exos['hydra:member']);
+    if (isLoading) {
+      return <p>Loading ...</p>;
+    }
     return (
               <Table className={classes.table}>
                 <TableHead>
                   <TableRow>
-                    <TableCell>Nom Prenom</TableCell>
-                    <TableCell numeric>Matière</TableCell>
-                    <TableCell numeric>Nombre de classes</TableCell>
-                    <TableCell numeric>Nombre d'éléves</TableCell>
-                    <TableCell >Options</TableCell>
+                    <TableCell>Titre</TableCell>
+                    <TableCell numeric>Desription</TableCell>
+                    <TableCell numeric>Fonction</TableCell>
+                    <TableCell numeric>Entree</TableCell>
+                    <TableCell >Sortie</TableCell>
+                    <TableCell >Action</TableCell>
                   </TableRow>
                 </TableHead>
-                <TableBody>
-                  {this.rows.map(row => {
+                <TableBody> 
+                  {dataExo.map(exo => {
                     return (
-                      <TableRow key={row.id}>
+                      <TableRow key={exo.id} >
                         <TableCell component="th" scope="row">
-                          {row.nom}
+                          {exo.name}
                         </TableCell>
-                        <TableCell numeric>{row.matiere}</TableCell>
-                        <TableCell numeric>{row.eleves}</TableCell>
-                        <TableCell numeric>{row.autre}</TableCell>
+                        <TableCell numeric>{exo.description}</TableCell>
+                        <TableCell numeric>{exo.fonction}</TableCell>
+                        <TableCell numeric>{exo.inData.arg}</TableCell>
+                        <TableCell numeric>{exo.autre}</TableCell>
+
                         <TableCell >
-                            <Checkbox
-                            checked = {this.isChecked(row.id)}
-                            onChange={() => this.onChangeSelect(row)}
-                            />
+                           multi select attr classe
+                        </TableCell>
+
+                        <TableCell >
+                        <Button  onClick={() => this.onDeleteExo(exo)} variant="fab" aria-label="Delete" className={scss['btn_fab-right']} >
+                <DeleteIcon />
+              </Button>
+                    
+                        </TableCell>
+                        <TableCell >
                             <Button variant="outlined" href="#outlined-buttons" className={classes.button}>
                               Modifier
                             </Button>
                         </TableCell>
-
 
                       </TableRow>
                     );

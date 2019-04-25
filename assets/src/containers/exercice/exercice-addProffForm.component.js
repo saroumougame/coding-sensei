@@ -7,6 +7,8 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './exercice.style';
 import scss from './exercice.module.scss';
+
+/*
 import Paper from '@material-ui/core/Paper';
 import AddIcon from '@material-ui/icons/Add';
 import Checkbox from '@material-ui/core/Checkbox'
@@ -17,8 +19,13 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import {changeSidenavToolbarText} from "../../actions/theme.actions";
+*/
 
 import { addProffAction } from '../../actions/exercice.actions';
+
+
+const API = 'http://localhost:8089/api/';
+const DEFAULT_QUERY = 'exercices';
 
 class ExerciceAddProffForm extends Component  {
 
@@ -26,81 +33,108 @@ class ExerciceAddProffForm extends Component  {
     super();
     this.state = {
       expandAddZone: false,
-        nom: '',
-        autre: 0,
-        eleves: 0,
-        classe: 0,
-        matiere: ''
+        titre: '',
+        description: '',
+        fonction:'',
+        entree: '',
+        sortie: ''
 
     };
   }
-
+  
   formSubmit() {
+   
     let form = {
-      nom: this.state.nom,
-      autre: this.state.autre,
-      eleves: this.state.eleves,
-      classe: this.state.classe,
-      matiere: this.state.matiere
+      "inData": [
+        this.state.entree
+      ],
+      "outData": [
+        this.state.sortie
+      ],
+      "name":  this.state.titre,
+      "description":  this.state.description,
+      "langagueSpecs":  'php',
+      "fonction":  this.state.fonction
     }
-    this.props.addProffAction(form);
+
+    this.addExercices(form);
   }
+
+  addExercices(form){
+
+    console.log(JSON.stringify(form));
+ 
+      fetch(API+ DEFAULT_QUERY, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(form)
+      }).then(function(response) {
+        return response.json();
+      });
+
+
+  }
+
+  
 
   render() {
     let { classes } = this.props;
     return (
         <div className={[ scss['form_add_proff_div']]}>
-          Ajouter un professeur
+          Ajouter un exercice
           <form className={[ scss['form_add_proff_form']]} noValidate autoComplete="off">
             <TextField
-              id="nom"
-              value={this.state.nom}
-              onChange={(e) => {this.setState({nom: e.target.value});}}
-              label="Nom et prenom"
+              id="titre"
+              value={this.state.titre}
+              onChange={(e) => {this.setState({titre: e.target.value});}}
+              label="titre"
               className={classes.textField}
               margin="normal"
             />
             <TextField
-              id="matiere"
-              value={this.state.matiere}
-              onChange={(e) => {this.setState({matiere: e.target.value});}}
-              label="matiere"
-              className={classes.textField}
-              margin="normal"
-            />
-
-            <TextField
-              id="autre"
-              label="autre"
-              type="number"
-              value={this.state.autre}
-              onChange={(e) => {this.setState({autre: e.target.value});}}
+              id="description"
+              value={this.state.description}
+              onChange={(e) => {this.setState({description: e.target.value});}}
+              label="description"
               className={classes.textField}
               margin="normal"
             />
 
             <TextField
-              id="eleves"
-              label="eleves"
-              type="number"
+              id="fonction"
+              label="nom de la fonction a declancher"
+              type="text"
+              value={this.state.fonction}
+              onChange={(e) => {this.setState({fonction: e.target.value});}}
               className={classes.textField}
-              onChange={(e) => {this.setState({eleves: e.target.value});}}
-              value={this.state.eleves}
               margin="normal"
             />
 
             <TextField
-              id="classe"
-              label="classes"
-              type="number"
+              id="entree"
+              label="param d'entré"
+              type="text"
+              value={this.state.entree}
+              onChange={(e) => {this.setState({entree: e.target.value});}}
               className={classes.textField}
-              value={this.state.classe}
-              onChange={(e) => {this.setState({classe: e.target.value});}}
+              margin="normal"
+            />
+
+            <TextField
+              id="sortie"
+              label="param de sortie attendue"
+              type="text"
+              value={this.state.sortie}
+              onChange={(e) => {this.setState({sortie: e.target.value});}}
+              className={classes.textField}
               margin="normal"
             />
 
             <Button variant="contained" color="primary" className={classes.button} onClick={() => {this.formSubmit()}}>
-              Crée le professeur
+              Valider
             </Button>
           </form>
         </div>

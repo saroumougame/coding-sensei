@@ -60,7 +60,7 @@ class TableauExercice extends Component  {
       method: 'DELETE',
       headers: {'Content-Type': 'application/json'},
     }).then(response => {
-      response.json()
+      //response.json()
       this.componentWillMount();
     });
    

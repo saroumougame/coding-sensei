@@ -86,7 +86,6 @@ const authReducer = (state = defaultState, action) => {
       }else {
         var newregister_message = "Félicitation, vous pouvez maintenent vous connecter";
       }
-
         return {
         ...state,
           register_snack:   true,
@@ -131,8 +130,8 @@ const authReducer = (state = defaultState, action) => {
             login_message: 'Bravo, tu es désormais connecté.',
             login_spinner:   false,
         };
-      // auth 
-      // redirection || ==
+    // auth 
+    // redirection || ==
     break;  
     case LOGIN_SPINNER_START:
               return {

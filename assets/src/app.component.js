@@ -25,6 +25,8 @@ class App extends React.Component {
   componentDidMount() {
   var token = localStorage.getItem('token');
 
+  console.log(token);
+
     if(typeof(token) != 'undefined' && token != null){
       this.props.logginWithTokenAction();
     }

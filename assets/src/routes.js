@@ -17,7 +17,10 @@ import NoLayout from './layouts/layout-none/layout-none.component';
 //  MAIN APP ROUTES
 const AsyncLanding= asyncComponent(() => import('./containers/landing/landing.component'));
 const AsyncEcole= asyncComponent(() => import('./containers/ecole/ecole.component'));
-const AccountProff= asyncComponent(() => import('./containers/account/professeur/account.component'))
+const AccountProff= asyncComponent(() => import('./containers/account/professeur/account.component'));
+const ClassesProff= asyncComponent(() => import('./containers/classe/proff/contacts.component'));
+
+
 
 //AsyncLogin
 
@@ -194,9 +197,12 @@ export default ({ logged , childProps, layout }) => {
       <AppRoute path="/eleve" exact component={AsyncRegister} props={childProps} layout={activeLayout} />
 
       
-      <AppprotectedRoute path="/account"  logged={logged} exact component={AsyncAccount} props={childProps} layout={CompactLayout} />*
+      <AppprotectedRoute path="/account"  logged={logged} exact component={AsyncAccount} props={childProps} layout={CompactLayout} />
       <AppprotectedRoute path="/account/proff" logged={logged}  exact component={AccountProff} props={childProps} layout={CompactLayout} />
       <AppprotectedRoute path="/professeur" exact component={AsyncRegister} redir={AsyncLogin} props={childProps} layout={CompactLayout} />
+      <AppprotectedRoute path="/professeur/classes" exact component={ClassesProff} redir={AsyncLogin} props={childProps} layout={CompactLayout} />
+
+      
       
       <AppRoute path="/dashboards/analytics" exact component={AsyncAnalyticsDashboard} props={childProps} layout={CompactLayout} />
       <AppRoute path="/dashboards/ecommerce" exact component={AsyncEcommerceDashboard} props={childProps} layout={CompactLayout} />

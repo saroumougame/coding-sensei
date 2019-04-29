@@ -65,7 +65,11 @@ export const menuItems = [{
   title: 'Mon Ecole',
   href: '/theming',
   icon: <BuildIcon style={iconStyle} />
-}, {
+},  {
+  title: 'Mes classes',
+  href: '/professeur/classes',
+  icon: <DesktopWindowsIcon style={iconStyle} />
+},{
   title: 'Cours',
   type: 'header'
 }, {

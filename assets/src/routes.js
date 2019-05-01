@@ -19,6 +19,8 @@ const AsyncLanding= asyncComponent(() => import('./containers/landing/landing.co
 const AsyncEcole= asyncComponent(() => import('./containers/ecole/ecole.component'));
 const AccountProff= asyncComponent(() => import('./containers/account/professeur/account.component'));
 const ClassesProff= asyncComponent(() => import('./containers/classe/proff/contacts.component'));
+const AsyncExercice= asyncComponent(() => import('./containers/exercice/exercice.component'));
+const AccountProff= asyncComponent(() => import('./containers/account/professeur/account.component'))
 
 
 
@@ -195,6 +197,8 @@ export default ({ logged , childProps, layout }) => {
       <AppRoute path="/inscription" exact component={AsyncRegister} props={childProps} layout={activeLayout} />
       <AppRoute path={"/inscription/:formulaire"} exact component={AsyncRegisterForm} props={childProps} layout={activeLayout} />
       <AppRoute path="/eleve" exact component={AsyncRegister} props={childProps} layout={activeLayout} />
+        <AppRoute path="/exercice" exact component={AsyncExercice} props={childProps} layout={activeLayout} />
+
 
       
       <AppprotectedRoute path="/account"  logged={logged} exact component={AsyncAccount} props={childProps} layout={CompactLayout} />

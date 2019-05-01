@@ -39,6 +39,9 @@ services:
             - app-sync-coding2:/coding
             - ./symfony/conf/apache2:/etc/apache2
             - ./symfony/conf/php7/php.ini:/etc/php7/php.ini
+        environment:
+              # Keep attention to that env variable
+              PHP_IDE_CONFIG: serverName=symfony_adboghi91jp9t4z28
 # <------ symfony <------
 
 volumes:

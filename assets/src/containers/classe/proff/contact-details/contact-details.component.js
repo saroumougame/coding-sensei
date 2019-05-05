@@ -41,6 +41,7 @@ const ContactDetails = (props) => {
                 scss['portal-contact-details__avatar-container']
               )}
             >
+            {/*
               <div
                 className={classNames(
                   scss['portal-contact-details__avatar'],
@@ -55,17 +56,16 @@ const ContactDetails = (props) => {
                   alt={`${process.env.PUBLIC_URL}/${selectedContact.name}`}
                 />
               </div>
+            */}
               <div
                 className={classNames(
                   scss['portal-contact-details__extra'],
                   classes.portalContactDetailsExtra
                 )}
               >
-                <p>{selectedContact.gender}, age {selectedContact.age}</p>
                 <p>{selectedContact.region}</p>
                 <p>{selectedContact.phone}</p>
                 <p>{selectedContact.email}</p>
-                <p>{selectedContact.birthday.dmy}</p>
                 <br />
 
                 <FontAwesome name="twitter" className={classNames(
@@ -86,7 +86,7 @@ const ContactDetails = (props) => {
                 scss['portal-contact-details__main']
               )}
             >
-              <Typography variant="headline" gutterBottom>{selectedContact.name}, {selectedContact.surname}</Typography>
+              <Typography variant="headline" gutterBottom>{selectedContact.name}</Typography>
               <Typography component="div" dangerouslySetInnerHTML={{ __html: selectedContact.bio }} />
             </div>
           </Grid>

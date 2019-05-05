@@ -87,7 +87,10 @@
     box-shadow: 0 4px 0 #e3f1fc, 0 8px 0 #e3f1fc, 0 12px 0 #e3f1fc, 0 20px 0 #e3f1fc;
   }
 }
-
+.portal-contacts-no-button-form {
+  margin-top: 30px;
+  margin-left: 10px;
+}
 @keyframes portal-contacts-no-contacts__icon {
   0%, 50% {
     transform: translateY(15px);

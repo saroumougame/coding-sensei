@@ -20,7 +20,7 @@ const AsyncEcole= asyncComponent(() => import('./containers/ecole/ecole.componen
 const AccountProff= asyncComponent(() => import('./containers/account/professeur/account.component'));
 const ClassesProff= asyncComponent(() => import('./containers/classe/proff/contacts.component'));
 const AsyncExercice= asyncComponent(() => import('./containers/exercice/exercice.component'));
-const AccountProff= asyncComponent(() => import('./containers/account/professeur/account.component'))
+//const AccountProff= asyncComponent(() => import('./containers/account/professeur/account.component'))
 
 
 

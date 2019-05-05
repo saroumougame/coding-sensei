@@ -34,7 +34,7 @@ export const configuredLayout = {
 const iconStyle = {
   fontSize: 16
 };
-
+//BuildIcon
 export const menuItems = [{
   title: 'Administration',
   icon: <HomeIcon style={iconStyle} />,
@@ -71,18 +71,24 @@ export const menuItems = [{
   }
 ]
 }, {
-  title: 'Mon Ecole',
+  title: 'Mes Ecole',
   href: '/theming',
-  icon: <BuildIcon style={iconStyle} />
+  icon: <DesktopWindowsIcon style={iconStyle} />
 },  {
   title: 'Mes classes',
   href: '/professeur/classes',
   icon: <DesktopWindowsIcon style={iconStyle} />
-},{
+},  {
+  title: 'theming',
+  href: '/theming',
+  icon: <DesktopWindowsIcon style={iconStyle} />
+},
+
+{
   title: 'Cours',
   type: 'header'
 }, {
-  title: 'Cours - Tp',
+  title: 'Autres',
   icon: <DesktopWindowsIcon style={iconStyle} />,
   children: [{
     title: 'Email',
@@ -113,7 +119,7 @@ export const menuItems = [{
     href: '/apps/chat',
     icon: <ChatIcon style={iconStyle} />
   }]
-}/*, {
+},/* {
   title: 'USER INTERFACE',
   type: 'header'
 }, {

@@ -3,7 +3,8 @@ import {
   EDIT_CLASS_BY_PROFF,
   SUPPRIMER_CLASS_BY_PROFF,
   UPDATE_CLASS_LIST,
-  GET_ALL_CLASS__BY_PROFF
+  GET_ALL_CLASS__BY_PROFF,
+  UPDATE_CLASS_NOM
 } from '../actions/classes.actions';
 
 
@@ -12,6 +13,7 @@ const defaultState = {
     UpdatedClasses: [],
     CreateClassNom: '',
     CreateClassPromotion: '',
+    FormDataUpdateClassNom: '',
 };
 
 const classesReducer = (state = defaultState, action) => {
@@ -29,6 +31,13 @@ const classesReducer = (state = defaultState, action) => {
         ...state,
           UpdatedClasses: action.payload
       }
+    break;
+    case UPDATE_CLASS_NOM:
+      return {
+        ...state,
+          FormDataUpdateClassNom: action.payload
+      }
+    break;
     default:
       return state;
   }

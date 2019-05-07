@@ -3,20 +3,50 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-
+import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import themeStyles from './contact-details.theme.style';
 import withWidth from '@material-ui/core/withWidth';
 import { withStyles } from '@material-ui/core/styles';
 import scss from './contact-details.module.scss';
 
-import FontAwesome from 'react-fontawesome';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
-const ContactDetails = (props) => {
+import FontAwesome from 'react-fontawesome';
+import {FormUpdateClassNom, updateClass, deleteClass}      from '../../../../actions/classes.actions';
+
+
+class ContactDetails extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      nom: '',
+
+    }
+  }
+
+  handleNameUpdate = (e) => {
+    this.props.FormUpdateClassNom(e.target.value);
+  }
+
+  formSubmit() {
+      if(this.props.data.FormDataUpdateClassNom != ''){
+        this.props.onSelect(null);
+        this.props.updateClass(this.props.data.FormDataUpdateClassNom, this.props.selectedContact.id);    
+      }
+
+      return;
+  }
+
+
+  render(){
   const {
     selectedContact,
     classes
-  } = props;
+  } = this.props;
 
   return (
     <div className={classNames(scss['portal-contact-details'] )}>
@@ -41,6 +71,9 @@ const ContactDetails = (props) => {
                 scss['portal-contact-details__avatar-container']
               )}
             >
+                 <Button variant="contained" color="primary" className={scss['portal-contacts-detail-update-contact']} onClick={() => {this.props.deleteClass(selectedContact.id)}}>
+                    Supprimer la classe
+                  </Button>
             {/*
               <div
                 className={classNames(
@@ -87,6 +120,30 @@ const ContactDetails = (props) => {
               )}
             >
               <Typography variant="headline" gutterBottom>{selectedContact.name}</Typography>
+               <form  noValidate autoComplete="off">
+                  <TextField
+                    id="nom"
+                    value={this.props.data.FormDataUpdateClassNom}
+                    onChange={this.handleNameUpdate}
+                    label="Nom de la classe"
+                    className={classes.textField}
+                    margin="normal"
+                  />
+                  {/*
+                    <TextField
+                      id="matiere"
+                      value={this.props.data.classPromotion}
+                      onChange={(e) => {this.setState({matiere: e.target.value});}}
+                      label="promotion"
+                      className={classes.textField}
+                      margin="normal"
+                    />
+                  */}
+
+                  <Button variant="contained" color="primary" className={scss['portal-contacts-detail-update-contact']} onClick={() => {this.formSubmit()}}>
+                    Modifier la classe
+                  </Button>
+                </form>
               <Typography component="div" dangerouslySetInnerHTML={{ __html: selectedContact.bio }} />
             </div>
           </Grid>
@@ -94,7 +151,18 @@ const ContactDetails = (props) => {
       </div>
     </div>
   );
+}
 };
+
+
+
+function mapStateToProps(state) {
+  return {
+    data: {
+      FormDataUpdateClassNom:           state.classData.FormDataUpdateClassNom,  
+    }
+  };
+}
 
 ContactDetails.defaultProps = {
   selectedContact: null
@@ -104,4 +172,7 @@ ContactDetails.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   selectedContact: PropTypes.shape({})
 };
-export default compose(withWidth(), withStyles(themeStyles, { withTheme: true }))(ContactDetails);
+
+export default compose(withWidth(), withStyles(themeStyles, { withTheme: true }),
+  connect(mapStateToProps, {FormUpdateClassNom, updateClass, deleteClass}))(ContactDetails);
+

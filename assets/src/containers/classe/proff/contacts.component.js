@@ -43,7 +43,7 @@ class ListeClassesProff extends React.Component {
 
         {this.state.selectedContact ?
           <ContactDetails
-            selectedContact={this.state.selectedContact} /> : <NoContacts />}
+            selectedContact={this.state.selectedContact}  onSelect={this.selectContact} /> : <NoContacts />}
 
       </div>
     );

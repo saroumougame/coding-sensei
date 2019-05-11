@@ -4,7 +4,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  margin-top: 10vh;
 
   h2 {
     font-size: .95em;
@@ -30,7 +31,13 @@
   font-size: .95em;
   margin-top: 12px;
 }
-
+.card_proff_class {
+  padding: 1%;
+}
+.car_addclass_boutique {
+  margin-left: 20px;
+}
+/*
 .portal-contacts-no-contacts__icon {
   position: relative;
   margin: 25px auto 0;
@@ -55,6 +62,7 @@
     box-shadow: 0 2px 2px rgba(0,0,0,0.075);
   }
 }
+*/
 
 .portal-contacts-no-contacts__paper {
   background: #fff;
@@ -129,4 +137,11 @@
   80%, 100% {
     opacity: 0;
   }
+}
+
+.perso-paper-tkt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5%;
 }

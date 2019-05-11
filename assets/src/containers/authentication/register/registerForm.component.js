@@ -79,9 +79,6 @@ class RegisterForm extends React.Component {
     this.props.snackDelete();
   };
 
-  componentWillMount() {
-    //console.log('auth_success?-'+this.props.data.register_process);
-  }
 
   getType = () => {
     if(this.props.match.params.formulaire == "structure"){
@@ -291,7 +288,7 @@ class RegisterForm extends React.Component {
           message={<span id="message-id">{this.props.data.register_message}</span>}
         />
 
-        <Card>
+        <Card className={scss['register-form-cart']}>
           <NavLink strict to="/inscription">
           <Button variant="fab" color="primary" className={scss['inscription-back-button']}>
             <Remove/>

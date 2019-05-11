@@ -57,10 +57,24 @@
   margin-top: 15px;
   margin-left: 15px;
 }
-.form_inscription{
+.form_inscription {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
   width: 80%;
+}
+
+.card_proffesseur {
+  width: 22%;
+  //  height: 45vh;
+  //  display: flex;
+  //  justify-content: center;
+  //  align-items: center;
+  //  background-image: url('../../../assets/images/bonneval-sebastien-1389597-unsplash.jpg');
+  //  background-size: 600px;
+}
+
+.register-form-cart {
+  width: 40%;
 }

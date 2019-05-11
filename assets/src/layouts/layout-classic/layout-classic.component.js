@@ -53,8 +53,6 @@ class ClassicLayout extends React.Component {
             <ContentToolbar />
           </AppBar>
 */}
-
-
           <div className={scss['layout-classic-content-wrapper']}>
             <div className={scss['layout-classic-content']}>
               {children}

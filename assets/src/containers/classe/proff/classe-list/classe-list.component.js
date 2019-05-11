@@ -157,12 +157,14 @@ class ClassesList extends React.Component {
           }}
         />
         <div>
-        <h2>Liste des classes</h2>
+      {/*
+      */}
         <Button variant="contained" className={classes.button} onClick={onSelect(null)}>
-         Ajouter une classe
+          Ajouter une classe
         </Button>
         <div  className={scss['classe_cree_le']} >Classe à crée : {this.state.classeToCreate}</div>
         </div>
+       
       </div>
     );
   }

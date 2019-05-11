@@ -21,7 +21,13 @@ import { withStyles } from '@material-ui/core/styles';
 //import themeStyles from './login.theme.style';
 import scss from './account.module.scss';
 
+import styles from './account.style';
 
+import LineChartWidget from '../../../components/line-chart-widget/line-chart-widget.component';
+import ActiveUsersWidget from '../../../components/active-users-widget/active-users-widget.component';
+import DailySalesWidget from '../../../components/daily-sales-widget/daily-sales-widget.component';
+import TableWidget from '../../../components/table-widget/table-widget.component';
+import RegionSalesWidget from '../../../components/region-sales-widget/region-sales-widget.component';
 
 class AccountProff extends React.Component {
 
@@ -33,13 +39,66 @@ class AccountProff extends React.Component {
   
 
   render() {
-    const { classes } = this.props;
+    const { classes } = styles;
       return (
         
+    <div className={styles.portalDashboardPageWrapper}>
+      <Grid item xs={12}>
+        <Grid container justify="center" spacing={16}>
 
-                <div className={scss.card}>
-                  coucou
-                </div>
+          <Grid key={1} item xs={12} sm={6} md={4} className={styles.portalWidget}>
+            <Paper className={styles.portalWidgetContent}>
+          {/*
+              <LineChartWidget title="Recent Sales" />
+          */}
+              <Typography variant="h5" gutterBottom>
+                   Information proff 
+                </Typography>
+            </Paper>
+          </Grid>
+{/*
+          <Grid key={2} item xs={12} sm={6} md={4} className={styles.portalWidget}>
+            <Paper className={styles.portalWidgetContent}>
+              <LineChartWidget title="Nombre d'éleves" />
+            </Paper>
+          </Grid>
+
+          <Grid key={3} item xs={12} sm={12} md={4} className={styles.portalWidget}>
+            <Paper className={styles.portalWidgetContent}>
+              <ActiveUsersWidget />
+            </Paper>
+          </Grid>
+
+          <Grid key={6} item xs={12} sm={12} md={4} className={styles.portalWidget}>
+            <Paper className={styles.portalWidgetContent}>
+              <RegionSalesWidget />
+            </Paper>
+          </Grid>
+                  <DailySalesWidget />
+                  <TableWidget />
+*/}
+          <Grid item xs={12} sm={12} md={8}>
+            <Grid container justify="center" spacing={16}>
+              <Grid key={4} item xs={12} className={styles.portalWidget}>
+                <Paper className={styles.portalWidgetContent}>
+                <Typography variant="h5" gutterBottom>
+                   Information Generales
+                </Typography>
+                </Paper>
+              </Grid>
+
+              <Grid key={5} item xs={12} className={styles.portalWidget}>
+                <Paper className={styles.portalWidgetContent}>
+                </Paper>
+              </Grid>
+            </Grid>
+          </Grid>
+
+
+        </Grid>
+      </Grid>
+    </div>
+
       );
   }
 }

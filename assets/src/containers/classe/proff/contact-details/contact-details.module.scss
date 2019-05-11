@@ -4,9 +4,12 @@
   overflow: auto;
 }
 
+
+
+
 .portal-contact-details__header {
   // Add a background image or use the default animation
-  min-height: 33vh;
+  min-height: 15vh;
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -22,6 +25,7 @@
     border-radius: 50%;
     opacity: 0;
   }
+/*
   &:before {
     animation: portal-contact-details__header-before  .6s ease-out forwards 1;
     animation-delay: .2s;
@@ -30,6 +34,7 @@
     animation: portal-contact-details__header-after  .4s ease-out  forwards 1;
     animation-delay: .4s;
   }
+*/
 }
 
 @keyframes portal-contact-details__header-before {

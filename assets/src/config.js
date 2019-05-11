@@ -39,56 +39,34 @@ export const menuItems = [{
   title: 'Administration',
   icon: <HomeIcon style={iconStyle} />,
   children: [{
-    title: 'Account',
+    title: 'Mon Compte',
     href: '/account/proff',
     icon: <DashboardIcon style={iconStyle} />
   }, {
     title: 'Ecole',
     href: '/ecole',
     icon: <ShoppingCartIcon style={iconStyle} />
-  }, {
-      title: 'Exercice',
-      href: '/exercice',
-      icon: <TextFormatIcon style={iconStyle} />
-  },
-
-    {
-    title: 'Ecommerce',
-    href: '/dashboards/ecommerce',
-    icon: <ShoppingCartIcon style={iconStyle} />
-  }, {
-    title: 'Crypto',
-    href: '/dashboards/crypto',
-    icon: <EuroSymbolIcon style={iconStyle} />
-  }, {
-    title: 'Project',
-    href: '/dashboards/project',
-    icon: <EventNoteIcon style={iconStyle} />
-  }, {
-    title: 'Analytics',
-    href: '/dashboards/analytics',
-    icon: <EventNoteIcon style={iconStyle} />
-  }
-]
-}, {
-  title: 'Mes Ecole',
-  href: '/theming',
-  icon: <DesktopWindowsIcon style={iconStyle} />
-},  {
+  } ,{
   title: 'Mes classes',
   href: '/professeur/classes',
   icon: <DesktopWindowsIcon style={iconStyle} />
-},  {
-  title: 'theming',
-  href: '/theming',
-  icon: <DesktopWindowsIcon style={iconStyle} />
-},
+} ,{
+    title: 'Mes Eleves',
+    href: '/apps/contacts',
+    icon: <FaceIcon style={iconStyle} />
+  }
+]
+}, 
 
 {
-  title: 'Cours',
+  title: 'Template',
   type: 'header'
+},{
+  title: 'Theming',
+  href: '/theming',
+  icon: <DesktopWindowsIcon style={iconStyle} />
 }, {
-  title: 'Autres',
+  title: 'Autres / Vues',
   icon: <DesktopWindowsIcon style={iconStyle} />,
   children: [{
     title: 'Email',
@@ -118,6 +96,28 @@ export const menuItems = [{
     title: 'Chat',
     href: '/apps/chat',
     icon: <ChatIcon style={iconStyle} />
+  }, {
+      title: 'Exercice',
+      href: '/exercice',
+      icon: <TextFormatIcon style={iconStyle} />
+  },
+
+    {
+    title: 'Ecommerce',
+    href: '/dashboards/ecommerce',
+    icon: <ShoppingCartIcon style={iconStyle} />
+  }, {
+    title: 'Crypto',
+    href: '/dashboards/crypto',
+    icon: <EuroSymbolIcon style={iconStyle} />
+  }, {
+    title: 'Project',
+    href: '/dashboards/project',
+    icon: <EventNoteIcon style={iconStyle} />
+  }, {
+    title: 'Analytics',
+    href: '/dashboards/analytics',
+    icon: <EventNoteIcon style={iconStyle} />
   }]
 },/* {
   title: 'USER INTERFACE',

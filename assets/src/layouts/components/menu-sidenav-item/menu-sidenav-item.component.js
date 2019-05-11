@@ -41,7 +41,6 @@ class MenuSidenavItem extends React.Component {
       const iconStyle = {
         fontSize: 16
       };
-
       return (
         <ListItem {...listItemAttrs} className={classes.root} disableGutters>
           <Button
@@ -66,6 +65,22 @@ class MenuSidenavItem extends React.Component {
             </Collapse>}
         </ListItem>
       );
+/*
+      return (
+        <ListItem {...listItemAttrs} className={classes.root} disableGutters>
+          <Button
+            onClick={this.handleClick}
+            classes={{
+              root: classes.listItem,
+              label: classes.listItemButtonLabel
+            }}
+          >
+            {icon && <span className={classes.listIcon}>{icon}</span>}
+            <Typography variant="button" color="inherit" className={classes.listItemText}>Déconnection</Typography>
+          </Button>
+        </ListItem>
+      );
+  */
     }
 }
 

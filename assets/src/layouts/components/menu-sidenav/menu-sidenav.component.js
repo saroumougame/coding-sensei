@@ -9,6 +9,7 @@ import styles from './menu-sidenav.style';
 import { menuItems } from '../../../config';
 
 class MenuSidenav extends React.Component {
+  
   constructNavItems = (itemsArray, classes) => {
     const arr = [];
     itemsArray.forEach((el) => {

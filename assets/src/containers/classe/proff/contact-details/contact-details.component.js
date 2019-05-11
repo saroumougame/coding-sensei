@@ -9,10 +9,8 @@ import themeStyles from './contact-details.theme.style';
 import withWidth from '@material-ui/core/withWidth';
 import { withStyles } from '@material-ui/core/styles';
 import scss from './contact-details.module.scss';
-
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-
 import FontAwesome from 'react-fontawesome';
 import {FormUpdateClassNom, updateClass, deleteClass}      from '../../../../actions/classes.actions';
 
@@ -37,10 +35,8 @@ class ContactDetails extends React.Component {
         this.props.onSelect(null);
         this.props.updateClass(this.props.data.FormDataUpdateClassNom, this.props.selectedContact.id);    
       }
-
       return;
   }
-
 
   render(){
   const {
@@ -101,15 +97,7 @@ class ContactDetails extends React.Component {
                 <p>{selectedContact.email}</p>
                 <br />
 
-                <FontAwesome name="twitter" className={classNames(
-                  classes.portalContactDetailsSocialIcons
-                )} />
-                <FontAwesome name="facebook" className={classNames(
-                  classes.portalContactDetailsSocialIcons
-                )} />
-                <FontAwesome name="linkedin" className={classNames(
-                    classes.portalContactDetailsSocialIcons
-                  )} />
+  
               </div>
             </div>
           </Grid>

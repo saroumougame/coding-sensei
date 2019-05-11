@@ -9,6 +9,8 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -25,7 +27,11 @@ import proff_image from '../../../assets/images/proff.jpg';
 import eleve_image from '../../../assets/images/eleve.jpg';
 import logoImage from '../../../assets/images/imgFrontBackG.jpg';
 import { inscriptionEtapeAction } from '../../../actions/auth.actions';
+import proff from '../../../assets/images/proff.jpg';
+import proff2 from '../../../assets/images/bonneval-sebastien-1389597-unsplash.jpg';
+
 import RegisterForm from './registerForm.component';
+
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -36,6 +42,12 @@ const styles = theme => ({
   },
   control: {
     padding: theme.spacing.unit * 2,
+  },
+  card: {
+    backgroundImage: `url(${proff})`
+  },
+  media: {
+    objectFit: 'cover',
   },
 });
 
@@ -62,10 +74,10 @@ class Register extends React.Component {
     return (
 
       <div className={scss['inscription-content']}>
+{/* 
       <Grid className={classes.root} spacing={16}>
         <Grid item xs={12}>
           <Grid container className={classes.demo} justify="center" spacing={Number(spacing)}>
-{/* 
               <Grid item>
                 <Card >
                   <CardContent>
@@ -80,22 +92,31 @@ class Register extends React.Component {
                 </Card>
               </Grid>
 
-*/}
             <Grid item>
-              <Card >
-                <CardContent>
-                  <Typography variant="headline" component="h2" gutterBottom>
-                    Vous éte un Professeur.
-                  </Typography>
-                  <NavLink to="/inscription/professeur" >
-                  <Button color="default" variant="raised">S'inscrire</Button>
-                  <Button >Plus d'informations</Button>
-                  </NavLink>
-                </CardContent>
+*/}
+              <Card className={scss['card_proffesseur']}  style={styles.card}>
+                    <CardActionArea>
+                      <CardMedia
+                        component="img"
+                        alt="PROFF"
+                        className={styles.media}
+                        image={proff2}
+                        title="Contemplative Reptile"
+                      />
+                      <CardContent className={scss['card_register_proffesseur_content']} >
+                        <Typography variant="headline" component="h2" gutterBottom>
+                          Vous éte un Professeur.
+                        </Typography>
+                        <NavLink to="/inscription/professeur" >
+                        <Button color="default" variant="raised">S'inscrire</Button>
+                        <Button >Plus d'informations</Button>
+                        </NavLink>
+                      </CardContent>
+                    </CardActionArea>
               </Card>
+
+{/*
             </Grid>
-
-
 
             <Grid item>
               <Card >
@@ -115,6 +136,7 @@ class Register extends React.Component {
           </Grid>
         </Grid>
       </Grid>
+*/}
       </div>
     );
   }

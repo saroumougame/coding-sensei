@@ -18,6 +18,9 @@ import themeStyles from './no-contacts.theme.style';
 import scss from './no-contacts.module.scss';
 import {addClass}      from '../../../../actions/classes.actions';
 import Paper from '@material-ui/core/Paper';
+import Modal from '@material-ui/core/Modal';
+import Modal2 from '../../../../components/modal.component';
+
 /*
 const NoContacts = (props) => {
   const { classes } = props;
@@ -33,8 +36,30 @@ const NoContacts = (props) => {
                 margin="normal"
            />
   */
+function rand() {
+  return Math.round(Math.random() * 20) - 10;
+}
+function getModalStyle() {
+  const top = 50 + rand();
+  const left = 50 + rand();
 
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
 
+const styles = theme => ({
+  paper: {
+    position: 'absolute',
+    width: theme.spacing.unit * 50,
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing.unit * 4,
+    outline: 'none',
+  },
+});
 class NoContacts extends React.Component {
 
   constructor(props) {
@@ -42,14 +67,41 @@ class NoContacts extends React.Component {
 
     this.state = {
       nom: '',
+       open: false,
 
     }
   }
 
+ handleOpenModal = () => {
+    this.setState({ open: true });
+  };
+
+  handleCloseModal = () => {
+    this.setState({ open: false });
+  };
+
 
   formSubmit () {
-    console.log(this.state.nom);
     this.props.addClass(this.state.nom);
+  }
+
+  getAddClassForm() {
+    const { classes } = this.props;
+    return (
+          <form  noValidate autoComplete="off">
+            <TextField
+              id="nom"
+              value={this.state.nom}
+              onChange={(e) => {this.setState({nom: e.target.value});}}
+              label="Nom de la classe"
+              className={classes.textField}
+              margin="normal"
+            />
+            <Button variant="contained" color="primary" className={scss['portal-contacts-no-button-form']} onClick={() => {this.formSubmit()}}>
+              Crée la classe
+            </Button>
+          </form>
+      );
   }
 
   render(){
@@ -63,10 +115,15 @@ class NoContacts extends React.Component {
                         <Typography variant="h5"  gutterBottom>
                            Vous avez avez 10 Crédit. Un crédit correspond a 5 élèves.Chaque élèves ne peut appartenir qu'a une classe. 
                         </Typography>
-                        <NavLink to="/inscription/professeur" >
-                        <Button color="default" variant="raised">Ajouter une classe</Button>
-                        </NavLink>
+                        
+                        <Modal2 
+                         titleButton='Aouter une classe'
+                         title="Ajouter une classe"
+                         text={this.getAddClassForm()}
+                         />
+                      {/*
                         <Button className={scss['car_addclass_boutique']}>Aller a la boutique</Button>
+                      */}
                       </CardContent>
                     </CardActionArea>
               </Card>
@@ -76,6 +133,7 @@ class NoContacts extends React.Component {
         classes['portal-contacts-no-contacts__icon']
       )}
       >
+
         <div className={scss['portal-contacts-no-contacts__paper']} />
       </div>
     {/*

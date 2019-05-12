@@ -7,7 +7,6 @@ import {
   TOGGLE_NOTIFICATIONS } from '../actions/layout.actions';
 
 const portalData = JSON.parse(sessionStorage.getItem('portalData'));
-console.log(portalData);
 const defaultLayout = portalData && portalData.layout ? portalData.layout : configuredLayout;
 
 const layoutReducer = (layout = defaultLayout, action) => {

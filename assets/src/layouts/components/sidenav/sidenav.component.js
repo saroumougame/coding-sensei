@@ -50,10 +50,10 @@ const Sidenav = (props) => {
           
         >
           <Toolbar > 
-            <img src={logoImage} className={scss['portal-toolbar-brand']} alt="logo" />
+   
             {layout.currentLayout !== 'compact' && layout.currentLayout !== 'funky' &&
               <Typography variant="title" color="inherit" noWrap>
-                Bienvenue
+                Espace pro
               </Typography>
             }
           </Toolbar>

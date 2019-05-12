@@ -5,6 +5,18 @@
 }
 
 
+.portal-contact-paper-grid {
+    height: 35vh;
+    width: 35vw;
+}
+
+.class-detail-header {
+  background-color: #c6c6c6;
+  width: 40%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 
 
 .portal-contact-details__header {
@@ -12,6 +24,7 @@
   min-height: 15vh;
   position: relative;
   overflow: hidden;
+  display: flex;
   z-index: 1;
   &:before, &:after {
     content: "";
@@ -116,4 +129,14 @@
 .portal-contacts-detail-update-contact {
   margin-top: 25px;
   margin-left: 10px;
+}
+
+.class-detail-header-part-deux {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+}
+.portal-contacts-detail-delete-button-contact {
+  height: 30%;
 }

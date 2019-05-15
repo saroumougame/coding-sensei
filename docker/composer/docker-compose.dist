@@ -3,4 +3,3 @@
         image: composer:latest
         volumes:
             - ../{{ application_dir }}:/app
-        command: ["composer", "update"]

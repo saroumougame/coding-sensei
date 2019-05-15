@@ -1,10 +1,9 @@
     {{ container_name }}:
         container_name: {{ container_name }}
         image: mariadb:latest
-        restart: always
+        restart: 'on-failure'
         volumes:
             - ../{{ database_storage_location }}:/var/lib/mysql
-#            - ./mariadb/conf/mariadb:/etc/mysql
         environment:
             MYSQL_DATABASE: {{ database_name }}
             MYSQL_USER: {{ user }}

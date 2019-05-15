@@ -47,6 +47,45 @@ bin/console doctrine:schema:update --force // Update la BD
 ```
 
 
+```
+	
+php bin/console doctrine:schema:update --force
+php bin/console fos:user:create testuser test@example.com p@ssword
+php bin/console fos:user:promote testuser ROLE_READER
+
+```
+
+configurer cle JWT
+
+utiliser coding pour la passphrass
+
+```
+mkdir -p var/jwt # For Symfony3+, no need of the -p option
+openssl genrsa -out var/jwt/private.pem -aes256 4096
+openssl rsa -pubout -in var/jwt/private.pem -out var/jwt/public.pem
+````
+
+recupere token
+```
+curl -X POST http://localhost:8089/login_check -d _username=mail@example.com -d _password=p@ssword
+```
+
+register
+
+```
+
+http://localhost:8089/api/users
+
+{
+       “email”: “chris2@codereviewvideos.com”,
+       “username”: “chris2",
+       “plainPassword”: “test”,
+       “enabled”: true
+     }
+
+
+```
+
 #### React :
 
 dev:
@@ -55,6 +94,10 @@ dev:
 cd ./assets
 yarn install
 yarn run start
+```
+
+
+
 ```
 
 buid:

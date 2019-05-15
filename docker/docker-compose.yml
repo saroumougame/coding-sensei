@@ -1,36 +1,24 @@
-version: "2"
+version: "3"
 
 services:
 
-# ------> asset ------>
-    asset_e0ywpailjm0esook:
-        container_name: asset_e0ywpailjm0esook
-        image: node:alpine
-        working_dir: /var/www/assets
-        volumes:
-            - ../assets:/var/www/assets
-            - ../public:/var/www/public
-# <------ asset <------
-
 # ------> composer ------>
-    composer_e0ywpailjm0esool:
-        container_name: composer_e0ywpailjm0esool
+    composer_adboghi91jp9t4z26:
+        container_name: composer_adboghi91jp9t4z26
         image: composer:latest
         volumes:
             - .././:/app
-        command: ["composer", "update"]
 # <------ composer <------
 
 # ------> mariadb ------>
-    mariadb_e0ywpailjm0esoom:
-        container_name: mariadb_e0ywpailjm0esoom
+    mariadb_adboghi91jp9t4z27:
+        container_name: mariadb_adboghi91jp9t4z27
         image: mariadb:latest
-        restart: always
+        restart: 'on-failure'
         ports:
             - 3306:3306
         volumes:
-            - ../../.database/my_app:/var/lib/mysql
-#            - ./mariadb/conf/mariadb:/etc/mysql
+            - .././skyflow/database/mariadb:/var/lib/mysql
         environment:
             MYSQL_DATABASE: coding
             MYSQL_USER: coding
@@ -39,16 +27,15 @@ services:
 # <------ mariadb <------
 
 # ------> symfony ------>
-    symfony_e0ywpailjm0esoon:
-        container_name: symfony_e0ywpailjm0esoon
+    symfony_adboghi91jp9t4z28:
+        container_name: symfony_adboghi91jp9t4z28
         build: ./symfony
         image: skyflow/symfony
-        restart: always
-        working_dir: /coding-sensei
+        restart: 'on-failure'
         ports:
-            - 8889:80
+            - 8089:80
         volumes:
-            - ../:/coding-sensei
+            - ../:/coding
             - ./symfony/conf/apache2:/etc/apache2
             - ./symfony/conf/php7/php.ini:/etc/php7/php.ini
 # <------ symfony <------

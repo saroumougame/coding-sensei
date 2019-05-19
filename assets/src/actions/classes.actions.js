@@ -6,7 +6,7 @@ export const GET_ALL_CLASS__BY_PROFF  = 'montre le form ';
 export const UPDATE_CLASS_LIST        = 'modifier l\'ordre de la liste';
 export const UPDATE_CLASS_NOM         = 'modifier le nom de la classe';
        const API_URL                  = 'http://localhost:8089';
-       const ID_PROFF                 = '/api/users/23';
+       const ID_PROFF                 = '/api/users/1';
 //export const ADD_CLASS_BY_PROFF = 'Ajoute  à la selection';
 
 // On ajoute une class pour un Nom avec L'id d'un proff ( en dur pour l'instant )

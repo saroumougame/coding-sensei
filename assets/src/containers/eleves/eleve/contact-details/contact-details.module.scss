@@ -4,29 +4,12 @@
   overflow: auto;
 }
 
-
-.portal-contact-paper-grid {
-    height: 35vh;
-    width: 35vw;
-}
-
-.class-detail-header {
- //background-color: #c6c6c6;
-  width: 100% !important;
-  min-height: 5vh;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
 .portal-contact-details__header {
   // Add a background image or use the default animation
-  min-height: 15vh;
+  min-height: 33vh;
   position: relative;
   overflow: hidden;
-  display: flex;
   z-index: 1;
-
   &:before, &:after {
     content: "";
     position: absolute;
@@ -39,9 +22,6 @@
     border-radius: 50%;
     opacity: 0;
   }
-
-
-/*
   &:before {
     animation: portal-contact-details__header-before  .6s ease-out forwards 1;
     animation-delay: .2s;
@@ -50,7 +30,6 @@
     animation: portal-contact-details__header-after  .4s ease-out  forwards 1;
     animation-delay: .4s;
   }
-*/
 }
 
 @keyframes portal-contact-details__header-before {
@@ -128,18 +107,4 @@
   z-index: 5;
   position: relative;
   padding-top: 36px;
-}
-.portal-contacts-detail-update-contact {
-  margin-top: 25px;
-  margin-left: 10px;
-}
-
-.class-detail-header-part-deux {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 60%;
-}
-.portal-contacts-detail-delete-button-contact {
-  height: 30%;
 }

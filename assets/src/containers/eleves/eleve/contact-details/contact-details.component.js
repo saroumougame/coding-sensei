@@ -12,7 +12,6 @@ import scss from './contact-details.module.scss';
 import FontAwesome from 'react-fontawesome';
 
 
-
 const ContactDetails = (props) => {
   const {
     selectedContact,
@@ -42,31 +41,15 @@ const ContactDetails = (props) => {
                 scss['portal-contact-details__avatar-container']
               )}
             >
-              <div
-                className={classNames(
-                  scss['portal-contact-details__avatar'],
-                  classes.portalContactDetailsAvatar
-                )}
-              >
-                <img
-                  className={classNames(
-                    classes.portalContactDetailsAvatarImg
-                  )}
-                  src={`${process.env.PUBLIC_URL}/${selectedContact.photo}`}
-                  alt={`${process.env.PUBLIC_URL}/${selectedContact.name}`}
-                />
-              </div>
+
               <div
                 className={classNames(
                   scss['portal-contact-details__extra'],
                   classes.portalContactDetailsExtra
                 )}
               >
-                <p>{selectedContact.gender}, age {selectedContact.age}</p>
-                <p>{selectedContact.region}</p>
-                <p>{selectedContact.phone}</p>
-                <p>{selectedContact.email}</p>
-                <p>{selectedContact.birthday.dmy}</p>
+       
+
                 <br />
 
                 <FontAwesome name="twitter" className={classNames(
@@ -81,7 +64,6 @@ const ContactDetails = (props) => {
               </div>
             </div>
           </Grid>
-          
           <Grid item xs={12} sm={6} md={9}>
             <div
               className={classNames(

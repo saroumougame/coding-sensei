@@ -10,18 +10,29 @@ Docker
 
 Skyflow  https://skyflow.io/doc#doc-for-default-module-get-started
 
-## Installation
+## Installation Skyflow
 
 ```
 git clone git@github.com:saroumougame/coding-sensei.git
 cd coding-sensei
-skyflow compose:up ||  docker-compose -f docker/docker-compose.yml up -d
+skyflow compose:up 
 skyflow compose:composer:run "composer update"
 skyflow compose:symfony:sh
 bin/console doctrine:database:create --if-not-exists // penser a conf le .env
 
 ```
 
+## Installation Classique
+
+```
+git clone git@github.com:saroumougame/coding-sensei.git
+cd coding-sensei
+docker-compose -f docker/docker-compose.yml up -d
+docker run --rm --interactive --tty --volume $PWD:/app  composer install
+docker exec -it $containerID sh
+php bin/console doctrine:database:create --if-not-exists // penser a conf le .env
+
+```
 
 
 ### Local Environment
@@ -55,9 +66,9 @@ php bin/console fos:user:promote testuser ROLE_READER
 
 ```
 
-configurer cle JWT
+configurer le JWT
 
-utiliser coding pour la passphrass
+utiliser coding pour la passphrass || attention au répertoire du JWT - /config/jwt dans la DOC officielle & sur la branche Nicolas. 
 
 ```
 mkdir -p var/jwt # For Symfony3+, no need of the -p option
@@ -81,7 +92,7 @@ http://localhost:8089/api/users
        “username”: “chris2",
        “plainPassword”: “test”,
        “enabled”: true
-     }
+}
 
 
 ```
@@ -98,12 +109,12 @@ yarn run start
 
 
 
-```
-
 buid:
+
 ```
 cd ./assets
 yarn install
 yarn run build
+
 ```
 

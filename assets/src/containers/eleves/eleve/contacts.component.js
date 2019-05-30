@@ -14,35 +14,51 @@ import NoContacts from './no-contacts/no-contacts.component';
 import themeStyles from './contacts.theme.style';
 import scss from './contacts.module.scss';
 
+import { setEleveAction, getEleve } from '../../../actions/eleve.actions';
+
 class Contacts extends React.Component {
-  state = {
-    selectedContact: null
-  };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      selectedContact: null
+    };
+    this.props.getEleve();
+  }
+
+
 
   selectContact = contact => () => {
-    this.setState({ selectedContact: contact });
+    //this.setState({ selectedContact: contact });
+    this.props.setEleveAction(contact);
   }
 
   render() {
-    var contactsList = this.props.data.classList;
+    console.log(this.props.data.elevesList);
+    var contactsList = this.props.data.elevesList;
     return (
       <div className={scss['contacts-wrapper']}>
         <ContactsList
-          selectedContact={this.state.selectedContact}
+          selectedContact={this.props.data.SelectedEleve}
           list={contactsList}
           onSelect={this.selectContact}
         />
-        {this.state.selectedContact ?
+
+        {this.props.data.SelectedEleve ?
           <ContactDetails
-            selectedContact={this.state.selectedContact} /> : <NoContacts />}
+            selectedContact={this.props.data.SelectedEleve} /> : <NoContacts />}
       </div>
     );
   }
 }
 function mapStateToProps(state) {
+  console.log(state.eleveData);
   return {
     data: {
       classList:           state.classData.classes,  
+      SelectedEleve:       state.eleveData.SelectedEleve,
+      elevesList   :       state.eleveData.eleves
     }
   };
 }
@@ -53,4 +69,4 @@ Contacts.propTypes = {
 };
 
 export default compose(withWidth(), withStyles(themeStyles, { withTheme: true }),
-  connect(mapStateToProps))(Contacts);
+  connect(mapStateToProps, { setEleveAction, getEleve }))(Contacts);

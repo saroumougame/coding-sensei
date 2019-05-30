@@ -16,6 +16,7 @@ import TextField from '@material-ui/core/TextField';
 
 import Modal2 from '../../../components/modal.component';
 import {FormUpdateClassNom, updateClass, deleteClass}     from '../../../actions/classes.actions';
+import { AddUserEleveAction }							from '../../../actions/eleve.actions';
 
 class CreateEleveModal extends React.Component {
 
@@ -37,11 +38,11 @@ class CreateEleveModal extends React.Component {
 	 	if(nom == '' 
         || email == '') {
         	alert('Vous devez remplir tout les champs');
-        this.setState({ open: true,  snackMessage: 'Vous devez remplir tout les champs.' });
+        	this.setState({ open: true,  snackMessage: 'Vous devez remplir tout les champs.' });
         return;
       }
 
-      // this.props.AddEleveAction();
+        this.props.AddUserEleveAction(nom, email);
 	 	return;
 	 }
 
@@ -139,4 +140,4 @@ function mapStateToProps(state) {
   };
 }
 export default compose(withWidth(), withStyles(themeStyles, { withTheme: true }),
-  connect(mapStateToProps, {FormUpdateClassNom, updateClass, deleteClass}))(CreateEleveModal);
+  connect(mapStateToProps, {FormUpdateClassNom, updateClass, deleteClass, AddUserEleveAction}))(CreateEleveModal);

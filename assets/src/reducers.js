@@ -16,7 +16,6 @@ const todoApp = combineReducers({
   userData: userReducer,
   classData: classReducer,
   eleveData: eleveReducer
-
 });
 
 export default todoApp;

@@ -12,8 +12,8 @@ import ContactDetails from './contact-details/contact-details.component';
 import NoContacts     from './no-contacts/no-contacts.component';
 import themeStyles    from './contacts.theme.style';
 import scss           from './contacts.module.scss';
-import {getClass}      from '../../../actions/classes.actions';
-
+import { getClass, setClasseAction }      from '../../../actions/classes.actions';
+import { setEleveAction } from '../../../actions/eleve.actions';
 
 class ListeClassesProff extends React.Component {
 
@@ -26,24 +26,26 @@ class ListeClassesProff extends React.Component {
   }
 
   selectContact = contact => () => {
+    this.props.setEleveAction(null);
+    this.props.setClasseAction(contact);
     this.setState({ selectedContact: contact });
   }
 
   render() {
     var contactsList = this.props.data.classList;
-
+    var currentClasse = this.props.data.currentClasse;
     return (
       <div className={scss['contacts-wrapper']}>
 
         <ClassesList
-          selectedContact={this.state.selectedContact}
+          selectedContact={currentClasse}
           list={contactsList}
           onSelect={this.selectContact}
         />
 
-        {this.state.selectedContact ?
+        {currentClasse ?
           <ContactDetails
-            selectedContact={this.state.selectedContact}  onSelect={this.selectContact} /> : <NoContacts />}
+            selectedContact={currentClasse}  onSelect={this.selectContact} /> : <NoContacts />}
 
       </div>
     );
@@ -54,7 +56,8 @@ class ListeClassesProff extends React.Component {
 function mapStateToProps(state) {
   return {
     data: {
-      classList:           state.classData.classes,  
+      classList:           state.classData.classes, 
+      currentClasse:       state.classData.currentClasse, 
     }
   };
 }
@@ -66,5 +69,5 @@ ListeClassesProff.propTypes = {
 };
 
 export default compose(withWidth(), withStyles(themeStyles, { withTheme: true }),
-  connect(mapStateToProps, {getClass}))(ListeClassesProff);
+  connect(mapStateToProps, {getClass, setEleveAction, setClasseAction}))(ListeClassesProff);
 

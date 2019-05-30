@@ -59,6 +59,9 @@ class ClassesList extends React.Component {
     this.setState({contacts: this.props.data.classList})
   }
 
+    
+  
+
   createDesktopListItem = (contact) => {
     const {
       classes,
@@ -120,7 +123,7 @@ class ClassesList extends React.Component {
           scss['portal-contacts-list__item'],
           contact === selectedContact ? classes['portal-contacts-list__item--active'] : ''
         )}
-        onClick={onSelect(contact)}
+        onClick={this.onClickClassElement(contact).bind(this)}
         divider
         button
       >
@@ -220,4 +223,5 @@ ClassesList.propTypes = {
   width: PropTypes.string.isRequired
 };
 
-export default compose(withWidth(), withStyles(themeStyles, { withTheme: true }), connect(mapStateToProps, {UpdateClass}) )(ClassesList);
+export default compose(withWidth(), withStyles(themeStyles, { withTheme: true }),
+ connect(mapStateToProps, {UpdateClass}) )(ClassesList);

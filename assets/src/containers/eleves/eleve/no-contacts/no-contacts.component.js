@@ -16,11 +16,13 @@ const NoContacts = (props) => {
 
   return (
     <div className={classNames(scss['portal-contacts-no-contacts'], classes['portal-contacts-no-contacts'])}>
-     		            <Typography variant="h5"  gutterBottom>
+  {/*
+                    <Typography variant="h5"  gutterBottom>
                            Mon cour - Liste des exerces
                         </Typography>
 
                         <UserTasksWidget />
+  */}
      
     </div>
   );

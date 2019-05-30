@@ -1,16 +1,17 @@
+import { SETELEVECONTACT, GETELEVEBYCLASS } from '../actions/eleve.actions';
 
-export const GET_ALL_ELEVE__BY_CLASS = "GET_ALL_ELEVE__BY_CLASS";
-export const UPDATE_ELEVE_LIST = "UPDATE_ELEVE_LIST";
+export const UPDATE_ELEVE_LIST      = "UPDATE_ELEVE_LIST";
 
 
 const defaultState = {
     eleves: [],
     UpdatedEleves: [],
+    SelectedEleve: null,
 };
 
 const classesReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case GET_ALL_ELEVE__BY_CLASS:
+    case GETELEVEBYCLASS:
         return {
           ...state,
           eleves: action.payload,
@@ -22,6 +23,12 @@ const classesReducer = (state = defaultState, action) => {
       return {
         ...state,
           UpdatedEleves: action.payload
+      }
+    break;
+    case SETELEVECONTACT : 
+      return {
+        ...state,
+        SelectedEleve: action.payload
       }
     break;
     default:

@@ -2,8 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
-import { withRouter } from 'react-router-dom';
-
+import { NavLink, withRouter } from 'react-router-dom';
 // Material components
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import AppBar from '@material-ui/core/AppBar';
@@ -52,9 +51,11 @@ const Sidenav = (props) => {
           <Toolbar > 
    
             {layout.currentLayout !== 'compact' && layout.currentLayout !== 'funky' &&
-              <Typography variant="title" color="inherit" noWrap>
+             <NavLink to="/account/proff">
+              <Typography variant="title" color="white& "  noWrap>
                 Espace pro
               </Typography>
+            </NavLink>
             }
           </Toolbar>
         </AppBar>
@@ -68,7 +69,7 @@ const Sidenav = (props) => {
           <Toolbar disableGutters>
             <span className="portal-flex" />
             <IconButton >
-                 <Typography variant="h5" color="inherit" noWrap>
+                <Typography variant="h5" color="inherit" noWrap>
                 Déconnexion
               </Typography>
               <ChevronLeftIcon />

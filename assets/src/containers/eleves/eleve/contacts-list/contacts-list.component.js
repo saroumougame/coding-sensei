@@ -13,7 +13,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 import Search from '@material-ui/icons/Search';
 import Person from '@material-ui/icons/Person';
-
+import { connect } from 'react-redux';
 import themeStyles from './contacts-list.theme.style';
 import scss from './contacts-list.module.scss';
 import CreateEleveModal from '../../../eleves/create/create-eleve-modal.component';
@@ -24,7 +24,8 @@ class ContactsList extends React.Component {
 
     this.state = {
       initialContacts: props.list,
-      contacts: []
+      contacts: [],
+      updatedList: false,
     }
   }
   // Handles the filtering of contacts based on the input of search field.
@@ -42,7 +43,8 @@ class ContactsList extends React.Component {
   }
 
   componentWillMount() {
-    this.setState({contacts: this.state.initialContacts})
+    this.setState({contacts: this.state.initialContacts});
+
   }
 
   createDesktopListItem = (contact) => {
@@ -52,6 +54,7 @@ class ContactsList extends React.Component {
       onSelect
     } = this.props;
 
+    console.log(contact);
     return (
       <ListItem
         title={contact.name}
@@ -68,7 +71,7 @@ class ContactsList extends React.Component {
         <Avatar alt={contact.name} src={`${process.env.PUBLIC_URL}/${contact.photo}`} />
     */}
         <ListItemText
-          primary={contact.name}
+          primary={contact['@id']}
           classes={{
             primary: contact === selectedContact ? classes['portal-contacts-list__item__text--active'] : '',
             secondary: classNames(
@@ -95,7 +98,7 @@ class ContactsList extends React.Component {
       selectedContact,
       onSelect
     } = this.props;
-
+console.log(contact);
     return (
       <ListItem
         title={contact.name}
@@ -135,6 +138,14 @@ class ContactsList extends React.Component {
     );
   }
 
+
+  getCustomClassList() {
+    if(this.state.updatedList == true){
+      return this.props.data.classUpdatedList;
+    }
+    return this.props.data.elevesList;
+  }
+
   render () {
     const {
       classes,
@@ -148,7 +159,7 @@ class ContactsList extends React.Component {
       </div>
         {isWidthUp('sm', width) ? this.createSearchTextField() : ''}
         <List component="nav" className={classes.listWrapper}>
-          {this.state.contacts.map((contact) => {
+          {this.getCustomClassList().map((contact) => {
             return isWidthUp('sm', width) ?
               this.createDesktopListItem(contact) :
               this.createMobileListItem(contact);
@@ -158,6 +169,16 @@ class ContactsList extends React.Component {
     );
   }
 };
+
+function mapStateToProps(state) {
+  return {
+    data: {
+      classList:           state.classData.classes,  
+      classUpdatedList:    state.classData.UpdatedClasses, 
+      elevesList   :       state.eleveData.eleves
+    }
+  };
+}
 
 ContactsList.defaultProps = {
   selectedContact: null
@@ -171,4 +192,5 @@ ContactsList.propTypes = {
   width: PropTypes.string.isRequired
 };
 
-export default compose(withWidth(), withStyles(themeStyles, { withTheme: true }))(ContactsList);
+export default compose(withWidth(), withStyles(themeStyles, { withTheme: true }),
+  connect(mapStateToProps))(ContactsList);

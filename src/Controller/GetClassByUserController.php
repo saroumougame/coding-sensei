@@ -32,7 +32,7 @@ class GetClassByUserController extends AbstractController
 
 
         $classe = $this->getDoctrine()->getRepository(Classe::class)->findBy(array("teacher" => $data->getId()));
-
+        
         return $classe;
     }
 

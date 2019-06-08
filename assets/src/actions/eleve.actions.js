@@ -76,9 +76,12 @@ export const AddEleveAction = (idEleve) => {
     const state = getState();
     const idClass =  state.classData.currentClasse['@id'];
 
+    if(typeof(idEleve) == 'undefined' || typeof(idClass) == 'undefined') {
+      return dispatch(getEleve());
+    }
     var details = {
         'user': idEleve,
-        'classes': idClass,
+        'classe': idClass,
       }
     var formBody = JSON.stringify(details);
 

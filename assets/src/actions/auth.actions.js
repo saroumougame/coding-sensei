@@ -128,6 +128,7 @@ export const login = (email, password) => {
     .then(json => {
 
       if(typeof(json.token) != 'undefined'){
+        
         localStorage.setItem('token', json.token);
         dispatch(loginAction(true));
         history.push('/account');

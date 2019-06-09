@@ -18,6 +18,7 @@ import logoImage from '../../../assets/images/portal-logo.png';
 
 // Actions
 import { toggleSidenav } from '../../../actions/layout.actions';
+import { deconnexionAction} from '../../../actions/user.actions';
 
 // Styles
 import scss from './sidenav.module.scss';
@@ -68,7 +69,7 @@ const Sidenav = (props) => {
         >
           <Toolbar disableGutters>
             <span className="portal-flex" />
-            <IconButton >
+            <IconButton onClick={props.deconnexionAction}>
                 <Typography variant="h5" color="inherit" noWrap>
                 Déconnexion
               </Typography>
@@ -102,6 +103,6 @@ Sidenav.propTypes = {
 export default compose(
   withRouter,
   connect(mapStateToProps, {
-    toggleSidenav
+    toggleSidenav, deconnexionAction
   })
 )(Sidenav);

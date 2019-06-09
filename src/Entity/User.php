@@ -16,6 +16,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Controller\UserExercicesController;
+use App\Controller\GetClassByUserController;
 /**
  * @ORM\Entity
  * @ApiResource(
@@ -27,14 +28,22 @@ use App\Controller\UserExercicesController;
  *         "get",
  *          "delete",
  *          "put",
- *         "get_publication"={
- *         "method"="GET",
- *         "path"="/user/{id}/exercices",
- *         "controller"=UserExercicesController::class,
- *     "swagger_context" = {
- *          "summary" = "RETOURNE LES EXERCICE DUN ELEVE DONNER APRES CA SERA CELUIS CONNECTER",
- *     }
- *     }
+     *      "get_publication"={
+     *         "method"="GET",
+     *         "path"="/user/{id}/exercices",
+     *         "controller"=UserExercicesController::class,
+     *          "swagger_context" = {
+     *              "summary" = "RETOURNE LES EXERCICE DUN ELEVE DONNER APRES CA SERA CELUIS CONNECTER",
+     *              },
+     *       },
+     *       "get_class"={
+     *              "method"="GET",
+     *              "path"="/user/getClass/{id}",
+     *              "controller"=GetClassByUserController::class,
+     *              "swagger_context" = {
+     *                  "summary" = "retourne toute les classe d'un eleve",
+     *                  },
+            }
  *     },
  * )
  * @ORM\Table(name="fos_user")

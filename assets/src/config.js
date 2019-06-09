@@ -119,7 +119,7 @@ export const menuItems = [{
     href: '/dashboards/analytics',
     icon: <EventNoteIcon style={iconStyle} />
   }]
-},/* {
+}, {
   title: 'USER INTERFACE',
   type: 'header'
 }, {
@@ -224,5 +224,6 @@ export const menuItems = [{
     href: '/errors/500'
   }]
 }
+/*
 */
 ];

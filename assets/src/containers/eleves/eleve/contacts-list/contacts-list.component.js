@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
-import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -14,53 +13,39 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 import Search from '@material-ui/icons/Search';
 import Person from '@material-ui/icons/Person';
-import location_city from '@material-ui/icons/LocationCity';
-import Group from '@material-ui/icons/Group';
-import AddIcon from '@material-ui/icons/Add';
-import Icon from '@material-ui/core/Icon';
-import Fab from '@material-ui/core/Fab';
-import Button from '@material-ui/core/Button';
-import themeStyles from './classe-list.theme.style';
-import scss from './classe-list.module.scss';
-import {UpdateClass}      from '../../../../actions/classes.actions';
+import { connect } from 'react-redux';
+import themeStyles from './contacts-list.theme.style';
+import scss from './contacts-list.module.scss';
+import CreateEleveModal from '../../../eleves/create/create-eleve-modal.component';
 
-
-// migration de la liste de contact du local vers le state redux. 
-class ClassesList extends React.Component {
-
+class ContactsList extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      initialContacts: this.props.data.classList,
+      initialContacts: props.list,
       contacts: [],
       updatedList: false,
-      classeToCreate: 999
     }
   }
   // Handles the filtering of contacts based on the input of search field.
   onChangeHandler(e){
-    var updatedList = this.props.data.classList;
+    var updatedList = this.state.initialContacts;
     updatedList = updatedList.filter((item) =>
-      (item.name)
+      (item.name + ' ' + item.surname)
         .toLowerCase()
         .search(e.target.value.toLowerCase()) !== -1
     );
 
-    this.props.UpdateClass(updatedList);
-    if(e.target.value != ""){
-      this.setState({updatedList: true});
-    }else{
-       this.setState({updatedList: false});
-    }
+    this.setState({
+      contacts: updatedList
+    })
   }
 
   componentWillMount() {
-    this.setState({contacts: this.props.data.classList})
-  }
+    this.setState({contacts: this.state.initialContacts});
 
-    
-  
+  }
 
   createDesktopListItem = (contact) => {
     const {
@@ -69,6 +54,7 @@ class ClassesList extends React.Component {
       onSelect
     } = this.props;
 
+    console.log(contact);
     return (
       <ListItem
         title={contact.name}
@@ -81,13 +67,11 @@ class ClassesList extends React.Component {
         divider
         button
       >
-
-        {/*
-            <Avatar alt={contact.name} src={`${process.env.PUBLIC_URL}/${contact.photo}`} />
-        */}
+    {/*
+        <Avatar alt={contact.name} src={`${process.env.PUBLIC_URL}/${contact.photo}`} />
+    */}
         <ListItemText
-          primary={contact.name}
-          secondary={'2019'}
+          primary={contact['@id']}
           classes={{
             primary: contact === selectedContact ? classes['portal-contacts-list__item__text--active'] : '',
             secondary: classNames(
@@ -102,7 +86,7 @@ class ClassesList extends React.Component {
             classes.portalContactsListItemIcon)
           }
         >
-          <Group />
+          <Person />
         </ListItemIcon>
       </ListItem>
     );
@@ -114,7 +98,7 @@ class ClassesList extends React.Component {
       selectedContact,
       onSelect
     } = this.props;
-
+console.log(contact);
     return (
       <ListItem
         title={contact.name}
@@ -123,7 +107,7 @@ class ClassesList extends React.Component {
           scss['portal-contacts-list__item'],
           contact === selectedContact ? classes['portal-contacts-list__item--active'] : ''
         )}
-        onClick={this.onClickClassElement(contact).bind(this)}
+        onClick={onSelect(contact)}
         divider
         button
       >
@@ -132,18 +116,9 @@ class ClassesList extends React.Component {
     );
   }
 
-  AddClass () {
-    const {
-      onSelect
-    } = this.props;
-
-    onSelect(null)
-  }
-
   createSearchTextField = () => {
     const {
-      classes,
-      onSelect
+      classes
     } = this.props;
 
     return (
@@ -159,25 +134,16 @@ class ClassesList extends React.Component {
             endAdornment: <InputAdornment position="end"><Search /></InputAdornment>,
           }}
         />
-
-
-        <div>
-      {/*
-      */}
-        <Button variant="contained" className={classes.button} onClick={onSelect(null)}>
-          Ajouter une classe
-        </Button>
-        </div>
-       
       </div>
     );
   }
+
 
   getCustomClassList() {
     if(this.state.updatedList == true){
       return this.props.data.classUpdatedList;
     }
-    return this.props.data.classList;
+    return this.props.data.elevesList;
   }
 
   render () {
@@ -185,8 +151,12 @@ class ClassesList extends React.Component {
       classes,
       width,
     } = this.props;
+
     return (
       <div className={classNames(classes.list, 'portal-hide-scrollbars')}>
+      <div className={classNames(scss['center'])}>
+        <CreateEleveModal />
+      </div>
         {isWidthUp('sm', width) ? this.createSearchTextField() : ''}
         <List component="nav" className={classes.listWrapper}>
           {this.getCustomClassList().map((contact) => {
@@ -200,22 +170,21 @@ class ClassesList extends React.Component {
   }
 };
 
-
 function mapStateToProps(state) {
   return {
     data: {
       classList:           state.classData.classes,  
       classUpdatedList:    state.classData.UpdatedClasses, 
+      elevesList   :       state.eleveData.eleves
     }
   };
 }
 
-
-ClassesList.defaultProps = {
+ContactsList.defaultProps = {
   selectedContact: null
 };
 
-ClassesList.propTypes = {
+ContactsList.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   selectedContact: PropTypes.shape({}),
   list: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
@@ -224,4 +193,4 @@ ClassesList.propTypes = {
 };
 
 export default compose(withWidth(), withStyles(themeStyles, { withTheme: true }),
- connect(mapStateToProps, {UpdateClass}) )(ClassesList);
+  connect(mapStateToProps))(ContactsList);

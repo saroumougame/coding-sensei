@@ -6,9 +6,28 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Controller\GetUserEleveByClass;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     collectionOperations={
+ *         "get",
+ *         "post",
+ *     },
+ *     itemOperations={
+ *         "get",
+ *          "delete",
+ *          "put",
+     *       "get_class"={
+     *              "method"="GET",
+     *              "path"="/eleve/getByClass/{id}",
+     *              "controller"=GetUserEleveByClass::class,
+     *              "swagger_context" = {
+     *                  "summary" = "retourne les eleves d'une classe",
+     *                  },
+            }
+ *     },
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\EleveRepository")
  */
 class Eleve

@@ -16,9 +16,10 @@ import Person from '@material-ui/icons/Person';
 import AddIcon from '@material-ui/icons/Add';
 import Icon from '@material-ui/core/Icon';
 import Fab from '@material-ui/core/Fab';
-
+import { connect } from 'react-redux';
 import themeStyles from './contacts-list.theme.style';
 import scss from './contacts-list.module.scss';
+import { setEleveAction } from '../../../../actions/eleve.actions';
 
 class ContactsList extends React.Component {
 
@@ -48,6 +49,12 @@ class ContactsList extends React.Component {
     this.setState({contacts: this.state.initialContacts})
   }
 
+  onClickClassElement(contact) {
+    //console.log('laaaa');
+    //this.props.setEleveAction(null);
+    //this.props.onSelect(contact);
+  }
+
   createDesktopListItem = (contact) => {
     const {
       classes,
@@ -63,7 +70,7 @@ class ContactsList extends React.Component {
           scss['portal-contacts-list__item'],
           contact === selectedContact ? classes['portal-contacts-list__item--active'] : ''
         )}
-        onClick={onSelect(contact)}
+        onClick={this.onClickClassElement(contact)}
         divider
         button
       >
@@ -106,7 +113,7 @@ class ContactsList extends React.Component {
           scss['portal-contacts-list__item'],
           contact === selectedContact ? classes['portal-contacts-list__item--active'] : ''
         )}
-        onClick={onSelect(contact)}
+        onClick={this.onClickClassElement(contact)}
         divider
         button
       >
@@ -161,6 +168,15 @@ class ContactsList extends React.Component {
   }
 };
 
+function mapStateToProps(state) {
+  return {
+    data: {
+      classList:           state.classData.classes,  
+      SelectedEleve:       state.eleveData.SelectedEleve
+    }
+  };
+}
+
 ContactsList.defaultProps = {
   selectedContact: null
 };
@@ -173,4 +189,5 @@ ContactsList.propTypes = {
   width: PropTypes.string.isRequired
 };
 
-export default compose(withWidth(), withStyles(themeStyles, { withTheme: true }))(ContactsList);
+export default compose(withWidth(), withStyles(themeStyles, { withTheme: true }),
+  connect(mapStateToProps, { setEleveAction }))(ContactsList);

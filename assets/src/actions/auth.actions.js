@@ -102,7 +102,7 @@ export const register = (nom, email, password) => {
 };
 
 export const login = (email, password) => {
-  console.log(email);
+  //console.log(email);
     var success = {
     '_username': email,
     '_password': password,
@@ -128,6 +128,7 @@ export const login = (email, password) => {
     .then(json => {
 
       if(typeof(json.token) != 'undefined'){
+        
         localStorage.setItem('token', json.token);
         dispatch(loginAction(true));
         history.push('/account');

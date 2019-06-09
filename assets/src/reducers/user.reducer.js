@@ -2,13 +2,14 @@ import {
   LOGIN,
 } from '../actions/auth.actions';
 import {
-  GET_CONNEXION_INFO,
+  GET_CONNEXION_INFO, DECONNEXION
 } from '../actions/user.actions';
 
-// trois étapes d'inscription.
-// type: 0 null - 1 structure - 2 proff - 3 eleve
+import history from '../history';
+
 const defaultState = {
   logged:               false,
+  UserRole:             'ROLE_ELEVE'
 };
 
 const userReducer = (state = defaultState, action) => {
@@ -24,6 +25,14 @@ const userReducer = (state = defaultState, action) => {
         return state;
       }
     break; 
+    case DECONNEXION: {
+      localStorage.removeItem('token');
+      history.push('/');
+      return {
+          ...state,
+          logged: 0
+        }
+    }
     case GET_CONNEXION_INFO: {
       return {
           ...state,

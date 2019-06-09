@@ -16,6 +16,8 @@ import FontAwesome from 'react-fontawesome';
 import {FormUpdateClassNom, updateClass, deleteClass}      from '../../../../actions/classes.actions';
 
 
+import Eleve   from '../../../eleves/eleve/contacts.component';
+
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -63,7 +65,7 @@ class ContactDetails extends React.Component {
       <div
         className={classNames(
           scss['portal-contact-details__header'],
-          classes.portalContactDetailsHeader
+
         )}
       >
       <div className={classNames(scss['class-detail-header'])}>
@@ -82,12 +84,11 @@ class ContactDetails extends React.Component {
                     Modifier la classe
                   </Button>
                 </form>      
-      </div>
-      <div className={classNames(scss['class-detail-header-part-deux'])}>
-                <Button variant="contained" color="primary" className={scss['portal-contacts-detail-delete-button-contact']} onClick={() => {this.props.deleteClass(selectedContact.id)}}>
+                              <Button variant="contained" color="primary" className={scss['portal-contacts-detail-delete-button-contact']} onClick={() => {this.props.deleteClass(selectedContact.id)}}>
                     Supprimer la classe
                 </Button>
       </div>
+
 
       </div>
       <div
@@ -96,6 +97,9 @@ class ContactDetails extends React.Component {
           classes.portalContactDetailsContent
         )}
       >
+      <Eleve />
+    {/*
+
 <Grid container className={classes.root} spacing={16}>
         <Grid item xs={12}>
           <Grid container className={classes.demo} justify="center" spacing={32}>
@@ -108,21 +112,23 @@ class ContactDetails extends React.Component {
               <Grid  item>
                <Paper className={classNames(scss['portal-contact-paper-grid'] )}>
                 Liste des Eleves
+              
                 </Paper>
               </Grid>
               <Grid  item>
                 <Paper className={classNames(scss['portal-contact-paper-grid'] )}>
-                Mes notes
+                  Mes notes
                 </Paper>
               </Grid>
               <Grid  item>
                 <Paper className={classNames(scss['portal-contact-paper-grid'] )}>
-                Gestion
+                  Gestion
                 </Paper>
               </Grid>         
           </Grid>
         </Grid>
  </Grid>
+ */}
       {/*
         <Grid container spacing={0}>
 

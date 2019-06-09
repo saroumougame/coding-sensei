@@ -7,6 +7,7 @@ import asyncComponent from './components/async.component';
 /* --------------------------------------------------------------------------------------------------------------------------  */
 import Front from './layouts/layout-front/layout-front.component';
 import Classic from './layouts/layout-classic/layout-classic.component';
+import Eleve from './layouts/layout-eleve/layout-eleve.component';
 
 
 /* ------------------------------ TEMPLATE  ----------------------------------------------------------------------------------- */
@@ -30,11 +31,17 @@ const AccountProff= asyncComponent(() => import('./containers/account/professeur
 const ClassesProff= asyncComponent(() => import('./containers/classe/proff/contacts.component'));
 const AsyncExercice= asyncComponent(() => import('./containers/exercice/exercice.component'));
 //const AccountProff= asyncComponent(() => import('./containers/account/professeur/account.component'))
+const AsyncEleveHome= asyncComponent(() => import('./containers/eleves/home/home-eleve.component'));
+const classesEleve = asyncComponent(() => import('./containers/eleves/classes/classes-eleve.component'));
 
 /* --------------------------------------------------------------------------------------------------------------------------  */
                                                     /*  IMPORT DES VUE DU  TEMPLATE  */
 /* --------------------------------------------------------------------------------------------------------------------------  */
 const AsyncAccount = asyncComponent(() => import('./containers/dashboards/ecommerce/ecommerce.component'));
+
+
+
+
 // DASHBOARD ROUTE
 const AsyncAnalyticsDashboard = asyncComponent(() => import('./containers/dashboards/analytics/analytics.component'));
 const AsyncEcommerceDashboard = asyncComponent(() => import('./containers/dashboards/ecommerce/ecommerce.component'));
@@ -99,11 +106,16 @@ const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
 /* --------------------------------------------------------------------------------------------------------------------------  */
                                                     /*  Composant route protegée */
 /* --------------------------------------------------------------------------------------------------------------------------  */
-const AppprotectedRoute = ({ logged: logged, component: Component, redir: redir, layout: Layout, ...rest }) => {
+const AppprotectedRoute = ({ roles: roles , logged: logged, roles_accepted: roles_accepted, component: Component, redir: redir, layout: Layout, ...rest }) => {
   var token = localStorage.getItem('token');
 
   if(typeof(token) != 'undefined' && token != null){
     logged = true;
+  }
+
+
+  if(!roles_accepted.includes(roles)) {
+    logged = false;
   }
 
   if(logged){
@@ -125,6 +137,7 @@ const AppprotectedRoute = ({ logged: logged, component: Component, redir: redir,
 };
 
 
+
 const ClassicLayout = props => (
   <Front>{props.children}</Front>
 );
@@ -137,8 +150,12 @@ const CompactLayout = props => (
   <Classic>{props.children}</Classic>
 );
 
+const EleveLayout = props => (
+  <Eleve>{props.children}</Eleve>
+);
 
-export default ({ logged , childProps, layout }) => {
+
+export default ({ logged , childProps, layout, roles }) => {
 
   let activeLayout;
 
@@ -157,6 +174,9 @@ export default ({ logged , childProps, layout }) => {
     activeLayout = FrontLayout;
   }
 
+  const role_user  = ['ROLE_USER'];
+  const role_eleve = ['ROLE_ELEVE'];
+
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------  */
                                                     /* ROUTES */
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------  */
@@ -165,23 +185,25 @@ export default ({ logged , childProps, layout }) => {
   {/*
               Routes landing. Inscription.
   */}
-      <AppRoute path="/" exact component={AsyncLanding} props={childProps} layout={activeLayout} />
-      <AppRoute path="/ecole" exact component={AsyncEcole} props={childProps} layout={activeLayout} />
-      <AppRoute path="/login" exact component={AsyncLogin} props={childProps} layout={activeLayout} />
-      <AppRoute path="/inscription" exact component={AsyncRegister} props={childProps} layout={activeLayout} />
-      <AppRoute path={"/inscription/:formulaire"} exact component={AsyncRegisterForm} props={childProps} layout={activeLayout} />
-      <AppRoute path="/eleve" exact component={AsyncRegister} props={childProps} layout={activeLayout} />
-      <AppRoute path="/exercice" exact component={AsyncExercice} props={childProps} layout={activeLayout} />
+      <AppRoute path="/" exact component={AsyncLanding} props={childProps} layout={activeLayout}     roles={roles}                            />
+      <AppRoute path="/ecole" exact component={AsyncEcole} props={childProps} layout={activeLayout} roles={roles}                             />
+      <AppRoute path="/login" exact component={AsyncLogin} props={childProps} layout={activeLayout} roles={roles}                             />
+      <AppRoute path="/inscription" exact component={AsyncRegister} props={childProps} layout={activeLayout} roles={roles}                    />
+      <AppRoute path={"/inscription/:formulaire"} exact component={AsyncRegisterForm} props={childProps} layout={activeLayout} roles={roles}  />
+      <AppRoute path="/eleve" exact component={AsyncRegister} props={childProps} layout={activeLayout} roles={roles}                          />
+      <AppRoute path="/exercice" exact component={AsyncExercice} props={childProps} layout={activeLayout} roles={roles}                       />
   {/*
               Routes Proteger.
         --------------------------------------------------------------------------------------------------------------------------------------------------- 
-  */}      
-      <AppprotectedRoute path="/account"  logged={logged} exact component={AccountProff} props={childProps} layout={CompactLayout} />
-      <AppprotectedRoute path="/account/proff" logged={logged}  exact component={AccountProff} props={childProps} layout={CompactLayout} />
-      <AppprotectedRoute path="/professeur" exact component={AsyncRegister} redir={AsyncLogin} props={childProps} layout={CompactLayout} />
-      <AppprotectedRoute path="/professeur/classes" exact component={ClassesProff} redir={AsyncLogin} props={childProps} layout={CompactLayout} />
+  */} 
+      <AppprotectedRoute path="/account"  logged={logged} exact component={AccountProff} props={childProps} layout={CompactLayout} roles={roles}        roles_accepted={role_user} />
+      <AppprotectedRoute path="/account/proff" logged={logged}  exact component={AccountProff} props={childProps} layout={CompactLayout} roles={roles}  roles_accepted={role_user} />
+      <AppprotectedRoute path="/professeur" exact component={AsyncRegister} redir={AsyncLogin} props={childProps} layout={CompactLayout} roles={roles}  roles_accepted={role_user}/>
+      <AppprotectedRoute path="/professeur/classes" exact component={ClassesProff} redir={AsyncLogin} props={childProps} layout={CompactLayout} roles={roles} roles_accepted={role_user} />
 
       
+      <AppprotectedRoute path="/home"  logged={logged} exact component={AsyncEleveHome} props={childProps} layout={EleveLayout} roles={roles}           roles_accepted={role_eleve} />
+      <AppprotectedRoute path="/classes"  logged={logged} exact component={classesEleve} props={childProps} layout={EleveLayout} roles={roles}           roles_accepted={role_eleve} />
    {/*
         --------------------------------------------------------------------------------------------------------------------------------------------    
         --------------------------------------------------------------------------------------------------------------------------------------------

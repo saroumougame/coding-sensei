@@ -18,8 +18,7 @@ export const getEleveAction = arrayEleve => ({
 
 // Get all classes
 export const getEleve = () => {
-  console.log('geteleve');
-  //console.log();
+
   return (dispatch, getState) => { 
     fetch(API_URL + '/api/eleves', {
       method: 'GET',
@@ -62,10 +61,9 @@ export const AddUserEleveAction = (nom, email) => {
       if(typeof (json['@id'] != 'undefined')){
           dispatch(AddEleveAction(json['@id']));
       }
-
     })
     .catch((e) => dispatch());
- 
+
   }
 }
 

@@ -9,6 +9,7 @@ import history from '../history';
 
 const defaultState = {
   logged:               false,
+  UserRole:             'ROLE_ELEVE'
 };
 
 const userReducer = (state = defaultState, action) => {
@@ -27,7 +28,6 @@ const userReducer = (state = defaultState, action) => {
     case DECONNEXION: {
       localStorage.removeItem('token');
       history.push('/');
-      console.log('ici');
       return {
           ...state,
           logged: 0

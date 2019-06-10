@@ -41,7 +41,7 @@ class HomeEleve extends React.Component {
 
           <Paper className={scss['paper-profil-main']} elevation={4}>
               <Typography variant="headline" component="h3">
-                Informations personnel
+                
               </Typography>
 
           </Paper>

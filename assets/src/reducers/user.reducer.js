@@ -9,7 +9,7 @@ import history from '../history';
 
 const defaultState = {
   logged:               false,
-  UserRole:             'ROLE_ELEVE'
+  UserRole:             'ROLE_USER'
 };
 
 const userReducer = (state = defaultState, action) => {

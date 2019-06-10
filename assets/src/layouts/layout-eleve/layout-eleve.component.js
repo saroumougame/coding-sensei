@@ -25,6 +25,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 // Actions
 import { toggleSidenav, setSidenavOpen, toggleSidenavVariant } from '../../actions/layout.actions';
+import { deconnexionAction } from '../../actions/user.actions';
 
 import scss from './layout-eleve.module.scss';
 import styles from './layout-eleve.style';
@@ -34,6 +35,7 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import RestoreIcon from '@material-ui/icons/Restore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+import Https from '@material-ui/icons/Https';
 
 import history from '../../history';
 
@@ -75,6 +77,8 @@ class EleveLayout extends React.Component {
                     history.push('/favoris');
                   }else if(newValue == 2){
                     history.push('/home');
+                  }else if(newValue == 3){
+                    this.props.deconnexionAction();
                   }
 
                   this.setState({ valueBottom : newValue });
@@ -85,6 +89,8 @@ class EleveLayout extends React.Component {
                 <BottomNavigationAction label="Mes classes"       icon={<RestoreIcon className={scss['layout-eleve-Menu-icon']} />} />
                 <BottomNavigationAction label="Favoris"         icon={<FavoriteIcon  className={scss['layout-eleve-Menu-icon']}/>} />
                 <BottomNavigationAction label="Profil & settings" icon={<LocationOnIcon className={scss['layout-eleve-Menu-icon']} />} />
+                <BottomNavigationAction className={scss['layout-eleve-Menu-right']} label="Déconnexion" icon={<Https className={scss['layout-eleve-Menu-icon']} />} />
+
               </BottomNavigation>
                {children}
             </div>
@@ -118,7 +124,8 @@ export default compose(
   connect(mapStateToProps, {
     toggleSidenav,
     toggleSidenavVariant,
-    setSidenavOpen
+    setSidenavOpen,
+    deconnexionAction
   })
 )(EleveLayout);
 

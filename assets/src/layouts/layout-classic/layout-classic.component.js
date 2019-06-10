@@ -58,9 +58,9 @@ class ClassicLayout extends React.Component {
               {children}
             </div>
           </div>
-          <ContentFooter />
+   
         </main>
-        <NotificationSidenav />
+  
       </div>
     );
   }

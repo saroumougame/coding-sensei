@@ -1,0 +1,19 @@
+.un-cour {
+	margin-top: 30px;
+	border: 1px solid white;
+	height: 100px;
+	width: 90%;
+	background-color: white;
+}
+
+.un-cour:hover {
+	background-color: rgba(40, 120, 179, 0.92) !important;
+	cursor: pointer;
+}
+.liste-exercice {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+}

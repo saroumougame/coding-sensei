@@ -17,6 +17,9 @@ const userReducer = (state = defaultState, action) => {
     case LOGIN:
 
       if(action.payload == true){
+
+        //history.push('/account');
+
         return {
           ...state,
           logged: 1

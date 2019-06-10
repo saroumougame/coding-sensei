@@ -10,12 +10,12 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import FontAwesome from 'react-fontawesome';
-import scss from './classes-eleve.module.scss';
+import scss from './ListeCours.module.scss';
 import TextField from '@material-ui/core/TextField';
-import ListeExercices from '../listeCours/ListeCours.component.js';
 
 
-class classesEleve extends React.Component {
+
+class ListeCours extends React.Component {
 
   	constructor(props) {
     	super(props);
@@ -28,12 +28,9 @@ class classesEleve extends React.Component {
 
 	 render() {
 	 	return(
-	 		 <div className={scss['main-class-list']}> 
-          <div className={scss['class-list']}>
-              <Typography  className={scss['mes-formations']} variant="headline" component="h2">
-                Mes formations
-              </Typography>
-              <ListeExercices />
+	 		 <div className={scss['liste-exercice']}> 
+          <div className={scss['un-cour']}>
+               Formation PHP Niveau 1
           </div>
 	 		 </div>
 	 	);
@@ -48,4 +45,4 @@ function mapStateToProps(state) {
   };
 }
 export default 
-  connect(mapStateToProps)(classesEleve);
+  connect(mapStateToProps)(ListeCours);

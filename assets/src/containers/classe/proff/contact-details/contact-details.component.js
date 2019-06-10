@@ -69,7 +69,16 @@ class ContactDetails extends React.Component {
         )}
       >
       <div className={classNames(scss['class-detail-header'])}>
-               <Typography variant="headline" gutterBottom>{selectedContact.name}</Typography>
+                 <Paper className={scss['class-name-paper']} elevation={4}>
+                              <Typography variant="headline" component="h3">
+                                {selectedContact.name}
+                              </Typography>
+                  </Paper>
+<Paper className={scss['class-name-paper-central']} elevation={4}>
+                            <Typography variant="headline" component="h3">
+                                Information
+                              </Typography>
+
                <form  noValidate autoComplete="off">
                   <TextField
                     id="nom"
@@ -79,12 +88,13 @@ class ContactDetails extends React.Component {
                     className={classes.textField}
                     margin="normal"
                   />
-
-                  <Button variant="contained" color="primary" className={scss['portal-contacts-detail-update-contact']} onClick={() => {this.formSubmit()}}>
+                <Button variant="contained" color="primary" className={scss['portal-contacts-detail-update-contact']} onClick={() => {this.formSubmit()}}>
                     Modifier la classe
                   </Button>
                 </form>      
+</Paper>
                               <Button variant="contained" color="primary" className={scss['portal-contacts-detail-delete-button-contact']} onClick={() => {this.props.deleteClass(selectedContact.id)}}>
+
                     Supprimer la classe
                 </Button>
       </div>

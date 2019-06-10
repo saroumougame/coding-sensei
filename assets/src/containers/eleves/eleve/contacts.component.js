@@ -35,7 +35,7 @@ class Contacts extends React.Component {
   }
 
   render() {
-    console.log(this.props.data.elevesList);
+
     var contactsList = this.props.data.elevesList;
     return (
       <div className={scss['contacts-wrapper']}>

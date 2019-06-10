@@ -10,7 +10,7 @@ import withWidth from '@material-ui/core/withWidth';
 import { withStyles } from '@material-ui/core/styles';
 import scss from './contact-details.module.scss';
 import FontAwesome from 'react-fontawesome';
-
+import Avatar from '@material-ui/core/Avatar';
 
 const ContactDetails = (props) => {
   const {
@@ -26,6 +26,7 @@ const ContactDetails = (props) => {
           classes.portalContactDetailsHeader
         )}
       >
+      test
       </div>
       <div
         className={classNames(
@@ -34,47 +35,8 @@ const ContactDetails = (props) => {
         )}
       >
 
-        <Grid container spacing={0}>
-          <Grid item xs={12} sm={6} md={3}>
-            <div
-              className={classNames(
-                scss['portal-contact-details__avatar-container']
-              )}
-            >
-
-              <div
-                className={classNames(
-                  scss['portal-contact-details__extra'],
-                  classes.portalContactDetailsExtra
-                )}
-              >
        
-
-                <br />
-
-                <FontAwesome name="twitter" className={classNames(
-                  classes.portalContactDetailsSocialIcons
-                )} />
-                <FontAwesome name="facebook" className={classNames(
-                  classes.portalContactDetailsSocialIcons
-                )} />
-                <FontAwesome name="linkedin" className={classNames(
-                    classes.portalContactDetailsSocialIcons
-                  )} />
-              </div>
-            </div>
-          </Grid>
-          <Grid item xs={12} sm={6} md={9}>
-            <div
-              className={classNames(
-                scss['portal-contact-details__main']
-              )}
-            >
-              <Typography variant="headline" gutterBottom>{selectedContact.name}, {selectedContact.surname}</Typography>
-              <Typography component="div" dangerouslySetInnerHTML={{ __html: selectedContact.bio }} />
-            </div>
-          </Grid>
-        </Grid>
+    
       </div>
     </div>
   );

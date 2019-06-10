@@ -128,34 +128,19 @@ class NoContacts extends React.Component {
                     </CardActionArea>
               </Card>
 
-      <div className={classNames(
-        scss['portal-contacts-no-contacts__icon'],
-        classes['portal-contacts-no-contacts__icon']
-      )}
-      >
 
-        <div className={scss['portal-contacts-no-contacts__paper']} />
-      </div>
-    {/*
-      <Typography component="h2">Crée ou sélectionner une classe</Typography>
 
-          <form  noValidate autoComplete="off">
-            <TextField
-              id="nom"
-              value={this.state.nom}
-              onChange={(e) => {this.setState({nom: e.target.value});}}
-              label="Nom de la classe"
-              className={classes.textField}
-              margin="normal"
-            />
-    
+          <Paper className={scss['no-contact-pricing']} elevation={4}>
+              <Typography variant="headline" component="h3">
+                Acheter des classes
+              </Typography>
+              <Typography variant="headline" component="h5">
+                Prix de démo:  Gratuit <Button variant="outlined" className={classes.button}> Commander </Button> 
+              </Typography>
+          </Paper>
+     
 
-            <Button variant="contained" color="primary" className={scss['portal-contacts-no-button-form']} onClick={() => {this.formSubmit()}}>
-              Crée la classe
-            </Button>
-          </form>
-    */}
-
+          
     </div>
   );
 }

@@ -9,6 +9,8 @@ import classNames from 'classnames';
 import themeStyles from './no-contacts.theme.style';
 import scss from './no-contacts.module.scss';
 import UserTasksWidget from '../user-tasks-widget/user-tasks-widget.component';
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
 
 
 const NoContacts = (props) => {
@@ -23,6 +25,17 @@ const NoContacts = (props) => {
 
                         <UserTasksWidget />
   */}
+
+   <Paper className={scss['exercice-paper']} elevation={4}>
+              <Typography variant="headline" component="h3">
+                Mon cour
+              </Typography>
+          </Paper>
+   <Paper className={scss['exercice-paper']} elevation={4}>
+              <Typography variant="headline" component="h3">
+                Exercices 
+              </Typography>
+          </Paper>
      
     </div>
   );

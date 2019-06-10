@@ -143,3 +143,12 @@
 .portal-contacts-detail-delete-button-contact {
   height: 30%;
 }
+
+.class-name-paper {
+  padding: 30px;
+}
+
+.class-name-paper-central {
+  @extend .class-name-paper;
+  margin-top: 15px;
+}

@@ -200,6 +200,8 @@ export default ({ logged , childProps, layout, roles }) => {
       <AppprotectedRoute path="/account/proff" logged={logged}  exact component={AccountProff} props={childProps} layout={CompactLayout} roles={roles}  roles_accepted={role_user} />
       <AppprotectedRoute path="/professeur" exact component={AsyncRegister} redir={AsyncLogin} props={childProps} layout={CompactLayout} roles={roles}  roles_accepted={role_user}/>
       <AppprotectedRoute path="/professeur/classes" exact component={ClassesProff} redir={AsyncLogin} props={childProps} layout={CompactLayout} roles={roles} roles_accepted={role_user} />
+      <AppprotectedRoute path="/professeur/classes/add" exact component={ClassesProff} redir={AsyncLogin} props={childProps} layout={CompactLayout} roles={roles} roles_accepted={role_user} />
+
 
       
       <AppprotectedRoute path="/home"  logged={logged} exact component={AsyncEleveHome} props={childProps} layout={EleveLayout} roles={roles}           roles_accepted={role_eleve} />

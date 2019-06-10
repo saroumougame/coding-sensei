@@ -131,7 +131,7 @@ export const login = (email, password) => {
         
         localStorage.setItem('token', json.token);
         dispatch(loginAction(true));
-        history.push('/acount');
+        history.push('/account');
       }else {
         dispatch(loginAction(false));
       }

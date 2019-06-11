@@ -1,9 +1,10 @@
 
 import history from '../history';
 
-export 	const API_URL                  = 'http://localhost:8089';
 export  const SETELEVECONTACT = "SET ELEVE CONTACT";
 export  const GETELEVEBYCLASS = "GET ELEVE BYCLASS";
+
+export 	const API_URL                  = 'http://localhost:8089';
 
 export const setEleveAction = contact => ({
   type: SETELEVECONTACT,

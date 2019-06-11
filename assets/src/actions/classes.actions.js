@@ -6,8 +6,9 @@ export const GET_ALL_CLASS__BY_PROFF  = 'montre le form ';
 export const UPDATE_CLASS_LIST        = 'modifier l\'ordre de la liste';
 export const UPDATE_CLASS_NOM         = 'modifier le nom de la classe';
 export const SETCURRENTCLASS          = 'SET CURRENT CLASS';
-       const API_URL                  = 'http://localhost:8089';
        const ID_PROFF                 = '/api/users/1';
+       
+       const API_URL                  = 'http://localhost:8089';
 //export const ADD_CLASS_BY_PROFF = 'Ajoute  à la selection';
 
 export const setClasseAction = classe => ({
@@ -22,6 +23,7 @@ export const addClass = (nom) => {
     'name': nom,
     'teacher': ID_PROFF
   }
+  
   var formBody = JSON.stringify(details);
 
   return (dispatch, getState) => { 

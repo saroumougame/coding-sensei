@@ -14,7 +14,9 @@ export const LOGIN_SNACK              = "LOGIN_SNACK";
 export const LOGIN_SNACK_CLOSE        = "LOGIN_SNACK_CLOSE";
 export const LOGIN_SPINNER_START      = "LOGIN_SPINNER_START";
 export const LOGIN_SPINNER_STOP       = "LOGIN_SPINNER_STOP";
+
        const API_URL                  = 'http://localhost:8089';
+       const API_URL_CHARLES          = 'http://51.38.38.246:8080';
 
 export const inscriptionEtapeAction = etape => ({
   type: INSCRIPTION_ETAPES,
@@ -64,7 +66,7 @@ export const snackDelete = () => ({
 
 
 export const register = (nom, email, password) => {
-  
+  /*
   var details = {
     'fos_user_registration_form[email]': email,
     'fos_user_registration_form[username]': nom,
@@ -79,11 +81,23 @@ export const register = (nom, email, password) => {
     formBody.push(encodedKey + "=" + encodedValue);
   }
   formBody = formBody.join("&");
+  */
+  var details = {
+    'firstName': nom,
+    'lastName':  nom,
+    'email':     email ,
+    'password':  password
+  }
+  
+  var formBody = JSON.stringify(details);
+
+
   return dispatch => { 
-    fetch(API_URL + '/register/', {
+    fetch(API_URL_CHARLES + '/teacher/create', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json',
+         'accept': 'application/ld+json'
       },
       body: formBody
     })
@@ -128,7 +142,7 @@ export const login = (email, password) => {
     .then(json => {
 
       if(typeof(json.token) != 'undefined'){
-                history.push('/home');
+        history.push('/home');
         localStorage.setItem('token', json.token);
         dispatch(loginAction(true));
         

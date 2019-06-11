@@ -14,7 +14,7 @@ export const LOGIN_SNACK              = "LOGIN_SNACK";
 export const LOGIN_SNACK_CLOSE        = "LOGIN_SNACK_CLOSE";
 export const LOGIN_SPINNER_START      = "LOGIN_SPINNER_START";
 export const LOGIN_SPINNER_STOP       = "LOGIN_SPINNER_STOP";
-       const API_URL                  = 'http://localhost:8089';
+       const API_URL                  = 'http://51.38.38.246:8080';
 
 export const inscriptionEtapeAction = etape => ({
   type: INSCRIPTION_ETAPES,
@@ -65,27 +65,24 @@ export const snackDelete = () => ({
 
 export const register = (nom, email, password) => {
   
-  var details = {
-    'fos_user_registration_form[email]': email,
-    'fos_user_registration_form[username]': nom,
-    'fos_user_registration_form[plainPassword][first]': password,
-    'fos_user_registration_form[plainPassword][second]': password
+  var data = {
+    'email': email,
+    'firstName': nom,
+      'lastName': nom,
+    'password': password
+    // 'fos_user_registration_form[plainPassword][second]': password
   }
 
-  var formBody = [];
-  for (var property in details) {
-    var encodedKey = encodeURIComponent(property);
-    var encodedValue = encodeURIComponent(details[property]);
-    formBody.push(encodedKey + "=" + encodedValue);
-  }
-  formBody = formBody.join("&");
+  var dataJson = JSON.stringify(data);
+
   return dispatch => { 
-    fetch(API_URL + '/register/', {
+    fetch(API_URL + '/teacher/create', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json',
+          'accept': 'application/json'
       },
-      body: formBody
+      body: dataJson
     })
     .then(response => response)
     .then(json => {
@@ -103,26 +100,22 @@ export const register = (nom, email, password) => {
 
 export const login = (email, password) => {
   //console.log(email);
-    var success = {
-    '_username': email,
-    '_password': password,
+    var data = {
+    'username': email,
+    'password': password,
   }
 
-  var formBody = [];
-  for (var property in success) {
-    var encodedKey = encodeURIComponent(property);
-    var encodedValue = encodeURIComponent(success[property]);
-    formBody.push(encodedKey + "=" + encodedValue);
-  }
-  formBody = formBody.join("&");
+    var dataJson = JSON.stringify(data);
+
   return dispatch => { 
     fetch(API_URL + '/login_check', {
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json',
+          'accept': 'application/json'
+
       },
-      body: formBody
+      body: dataJson
     })
     .then(response => response.json() )
     .then(json => {

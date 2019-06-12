@@ -1,10 +1,12 @@
 const styles = theme => ({
   'portal-contacts-no-contacts': {
     '&:before': {
+
       background: theme.palette.secondary.main
     }
   },
   'portal-contacts-no-contacts__icon': {
+
     background: theme.palette.secondary.main,
     'box-shadow': `0 0 1px ${theme.palette.secondary.main} inset`,
     '&:before, &:after': {

@@ -165,7 +165,7 @@ class ClassesList extends React.Component {
       {/*
       */}
         <Button variant="contained" className={classes.button} onClick={onSelect(null)}>
-          Ajouter une classe
+          Classes
         </Button>
         </div>
        

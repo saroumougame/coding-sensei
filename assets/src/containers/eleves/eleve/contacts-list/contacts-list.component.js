@@ -140,7 +140,9 @@ console.log(contact);
 
 
   getCustomClassList() {
+
     if(this.state.updatedList == true){
+
       return this.props.data.classUpdatedList;
     }
     return this.props.data.elevesList;

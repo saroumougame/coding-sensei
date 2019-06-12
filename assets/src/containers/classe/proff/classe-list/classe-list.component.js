@@ -177,7 +177,14 @@ class ClassesList extends React.Component {
     if(this.state.updatedList == true){
       return this.props.data.classUpdatedList;
     }
-    return this.props.data.classList;
+    if (this.props.data.classList  != undefined){
+
+        return this.props.data.classList;
+    }else{
+
+      return [];
+    }
+
   }
 
   render () {
@@ -188,13 +195,13 @@ class ClassesList extends React.Component {
     return (
       <div className={classNames(classes.list, 'portal-hide-scrollbars')}>
         {isWidthUp('sm', width) ? this.createSearchTextField() : ''}
-        <List component="nav" className={classes.listWrapper}>
-          {this.getCustomClassList().map((contact) => {
-            return isWidthUp('sm', width) ?
-              this.createDesktopListItem(contact) :
-              this.createMobileListItem(contact);
-          })}
-        </List>
+          <List component="nav" className={classes.listWrapper}>
+              {this.getCustomClassList().map((contact) => {
+                  return isWidthUp('sm', width) ?
+                      this.createDesktopListItem(contact) :
+                      this.createMobileListItem(contact);
+              })}
+          </List>
       </div>
     );
   }

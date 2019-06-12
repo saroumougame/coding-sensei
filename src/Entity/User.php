@@ -17,6 +17,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Controller\UserExercicesController;
 use App\Controller\GetClassByUserController;
+use App\Controller\UserCurrentController;
+
 /**
  * @ORM\Entity
  * @ApiResource(
@@ -43,7 +45,16 @@ use App\Controller\GetClassByUserController;
      *              "swagger_context" = {
      *                  "summary" = "retourne toute les classe d'un eleve",
      *                  },
-            }
+ *
+  *          },
+ *     *       "get_current_user"={
+ *              "method"="GET",
+ *              "path"="/user/current",
+ *              "controller"=UserCurrentController::class,
+ *              "swagger_context" = {
+ *                  "summary" = "retourne current user",
+ *                  },
+ *     }
  *     },
  * )
  * @ORM\Table(name="fos_user")
@@ -133,6 +144,10 @@ class User extends BaseUser
     public function setId($id): void
     {
         $this->id = $id;
+    }
+
+    public function getUserObject(){
+        return $this;
     }
 
 

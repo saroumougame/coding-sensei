@@ -43,3 +43,5 @@ skyflow/
 
 docker/
 assets/node_modules/
+
+config/packages/lexik_jwt_authentication\.yaml

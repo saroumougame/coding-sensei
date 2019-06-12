@@ -29,7 +29,8 @@ export const addClass = (nom) => {
     fetch(API_URL + '/classes', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization'  : 'Bearer ' + localStorage.getItem('token')
       },
       body: formBody
     })
@@ -73,7 +74,8 @@ export const deleteClass = (id) => {
     fetch(API_URL + '/classes/'+id, {
       method: 'DELETE',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+          'Authorization'  : 'Bearer ' + localStorage.getItem('token')
       }
     })
     .then(response => response)
@@ -92,7 +94,8 @@ export const getClass = () => {
     fetch(API_URL + '/classes', {
       method: 'GET',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization'  : 'Bearer ' + localStorage.getItem('token')
       }
     })
     .then(response => response.json())

@@ -13,6 +13,8 @@ use App\Entity\Classe;
 use App\Entity\Exercice;
 use App\Entity\ExerciceClasse;
 use App\Entity\Reponse;
+use App\Service\MailService;
+use Lexik\Bundle\JWTAuthenticationBundle\Encoder\LcobucciJWTEncoder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\Serializer;
@@ -23,6 +25,8 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use App\Entity\User;
 use App\Entity\Eleve;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
+
 
 class GetClassByUserController extends AbstractController
 {
@@ -31,9 +35,26 @@ class GetClassByUserController extends AbstractController
     {
 
 
-        $classe = $this->getDoctrine()->getRepository(Classe::class)->findBy(array("teacher" => $data->getId()));
+      $mail = new MailService(\swith_mail);
 
-        return $classe;
+        $statuemail = $mail->notificationMail('tototo', 'sridar.aroumougame@gmail.com');
+
+        $token = $this->get('security.token_storage')->getToken();
+
+//     $decodeToken =  $jwtEncoder->decode($token);
+
+return $statuemail;
+//        $currentToken
+
+
+
+//$user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['username' => $username]);
+//
+//        dump($user);
+//
+//        $classe = $this->getDoctrine()->getRepository(Classe::class)->findBy(array("teacher" => $data->getId()));
+
+//        return $user;
 
 //
 //        if (!$this->container->has('security.token_storage')) {
@@ -49,8 +70,6 @@ class GetClassByUserController extends AbstractController
 //        return $user;
 
 
-//        $currentToken = $this->get('security.token_storage')->getToken();
-////var_dump($currentToken);
 //
 //        return new JsonResponse(['user' => $currentToken->getUser()]);
 //        if (is_object($currentToken->getUser())) {

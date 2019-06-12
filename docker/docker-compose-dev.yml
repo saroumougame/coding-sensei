@@ -36,7 +36,7 @@ services:
             - 8089:80
         volumes:
 #            - ../:/coding
-            - app-sync-coding2:/coding
+            - app-sync-coding3:/coding
             - ./symfony/conf/apache2:/etc/apache2
             - ./symfony/conf/php7/php.ini:/etc/php7/php.ini
         environment:
@@ -45,5 +45,5 @@ services:
 # <------ symfony <------
 
 volumes:
-  app-sync-coding2:
+  app-sync-coding3:
     external: true

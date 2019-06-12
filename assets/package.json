@@ -74,7 +74,8 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "react-app-rewired build && cd ../public/ && rm -rf ./build && cp -r ../assets/build ./",
+    "build": "react-app-rewired build && cd ./public && cp -rf ../build . && cp ./build/index.html .",
+    "build_custom": "react-app-rewired build && cd ../public/ && rm -rf ./build && cp -r ../assets/build ./",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint src"

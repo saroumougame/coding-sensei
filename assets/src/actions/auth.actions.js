@@ -9,6 +9,7 @@ export const AUTH_LOGIN_EMAIL         = "FORM LOGIN EMAIL";
 export const AUTH_LOGIN_PASSWORD      = "FORM LOGIN PASSWORD";
 export const LOGIN                    = "LOGIN";
 export const REGISTER                 = "REGISTER";
+export const REGISTER_FAIL           = "REGISTER_FAIL";
 export const SNACK_REGISTER           = "SNACK_REGISTER";
 export const LOGIN_SNACK              = "LOGIN_SNACK";
 export const LOGIN_SNACK_CLOSE        = "LOGIN_SNACK_CLOSE";
@@ -53,11 +54,15 @@ export const loginonPassword = password => ({
   payload: password
 });
 
-export const registerAction = success => ({
+export const registerAction = jsonUser => ({
   type: REGISTER,
-  payload: success
+  payload: jsonUser
 });
 
+export const registerFailAction = message => ({
+  type: REGISTER_FAIL,
+  payload: message
+});
 export const snackDelete = () => ({
   type: SNACK_REGISTER,
 })
@@ -68,7 +73,7 @@ export const register = (nom, email, password) => {
   var data = {
     'email': email,
     'firstName': nom,
-      'lastName': nom,
+    'lastName': nom,
     'password': password
     // 'fos_user_registration_form[plainPassword][second]': password
   }
@@ -79,18 +84,17 @@ export const register = (nom, email, password) => {
     fetch(API_URL + '/teacher/create', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+          'Content-Type': 'application/json',
           'accept': 'application/json'
       },
       body: dataJson
     })
-    .then(response => response)
+    .then(response => response.json())
     .then(json => {
-      console.log(json.status);
-      if(json.status == 200){
-        dispatch(registerAction(false))
-      }else if(json.status == 401){
-        dispatch(registerAction(true))
+      if(typeof(json.email) == 'undefined'){
+        dispatch(registerFailAction(json.detail));
+      }else {
+        dispatch(registerAction(json));
       }
 
     })
@@ -121,7 +125,7 @@ export const login = (email, password) => {
     .then(json => {
 
       if(typeof(json.token) != 'undefined'){
-        history.push('/home');
+        history.push('/account');
         localStorage.setItem('token', json.token);
         dispatch(loginAction(true));
         

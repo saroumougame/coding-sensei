@@ -5,7 +5,6 @@ export 	const API_URL                  = 'http://51.38.38.246:8080';
 export  const SETELEVECONTACT = "SET ELEVE CONTACT";
 export  const GETELEVEBYCLASS = "GET ELEVE BYCLASS";
 
-export 	const API_URL                  = 'http://localhost:8089';
 
 export const setEleveAction = contact => ({
   type: SETELEVECONTACT,

@@ -54,7 +54,7 @@ const names = [
   "Kelly Snyder"
 ];
 
-const API = 'http://localhost:8089/api/';
+const API = 'http://localhost:8089/';
 const DEFAULT_QUERY = 'exercices';
 
 class ExerciceAddProffForm extends Component  {

@@ -1,6 +1,7 @@
 
 import history from '../history';
 
+export 	const API_URL                  = 'http://51.38.38.246:8080';
 export  const SETELEVECONTACT = "SET ELEVE CONTACT";
 export  const GETELEVEBYCLASS = "GET ELEVE BYCLASS";
 
@@ -21,7 +22,7 @@ export const getEleveAction = arrayEleve => ({
 export const getEleve = () => {
 
   return (dispatch, getState) => { 
-    fetch(API_URL + '/api/eleves', {
+    fetch(API_URL + '/eleves', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -50,7 +51,7 @@ export const AddUserEleveAction = (nom, email) => {
 
   return (dispatch, getState) => { 
 
-    fetch(API_URL + '/api/users', {
+    fetch(API_URL + '/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -84,7 +85,7 @@ export const AddEleveAction = (idEleve) => {
       }
     var formBody = JSON.stringify(details);
 
-    fetch(API_URL + '/api/eleves', {
+    fetch(API_URL + '/eleves', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

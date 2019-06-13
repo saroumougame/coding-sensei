@@ -1,4 +1,5 @@
 import history from '../history';
+import { deconnexionAction } from './user.actions';
 export  const INSCRIPTION_ETAPES = "changer_étapes";
 
 export const AUTH_NOM_PROFF           = "FORM NOM PROFF";
@@ -15,6 +16,9 @@ export const LOGIN_SNACK              = "LOGIN_SNACK";
 export const LOGIN_SNACK_CLOSE        = "LOGIN_SNACK_CLOSE";
 export const LOGIN_SPINNER_START      = "LOGIN_SPINNER_START";
 export const LOGIN_SPINNER_STOP       = "LOGIN_SPINNER_STOP";
+export const LOGIN_FAIL              = "LOGIN_FAIL";
+export const EXPIRED                 = "EXPIRED";
+
        const API_URL                  = 'http://51.38.38.246:8080';
 
 export const inscriptionEtapeAction = etape => ({
@@ -125,25 +129,89 @@ export const login = (email, password) => {
     .then(json => {
 
       if(typeof(json.token) != 'undefined'){
-        history.push('/account');
         localStorage.setItem('token', json.token);
-        dispatch(loginAction(true));
+        dispatch(getUser());
         
       }else {
-        dispatch(loginAction(false));
+        history.push('/login?error=access');
+        dispatch(loginFailAction());
       }
 
       return dispatch(login_spinner_stop());
-
-
-
     })
     .catch((e) => dispatch(loginAction(false)));
   }
 }
-export const loginAction = (success) => ({
+
+
+export const getUserByToken = () => {
+
+  var token = localStorage.getItem('token');
+
+  return (dispatch, getState) => { 
+    fetch(API_URL + '/currentuser', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization' : 'Bearer '+token
+      }
+    })
+    .then(response => response.json())
+    .then(json => {
+
+      if(json.code == 401){
+      history.push('/login?session_expired');
+       dispatch(expiredAction());
+      }else {
+        history.push('/account');
+        dispatch(loginAction(json));
+      }
+    })
+    .catch((e) => dispatch());
+  }
+};
+
+
+export const expiredAction = () => ({
+  type: EXPIRED
+});
+
+
+
+export const getUser = () => {
+
+  var token = localStorage.getItem('token');
+
+  return (dispatch, getState) => { 
+    fetch(API_URL + '/currentuser', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization' : 'Bearer '+token
+      }
+    })
+    .then(response => response.json())
+    .then(json => {
+
+        if(json.roles.includes('ROLE_TEACHER')) {
+          history.push('/account');
+        }else if(json.roles.includes('ROLE_STUDENT')) {
+          history.push('/home');
+        }
+      dispatch(loginAction(json));
+    })
+    .catch((e) => dispatch());
+  }
+};
+
+
+export const loginAction = (jsonUser) => ({
   type: LOGIN,
-  payload: success
+  payload: jsonUser
+});
+
+export const loginFailAction = () => ({
+  type: LOGIN_FAIL
 });
 
 export const login_snack = (text) => ({

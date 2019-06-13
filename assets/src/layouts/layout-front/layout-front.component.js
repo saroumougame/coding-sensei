@@ -45,7 +45,7 @@ class ClassicLayout extends React.Component {
     return (
       <div className={classNames(scss['layout-classic-wrapper'], classes.wrapper)}>
         <main className={scss['layout-classic-main']}>
-          <AppBar color="#f8ede9" position="static">
+          <AppBar color="#fff" position="static">
             <ContentToolbar />
           </AppBar>
           <div className={scss['layout-classic-content-wrapper']}>

@@ -12,7 +12,8 @@ import {
   LOGIN_SNACK,
   LOGIN_SNACK_CLOSE,
   LOGIN_SPINNER_START,
-  LOGIN_SPINNER_STOP
+  LOGIN_SPINNER_STOP,
+  REGISTER_FAIL
 } from '../actions/auth.actions';
 
 // trois étapes d'inscription.
@@ -81,11 +82,18 @@ const authReducer = (state = defaultState, action) => {
       break;
       case REGISTER: 
 
-      if(action.payload == false){
-        var newregister_message = "Une erreur c'est produite, votre email est surrement deja utiliser";
-      }else {
         var newregister_message = "Félicitation, vous pouvez maintenent vous connecter";
-      }
+      
+        return {
+        ...state,
+          register_snack:   true,
+          register_message: newregister_message
+      };
+    break;
+    case REGISTER_FAIL : 
+      
+        var newregister_message = action.payload;
+      
         return {
         ...state,
           register_snack:   true,

@@ -22,6 +22,7 @@ export const addClass = (nom) => {
     'name': nom,
     'teacher': ID_PROFF
   }
+  
   var formBody = JSON.stringify(details);
 
   return (dispatch, getState) => { 

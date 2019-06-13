@@ -21,6 +21,7 @@ import Paper from '@material-ui/core/Paper';
 import Modal from '@material-ui/core/Modal';
 import Modal2 from '../../../../components/modal.component';
 
+
 /*
 const NoContacts = (props) => {
   const { classes } = props;
@@ -108,25 +109,27 @@ class NoContacts extends React.Component {
     const { classes } = this.props;
   return (
     <div className={classNames(scss['portal-contacts-no-contacts'], classes['portal-contacts-no-contacts'])}>
-              <Card className={scss['card_proff_class']} >
-                    <CardActionArea>
+              {/*<Card className={scss['card_proff_class']} >*/}
+
+                  <Modal2
+                      colorBtn='default'
+                      titleButton='Aouter une classe'
+                      title="Ajouter une classe"
+                      text={this.getAddClassForm()}
+                  />
+                    {/*<CardActionArea>*/}
                     
-                      <CardContent className={scss['card_register_proffesseur_content']} >
-                        <Typography variant="h5"  gutterBottom>
-                           Vous avez avez 10 Crédit. Un crédit correspond a 5 élèves.Chaque élèves ne peut appartenir qu'a une classe. 
-                        </Typography>
-                        
-                        <Modal2 
-                         titleButton='Aouter une classe'
-                         title="Ajouter une classe"
-                         text={this.getAddClassForm()}
-                         />
-                      {/*
-                        <Button className={scss['car_addclass_boutique']}>Aller a la boutique</Button>
-                      */}
-                      </CardContent>
-                    </CardActionArea>
-              </Card>
+                      {/*<CardContent className={scss['card_register_proffesseur_content']} >*/}
+                        {/*<Typography variant="h5"  gutterBottom>*/}
+                           {/*Vous avez avez 10 Crédit. Un crédit correspond a 5 élèves.Chaque élèves ne peut appartenir qu'a une classe. */}
+                        {/*</Typography>*/}
+
+                      {/*/!**/}
+                        {/*<Button className={scss['car_addclass_boutique']}>Aller a la boutique</Button>*/}
+                      {/**!/*/}
+                      {/*</CardContent>*/}
+                    {/*</CardActionArea>*/}
+              {/*</Card>*/}
 
 
 
@@ -135,7 +138,7 @@ class NoContacts extends React.Component {
                 Acheter des classes
               </Typography>
               <Typography variant="headline" component="h5">
-                Prix de démo:  Gratuit <Button variant="outlined" className={classes.button}> Commander </Button> 
+                Prix de démo:  Gratuit <Button variant="outlined" className={classes.button}> Commander </Button>
               </Typography>
           </Paper>
      

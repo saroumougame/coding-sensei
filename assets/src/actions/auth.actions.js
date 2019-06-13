@@ -1,4 +1,5 @@
 import history from '../history';
+import { deconnexionAction } from './user.actions';
 export  const INSCRIPTION_ETAPES = "changer_étapes";
 
 export const AUTH_NOM_PROFF           = "FORM NOM PROFF";
@@ -9,14 +10,16 @@ export const AUTH_LOGIN_EMAIL         = "FORM LOGIN EMAIL";
 export const AUTH_LOGIN_PASSWORD      = "FORM LOGIN PASSWORD";
 export const LOGIN                    = "LOGIN";
 export const REGISTER                 = "REGISTER";
+export const REGISTER_FAIL           = "REGISTER_FAIL";
 export const SNACK_REGISTER           = "SNACK_REGISTER";
 export const LOGIN_SNACK              = "LOGIN_SNACK";
 export const LOGIN_SNACK_CLOSE        = "LOGIN_SNACK_CLOSE";
 export const LOGIN_SPINNER_START      = "LOGIN_SPINNER_START";
 export const LOGIN_SPINNER_STOP       = "LOGIN_SPINNER_STOP";
+export const LOGIN_FAIL              = "LOGIN_FAIL";
+export const EXPIRED                 = "EXPIRED";
 
-       const API_URL                  = 'http://localhost:8089';
-       const API_URL_CHARLES          = 'http://51.38.38.246:8080';
+       const API_URL                  = 'http://51.38.38.246:8080';
 
 export const inscriptionEtapeAction = etape => ({
   type: INSCRIPTION_ETAPES,
@@ -55,59 +58,47 @@ export const loginonPassword = password => ({
   payload: password
 });
 
-export const registerAction = success => ({
+export const registerAction = jsonUser => ({
   type: REGISTER,
-  payload: success
+  payload: jsonUser
 });
 
+export const registerFailAction = message => ({
+  type: REGISTER_FAIL,
+  payload: message
+});
 export const snackDelete = () => ({
   type: SNACK_REGISTER,
 })
 
 
 export const register = (nom, email, password) => {
-  /*
-  var details = {
-    'fos_user_registration_form[email]': email,
-    'fos_user_registration_form[username]': nom,
-    'fos_user_registration_form[plainPassword][first]': password,
-    'fos_user_registration_form[plainPassword][second]': password
-  }
-
-  var formBody = [];
-  for (var property in details) {
-    var encodedKey = encodeURIComponent(property);
-    var encodedValue = encodeURIComponent(details[property]);
-    formBody.push(encodedKey + "=" + encodedValue);
-  }
-  formBody = formBody.join("&");
-  */
-  var details = {
-    'firstName': nom,
-    'lastName':  nom,
-    'email':     email ,
-    'password':  password
-  }
   
-  var formBody = JSON.stringify(details);
+  var data = {
+    'email': email,
+    'firstName': nom,
+    'lastName': nom,
+    'password': password
+    // 'fos_user_registration_form[plainPassword][second]': password
+  }
 
+  var dataJson = JSON.stringify(data);
 
   return dispatch => { 
-    fetch(API_URL_CHARLES + '/teacher/create', {
+    fetch(API_URL + '/teacher/create', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-         'accept': 'application/ld+json'
+          'Content-Type': 'application/json',
+          'accept': 'application/json'
       },
-      body: formBody
+      body: dataJson
     })
-    .then(response => response)
+    .then(response => response.json())
     .then(json => {
-      console.log(json.status);
-      if(json.status == 200){
-        dispatch(registerAction(false))
-      }else if(json.status == 401){
-        dispatch(registerAction(true))
+      if(typeof(json.email) == 'undefined'){
+        dispatch(registerFailAction(json.detail));
+      }else {
+        dispatch(registerAction(json));
       }
 
     })
@@ -117,50 +108,110 @@ export const register = (nom, email, password) => {
 
 export const login = (email, password) => {
   //console.log(email);
-    var success = {
-    '_username': email,
-    '_password': password,
+    var data = {
+    'username': email,
+    'password': password,
   }
 
-  var formBody = [];
-  for (var property in success) {
-    var encodedKey = encodeURIComponent(property);
-    var encodedValue = encodeURIComponent(success[property]);
-    formBody.push(encodedKey + "=" + encodedValue);
-  }
-  formBody = formBody.join("&");
+    var dataJson = JSON.stringify(data);
+
   return dispatch => { 
     fetch(API_URL + '/login_check', {
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json',
+          'accept': 'application/json'
+
       },
-      body: formBody
+      body: dataJson
     })
     .then(response => response.json() )
     .then(json => {
 
       if(typeof(json.token) != 'undefined'){
-        history.push('/home');
         localStorage.setItem('token', json.token);
-        dispatch(loginAction(true));
+        dispatch(getUser());
         
       }else {
-        dispatch(loginAction(false));
+        history.push('/login?error=access');
+        dispatch(loginFailAction());
       }
 
       return dispatch(login_spinner_stop());
-
-
-
     })
     .catch((e) => dispatch(loginAction(false)));
   }
 }
-export const loginAction = (success) => ({
+
+
+export const getUserByToken = () => {
+
+  var token = localStorage.getItem('token');
+
+  return (dispatch, getState) => { 
+    fetch(API_URL + '/currentuser', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization' : 'Bearer '+token
+      }
+    })
+    .then(response => response.json())
+    .then(json => {
+
+      if(json.code == 401){
+      history.push('/login?session_expired');
+       dispatch(expiredAction());
+      }else {
+        history.push('/account');
+        dispatch(loginAction(json));
+      }
+    })
+    .catch((e) => dispatch());
+  }
+};
+
+
+export const expiredAction = () => ({
+  type: EXPIRED
+});
+
+
+
+export const getUser = () => {
+
+  var token = localStorage.getItem('token');
+
+  return (dispatch, getState) => { 
+    fetch(API_URL + '/currentuser', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization' : 'Bearer '+token
+      }
+    })
+    .then(response => response.json())
+    .then(json => {
+
+        if(json.roles.includes('ROLE_TEACHER')) {
+          history.push('/account');
+        }else if(json.roles.includes('ROLE_STUDENT')) {
+          history.push('/home');
+        }
+      dispatch(loginAction(json));
+    })
+    .catch((e) => dispatch());
+  }
+};
+
+
+export const loginAction = (jsonUser) => ({
   type: LOGIN,
-  payload: success
+  payload: jsonUser
+});
+
+export const loginFailAction = () => ({
+  type: LOGIN_FAIL
 });
 
 export const login_snack = (text) => ({

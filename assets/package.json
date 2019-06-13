@@ -22,7 +22,7 @@
     "lint-staged": "^6.0.0",
     "marked": "^0.3.12",
     "moment": "^2.24.0",
-    "node-sass": "^4.7.2",
+    "node-sass": "^4.12.0",
     "prettier": "^1.10.2",
     "prismjs": "^1.15.0",
     "prop-types": "^15.6.0",
@@ -74,7 +74,8 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "react-app-rewired build && cd ../public/ && rm -rf ./build && cp -r ../assets/build ./",
+    "build": "react-app-rewired build && cd ./public && cp -rf ../build . && cp ./build/index.html .",
+    "build_custom": "react-app-rewired build && cd ../public/ && rm -rf ./build && cp -r ../assets/build ./",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint src"

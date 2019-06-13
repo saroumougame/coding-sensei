@@ -6,9 +6,8 @@ export const GET_ALL_CLASS__BY_PROFF  = 'montre le form ';
 export const UPDATE_CLASS_LIST        = 'modifier l\'ordre de la liste';
 export const UPDATE_CLASS_NOM         = 'modifier le nom de la classe';
 export const SETCURRENTCLASS          = 'SET CURRENT CLASS';
-       const ID_PROFF                 = '/api/users/1';
-       
-       const API_URL                  = 'http://localhost:8089';
+       const API_URL                  = 'http://51.38.38.246:8080';
+       const ID_PROFF                 = '/users/1';
 //export const ADD_CLASS_BY_PROFF = 'Ajoute  à la selection';
 
 export const setClasseAction = classe => ({
@@ -27,10 +26,11 @@ export const addClass = (nom) => {
   var formBody = JSON.stringify(details);
 
   return (dispatch, getState) => { 
-    fetch(API_URL + '/api/classes', {
+    fetch(API_URL + '/classes', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization'  : 'Bearer ' + localStorage.getItem('token')
       },
       body: formBody
     })
@@ -51,7 +51,7 @@ export const updateClass = (nom, id) => {
   var formBody = JSON.stringify(details);
 
   return (dispatch, getState) => { 
-    fetch(API_URL + '/api/classes/'+id, {
+    fetch(API_URL + '/classes/'+id, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -71,10 +71,11 @@ export const updateClass = (nom, id) => {
 export const deleteClass = (id) => {
 
   return (dispatch, getState) => { 
-    fetch(API_URL + '/api/classes/'+id, {
+    fetch(API_URL + '/classes/'+id, {
       method: 'DELETE',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+          'Authorization'  : 'Bearer ' + localStorage.getItem('token')
       }
     })
     .then(response => response)
@@ -90,10 +91,11 @@ export const deleteClass = (id) => {
 // Get all classes
 export const getClass = () => {
   return (dispatch, getState) => { 
-    fetch(API_URL + '/api/classes', {
+    fetch(API_URL + '/classes', {
       method: 'GET',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization'  : 'Bearer ' + localStorage.getItem('token')
       }
     })
     .then(response => response.json())

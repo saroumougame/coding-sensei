@@ -71,7 +71,8 @@ class ContactsList extends React.Component {
         <Avatar alt={contact.name} src={`${process.env.PUBLIC_URL}/${contact.photo}`} />
     */}
         <ListItemText
-          primary={contact['@id']}
+          primary={contact['email']}
+          secondary={contact['lastName']}
           classes={{
             primary: contact === selectedContact ? classes['portal-contacts-list__item__text--active'] : '',
             secondary: classNames(
@@ -140,7 +141,9 @@ console.log(contact);
 
 
   getCustomClassList() {
+
     if(this.state.updatedList == true){
+
       return this.props.data.classUpdatedList;
     }
     return this.props.data.elevesList;

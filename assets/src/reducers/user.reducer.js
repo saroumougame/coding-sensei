@@ -1,5 +1,6 @@
 import {
-  LOGIN,
+  LOGIN,LOGIN_FAIL,
+  EXPIRED
 } from '../actions/auth.actions';
 import {
   GET_CONNEXION_INFO, DECONNEXION
@@ -9,28 +10,34 @@ import history from '../history';
 
 const defaultState = {
   logged:               false,
-  UserRole:             'ROLE_USER'
+  UserRole:             ['ROLE_USER'],
+  User: null
 };
 
 const userReducer = (state = defaultState, action) => {
   switch (action.type) {
     case LOGIN:
-
-      if(action.payload == true){
-
-        //history.push('/account');
-
         return {
           ...state,
-          logged: 1
+          logged: 1,
+          UserRole: action.payload.roles,
+          User: action.payload,
         }
-      }else{
+      
+    break;
+    case LOGIN_FAIL: {
         return state;
-      }
-    break; 
+    } 
     case DECONNEXION: {
       localStorage.removeItem('token');
       history.push('/');
+      return {
+          ...state,
+          logged: 0
+        }
+    }
+    case EXPIRED: {
+      localStorage.removeItem('token');
       return {
           ...state,
           logged: 0

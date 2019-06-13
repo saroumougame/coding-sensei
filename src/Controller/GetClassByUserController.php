@@ -31,53 +31,26 @@ use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 class GetClassByUserController extends AbstractController
 {
 
-    public function __invoke(User $data) 
+    /**
+     * @param User $data
+     * @param JWTEncoderInterface $decodeToken
+     * @return JWTEncoderInterface
+     * @throws \Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTDecodeFailureException
+     */
+    public function __invoke(User $data, JWTEncoderInterface $decodeToken)
     {
+        
 
-
-      $mail = new MailService(\swith_mail);
-
-        $statuemail = $mail->notificationMail('tototo', 'sridar.aroumougame@gmail.com');
-
-        $token = $this->get('security.token_storage')->getToken();
-
-//     $decodeToken =  $jwtEncoder->decode($token);
-
-return $statuemail;
-//        $currentToken
+        $token = $this->get('security.token_storage')->getToken()->getCredentials();
+        $userCurent = $decodeToken->decode($token);
+        $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['username' => $userCurent['username']]);
 
 
 
-//$user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['username' => $username]);
-//
-//        dump($user);
-//
-//        $classe = $this->getDoctrine()->getRepository(Classe::class)->findBy(array("teacher" => $data->getId()));
+        $classe = $this->getDoctrine()->getRepository(Classe::class)->findBy(array("teacher" => $user->getId()));
 
-//        return $user;
+        return $classe;
 
-//
-//        if (!$this->container->has('security.token_storage')) {
-//            throw new \LogicException('The Security Bundle is not registered in your application.');
-//        }
-//        if (null === $token = $this->container->get('security.token_storage')->getToken()) {
-//            return;
-//        }
-//        if (!is_object($user = $token->getUser())) {
-//            // e.g. anonymous authentication
-//            return;
-//        }
-//        return $user;
-
-
-//
-//        return new JsonResponse(['user' => $currentToken->getUser()]);
-//        if (is_object($currentToken->getUser())) {
-//            // Do your logic with the current user
-//            return new JsonResponse(['user' => $currentToken->getUser()->getUsername()]);
-//        } else {
-//            return new JsonResponse(['user' => 'Anonymous']);
-//        }
 
     }
 

@@ -26,7 +26,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Chip from '@material-ui/core/Chip';
+
+import { updateFormTitle, updateFormDesc, updateFormIn, updateFormOut, createExerciceAction } from '../../../actions/exercice.actions';
+
 const ListExo = ['Exercice 1 - constante PHP', 'Exercice 2 - variables PHP'];
+
 
 const MenuProps = {
   PaperProps: {
@@ -48,28 +52,35 @@ class AddExerciceForm extends React.Component {
 	    }
 	 } 
 
+   formSubmit() {
+    this.props.createExerciceAction();
+   }
+
 	 render() {
 
 	 	return(
 	 		 <div className={scss['ListeExercices']} >  
           <form className={[ scss['form_add_proff_form']]} noValidate autoComplete="off">
+          <div  className={[ scss['form_header']]}>
             <TextField
               id="titre"
-              value={this.state.titre}
-              onChange={(e) => {this.setState({titre: e.target.value});}}
+              value={this.props.data.FormDataTitle}
+              onChange={(e) => {this.props.updateFormTitle(e.target.value)}}
               label="titre"
-             
               margin="normal"
             />
             <TextField
-              id="description"
-              value={this.state.description}
-              onChange={(e) => {this.setState({description: e.target.value});}}
+              id="Énoncé"
+              value={this.props.data.FormDataDesc}
+              onChange={(e) => {this.props.updateFormDesc(e.target.value)}}
               label="description"
-              
+              multiline={true}
+              variant="outlined"
+              rows={5}
+              rowsMax={20}
               margin="normal"
             />
-
+          </div>
 {/*
             <TextField
               id="fonction"
@@ -81,14 +92,13 @@ class AddExerciceForm extends React.Component {
               margin="normal"
             />
 */}
-
+          <div className={[ scss['form_header']]}>
             <TextField
               id="entree"
               label="param d'entré"
               type="text"
-              value={this.state.entree}
-              onChange={(e) => {this.setState({entree: e.target.value});}}
-              
+              value={this.props.data.FormDataIn}
+              onChange={(e) => {this.props.updateFormIn(e.target.value)}}
               margin="normal"
             />
 
@@ -96,12 +106,11 @@ class AddExerciceForm extends React.Component {
               id="sortie"
               label="param de sortie attendue"
               type="text"
-              value={this.state.sortie}
-              onChange={(e) => {this.setState({sortie: e.target.value});}}
-              
+              value={this.props.data.FormDataOut}
+              onChange={(e) => {this.props.updateFormOut(e.target.value)}}
               margin="normal"
             />
-
+          </div>
           </form>
 
             <Button className={[scss['vld']]} variant="contained" color="primary"  onClick={() => {this.formSubmit()}}>
@@ -116,8 +125,12 @@ function mapStateToProps(state) {
   return {
     data: {
       FormDataUpdateClassNom:           state.classData.FormDataUpdateClassNom,  
+      FormDataTitle:                    state.exerciceData.add_form_titre,  
+      FormDataDesc:                     state.exerciceData.add_form_description,
+      FormDataIn:                       state.exerciceData.add_form_param_in,
+      FormDataOut:                      state.exerciceData.add_form_param_out,
     }
   };
 }
 export default 
-  connect(mapStateToProps)(AddExerciceForm);
+  connect(mapStateToProps,  {updateFormTitle, updateFormDesc, updateFormIn, updateFormOut, createExerciceAction})(AddExerciceForm);

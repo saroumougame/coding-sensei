@@ -13,6 +13,7 @@ import FontAwesome from 'react-fontawesome';
 import scss from './ListeCours.module.scss';
 import TextField from '@material-ui/core/TextField';
 
+import { getExercicesEleve, setCurrentExoUser } from '../../../actions/exercice.actions';
 
 
 class ListeCours extends React.Component {
@@ -23,16 +24,38 @@ class ListeCours extends React.Component {
     	this.state = {
     		eleve: null
 	    }
+
+
 	 }
 
+   showExercice(i) {
+     //console.log(i);
+     this.props.setCurrentExoUser(i);
+   }
+
+   getListeExercices() {
+      //if(this.props.data.classeUser != null) {
+      //}
+        //this.props.getExercicesEleve();
+       return this.props.data.liste_exercice_user.map((i) => {
+          return (
+            <div className={scss['un-cour']} onClick={() => this.showExercice(i)} >
+               {i.name}
+               <div>
+               {i.description}
+               </div>
+            </div>
+            );
+        });
+   }
 
 	 render() {
 	 	return(
+      <div>
 	 		 <div className={scss['liste-exercice']}> 
-          <div className={scss['un-cour']}>
-               Formation PHP Niveau 1
-          </div>
+        {this.getListeExercices()}
 	 		 </div>
+      </div>
 	 	);
 	 }
 }
@@ -41,8 +64,10 @@ function mapStateToProps(state) {
   return {
     data: {
       FormDataUpdateClassNom:           state.classData.FormDataUpdateClassNom,  
+      classeUser:                       state.classData.classeUser,
+      liste_exercice_user:              state.exerciceData.liste_exercice_user,
     }
   };
 }
 export default 
-  connect(mapStateToProps)(ListeCours);
+  connect(mapStateToProps, {getExercicesEleve, setCurrentExoUser})(ListeCours);

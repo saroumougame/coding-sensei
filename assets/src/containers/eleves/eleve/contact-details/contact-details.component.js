@@ -37,7 +37,7 @@ class ContactDetails extends React.Component {
       else {
         return (
             <div onClick={() => { this.setState({composantClicker: null})}}>
-            exercice {this.state.composantClicker};
+              exercice {this.state.composantClicker};
             </div>
 
           );

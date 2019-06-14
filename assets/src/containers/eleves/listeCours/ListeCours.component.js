@@ -31,6 +31,7 @@ class ListeCours extends React.Component {
    showExercice(i) {
      //console.log(i);
      this.props.setCurrentExoUser(i);
+
    }
 
    getListeExercices() {

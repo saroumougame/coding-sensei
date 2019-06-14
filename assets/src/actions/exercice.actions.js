@@ -17,10 +17,15 @@ export  const SET_CURRENT_EXO_USER     = 'SET_CURRENT_EXO_USER';
 export  const UPDATE_TEXT_EXERCICE      = 'UPDATE_TEXT_EXERCICE';
 export  const SUBMIT_MODAL              = "SUBMIT_MODAL"; 
 export  const MODAL_FAIL                = "MODAL_FAIL";
+export  const DISMISS_MODAL                = "DISMISS_MODAL";
 
 export const addProffAction = form => ({
   type: ADD_PROFF_ACTION,
   payload: form
+});
+
+export const dismissModal = () => ({
+  type: DISMISS_MODAL,
 });
 
 export const showformaction = () => ({

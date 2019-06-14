@@ -1,6 +1,6 @@
 import { UPDATE_FORM_TITLE, UPDATE_FORM_DESC, UPDATE_FORM_PARAM_IN, UPDATE_FORM_PARAM_OUT, 
   GET_LISTE_EXERCICES, GET_LISTE_EXERCICES_USER, SET_CURRENT_EXO_USER, UPDATE_TEXT_EXERCICE,
-SUBMIT_MODAL, MODAL_FAIL} from '../actions/exercice.actions';
+SUBMIT_MODAL, MODAL_FAIL, DISMISS_MODAL} from '../actions/exercice.actions';
 
 export const UPDATE_ELEVE_LIST      = "UPDATE_ELEVE_LIST";
 
@@ -81,6 +81,14 @@ const exerciceReducer = (state = defaultState, action) => {
           'exerciceResultat': false,
         }
         break;
+      case DISMISS_MODAL:
+         return {
+          ...state,
+          'exerciceModal': false,
+          'exerciceResultat': null
+        }
+        break;
+      break;
     default:
       return state;
   }

@@ -14,7 +14,7 @@ import scss from './ExerciceEditeur.module.scss';
 import TextField from '@material-ui/core/TextField';
 import Modal from '@material-ui/core/Modal';
 import Loader from 'react-loader-spinner'
-import {updateExerciceAction, submitModalAction, submitExerciceAction} from "../../../../actions/exercice.actions";
+import {updateExerciceAction, submitModalAction, submitExerciceAction, dismissModal} from "../../../../actions/exercice.actions";
 
 class ExerciceEditeur extends React.Component {
 
@@ -42,31 +42,61 @@ class ExerciceEditeur extends React.Component {
       console.log(monTextArea);
    }
 
+   getLoader() {
+
+    if(this.props.data.exerciceResultat == null){
+      return (
+            <Loader 
+                   type="Triangle"
+                   color="#00BFFF"
+                   height="100" 
+                   width="100"
+                />
+        );
+    }
+   }
+
+   getDismissButton() {
+    if(this.props.data.exerciceResultat != null){
+      return (
+          <Button variant="contained" color="default" onClick={() => {this.props.dismissModal()}}>
+              continuer
+          </Button>
+        );
+     }
+   }
+
+
    submitTextAreat() {
     this.props.submitModalAction();
     this.props.submitExerciceAction(this.props.data.exerciceTexte);
    }
 
+  getModalText () {
+     if(this.props.data.exerciceResultat == null){
+      return ' Nous compilons votre code.. veuillez patienter...';
+     }else if(this.props.data.exerciceResultat == false) {
+        return 'Rater... veuillez réessayer';
+     }else if(this.props.data.exerciceResultat == true) {
+        return 'Bravo, vous avez réussit';
+     }
+  }
    getModalValidation () {
     return (
       <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
           open={this.props.data.exerciceModal}
-          //onClose={this.handleClose}
         >
           <div  className={scss['modal-paper']}>
+
               <Typography variant="h6" id="modal-title">
-                 Nous compilons votre code.. veuillez patienter...
+                 {this.getModalText()}
               </Typography>
 
                 {this.getLoader()}
-                    <Loader 
-                   type="Triangle"
-                   color="#00BFFF"
-                   height="100" 
-                   width="100"
-                />
+                {this.getDismissButton()}
+
 
           {/*
             <SimpleModalWrapped />
@@ -112,4 +142,4 @@ function mapStateToProps(state) {
   };
 }
 export default compose(withWidth(), withStyles( { withTheme: true }),
-  connect(mapStateToProps,  {updateExerciceAction, submitModalAction, submitExerciceAction}))(ExerciceEditeur);
+  connect(mapStateToProps,  {updateExerciceAction, submitModalAction, submitExerciceAction, dismissModal}))(ExerciceEditeur);

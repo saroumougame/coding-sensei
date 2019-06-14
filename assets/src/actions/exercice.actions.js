@@ -13,6 +13,7 @@ export  const UPDATE_FORM_PARAM_IN     = 'UPDATE_FORM_PARAM_IN';
 export  const UPDATE_FORM_PARAM_OUT    = 'UPDATE_FORM_PARAM_OUT';
 export  const GET_LISTE_EXERCICES      = 'GET_LISTE_EXERCICES'; 
 export  const GET_LISTE_EXERCICES_USER = 'GET_LISTE_EXERCICES_USER';
+export  const SET_CURRENT_EXO_USER     = 'SET_CURRENT_EXO_USER';
 
 export const addProffAction = form => ({
   type: ADD_PROFF_ACTION,
@@ -65,6 +66,12 @@ export const listeExercice = jsonExercices => ({
 })
 
 
+export const setCurrentExoUser = exercice => ({
+  type: SET_CURRENT_EXO_USER,
+  payload: exercice
+})
+
+
 export const listeExerciceAction = () => {
 
   return (dispatch, getState) => { 
@@ -93,9 +100,8 @@ export const listeExerciceAction = () => {
   }
 }
 
-export const getExercicesEleve = jsonClass => {
+export const getExercicesEleve = () => {
 
-  console.log(jsonClass);
   return (dispatch, getState) => { 
 
     const state = getState();

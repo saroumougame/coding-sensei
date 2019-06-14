@@ -165,7 +165,7 @@ export const getUserByToken = () => {
       }else {
 
         if(json.roles.includes('ROLE_STUDENT')){
-          history.push('/home');
+          history.push('/classes');
         }else{
           history.push('/professeur/classes');
         }

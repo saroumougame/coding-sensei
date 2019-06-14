@@ -125,6 +125,8 @@ export const getClassUser = () => {
    // Une fois fini, on affiche toute les classes
       //dispatch(getExercicesEleve(json));
       dispatch(GetClassUser(json));
+
+      dispatch(getExercicesEleve(json));
     })
     .catch((e) => dispatch());
   }

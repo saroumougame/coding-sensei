@@ -38,7 +38,6 @@ class Contacts extends React.Component {
     var contactsList = this.props.data.elevesList;
     return (
       <div className={scss['contacts-wrapper']}>
-
         <ContactsList
           selectedContact={this.props.data.SelectedEleve}
           list={contactsList}

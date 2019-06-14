@@ -24,6 +24,33 @@ class ContactDetails extends React.Component {
       }
     }
 
+
+ getExoByEleve(){
+
+      var token = localStorage.getItem('token');
+    
+      return (dispatch, getState) => { 
+        fetch(API_URL + '/currentuser', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization' : 'Bearer '+token
+          }
+        })
+        .then(response => response.json())
+        .then(json => {
+    
+            if(json.roles.includes('ROLE_TEACHER')) {
+              history.push('/account');
+            }else if(json.roles.includes('ROLE_STUDENT')) {
+              history.push('/home');
+            }
+          dispatch(loginAction(json));
+        })
+        .catch((e) => dispatch());
+      }
+    }
+
     getListeExoOuExo() {
 
       if(this.state.composantClicker == null){
@@ -45,14 +72,20 @@ class ContactDetails extends React.Component {
     }
 
   render() {
-    console.log(this.props.data.exerciceTexte);
+    var ElevesInfo = this.props.data.SelectedEleve;
+    console.log(ElevesInfo);
           return (
             <div className={classNames(scss['portal-contact-details'] )}>
               <div
-          
               >
-              test
 
+                  <div className={scss['containerdiv']}>
+                   <Typography className={scss['exercice-paper-title']} variant="headline" component="h3">
+                    Eleve -   {ElevesInfo.firstName} ,  {ElevesInfo.lastName} <br />
+                    {ElevesInfo.email}
+                  </Typography>        
+          </div>
+ 
               {this.getListeExoOuExo()}
 
 
@@ -68,6 +101,7 @@ function mapStateToProps(state) {
   return {
     data: {
       exerciceTexte:                    state.exerciceData.liste_exercice,
+      SelectedEleve:       state.eleveData.SelectedEleve
     }
   };
 }

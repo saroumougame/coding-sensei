@@ -45,7 +45,7 @@ class Exercice extends Component  {
 
   SelectPaperContent = () => {
     if(!this.props.data.expanded) {
-      return (<TableauExercice />);
+      //return (<TableauExercice />);
     }
     return (<ExerciceAddProffForm  />);
   };

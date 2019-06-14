@@ -42,13 +42,12 @@ class listeEcercice extends React.Component {
 
    getListItem() {
       let count = 0;
-      console.log(this.props.data.liste_exerciceData);
       let liste = this.props.data.liste_exerciceData;
       return liste.map((i) => {
         count++;
         if(count > this.state.pagination){  
         return (
-            <ListItem button onClick={this.props.customClick}>
+            <ListItem key={count} button onClick={this.props.customClick}>
               <ListItemIcon>
                 <StarIcon />
               </ListItemIcon>

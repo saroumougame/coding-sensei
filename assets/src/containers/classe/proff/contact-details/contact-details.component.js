@@ -62,21 +62,21 @@ class ContactDetails extends React.Component {
 
   return (
     <div className={classNames(scss['portal-contact-details'] )}>
-      <div
+      {/*<div
         className={classNames(
           scss['portal-contact-details__header'],
 
         )}
       >
       <div className={classNames(scss['class-detail-header'])}>
-                 <Paper className={scss['class-name-paper']} elevation={4}>
-                              <Typography variant="headline" component="h3">
-                                {selectedContact.name}
-                              </Typography>
-                  </Paper>
-<Paper className={scss['class-name-paper-central']} elevation={4}>
-                            <Typography variant="headline" component="h3">
-                                Information
+        <Paper className={scss['class-name-paper']} elevation={4}>
+          <Typography variant="headline" component="h3">
+            {selectedContact.name}
+          </Typography>
+        </Paper>
+        <Paper className={scss['class-name-paper-central']} elevation={4}>
+          <Typography variant="headline" component="h3">
+            Information
                               </Typography>
 
                <form  noValidate autoComplete="off">
@@ -100,7 +100,7 @@ class ContactDetails extends React.Component {
       </div>
 
 
-      </div>
+      </div>*/}
       <div
         className={classNames(
           scss['portal-contact-details__content'],

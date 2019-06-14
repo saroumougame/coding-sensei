@@ -1,18 +1,21 @@
 .portal-contacts-no-contacts {
-  height: 80vh;
+  height: 100vh;
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: flex-start;
-  justify-content: space-around;
-  background-color: #fff;
-
+  justify-content: flex-start;
   h2 {
     font-size: .95em;
     margin-top: 12px;
   }
 }
-
+.portal-contacts-no-contacts-classe{
+  width: 100%;
+}
+.portal-contacts-no-contacts-exercices{
+  width: 100%;
+}
 .portal-contacts-no-contacts:before {
   display: block;
   content: '';
@@ -142,4 +145,7 @@
 
 .btn-ajouter-exo {
   margin-left: 10px;
+}
+.containerdiv{
+  width: 100%;
 }

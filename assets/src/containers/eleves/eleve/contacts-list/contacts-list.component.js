@@ -156,7 +156,7 @@ class ContactsList extends React.Component {
     } = this.props;
 
     return (
-      <div className={classNames(classes.list, 'portal-hide-scrollbars')}>
+      <div className={classNames(classes.list, 'portal-hide-scrollbars', 'list-white')}>
       <div className={classNames(scss['center'])}>
         <CreateEleveModal />
       </div>

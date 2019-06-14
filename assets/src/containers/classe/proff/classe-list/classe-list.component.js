@@ -193,9 +193,9 @@ class ClassesList extends React.Component {
       width,
     } = this.props;
     return (
-      <div className={classNames(classes.list, 'portal-hide-scrollbars')}>
+      <div className={classNames(classes.list, 'portal-hide-scrollbars', 'list-white', 'z-up')}>
         {isWidthUp('sm', width) ? this.createSearchTextField() : ''}
-          <List component="nav" className={classes.listWrapper}>
+          <List component="nav" className={classNames(classes.listWrapper)}>
               {this.getCustomClassList().map((contact) => {
                   return isWidthUp('sm', width) ?
                       this.createDesktopListItem(contact) :

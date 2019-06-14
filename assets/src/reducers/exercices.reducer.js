@@ -1,5 +1,6 @@
 import { UPDATE_FORM_TITLE, UPDATE_FORM_DESC, UPDATE_FORM_PARAM_IN, UPDATE_FORM_PARAM_OUT, 
-  GET_LISTE_EXERCICES, GET_LISTE_EXERCICES_USER, SET_CURRENT_EXO_USER} from '../actions/exercice.actions';
+  GET_LISTE_EXERCICES, GET_LISTE_EXERCICES_USER, SET_CURRENT_EXO_USER, UPDATE_TEXT_EXERCICE,
+SUBMIT_MODAL, MODAL_FAIL} from '../actions/exercice.actions';
 
 export const UPDATE_ELEVE_LIST      = "UPDATE_ELEVE_LIST";
 
@@ -12,6 +13,9 @@ const defaultState = {
         'liste_exercice'        : [],
         'liste_exercice_user'   : [],
         'current_Exercice_User' : null,
+        'exerciceTexte'         : '',
+        'exerciceModal'         : false,
+        'exerciceResultat'     : null,
 };
 
 const exerciceReducer = (state = defaultState, action) => {
@@ -59,6 +63,24 @@ const exerciceReducer = (state = defaultState, action) => {
           current_Exercice_User: action.payload,
         }
      break;
+     case UPDATE_TEXT_EXERCICE:
+         return {
+          ...state,
+          exerciceTexte: action.payload,
+        }
+     break;
+     case SUBMIT_MODAL:
+     return {
+          ...state,
+          exerciceModal: true,
+        }
+    break;
+    case MODAL_FAIL: 
+         return {
+          ...state,
+          'exerciceResultat': false,
+        }
+        break;
     default:
       return state;
   }

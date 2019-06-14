@@ -14,6 +14,9 @@ export  const UPDATE_FORM_PARAM_OUT    = 'UPDATE_FORM_PARAM_OUT';
 export  const GET_LISTE_EXERCICES      = 'GET_LISTE_EXERCICES'; 
 export  const GET_LISTE_EXERCICES_USER = 'GET_LISTE_EXERCICES_USER';
 export  const SET_CURRENT_EXO_USER     = 'SET_CURRENT_EXO_USER';
+export  const UPDATE_TEXT_EXERCICE      = 'UPDATE_TEXT_EXERCICE';
+export  const SUBMIT_MODAL              = "SUBMIT_MODAL"; 
+export  const MODAL_FAIL                = "MODAL_FAIL";
 
 export const addProffAction = form => ({
   type: ADD_PROFF_ACTION,
@@ -63,13 +66,64 @@ export const updateFormOut = inOut => ({
 export const listeExercice = jsonExercices => ({
   type: GET_LISTE_EXERCICES,
   payload: jsonExercices
-})
+});
 
 
 export const setCurrentExoUser = exercice => ({
   type: SET_CURRENT_EXO_USER,
   payload: exercice
-})
+});
+
+export const updateExerciceAction = exerciceText => ({
+  type: UPDATE_TEXT_EXERCICE,
+  payload: exerciceText
+});
+
+
+export const submitModalAction = () => ({
+  type: SUBMIT_MODAL
+});
+export const modalFailExercice = () => ({
+  type: MODAL_FAIL
+});
+
+
+
+export const submitExerciceAction = (ExerciceContent) => {
+  return (dispatch, getState) => { 
+
+    const state = getState();
+    let current_Exercice_User = state.exerciceData.current_Exercice_User['@id'];
+
+    
+    var details =  {
+      "awnserCode": ExerciceContent,
+      "exercice": current_Exercice_User
+    }
+    var formBody = JSON.stringify(details);
+
+    fetch(API_URL + '/reponses', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization'  : 'Bearer ' + localStorage.getItem('token')
+      },
+      body: formBody
+    })
+    .then(response => response.json())
+    .then(json => {
+      console.log(json);
+      if(json['@type'] == "hydra:Error"){
+        console.log('error');
+        dispatch(modalFailExercice())
+      }else {
+        console.log('success');
+      }
+          //dispatch(listeExercice(json["hydra:member"]));
+    })
+    .catch((e) => dispatch());
+  }
+}
 
 
 export const listeExerciceAction = () => {

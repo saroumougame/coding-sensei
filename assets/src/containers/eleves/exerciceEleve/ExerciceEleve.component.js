@@ -106,7 +106,8 @@ function mapStateToProps(state) {
   return {
     data: {
       FormDataUpdateClassNom:           state.classData.FormDataUpdateClassNom, 
-      current_Exercice_User:            state.exerciceData.current_Exercice_User 
+      current_Exercice_User:            state.exerciceData.current_Exercice_User ,
+      exerciceTexte:                    state.exerciceData.exerciceTexte,
     }
   };
 }

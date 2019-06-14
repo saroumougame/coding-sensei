@@ -62,7 +62,7 @@ class ContactDetails extends React.Component {
 
   return (
     <div className={classNames(scss['portal-contact-details'] )}>
-      <div
+      {/*<div
         className={classNames(
           scss['portal-contact-details__header'],
 
@@ -98,7 +98,7 @@ class ContactDetails extends React.Component {
       </div>
 
 
-      </div>
+      </div>*/}
       <div
         className={classNames(
           scss['portal-contact-details__content'],

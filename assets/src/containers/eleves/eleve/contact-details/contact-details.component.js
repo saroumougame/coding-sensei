@@ -34,9 +34,6 @@ const ContactDetails = (props) => {
           classes.portalContactDetailsContent
         )}
       >
-
-       
-    
       </div>
     </div>
   );

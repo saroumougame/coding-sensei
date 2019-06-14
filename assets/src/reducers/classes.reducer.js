@@ -5,7 +5,8 @@ import {
   UPDATE_CLASS_LIST,
   GET_ALL_CLASS__BY_PROFF,
   UPDATE_CLASS_NOM,
-  SETCURRENTCLASS
+  SETCURRENTCLASS,
+  UPDATE_CLASS_USER
 } from '../actions/classes.actions';
 
 
@@ -16,6 +17,7 @@ const defaultState = {
     CreateClassNom: '',
     CreateClassPromotion: '',
     FormDataUpdateClassNom: '',
+    classeUser: null
 };
 
 const classesReducer = (state = defaultState, action) => {
@@ -44,6 +46,13 @@ const classesReducer = (state = defaultState, action) => {
       return {
         ...state,
         currentClasse: action.payload
+      }
+    break;
+    case UPDATE_CLASS_USER : 
+    console.log(action.payload);
+      return {
+        ...state,
+        classeUser: action.payload
       }
     break;
     default:

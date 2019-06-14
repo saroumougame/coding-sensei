@@ -163,7 +163,12 @@ export const getUserByToken = () => {
       history.push('/login?session_expired');
        dispatch(expiredAction());
       }else {
-        history.push('/account');
+
+        if(json.roles.includes('ROLE_STUDENT')){
+          history.push('/home');
+        }else{
+          history.push('/professeur/classes');
+        }
         dispatch(loginAction(json));
       }
     })

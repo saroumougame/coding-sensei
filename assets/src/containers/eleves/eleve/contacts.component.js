@@ -35,10 +35,10 @@ class Contacts extends React.Component {
   }
 
   render() {
-
     var contactsList = this.props.data.elevesList;
     return (
       <div className={scss['contacts-wrapper']}>
+
         <ContactsList
           selectedContact={this.props.data.SelectedEleve}
           list={contactsList}
@@ -53,7 +53,6 @@ class Contacts extends React.Component {
   }
 }
 function mapStateToProps(state) {
-  console.log(state.eleveData);
   return {
     data: {
       classList:           state.classData.classes,  

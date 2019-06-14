@@ -13,6 +13,7 @@ import FontAwesome from 'react-fontawesome';
 import scss from './ListeCours.module.scss';
 import TextField from '@material-ui/core/TextField';
 
+import { getExercicesEleve } from '../../../actions/exercice.actions';
 
 
 class ListeCours extends React.Component {
@@ -41,8 +42,9 @@ function mapStateToProps(state) {
   return {
     data: {
       FormDataUpdateClassNom:           state.classData.FormDataUpdateClassNom,  
+      classeUser:                       state.classData.classeUser,
     }
   };
 }
 export default 
-  connect(mapStateToProps)(ListeCours);
+  connect(mapStateToProps, {getExercicesEleve})(ListeCours);

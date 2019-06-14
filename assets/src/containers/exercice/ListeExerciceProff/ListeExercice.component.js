@@ -20,6 +20,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import StarIcon from '@material-ui/icons/Star';
 
+import { listeExerciceAction } from '../../../actions/exercice.actions';
+
 
 const ListExo = ['Exercice 1 - constante PHP', 'Exercice 2 - variables PHP'];
 
@@ -32,12 +34,17 @@ class listeEcercice extends React.Component {
     		eleve: null,
         pagination: 0,
 	    }
+      //coucou
+      this.props.listeExerciceAction();
 	 }
+
 
 
    getListItem() {
       let count = 0;
-      return ListExo.map((i) => {
+      console.log(this.props.data.liste_exerciceData);
+      let liste = this.props.data.liste_exerciceData;
+      return liste.map((i) => {
         count++;
         if(count > this.state.pagination){  
         return (
@@ -45,7 +52,7 @@ class listeEcercice extends React.Component {
               <ListItemIcon>
                 <StarIcon />
               </ListItemIcon>
-              <ListItemText inset primary={i} />
+              <ListItemText inset primary={i.name}  secondary={i.description} />
             </ListItem>
           );
         }else {
@@ -56,7 +63,7 @@ class listeEcercice extends React.Component {
 
 	 render() {
 
-    console.log();
+    console.log(this.props.data.liste_exerciceData);
 	 	return(
 	 		 <div className={scss['ListeExercices']} >  
          <List component="nav">
@@ -71,8 +78,9 @@ function mapStateToProps(state) {
   return {
     data: {
       FormDataUpdateClassNom:           state.classData.FormDataUpdateClassNom,  
+      liste_exerciceData:               state.exerciceData.liste_exercice
     }
   };
 }
 export default 
-  connect(mapStateToProps)(listeEcercice);
+  connect(mapStateToProps, {listeExerciceAction})(listeEcercice);

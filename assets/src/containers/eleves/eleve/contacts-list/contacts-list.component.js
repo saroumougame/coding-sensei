@@ -99,7 +99,7 @@ class ContactsList extends React.Component {
       selectedContact,
       onSelect
     } = this.props;
-console.log(contact);
+    //console.log(contact);
     return (
       <ListItem
         title={contact.name}

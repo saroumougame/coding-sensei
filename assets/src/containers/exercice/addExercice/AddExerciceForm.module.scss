@@ -1,7 +1,7 @@
 .form_add_proff_form {
 	display: flex;
-	justify-content: space-around;
-	flex-wrap: wrap;
+	justify-content: flex-start;
+	flex-wrap: no-wrap;
 	flex-direction : column;
 }
 

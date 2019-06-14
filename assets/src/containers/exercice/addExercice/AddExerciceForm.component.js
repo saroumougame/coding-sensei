@@ -61,7 +61,6 @@ class AddExerciceForm extends React.Component {
 	 	return(
 	 		 <div className={scss['ListeExercices']} >  
           <form className={[ scss['form_add_proff_form']]} noValidate autoComplete="off">
-          <div  className={[ scss['form_header']]}>
             <TextField
               id="titre"
               value={this.props.data.FormDataTitle}
@@ -80,19 +79,7 @@ class AddExerciceForm extends React.Component {
               rowsMax={20}
               margin="normal"
             />
-          </div>
-{/*
-            <TextField
-              id="fonction"
-              label="nom de la fonction a declancher"
-              type="text"
-              value={this.state.fonction}
-              onChange={(e) => {this.setState({fonction: e.target.value});}}
-             
-              margin="normal"
-            />
-*/}
-          <div className={[ scss['form_header']]}>
+
             <TextField
               id="entree"
               label="param d'entré"
@@ -110,7 +97,6 @@ class AddExerciceForm extends React.Component {
               onChange={(e) => {this.props.updateFormOut(e.target.value)}}
               margin="normal"
             />
-          </div>
           </form>
 
             <Button className={[scss['vld']]} variant="contained" color="primary"  onClick={() => {this.formSubmit()}}>

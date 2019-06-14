@@ -37,9 +37,10 @@ class GetClassByUserController extends AbstractController
      * @return JWTEncoderInterface
      * @throws \Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTDecodeFailureException
      */
-    public function __invoke(User $data, JWTEncoderInterface $decodeToken)
+    public function __invoke(User $data, JWTEncoderInterface $decodeToken, MailService $mailService)
     {
-        
+
+        $mailService->notificationMail('ton message', 'sridar.aroumougame@gmail.com');
 
         $token = $this->get('security.token_storage')->getToken()->getCredentials();
         $userCurent = $decodeToken->decode($token);

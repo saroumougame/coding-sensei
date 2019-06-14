@@ -11,7 +11,7 @@
 }
 
 .class-detail-header {
- background-color: #fff;
+ //background-color: #fff;
 
   width: 95% !important;
   min-height: 5vh;
@@ -21,6 +21,7 @@
 }
 
 .portal-contact-details__header {
+  background-color: #eaefff; 
   // Add a background image or use the default animation
   min-height: 15vh;
   position: relative;
@@ -29,7 +30,7 @@
   z-index: 1;
 
   &:before, &:after {
-    content: "";
+   // content: "";
    // position: absolute;
     width: 160px;
     height: 160px;
@@ -147,10 +148,12 @@
 }
 
 .class-name-paper {
+  background-color: #eaefff; 
   padding: 30px;
 }
 
 .class-name-paper-central {
+  
   @extend .class-name-paper;
-  margin-top: 15px;
+  margin: 15px;
 }

@@ -136,15 +136,40 @@ export const createExerciceAction = () => {
     const idClass =  state.classData.currentClasse['@id'];
 /*
   */
+
+    var ini = 0;
+    var in_res = '{';
+    while (state.exerciceData.add_form_param_in["in_" + ini] != null){
+      if (state.exerciceData.add_form_param_in["in_" + ini] == 1){
+        in_res += `${state.exerciceData.add_form_param_in["in_name_" + ini]} : ${state.exerciceData.add_form_param_in["in_value_" + ini]}`
+      }
+//      if (state.exerciceData.add_form_param_in["in_" + ini] == 2){}
+      ini++;
+    }
+    in_res += '}';
+    ini = 0;
+    var out_res = '{';
+    while (state.exerciceData.add_form_param_in["out_" + ini] != null){
+      if (state.exerciceData.add_form_param_in["out_" + ini] == 2){
+        out_res += `${state.exerciceData.add_form_param_in["out_name_" + ini]} : ${state.exerciceData.add_form_param_in["out_value_" + ini]}`
+      }
+      if (state.exerciceData.add_form_param_in["out_" + ini] == 1){
+        out_res += `${state.exerciceData.add_form_param_in["out_name_" + ini]} : ""`
+
+      }
+
+
+      ini++;
+    }
+    out_res += '}'
     var details = {
     'name': 		 state.exerciceData.add_form_titre,
     'description':   state.exerciceData.add_form_description,
-    'in':        	state.exerciceData.add_form_param_in,
-    'out':     	 	state.exerciceData.add_form_param_out,
+    'in':        	in_res,
+    'out':     	 	out_res,
     'classe':        idClass,
     'langagueSpecs' : "php"
   }
-
   var formBody = JSON.stringify(details);
 
     fetch(API_URL + '/exercices', {

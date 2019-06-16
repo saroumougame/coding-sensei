@@ -119,7 +119,6 @@ export const submitExerciceAction = (ExerciceContent) => {
     .then(json => {
       console.log(json);
       if(json['@type'] == "hydra:Error"){
-        console.log('error');
         dispatch(modalFailExercice())
       }else {
         console.log('success');

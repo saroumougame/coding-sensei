@@ -13,7 +13,8 @@ import FontAwesome from 'react-fontawesome';
 import scss from './ExerciceEditeur.module.scss';
 import TextField from '@material-ui/core/TextField';
 import Modal from '@material-ui/core/Modal';
-import Loader from 'react-loader-spinner'
+import Loader from 'react-loader-spinner';
+import MonacoEditor from 'react-monaco-editor';
 import {updateExerciceAction, submitModalAction, submitExerciceAction, dismissModal} from "../../../../actions/exercice.actions";
 
 class ExerciceEditeur extends React.Component {
@@ -22,7 +23,8 @@ class ExerciceEditeur extends React.Component {
     	super(props);
 
     	this.state = {
-    		eleve: null
+    		eleve: null,
+        code: '// type your code...'
 	    }
 
 
@@ -31,7 +33,8 @@ class ExerciceEditeur extends React.Component {
 	 }
 
    componentDidMount() {
-          let monTextArea = document.getElementById('text-area');
+    /*
+        let monTextArea = document.getElementById('text-area');
         monTextArea.addEventListener('keydown', (e) => {
         console.log(e.key);
         if(e.key == "Tab") {
@@ -39,7 +42,7 @@ class ExerciceEditeur extends React.Component {
           this.props.updateExerciceAction(this.props.data.exerciceTexte+ '  ');
         }
       });
-      console.log(monTextArea);
+      */
    }
 
    getLoader() {
@@ -106,22 +109,39 @@ class ExerciceEditeur extends React.Component {
       );
    }
 
+  editorDidMount(editor, monaco) {
+    //console.log('editorDidMount', editor);
+    editor.focus();
+  }
+  onChange(newValue, e) {
+    console.log('onChange', newValue, e);
+  }
+
+
 	 render() {
+     const code = this.state.code;
+    const options = {
+      selectOnLineNumbers: false,
+      minimap: {
+        enabled: false
+      }
+    };
+
 	 	return(
 	 		 <div className={scss['home-eleve-main']} >  
        {this.getModalValidation()}
-            <TextField
-              id="text-area"
-              value={this.props.data.exerciceTexte}
-              onChange={(e) => {this.props.updateExerciceAction(e.target.value)}}
-              label="description"
-              multiline={true}
-              variant="outlined"
-              rows={15}
-              rowsMax={20000}
-              margin="normal"
-              className={scss['text-area']}
-            />
+       <div className={scss['editor']}>
+           <MonacoEditor
+            width="100%"
+            height="400"
+            language="php"
+            theme="vs-black"
+            value={this.props.data.exerciceTexte}
+            options={options}
+            onChange={(e) => { this.props.updateExerciceAction(e)}}
+            editorDidMount={this.editorDidMount}
+          />
+        </div>
      <Button variant="outlined"  onClick={this.submitTextAreat.bind(this)} color="primary" >
         Tester mes resultats
       </Button>

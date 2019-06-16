@@ -13,7 +13,7 @@ const defaultState = {
         'liste_exercice'        : [],
         'liste_exercice_user'   : [],
         'current_Exercice_User' : null,
-        'exerciceTexte'         : '',
+        'exerciceTexte'         : '\n',
         'exerciceModal'         : false,
         'exerciceResultat'     : null,
 };

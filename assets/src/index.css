@@ -19,6 +19,12 @@ body {
   -ms-overflow-style: none;
 }
 
+.list-white{
+  background-color: #fff;
+}
+.z-up{
+  z-index: 5;
+}
 .portal-hide-scrollbars::-webkit-scrollbar {
   width: 0;
 }

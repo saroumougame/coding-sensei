@@ -21,7 +21,7 @@ import { withStyles } from '@material-ui/core/styles';
 import themeStyles from './login.theme.style';
 import scss from './login.module.scss';
 import logoImage from '../../../assets/images/portal-logo.png';
-import Loader from 'react-loader-spinner'
+import Loader from 'react-loader-spinner';
 
 import Snackbar from '@material-ui/core/Snackbar';
 
@@ -122,7 +122,7 @@ class LoginForm extends React.Component {
                   </CardContent>
 
                   <CardActions className={scss['login-actions']}>
-                    <Button onClick={this.submitFormLogin} color="default" variant="raised">Login</Button>
+                    <Button onClick={this.submitFormLogin} color="default" variant="contained">Login</Button>
                     <Button> Forgot Password</Button>
                   </CardActions>
                 </Card>
@@ -139,7 +139,7 @@ class LoginForm extends React.Component {
           </CardContent>
           <CardActions className={scss['login-actions']}>
             <NavLink to="/login">
-            <Button color="default" variant="raised">Envoyer un email de recuperation de mot de passe</Button>
+            <Button color="default" variant="contained">Envoyer un email de recuperation de mot de passe</Button>
             </NavLink>
             <Button onClick={() => {this.changePassword();}} >login </Button>
           </CardActions>

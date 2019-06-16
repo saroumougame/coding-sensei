@@ -1,4 +1,5 @@
 import history from '../history';
+import { getExercicesEleve } from './exercice.actions';
 export const ADD_CLASS_BY_PROFF       = 'add class by professeur';
 export const EDIT_CLASS_BY_PROFF      = 'supprile les proff selectionnée';
 export const SUPPRIMER_CLASS_BY_ID    = 'supprime une class ';
@@ -6,6 +7,8 @@ export const GET_ALL_CLASS__BY_PROFF  = 'montre le form ';
 export const UPDATE_CLASS_LIST        = 'modifier l\'ordre de la liste';
 export const UPDATE_CLASS_NOM         = 'modifier le nom de la classe';
 export const SETCURRENTCLASS          = 'SET CURRENT CLASS';
+export const SET_CLASS_STATS          = 'sets stats for teacher';
+export const UPDATE_CLASS_USER        = 'UPDATE_CLASS_USER';
        const API_URL                  = 'http://51.38.38.246:8080';
        const ID_PROFF                 = '/users/1';
 //export const ADD_CLASS_BY_PROFF = 'Ajoute  à la selection';
@@ -101,11 +104,62 @@ export const getClass = () => {
     .then(response => response.json())
     .then(json => {
    // Une fois fini, on affiche toute les classes
+
       dispatch(getClassAction(json["hydra:member"]));
     })
     .catch((e) => dispatch());
   }
 };
+
+export const getClassStats = () => {
+  return (dispatch, getState) => { 
+    fetch(API_URL + '/stats', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization'  : 'Bearer ' + localStorage.getItem('token')
+      }
+    })
+    .then(response => response.json())
+    .then(json => {
+   // Une fois fini, on affiche toute les classes
+    
+      dispatch(getClassStatsAction(json));
+    })
+    .catch((e) => dispatch());
+  }
+};
+
+// Get all classes
+export const getClassUser = () => {
+  return (dispatch, getState) => { 
+    fetch(API_URL + '/user/classe', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+          'Authorization'  : 'Bearer ' + localStorage.getItem('token')
+      }
+    })
+    .then(response => response.json())
+    .then(json => {
+   // Une fois fini, on affiche toute les classes
+      //dispatch(getExercicesEleve(json));
+      dispatch(GetClassUser(json));
+
+      dispatch(getExercicesEleve(json));
+    })
+    .catch((e) => dispatch());
+  }
+};
+
+
+
+export const GetClassUser = (classeUser) => ({
+  type: UPDATE_CLASS_USER,
+  payload: classeUser
+});
+
+
 
 // Le nom est modifier dans le TextField
 export const FormUpdateClassNom = (nom) => ({
@@ -113,6 +167,11 @@ export const FormUpdateClassNom = (nom) => ({
   payload: nom
 });
 
+// Affiche toute les stats d'une classes
+export const getClassStatsAction = arrayStats => ({
+  type: SET_CLASS_STATS,
+  payload: arrayStats
+});
 // Affiche toute les classes
 export const getClassAction = arrayClass => ({
   type: GET_ALL_CLASS__BY_PROFF,

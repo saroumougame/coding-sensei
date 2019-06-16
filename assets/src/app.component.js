@@ -21,11 +21,13 @@ class App extends React.Component {
     constructor(props) {
       super(props);
 
-      var token = localStorage.getItem('token');
+    if(this.props.logged !== 1){
 
-    if(typeof(token) != 'undefined' && token != null){
-      //this.props.getUser();
-      this.props.getUserByToken();
+      var token = localStorage.getItem('token');
+      if(typeof(token) != 'undefined' && token != null){
+        //this.props.getUser();
+        this.props.getUserByToken();
+      }
     }
 
       this.state = {

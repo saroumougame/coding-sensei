@@ -26,6 +26,7 @@ class ListeClassesProff extends React.Component {
   }
 
   selectContact = contact => () => {
+    console.log({contact:contact});
     this.props.setEleveAction(null);
     this.props.setClasseAction(contact);
     this.setState({ selectedContact: contact });

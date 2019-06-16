@@ -21,7 +21,7 @@ const Error404 = (props) => {
 
   return (
     <div className={classes.background}>
-      <Card className={scss.card} raised>
+      <Card className={scss.card} contained>
         <CardContent className={scss['card-content']}>
           <Typography variant="headline" component="h2" gutterBottom>
             Page Not Found

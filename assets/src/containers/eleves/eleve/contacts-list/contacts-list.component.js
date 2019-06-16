@@ -99,7 +99,7 @@ class ContactsList extends React.Component {
       selectedContact,
       onSelect
     } = this.props;
-console.log(contact);
+    //console.log(contact);
     return (
       <ListItem
         title={contact.name}
@@ -156,7 +156,7 @@ console.log(contact);
     } = this.props;
 
     return (
-      <div className={classNames(classes.list, 'portal-hide-scrollbars')}>
+      <div className={classNames(classes.list, 'portal-hide-scrollbars', 'list-white')}>
       <div className={classNames(scss['center'])}>
         <CreateEleveModal />
       </div>

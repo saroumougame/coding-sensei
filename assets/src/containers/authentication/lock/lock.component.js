@@ -57,7 +57,7 @@ const Lock = (props) => {
                 />
               </CardContent>
               <CardActions className={scss['lock-actions']}>
-                <Button href="/lock" color="primary" variant="raised">Login</Button>
+                <Button href="/lock" color="primary" variant="contained">Login</Button>
                 <Button href="/">Logout</Button>
               </CardActions>
             </Card>

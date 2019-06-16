@@ -25,11 +25,14 @@ class MailService
     {
 
         $message = (new \Swift_Message('Coding-sensei creation compte'))
-            ->setFrom('coding@sensei.com')
+            ->setFrom('tokuro.meisashi@gmail.com')
             ->setTo($mailEleve)
-            ->addPart(
-                $msg
+            ->setBody(
+                $msg,
+                'text/html'
             );
+
         return $this->mailer->send($message) > 0;
     }
+
 }

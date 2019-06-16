@@ -234,7 +234,7 @@ class RegisterForm extends React.Component {
           />
 
             <CardActions onClick={this.submitFormProfesseur} >
-              <Button fullWidth  color="default" variant="raised">Crée un compte</Button>
+              <Button fullWidth  color="default" variant="contained">Crée un compte</Button>
             </CardActions>
         </div>
       );

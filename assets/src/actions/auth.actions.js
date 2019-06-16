@@ -18,6 +18,7 @@ export const LOGIN_SPINNER_START      = "LOGIN_SPINNER_START";
 export const LOGIN_SPINNER_STOP       = "LOGIN_SPINNER_STOP";
 export const LOGIN_FAIL              = "LOGIN_FAIL";
 export const EXPIRED                 = "EXPIRED";
+export const GET_USER                 = "GET_USER";
 
        const API_URL                  = 'http://51.38.38.246:8080';
 
@@ -107,7 +108,6 @@ export const register = (nom, email, password) => {
 };
 
 export const login = (email, password) => {
-  //console.log(email);
     var data = {
     'username': email,
     'password': password,
@@ -163,8 +163,14 @@ export const getUserByToken = () => {
       history.push('/login?session_expired');
        dispatch(expiredAction());
       }else {
-        history.push('/account');
-        dispatch(loginAction(json));
+        if(json.roles.includes('ROLE_STUDENT')){
+          history.push('/classes');
+        }else{
+          if (history.location.pathname.split("/")[1] != "professeur") {
+          history.push('/professeur/classes');
+          }
+        }
+        dispatch(getCurrentUser(json));
       }
     })
     .catch((e) => dispatch());
@@ -192,7 +198,6 @@ export const getUser = () => {
     })
     .then(response => response.json())
     .then(json => {
-
         if(json.roles.includes('ROLE_TEACHER')) {
           history.push('/account');
         }else if(json.roles.includes('ROLE_STUDENT')) {
@@ -205,6 +210,10 @@ export const getUser = () => {
 };
 
 
+export const getCurrentUser = (jsonUser) => ({
+  type: GET_USER,
+  payload: jsonUser
+});
 export const loginAction = (jsonUser) => ({
   type: LOGIN,
   payload: jsonUser

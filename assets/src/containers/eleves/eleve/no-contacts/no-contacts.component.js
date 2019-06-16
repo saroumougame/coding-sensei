@@ -20,7 +20,6 @@ class NoContacts extends React.Component {
 
 constructor(props) {    
   super(props);
-
       this.state = {
         Exercice: null // null = show | add = add | edit = edit
       }
@@ -29,7 +28,7 @@ constructor(props) {
    getPaperContent() {
       if(this.state.Exercice == null){
         return (
-          <span>
+          <div className={scss['containerdiv']}>
                    <Typography className={scss['exercice-paper-title']} variant="headline" component="h3">
                     Exercices -  
                     <Button onClick={() => {this.setState({Exercice: 'add'}) }} variant="outlined" className={scss['btn-ajouter-exo']}>
@@ -38,11 +37,11 @@ constructor(props) {
                   </Typography>
                   
                   <ListeExercice customClick={() => {this.setState({Exercice: 'edit'}) }} />
-          </span>
+          </div>
           );
       }else if(this.state.Exercice == 'add'){
         return (
-            <span>
+            <div className={scss['containerdiv']}>
                    <Typography className={scss['exercice-paper-title']} variant="headline" component="h3">
                     Ajout d'exercice -
                     <Button onClick={() => {this.setState({Exercice: null}) }} variant="outlined" className={scss['btn-ajouter-exo']}>
@@ -51,11 +50,11 @@ constructor(props) {
                   </Typography>
 
                   <AddExerciceForm />
-          </span>
+          </div>
           );
       }else if(this.state.Exercice == 'edit') {
           return (
-            <span>
+            <div className={scss['containerdiv']}>
                    <Typography className={scss['exercice-paper-title']} variant="headline" component="h3">
                     Exercice - PHP
                     <Button onClick={() => {this.setState({Exercice: null}) }} variant="outlined" className={scss['btn-ajouter-exo']}>
@@ -63,7 +62,7 @@ constructor(props) {
                    </Button>
                   </Typography>
 
-          </span>
+          </div>
           );        
       }
    }
@@ -72,11 +71,9 @@ constructor(props) {
 
   return (
     <div className={classNames(scss['portal-contacts-no-contacts'])}>
-       <Paper className={scss['exercice-paper']} elevation={4}>
-       {this.getPaperContent()}
-       </Paper>
+      {this.getPaperContent()}
          
-        </div>
+    </div>
     );
   }
 };

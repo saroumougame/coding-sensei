@@ -14,7 +14,7 @@ import scss from './classes-eleve.module.scss';
 import TextField from '@material-ui/core/TextField';
 import ListeExercices from '../listeCours/ListeCours.component.js';
 import { getClassUser } from '../../../actions/classes.actions';
-
+import ExerciceEleve from '../exerciceEleve/ExerciceEleve.component';
 class classesEleve extends React.Component {
 
   	constructor(props) {
@@ -33,7 +33,6 @@ class classesEleve extends React.Component {
 
    getClassName () {
 
-    console.log(this.props.data.classeUser);
     if(this.props.data.classeUser != null){
       return this.props.data.classeUser['name'];
     }
@@ -52,6 +51,7 @@ class classesEleve extends React.Component {
 
               <ListeExercices />
           </div>
+        <ExerciceEleve />
 	 		 </div>
 	 	);
 	 }

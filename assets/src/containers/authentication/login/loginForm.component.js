@@ -21,7 +21,7 @@ import { withStyles } from '@material-ui/core/styles';
 import themeStyles from './login.theme.style';
 import scss from './login.module.scss';
 import logoImage from '../../../assets/images/portal-logo.png';
-import Loader from 'react-loader-spinner'
+import Loader from 'react-loader-spinner';
 
 import Snackbar from '@material-ui/core/Snackbar';
 

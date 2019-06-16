@@ -165,7 +165,7 @@ export const getUserByToken = () => {
        dispatch(expiredAction());
       }else {
         if(json.roles.includes('ROLE_STUDENT')){
-          history.push('/home');
+          history.push('/classes');
         }else{
           if (history.location.pathname.split("/")[1] != "professeur") {
           history.push('/professeur/classes');

@@ -65,7 +65,7 @@ class ContactsList extends React.Component {
     return (
       <ListItem
         title={contact.name}
-        key={contact.phone}
+        key={contact.name}
         className={classNames(
           scss['portal-contacts-list__item'],
           contact === selectedContact ? classes['portal-contacts-list__item--active'] : ''

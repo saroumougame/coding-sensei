@@ -75,9 +75,9 @@ class AccountProff extends React.Component {
               Editer Mon profile >>
             </Button>
           </Grid>
-          <p>Nom:            {this.props.data.user.lastName[0].toUpperCase() + this.props.data.user.lastName.substring(1).toLowerCase()}</p>
-          <p>Prenom:         {this.props.data.user.firstName[0].toUpperCase() + this.props.data.user.firstName.substring(1).toLowerCase()}</p>
-          <p>Email:          {this.props.data.user.email}</p>
+          <p>Nom:            {this.props.data.user != null ?this.props.data.user.lastName[0].toUpperCase() + this.props.data.user.lastName.substring(1).toLowerCase(): ""}</p>
+          <p>Prenom:         {this.props.data.user != null ?this.props.data.user.firstName[0].toUpperCase() + this.props.data.user.firstName.substring(1).toLowerCase(): ""}</p>
+          <p>Email:          {this.props.data.user != null ?this.props.data.user.email: ""}</p>
           <p>Mot de passe:   ***</p>
             
           <Grid

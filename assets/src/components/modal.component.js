@@ -53,7 +53,7 @@ class SimpleModal extends React.Component {
 
     return (
       <div className={styles.div} >
-        <Button color={colorBtn} variant="raised"  onClick={this.handleOpen}>{titleButton}</Button>
+        <Button color={colorBtn} variant="contained"  onClick={this.handleOpen}>{titleButton}</Button>
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"

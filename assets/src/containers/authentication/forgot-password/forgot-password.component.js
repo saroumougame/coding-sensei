@@ -56,7 +56,7 @@ const Forgot = (props) => {
                 />
               </CardContent>
               <CardActions className={scss['lock-actions']}>
-                <Button href="/forgot-password" color="primary" variant="raised">Reset Password</Button>
+                <Button href="/forgot-password" color="primary" variant="contained">Reset Password</Button>
                 <Button href="/login">Back to login</Button>
               </CardActions>
             </Card>

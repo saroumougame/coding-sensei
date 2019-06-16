@@ -53,7 +53,7 @@ const Sidenav = (props) => {
    
             {layout.currentLayout !== 'compact' && layout.currentLayout !== 'funky' &&
              <NavLink to="/professeur/compte">
-              <Typography variant="title" color="white& "  noWrap>
+              <Typography variant="title" color="default"  noWrap>
                 Espace pro
               </Typography>
             </NavLink>

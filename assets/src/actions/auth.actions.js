@@ -18,6 +18,7 @@ export const LOGIN_SPINNER_START      = "LOGIN_SPINNER_START";
 export const LOGIN_SPINNER_STOP       = "LOGIN_SPINNER_STOP";
 export const LOGIN_FAIL              = "LOGIN_FAIL";
 export const EXPIRED                 = "EXPIRED";
+export const GET_USER                 = "GET_USER";
 
        const API_URL                  = 'http://51.38.38.246:8080';
 
@@ -163,13 +164,14 @@ export const getUserByToken = () => {
       history.push('/login?session_expired');
        dispatch(expiredAction());
       }else {
-
         if(json.roles.includes('ROLE_STUDENT')){
           history.push('/home');
         }else{
+          if (history.location.pathname.split("/")[1] != "professeur") {
           history.push('/professeur/classes');
+          }
         }
-        dispatch(loginAction(json));
+        dispatch(getCurrentUser(json));
       }
     })
     .catch((e) => dispatch());
@@ -197,7 +199,6 @@ export const getUser = () => {
     })
     .then(response => response.json())
     .then(json => {
-
         if(json.roles.includes('ROLE_TEACHER')) {
           history.push('/account');
         }else if(json.roles.includes('ROLE_STUDENT')) {
@@ -210,6 +211,10 @@ export const getUser = () => {
 };
 
 
+export const getCurrentUser = (jsonUser) => ({
+  type: GET_USER,
+  payload: jsonUser
+});
 export const loginAction = (jsonUser) => ({
   type: LOGIN,
   payload: jsonUser

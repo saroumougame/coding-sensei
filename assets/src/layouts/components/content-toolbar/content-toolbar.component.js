@@ -117,22 +117,22 @@ class ContentToolbar extends React.Component {
         <div className={scss['navbar-buttonSection']}>
 
        <NavLink to="/">
-          <Button variant="raised" >
+          <Button variant="contained" >
             Qui somme nous ? 
           </Button>
           </NavLink>
        <NavLink to="/">
-          <Button variant="raised" >
+          <Button variant="contained" >
             Tarifs
           </Button>
           </NavLink>
           <NavLink to="/inscription">
-          <Button  variant="raised" >
+          <Button  variant="contained" >
             S'inscrire
           </Button>
           </NavLink>
           <NavLink to="/login">
-          <Button variant="raised" >
+          <Button variant="contained" >
             Se connecter
           </Button>
           </NavLink>
@@ -179,7 +179,7 @@ export default compose(
 )(ContentToolbar);
 
 /*
-<Button variant="raised" className={classes.button}>
+<Button variant="contained" className={classes.button}>
         Default
       </Button>
 <IconButton

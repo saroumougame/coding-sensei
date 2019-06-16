@@ -52,8 +52,8 @@ const Sidenav = (props) => {
           <Toolbar > 
    
             {layout.currentLayout !== 'compact' && layout.currentLayout !== 'funky' &&
-             <NavLink to="/account/proff">
-              <Typography variant="title" color="white& "  noWrap>
+             <NavLink to="/professeur/compte">
+              <Typography variant="title" color="default"  noWrap>
                 Espace pro
               </Typography>
             </NavLink>

@@ -13,7 +13,8 @@ import {
   LOGIN_SNACK_CLOSE,
   LOGIN_SPINNER_START,
   LOGIN_SPINNER_STOP,
-  REGISTER_FAIL
+  REGISTER_FAIL,
+  GET_USER
 } from '../actions/auth.actions';
 
 // trois étapes d'inscription.
@@ -32,6 +33,7 @@ const defaultState = {
   login_snack:          false, 
   login_message:        '',
   login_spinner:        false,
+  user:                 null,
 };
 
 const authReducer = (state = defaultState, action) => {
@@ -151,6 +153,12 @@ const authReducer = (state = defaultState, action) => {
               return {
           ...state,
             login_spinner:   false,
+        };
+      break;
+    case GET_USER:
+              return {
+          ...state,
+            user:   action.payload,
         };
       break;
     default:

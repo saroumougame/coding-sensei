@@ -40,7 +40,7 @@ export const menuItems = [{
   icon: <HomeIcon style={iconStyle} />,
   children: [{
     title: 'Mon Compte',
-    href: '/account/proff',
+    href: '/professeur/compte',
     icon: <DashboardIcon style={iconStyle} />
   }, {
     title: 'Ecole',

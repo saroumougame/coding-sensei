@@ -49,7 +49,6 @@ const classesReducer = (state = defaultState, action) => {
       }
     break;
     case UPDATE_CLASS_USER : 
-    console.log(action.payload);
       return {
         ...state,
         classeUser: action.payload

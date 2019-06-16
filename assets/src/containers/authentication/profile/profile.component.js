@@ -117,7 +117,7 @@ class Profile extends React.Component {
                     </Grid>
                   </CardContent>
                   <CardActions className={scss['card-actions']}>
-                    <Button disabled={!isEnabled} variant="raised" color="secondary" onClick={() => this.onSnackbarOpen()}>
+                    <Button disabled={!isEnabled} variant="contained" color="secondary" onClick={() => this.onSnackbarOpen()}>
                       Update Settings
                     </Button>
                   </CardActions>

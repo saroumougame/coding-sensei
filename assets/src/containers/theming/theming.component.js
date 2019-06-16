@@ -276,12 +276,12 @@ const Theming = (props) => {
                 className={scss['portal-pages__color_examples']}
               >
                 <Grid item>
-                  <Button variant="raised" color="primary">
+                  <Button variant="contained" color="primary">
                     Example Primary Button
                   </Button>
                 </Grid>
                 <Grid item>
-                  <Button variant="raised" color="secondary">
+                  <Button variant="contained" color="secondary">
                     Example Secondary Button
                   </Button>
                 </Grid>

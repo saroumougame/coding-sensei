@@ -85,7 +85,7 @@ class Register extends React.Component {
                       Vous éte une Ecole / Structure.
                     </Typography>
                     <NavLink strict to="/inscription/structure">
-                    <Button  color="default" variant="raised">S'inscrire</Button>
+                    <Button  color="default" variant="contained">S'inscrire</Button>
                     <Button >Plus d'informations</Button>
                     </NavLink>
                   </CardContent>
@@ -108,7 +108,7 @@ class Register extends React.Component {
                           Vous éte un Professeur.
                         </Typography>
                         <NavLink to="/inscription/professeur" >
-                        <Button color="default" variant="raised">S'inscrire</Button>
+                        <Button color="default" variant="contained">S'inscrire</Button>
                         <Button >Plus d'informations</Button>
                         </NavLink>
                       </CardContent>
@@ -126,7 +126,7 @@ class Register extends React.Component {
                   </Typography>
 
                   <NavLink to="/inscription/eleve" >
-                  <Button color="default" variant="raised">S'inscrire</Button>
+                  <Button color="default" variant="contained">S'inscrire</Button>
                   <Button >Plus d'informations</Button>
                   </NavLink>
                 </CardContent>

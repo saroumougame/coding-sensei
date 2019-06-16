@@ -134,12 +134,12 @@ const authReducer = (state = defaultState, action) => {
         };
       }
 
-        return {
+        /*return {
           ...state,
             login_snack:   true,
             login_message: 'Bravo, tu es désormais connecté.',
             login_spinner:   false,
-        };
+        };*/
     // auth 
     // redirection || ==
     break;  

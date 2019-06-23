@@ -190,9 +190,11 @@ export const submitExerciceAction = (ExerciceContent) => {
 export const listeExerciceAction = () => {
 
   return (dispatch, getState) => { 
-
+    let idClass = "0";
     const state = getState();
-    let idClass =  state.classData.currentClasse['@id'];
+    if (state.classData.currentClasse){
+      idClass =  state.classData.currentClasse['@id'];
+    }
 /*
   */
     idClass = idClass.split('/')[2];

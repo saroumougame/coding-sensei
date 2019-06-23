@@ -29,6 +29,7 @@ const AsyncLanding= asyncComponent(() => import('./containers/landing/landing.co
 const AsyncEcole= asyncComponent(() => import('./containers/ecole/ecole.component'));
 const AccountProff= asyncComponent(() => import('./containers/account/professeur/account.component'));
 const ClassesProff= asyncComponent(() => import('./containers/classe/proff/contacts.component'));
+const ElevesProff= asyncComponent(() => import('./containers/eleves/eleve/allcontacts.component'));
 const AsyncExercice= asyncComponent(() => import('./containers/exercice/exercice.component'));
 //const AccountProff= asyncComponent(() => import('./containers/account/professeur/account.component'))
 const AsyncEleveHome= asyncComponent(() => import('./containers/eleves/home/home-eleve.component'));
@@ -191,6 +192,7 @@ export default ({ logged , childProps, layout, roles }) => {
       <AppprotectedRoute path="/professeur" exact component={AsyncRegister} redir={AsyncLogin} props={childProps} layout={CompactLayout} roles={roles}  roles_accepted={role_user}/>
       <AppprotectedRoute path="/professeur/classes" exact component={ClassesProff} redir={AsyncLogin} props={childProps} layout={CompactLayout} roles={roles} roles_accepted={role_user} />
       <AppprotectedRoute path="/professeur/classes/add" exact component={ClassesProff} redir={AsyncLogin} props={childProps} layout={CompactLayout} roles={roles} roles_accepted={role_user} />
+      <AppprotectedRoute path="/apps/contacts" exact component={ElevesProff} redir={AsyncLogin} props={childProps} layout={CompactLayout} roles={roles} roles_accepted={role_user} />
 
 
       
@@ -209,7 +211,6 @@ export default ({ logged , childProps, layout, roles }) => {
       <AppRoute path="/apps/todo" exact component={AsyncTodoApp} props={childProps} layout={CompactLayout} />
       <AppRoute path="/apps/maps" exact component={AsyncMapsApp} props={childProps} layout={CompactLayout} />
       <AppRoute path="/apps/notes" exact component={AsyncNotesApp} props={childProps} layout={CompactLayout} />
-      <AppRoute path="/apps/contacts" exact component={AsyncContactsApp} props={childProps} layout={CompactLayout} />
       <AppRoute path="/apps/chat" exact component={AsyncChatApp} props={childProps} layout={CompactLayout} />
       <AppRoute path="/apps/calendar" exact component={AsyncCalendarApp} props={childProps} layout={CompactLayout} />
       <AppRoute path="/elements/autocomplete" exact component={AsyncAutocompleteExample} props={childProps} layout={CompactLayout} />

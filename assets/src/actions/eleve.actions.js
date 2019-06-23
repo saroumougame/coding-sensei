@@ -38,6 +38,28 @@ export const getEleve = () => {
     .catch((e) => dispatch());
   }
 };
+export const getEleveByProf = () => {
+
+  return (dispatch, getState) => { 
+
+    const state = getState();
+    
+
+    fetch(API_URL +'/teacher/students', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization'  : 'Bearer ' + localStorage.getItem('token')
+      }
+    })
+    .then(response => response.json())
+    .then(json => {
+     // Une fois fini, on affiche toute les classes
+      dispatch(getEleveAction(json["hydra:member"]));
+    })
+    .catch((e) => dispatch());
+  }
+};
 
 
 export const AddUserEleveAction = (nom, email) => {

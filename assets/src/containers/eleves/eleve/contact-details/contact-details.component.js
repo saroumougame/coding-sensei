@@ -48,11 +48,9 @@ class ContactDetails extends React.Component {
               var { name, description, endDate, createdAt } = element.exercice;
               if (createdAt){
                 createdAt = (new Date(createdAt.date)).toLocaleDateString();
-                console.log(createdAt);
               }
               if (endDate){
                 endDate = (new Date(endDate.date)).toLocaleDateString();
-                console.log(endDate);
               }
               return(
                 <Paper className={classNames(scss['portal-contact-content-paper'])}>

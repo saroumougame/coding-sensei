@@ -20,6 +20,7 @@ import {addClass}      from '../../../../actions/classes.actions';
 import Paper from '@material-ui/core/Paper';
 import Modal from '@material-ui/core/Modal';
 import Modal2 from '../../../../components/modal.component';
+import Grid from '@material-ui/core/Grid';
 
 
 /*
@@ -109,38 +110,21 @@ class NoContacts extends React.Component {
     const { classes } = this.props;
   return (
     <div className={classNames(scss['portal-contacts-no-contacts'], classes['portal-contacts-no-contacts'])}>
-              {/*<Card className={scss['card_proff_class']} >*/}
 
-                  <Modal2
+                  
+
+
+              <Grid className={scss['grid_no_class']} container justify="center" alignContent="center">
+              <p className={scss['text_no_class']}
+              >Vous pouvez des à present creer une classe en cliquant <Modal2
                       colorBtn='default'
-                      titleButton='Aouter une classe'
+                      titleButton='ici'
                       title="Ajouter une classe"
                       text={this.getAddClassForm()}
                   />
-                    {/*<CardActionArea>*/}
-                    
-                      {/*<CardContent className={scss['card_register_proffesseur_content']} >*/}
-                        {/*<Typography variant="h5"  gutterBottom>*/}
-                           {/*Vous avez avez 10 Crédit. Un crédit correspond a 5 élèves.Chaque élèves ne peut appartenir qu'a une classe. */}
-                        {/*</Typography>*/}
-
-                      {/*/!**/}
-                        {/*<Button className={scss['car_addclass_boutique']}>Aller a la boutique</Button>*/}
-                      {/**!/*/}
-                      {/*</CardContent>*/}
-                    {/*</CardActionArea>*/}
-              {/*</Card>*/}
-
-
-
-          <Paper className={scss['no-contact-pricing']} elevation={4}>
-              <Typography variant="headline" component="h3">
-                Acheter des classes
-              </Typography>
-              <Typography variant="headline" component="h5">
-                Prix de démo:  Gratuit <Button variant="outlined" className={classes.button}> Commander </Button>
-              </Typography>
-          </Paper>
+              </p>
+              </Grid>
+              
      
 
           

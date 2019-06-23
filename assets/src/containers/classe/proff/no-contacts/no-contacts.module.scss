@@ -5,9 +5,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  margin: 15px;
-  margin-top: 10vh;
-
+  overflow: auto;
   h2 {
     font-size: .95em;
     margin-top: 12px;
@@ -150,4 +148,14 @@
 .no-contact-pricing {
   padding: 25px;
   margin-top: 50px;
+}
+.text_no_class{
+    color: #fff;
+    font-size: small;
+}
+.text_no_class span{
+    color: aqua;
+}
+.grid_no_class{
+  height: 100%
 }

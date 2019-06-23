@@ -23,6 +23,9 @@ import Button from '@material-ui/core/Button';
 import themeStyles from './classe-list.theme.style';
 import scss from './classe-list.module.scss';
 import {UpdateClass}      from '../../../../actions/classes.actions';
+import Modal      from '../../../../actions/classes.actions';
+import Modal2 from '../../../../components/list.modal.component';
+import {addClass}      from '../../../../actions/classes.actions';
 
 
 // migration de la liste de contact du local vers le state redux. 
@@ -35,8 +38,27 @@ class ClassesList extends React.Component {
       initialContacts: this.props.data.classList,
       contacts: [],
       updatedList: false,
-      classeToCreate: 999
+      classeToCreate: 999,
+      nom: ""
     }
+  }
+  getAddClassForm() {
+    const { classes } = this.props;
+    return (
+          <form  noValidate autoComplete="off">
+            <TextField
+              id="nom"
+              value={this.state.nom}
+              onChange={(e) => {this.setState({nom: e.target.value});}}
+              label="Nom de la classe"
+              className={classes.textField}
+              margin="normal"
+            />
+            <Button variant="contained" color="primary" className={scss['portal-contacts-no-button-form']} onClick={() => {this.formSubmit()}}>
+              Crée la classe
+            </Button>
+          </form>
+      );
   }
   // Handles the filtering of contacts based on the input of search field.
   onChangeHandler(e){
@@ -107,7 +129,9 @@ class ClassesList extends React.Component {
       </ListItem>
     );
   };
-
+  formSubmit () {
+    this.props.addClass(this.state.nom);
+  }
   createMobileListItem = (contact) => {
     const {
       classes,
@@ -162,11 +186,6 @@ class ClassesList extends React.Component {
 
 
         <div>
-      {/*
-      */}
-        <Button variant="contained" className={classes.button} onClick={onSelect(null)}>
-          Classes
-        </Button>
         </div>
        
       </div>
@@ -201,6 +220,13 @@ class ClassesList extends React.Component {
                       this.createDesktopListItem(contact) :
                       this.createMobileListItem(contact);
               })}
+              
+              <Modal2
+                titleButton='Aouter une classe'
+                title="Ajouter une classe"
+                text={this.getAddClassForm()}
+              />
+
           </List>
       </div>
     );
@@ -212,7 +238,9 @@ function mapStateToProps(state) {
   return {
     data: {
       classList:           state.classData.classes,  
-      classUpdatedList:    state.classData.UpdatedClasses, 
+      classUpdatedList:    state.classData.UpdatedClasses,
+
+ 
     }
   };
 }
@@ -231,4 +259,4 @@ ClassesList.propTypes = {
 };
 
 export default compose(withWidth(), withStyles(themeStyles, { withTheme: true }),
- connect(mapStateToProps, {UpdateClass}) )(ClassesList);
+ connect(mapStateToProps, {UpdateClass, addClass}) )(ClassesList);

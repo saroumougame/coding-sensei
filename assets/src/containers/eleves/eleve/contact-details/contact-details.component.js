@@ -11,7 +11,6 @@ import scss from './contact-details.module.scss';
 import { connect } from 'react-redux';
 import { elevesExerciceAction } from '../../../../actions/exercice.actions';
 import Paper from '@material-ui/core/Paper';
-
 class ContactDetails extends React.Component {
 
     constructor(props) {
@@ -44,7 +43,26 @@ class ContactDetails extends React.Component {
           </Grid>
 
           <div>
-             { this.props.data.exerciceTexte.map(element=>(<Paper className={classNames(scss['portal-contact-content-paper'])}>aaa</Paper>))}
+             { this.props.data.exerciceTexte.map(element=>{ 
+              //console.log(element);
+              var { name, description, endDate, createdAt } = element.exercice;
+              if (createdAt){
+                createdAt = (new Date(createdAt.date)).toLocaleDateString();
+                console.log(createdAt);
+              }
+              if (endDate){
+                endDate = (new Date(endDate.date)).toLocaleDateString();
+                console.log(endDate);
+              }
+              return(
+                <Paper className={classNames(scss['portal-contact-content-paper'])}>
+                  <div><b>Nom : </b>{name}</div>
+                  <div><b>Description: </b>{description}</div>
+                  <div><b>fin: </b>{endDate}</div>
+                  <div><b>creation: </b>{createdAt}</div>
+                </Paper>
+              );
+            })}
           </div>
 
         </Grid>);

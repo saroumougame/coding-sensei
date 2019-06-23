@@ -49,27 +49,29 @@ class listeEcercice extends React.Component {
    getListItem() {
       let count = 0;
       let liste = this.props.data.liste_exerciceData;
-      return liste.map((i) => {
-        count++;
-        if(count > this.state.pagination){  
-        return (
-            <ListItem key={count}  className={scss['UnExercice']} button onClick={() => { this.props.customClick()}}>
-              <ListItemIcon>
-              {/*
-                <StarIcon />
-              */}
-              </ListItemIcon>
-              <ListItemText inset primary={i.name}  secondary={i.description} />
+      if(typeof(liste) != 'undefined' && typeof(liste) != undefined) { 
+        return liste.map((i) => {
+          count++;
+          if(count > this.state.pagination){  
+          return (
+              <ListItem key={count}  className={scss['UnExercice']} button onClick={() => {this.props.customClick(i)}}>
+                <ListItemIcon>
+                {/*
+                  <StarIcon />
+                */}
+                </ListItemIcon>
+                <ListItemText inset primary={i.name}  secondary={i.description} />
 
-              <div>
-              {this.getDateRealisation(i)} 
-              </div>
-            </ListItem>
-          );
-        }else {
-          return;
-        }
-      });
+                <div>
+                {this.getDateRealisation(i)} 
+                </div>
+              </ListItem>
+            );
+          }else {
+            return;
+          }
+        });
+      }
    }    
 
 	 render() {

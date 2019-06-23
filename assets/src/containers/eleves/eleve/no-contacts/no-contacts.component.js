@@ -3,19 +3,21 @@ import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-
+import withWidth from '@material-ui/core/withWidth';
 import classNames from 'classnames';
-
+import compose from 'recompose/compose';
+import { connect } from 'react-redux';
 import themeStyles from './no-contacts.theme.style';
 import scss from './no-contacts.module.scss';
 import Button from '@material-ui/core/Button';
 import ListeExercice from   '../../../exercice/ListeExerciceProff/ListeExercice.component' ;
-import AddExerciceForm from '../../../exercice/addExercice/AddExerciceForm.component';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-
+import AddExerciceForm from '../../../exercice/addExercice/AddExerciceForm.component';
+import ShowExerciceProff from '../../../exercice/showExerciceProff/ShowExerice.component';
+import { setCurrentExerciceProff, setExerciceComponentAction } from '../../../../actions/exercice.actions';
 
 class NoContacts extends React.Component {
     
@@ -27,26 +29,36 @@ constructor(props) {
       }
    }
 
+
+   getExerciceTitle() {
+
+      if(this.props.data.current_Exercice_proff == null) {
+        return " liste d'exercices ";
+      }
+
+
+   }
+
    getPaperContent() {
-      if(this.state.Exercice === null){
+      if(this.props.data.exercice_component === null){
         return (
           <div className={scss['containerdiv']}>
                    <Typography className={scss['exercice-paper-title']} variant="headline" component="h3">
-                    Exercices -  
-                    <Button onClick={() => {this.setState({Exercice: 'add'}) }} variant="outlined" className={scss['btn-ajouter-exo']}>
+                    {this.getExerciceTitle()}
+                    <Button onClick={() => {this.props.setExerciceComponentAction('add'); }} variant="outlined" className={scss['btn-ajouter-exo']}>
                           Ajouter un exercice
                    </Button>
                   </Typography>
                   
-                  <ListeExercice customClick={() => {this.setState({Exercice: 'edit'}) }} />
+                  <ListeExercice customClick={(i) => {this.props.setCurrentExerciceProff(i);this.props.setExerciceComponentAction('edit'); }} />
           </div>
           );
-      }else if(this.state.Exercice === 'add'){
+      }else if(this.props.data.exercice_component === 'add'){
         return (
             <div className={scss['containerdiv']}>
                    <Typography className={scss['exercice-paper-title']} variant="headline" component="h3">
                     Ajout d'exercice -
-                    <Button onClick={() => {this.setState({Exercice: null}) }} variant="outlined" className={scss['btn-ajouter-exo']}>
+                    <Button onClick={() => {this.props.setExerciceComponentAction(null); }} variant="outlined" className={scss['btn-ajouter-exo']}>
                           voir les exercices
                    </Button>
                   </Typography>
@@ -54,15 +66,17 @@ constructor(props) {
                   <AddExerciceForm />
           </div>
           );
-      }else if(this.state.Exercice === 'edit') {
+      }else if(this.props.data.exercice_component === 'edit') {
           return (
             <div className={scss['containerdiv']}>
                    <Typography className={scss['exercice-paper-title']} variant="headline" component="h3">
-                    Exercice - PHP
-                    <Button onClick={() => {this.setState({Exercice: null}) }} variant="outlined" className={scss['btn-ajouter-exo']}>
+                    
+                    <Button onClick={() => {this.props.setExerciceComponentAction(null); }} variant="outlined" className={scss['btn-ajouter-exo']}>
                           voir les exercices
                    </Button>
                   </Typography>
+
+                  <ShowExerciceProff />
 
           </div>
           );        
@@ -70,7 +84,7 @@ constructor(props) {
    }
 
   render(){
-
+    console.log(this.props.data.current_Exercice_proff);
   return (
     <div className={classNames(scss['portal-contacts-no-contacts'])}>
       
@@ -125,4 +139,15 @@ NoContacts.propTypes = {
   classes: PropTypes.shape({}).isRequired
 };
 
-export default withStyles(themeStyles, { withTheme: true })(NoContacts);
+function mapStateToProps(state) {
+  return {
+    data: {
+      classList:           state.classData.classes,  
+      classUpdatedList:    state.classData.UpdatedClasses,
+      current_Exercice_proff: state.exerciceData.current_Exercice_proff,
+      exercice_component: state.exerciceData.exercice_component
+    }
+  };
+}
+export default compose(withWidth(), withStyles(themeStyles, { withTheme: true }),
+ connect(mapStateToProps, {setCurrentExerciceProff, setExerciceComponentAction}) )(NoContacts);

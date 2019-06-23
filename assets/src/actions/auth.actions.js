@@ -129,7 +129,7 @@ export const login = (email, password) => {
 
       if(typeof(json.token) !== 'undefined'){
         localStorage.setItem('token', json.token);
-        dispatch(getUser());
+        dispatch(getUserByToken());
         
       }else {
         history.push('/login?error=access');
@@ -166,7 +166,7 @@ export const getUserByToken = () => {
           history.push('/classes');
         }else{
           if (history.location.pathname.split("/")[1] !== "professeur") {
-          history.push('/professeur/classes');
+          history.push('/account');
           }
         }
         dispatch(getCurrentUser(json));
@@ -197,6 +197,7 @@ export const getUser = () => {
     })
     .then(response => response.json())
     .then(json => {
+
         if(json.roles.includes('ROLE_TEACHER')) {
           history.push('/account');
         }else if(json.roles.includes('ROLE_STUDENT')) {

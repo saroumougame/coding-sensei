@@ -22,27 +22,39 @@ class listeEcercice extends React.Component {
 	 }
 
 
+   getDateRealisation(exercice) {
+      if(exercice.dateEnd == null) {
+        return 'Date limite: infinie';
+      }
+      return 'Date limite: '+ exercice.dateEnd;
+   }
 
    getListItem() {
       let count = 0;
       let liste = this.props.data.liste_exerciceData;
-      return liste.map((i) => {
-        count++;
-        if(count > this.state.pagination){  
-        return (
-            <ListItem key={count}  className={scss['UnExercice']} button onClick={this.props.customClick}>
-              <ListItemIcon>
-              {/*
-                <StarIcon />
-              */}
-              </ListItemIcon>
-              <ListItemText inset primary={i.name}  secondary={i.description} />
-            </ListItem>
-          );
-        }else {
-          return (<div></div>);
-        }
-      });
+      if(typeof(liste) !== 'undefined' && typeof(liste) !== undefined) { 
+        return liste.map((i) => {
+          count++;
+          if(count > this.state.pagination){  
+          return (
+              <ListItem key={count}  className={scss['UnExercice']} button onClick={() => {this.props.customClick(i)}}>
+                <ListItemIcon>
+                {/*
+                  <StarIcon />
+                */}
+                </ListItemIcon>
+                <ListItemText inset primary={i.name}  secondary={i.description} />
+
+                <div>
+                {this.getDateRealisation(i)} 
+                </div>
+              </ListItem>
+            );
+          }else {
+            return <div></div>;
+          }
+        });
+      }
    }    
 
 	 render() {

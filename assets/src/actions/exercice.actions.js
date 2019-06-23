@@ -13,12 +13,28 @@ export  const UPDATE_FORM_PARAM_OUT    = 'UPDATE_FORM_PARAM_OUT';
 export  const GET_LISTE_EXERCICES      = 'GET_LISTE_EXERCICES'; 
 export  const GET_LISTE_EXERCICES_USER = 'GET_LISTE_EXERCICES_USER';
 export  const SET_CURRENT_EXO_USER     = 'SET_CURRENT_EXO_USER';
+export  const SET_CURRENT_EXO_PROFF    = 'SET_CURRENT_EXO_PROFF';
+export  const SETEXERCICECOMPONENT     = 'SETEXERCICECOMPONENT'; 
+
 export  const UPDATE_TEXT_EXERCICE      = 'UPDATE_TEXT_EXERCICE';
 export  const SUBMIT_MODAL              = "SUBMIT_MODAL"; 
 export  const MODAL_FAIL                = "MODAL_FAIL";
 export  const MODAL_SUCESS              = "MODAL_SUCESS";
 export  const DISMISS_MODAL                = "DISMISS_MODAL";
 export  const GET_LISTE_EXERCICES_FOR_STUDENT  = "GET_LISTE_EXERCICES_FOR_STUDENT";
+
+
+
+
+export const setExerciceComponentAction = state => ({
+  type: SETEXERCICECOMPONENT,
+  payload: state
+}); 
+
+export const setCurrentExerciceProff = exercice => ({
+  type: SET_CURRENT_EXO_PROFF,
+  payload: exercice
+});
 
 export const addProffAction = form => ({
   type: ADD_PROFF_ACTION,
@@ -101,6 +117,39 @@ export const modalFailExercice = exerciceFailText => ({
 export const modalSuccessExercice = () => ({
   type: MODAL_SUCESS
 });
+
+
+export const deleteExercice = () => {
+
+  return (dispatch, getState) => { 
+
+    const state = getState();
+    let idExercice =  state.exerciceData.current_Exercice_proff["@id"];
+    console.log(idExercice);
+/*
+  */
+    idExercice = idExercice.split('/')[2];
+
+    //var formBody = JSON.stringify(details);
+    fetch(API_URL + '/exercices/'+idExercice, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization'  : 'Bearer ' + localStorage.getItem('token')
+      }
+    })
+    .then(response => response.json())
+    .then(json => {
+          dispatch(setExerciceComponentAction(null));
+          dispatch(getExercicesEleve())
+          //dispatch(listeExercice(json["hydra:member"]));
+    })
+    .catch((e) => dispatch());
+    /*
+*/
+  }
+}
+
 
 
 export const submitExerciceAction = (ExerciceContent) => {

@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import withWidth      from '@material-ui/core/withWidth';
+
 import classNames from 'classnames';
-import compose        from 'recompose/compose';
-import { connect } from 'react-redux';
+
 import themeStyles from './no-contacts.theme.style';
 import scss from './no-contacts.module.scss';
 import UserTasksWidget from '../user-tasks-widget/user-tasks-widget.component';
@@ -93,14 +92,14 @@ className={classNames(scss['class-detail-header-in-form'])}
         container
         direction="row"
         spacing={0}
-        justify="space-between"
-        className={classNames(scss['class-detail-header-in-form-grid'])}>
+        justify="space-between">
         <TextField
               id="nom"
               onChange={this.handleNameUpdate}
               label="Nom de la classe"
               margin="normal"
               value="test"
+              className={classNames(scss['class-detail-header-in-form-grid'])}
             />
             <Button color="primary" className={scss['portal-contacts-detail-update-contact']} >
                 <EditIcon/>
@@ -128,13 +127,4 @@ NoContacts.propTypes = {
   classes: PropTypes.shape({}).isRequired
 };
 
-function mapStateToProps(state) {
-  return {
-    data: {
-      FormDataUpdateClassNom:           state.classData.FormDataUpdateClassNom,  
-    }
-  };
-}
-export default compose(withWidth(), withStyles(themeStyles, { withTheme: true }),
-  connect(mapStateToProps))(NoContacts);
-
+export default withStyles(themeStyles, { withTheme: true })(NoContacts);

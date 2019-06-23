@@ -47,9 +47,11 @@ class listeEcercice extends React.Component {
         count++;
         if(count > this.state.pagination){  
         return (
-            <ListItem key={count} button onClick={this.props.customClick}>
+            <ListItem key={count}  className={scss['UnExercice']} button onClick={this.props.customClick}>
               <ListItemIcon>
+              {/*
                 <StarIcon />
+              */}
               </ListItemIcon>
               <ListItemText inset primary={i.name}  secondary={i.description} />
             </ListItem>

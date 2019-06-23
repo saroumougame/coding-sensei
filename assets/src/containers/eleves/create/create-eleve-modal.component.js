@@ -14,7 +14,7 @@ import scss from './create-eleve-modal.module.scss';
 import themeStyles from './create-eleve-modal.style.js';
 import TextField from '@material-ui/core/TextField';
 
-import Modal2 from '../../../components/modal.component';
+import Modal2 from '../../../components/list.modal.component';
 import {FormUpdateClassNom, updateClass, deleteClass}     from '../../../actions/classes.actions';
 import { AddUserEleveAction }							from '../../../actions/eleve.actions';
 

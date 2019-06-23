@@ -157,9 +157,7 @@ class ContactsList extends React.Component {
 
     return (
       <div className={classNames(classes.list, 'portal-hide-scrollbars', 'list-white')}>
-      <div className={classNames(scss['center'])}>
-        <CreateEleveModal />
-      </div>
+      
         {isWidthUp('sm', width) ? this.createSearchTextField() : ''}
         <List component="nav" className={classes.listWrapper}>
           {this.getCustomClassList().map((contact) => {
@@ -167,6 +165,7 @@ class ContactsList extends React.Component {
               this.createDesktopListItem(contact) :
               this.createMobileListItem(contact);
           })}
+        <CreateEleveModal />
         </List>
       </div>
     );

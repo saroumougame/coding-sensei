@@ -1,5 +1,4 @@
 import history from '../history';
-import { deconnexionAction } from './user.actions';
 export  const INSCRIPTION_ETAPES = "changer_étapes";
 
 export const AUTH_NOM_PROFF           = "FORM NOM PROFF";
@@ -96,7 +95,7 @@ export const register = (nom, email, password) => {
     })
     .then(response => response.json())
     .then(json => {
-      if(typeof(json.email) == 'undefined'){
+      if(typeof(json.email) === 'undefined'){
         dispatch(registerFailAction(json.detail));
       }else {
         dispatch(registerAction(json));
@@ -128,7 +127,7 @@ export const login = (email, password) => {
     .then(response => response.json() )
     .then(json => {
 
-      if(typeof(json.token) != 'undefined'){
+      if(typeof(json.token) !== 'undefined'){
         localStorage.setItem('token', json.token);
         dispatch(getUser());
         
@@ -159,14 +158,14 @@ export const getUserByToken = () => {
     .then(response => response.json())
     .then(json => {
 
-      if(json.code == 401){
+      if(json.code === 401){
       history.push('/login?session_expired');
        dispatch(expiredAction());
       }else {
         if(json.roles.includes('ROLE_STUDENT')){
           history.push('/classes');
         }else{
-          if (history.location.pathname.split("/")[1] != "professeur") {
+          if (history.location.pathname.split("/")[1] !== "professeur") {
           history.push('/professeur/classes');
           }
         }

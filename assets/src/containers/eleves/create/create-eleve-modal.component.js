@@ -1,15 +1,10 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import withWidth from '@material-ui/core/withWidth';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
-import FontAwesome from 'react-fontawesome';
 import scss from './create-eleve-modal.module.scss';
 import themeStyles from './create-eleve-modal.style.js';
 import TextField from '@material-ui/core/TextField';
@@ -35,8 +30,8 @@ class CreateEleveModal extends React.Component {
 	 	let nom   = this.state.form_ajout_libre_nom;
 	 	let email = this.state.form_ajout_libre_email;
 
-	 	if(nom == '' 
-        || email == '') {
+	 	if(nom === '' 
+        || email === '') {
         	alert('Vous devez remplir tout les champs');
         	this.setState({ open: true,  snackMessage: 'Vous devez remplir tout les champs.' });
         return;
@@ -58,7 +53,7 @@ class CreateEleveModal extends React.Component {
                     Ajout libre
                 </Button>
 	 	*/}
-                {this.state.typeAjout == 1 &&
+                {this.state.typeAjout === 1 &&
                 	<div>	
                 	<div>Le mot de passe sera envoyer a l'eleve par email</div>
                 		 <form  noValidate autoComplete="off">
@@ -87,7 +82,7 @@ class CreateEleveModal extends React.Component {
 				          </form>
                 	</div>
                 }
-                {this.state.typeAjout == 2 &&
+                {this.state.typeAjout === 2 &&
                 	<div>	
 
                 		 <form  noValidate autoComplete="off">

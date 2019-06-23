@@ -44,88 +44,70 @@ const authReducer = (state = defaultState, action) => {
         ...state,
           etape_inscription: action.payload,
       };
-      break;
     case AUTH_NOM_PROFF:
       return {
         ...state,
           auth_nom: action.payload,
       };
-      break;
     case AUTH_NOM_EMAIL:
       return {
         ...state,
           auth_email: action.payload,
       };
-      break;
     case AUTH_NOM_PASSWORD:
       return {
         ...state,
           auth_password: action.payload,
       };
-      break;
     case AUTH_NOM_PASSWORD_DEUX:
       return {
         ...state,
           auth_password_double: action.payload,
       };
-      break;
     case AUTH_LOGIN_EMAIL:
       return {
         ...state,
           auth_login_email: action.payload,
       };
-      break;
-      
      case AUTH_LOGIN_PASSWORD:
       return {
         ...state,
           auth_login_password: action.payload,
       };
-      break;
-      case REGISTER: 
-
-        var newregister_message = "Félicitation, vous pouvez maintenent vous connecter";
-      
+    case REGISTER:       
         return {
         ...state,
           register_snack:   true,
-          register_message: newregister_message
+          register_message: "Félicitation, vous pouvez maintenent vous connecter"
       };
-    break;
     case REGISTER_FAIL : 
       
-        var newregister_message = action.payload;
-      
         return {
         ...state,
           register_snack:   true,
-          register_message: newregister_message
+          register_message: action.payload
       };
-    break;
     case SNACK_REGISTER:
       return {
         ...state,
           register_snack:   false,
           register_message: ''
       };
-      break;
     case LOGIN_SNACK:
           return {
         ...state,
           login_snack:   true,
           login_message: action.payload,
       };
-      break;
     case LOGIN_SNACK_CLOSE:
            return {
         ...state,
           login_snack:   false,
           login_message: '',
       };
-      break; 
     case LOGIN:
 
-      if(action.payload == false){
+      if(action.payload === false){
         return {
           ...state,
             login_snack:   true,
@@ -142,25 +124,21 @@ const authReducer = (state = defaultState, action) => {
         };
     // auth 
     // redirection || ==
-    break;  
     case LOGIN_SPINNER_START:
               return {
           ...state,
             login_spinner:   true,
         };
-      break;
     case LOGIN_SPINNER_STOP:
               return {
           ...state,
             login_spinner:   false,
         };
-      break;
     case GET_USER:
               return {
           ...state,
             user:   action.payload,
         };
-      break;
     default:
       return state;
   }

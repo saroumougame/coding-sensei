@@ -7,12 +7,9 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox'
-import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
-import scss from './ecole.module.scss';
 import styles from './ecole.style';
 import { addSelectaction, removeSelectaction } from '../../actions/ecole.actions';
 
@@ -28,7 +25,7 @@ class TableauEcole extends Component  {
   onChangeSelect = (row) => {
     let newTabSelect = this.props.data.tabSelected;
 
-    if(newTabSelect.indexOf(row.id) == -1){
+    if(newTabSelect.indexOf(row.id) === -1){
      return this.props.addSelectaction(row.id);
     }else {
       return this.props.removeSelectaction(row.id);
@@ -37,7 +34,7 @@ class TableauEcole extends Component  {
   };
 
   isChecked(id){
-    if(this.props.data.tabSelected.indexOf(id) != -1){
+    if(this.props.data.tabSelected.indexOf(id) !== -1){
       return true;
     }
     return false;

@@ -2,10 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import { connect } from 'react-redux';
-import {NavLink, withRouter, Redirect} from 'react-router-dom';
-import classNames from 'classnames';
+import {NavLink,  Redirect} from 'react-router-dom';
 import withWidth from '@material-ui/core/withWidth';
-import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -13,48 +11,17 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import TextField from '@material-ui/core/TextField';
-import FormLabel from '@material-ui/core/FormLabel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
-import Input from '@material-ui/core/Input';
-import FormControl from '@material-ui/core/FormControl';
-import ListItemText from '@material-ui/core/ListItemText';
-import Select from '@material-ui/core/Select';
-import FormGroup from '@material-ui/core/FormGroup';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import Radio from '@material-ui/core/Radio';
-import Paper from '@material-ui/core/Paper';
 import Switch from '@material-ui/core/Switch';
 import { withStyles } from '@material-ui/core/styles';
 import themeStyles from './register.theme.style';
 import scss from './register.module.scss';
-import ecole_image from '../../../assets/images/ecole_chaise.jpg';
-import proff_image from '../../../assets/images/proff.jpg';
-import NavigationIcon from '@material-ui/icons/Navigation';
 import logoImage from '../../../assets/images/imgFrontBackG.jpg';
 import { inscriptionEtapeAction, inscriptionNomProff, inscriptionEmailProff, inscriptionPasswordProff, inscriptionPasswordDoubleProff, register, snackDelete } from '../../../actions/auth.actions';
 import { Remove } from '@material-ui/icons';
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
-
 const option1 = "J'ai un code professeur";
 const option2 = "Je suis indépendant";
-
-const names = [
-  option1,
-  option2,
-];
-
 
 class RegisterForm extends React.Component {
 
@@ -81,11 +48,11 @@ class RegisterForm extends React.Component {
 
 
   getType = () => {
-    if(this.props.match.params.formulaire == "structure"){
+    if(this.props.match.params.formulaire === "structure"){
       return 'structure';
-    }else if(this.props.match.params.formulaire == "professeur"){
+    }else if(this.props.match.params.formulaire === "professeur"){
       return 'profeseur';
-    }else if(this.props.match.params.formulaire == "eleve"){
+    }else if(this.props.match.params.formulaire === "eleve"){
       return 'eleve';
     }
   };
@@ -96,15 +63,15 @@ class RegisterForm extends React.Component {
   handleChangeSelectProff = (e) => {
 
     this.setState({select: e.target.value});
-    if(e.target.value == option1){
+    if(e.target.value === option1){
 
-    }else if (e.target.value == option2){
+    }else if (e.target.value === option2){
 
     }
   };
 
   getRedirectConnect = () => {
-    if(this.props.data.register_snack == true) {
+    if(this.props.data.register_snack === true) {
        return <Redirect to='/' />;
     }
   }
@@ -112,14 +79,14 @@ class RegisterForm extends React.Component {
   submitFormProfesseur = (e) => {
       e.preventDefault();
 
-      if(this.props.data.auth_password == '' 
-        || this.props.data.auth_email == '' 
-        ||  this.props.data.auth_nom == '' 
-        || this.props.data.auth_password_double == '') {
+      if(this.props.data.auth_password === '' 
+        || this.props.data.auth_email === '' 
+        ||  this.props.data.auth_nom === '' 
+        || this.props.data.auth_password_double === '') {
         this.setState({ open: true,  snackMessage: 'Vous devez remplir tout les champs.' });
         return;
       }
-      if(this.props.data.auth_password != this.props.data.auth_password_double) {
+      if(this.props.data.auth_password !== this.props.data.auth_password_double) {
         this.setState({ open: true,  snackMessage: 'Les deux mots de passe ne correspondent pas.' });
         return;
       }
@@ -146,7 +113,7 @@ class RegisterForm extends React.Component {
   getForm = () => {
     let { classes } = this.props;
 
-    if(this.props.match.params.formulaire == "structure"){
+    if(this.props.match.params.formulaire === "structure"){
       return (
         <div className={[ scss['form_inscription']]}>
           <TextField
@@ -195,7 +162,7 @@ class RegisterForm extends React.Component {
           />
         </div>
       );
-    }else if(this.props.match.params.formulaire == "professeur"){
+    }else if(this.props.match.params.formulaire === "professeur"){
       return (
         <div className={[ scss['form_inscription']]}>
           <TextField
@@ -238,7 +205,7 @@ class RegisterForm extends React.Component {
             </CardActions>
         </div>
       );
-    }else if(this.props.match.params.formulaire == "eleve"){
+    }else if(this.props.match.params.formulaire === "eleve"){
       return (
         <div className={[ scss['form_inscription']]}>
           <TextField
@@ -260,7 +227,7 @@ class RegisterForm extends React.Component {
 
 
   render() {
-    {this.getRedirectConnect()}
+    this.getRedirectConnect()
     const { vertical, horizontal, open } = this.state;
     return (
 

@@ -1,29 +1,12 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { connect } from 'react-redux';
-import compose from 'recompose/compose';
-import withWidth from '@material-ui/core/withWidth';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
-import FontAwesome from 'react-fontawesome';
 import scss from './ListeExercice.module.scss';
-//import themeStyles from './home-eleve.style.js';
-import TextField from '@material-ui/core/TextField';
-
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import StarIcon from '@material-ui/icons/Star';
-
 import { listeExerciceAction } from '../../../actions/exercice.actions';
 
-
-const ListExo = ['Exercice 1 - constante PHP', 'Exercice 2 - variables PHP'];
 
 class listeEcercice extends React.Component {
 
@@ -57,7 +40,7 @@ class listeEcercice extends React.Component {
             </ListItem>
           );
         }else {
-          return;
+          return (<div></div>);
         }
       });
    }    

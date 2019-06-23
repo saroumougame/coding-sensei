@@ -6,36 +6,15 @@ import compose from 'recompose/compose';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
-import DeleteIcon from '@material-ui/icons/Delete';
 import { Remove  } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
 import scss from './exercice.module.scss';
 import styles from './exercice.style';
 
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Checkbox from '@material-ui/core/Checkbox'
-import Input from '@material-ui/core/Input';
-import Icon from '@material-ui/core/Icon';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import { NavLink } from 'react-router-dom';
-import TableauExercice from './exercice-table.component';
 import ExerciceAddProffForm from './exercice-addProffForm.component';
 import { showformaction, deleteProffAction } from '../../actions/exercice.actions';
 
 class Exercice extends Component  {
-
-  constructor() {
-    super();
-
-  }
-
   addClick = () => {
     if(!this.props.data.expanded) {
       return this.props.showformaction()
@@ -68,7 +47,6 @@ class Exercice extends Component  {
   };
 
   render() {
-    let { classes } = this.props;
 
   return (
     <div className={[ scss['portal-pages__header']]}>

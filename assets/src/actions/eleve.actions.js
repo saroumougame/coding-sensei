@@ -1,6 +1,3 @@
-
-import history from '../history';
-
 export 	const API_URL         = 'http://51.38.38.246:8080';
 export  const SETELEVECONTACT = "SET ELEVE CONTACT";
 export  const GETELEVEBYCLASS = "GET ELEVE BYCLASS";

@@ -4,25 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
-import withWidth, { isWidthUp, isWidthDown } from '@material-ui/core/withWidth';
-import AppBar from '@material-ui/core/AppBar';
-import { makeStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import Sidenav from '../components/sidenav/sidenav.component';
-import NotificationSidenav from '../components/notification-sidenav/notification-sidenav.component';
-import ContentToolbar from '../components/content-toolbar/content-toolbar.component';
-import ContentFooter from '../components/content-footer/content-footer.component';
-import MenuSidenav from '../components/menu-sidenav/menu-sidenav.component';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import withWidth, { isWidthDown } from '@material-ui/core/withWidth';
 // Actions
 import { toggleSidenav, setSidenavOpen, toggleSidenavVariant } from '../../actions/layout.actions';
 import { deconnexionAction } from '../../actions/user.actions';
@@ -71,13 +53,13 @@ class EleveLayout extends React.Component {
                 value={this.state.valueBottom}
                 onChange={(event, newValue) => {
 
-                  if(newValue == 0) {
+                  if(newValue === 0) {
                     history.push('/classes');
-                  }else if(newValue == 1){
+                  }else if(newValue === 1){
                     history.push('/favoris');
-                  }else if(newValue == 2){
+                  }else if(newValue === 2){
                     history.push('/home');
-                  }else if(newValue == 3){
+                  }else if(newValue === 3){
                     this.props.deconnexionAction();
                   }
 

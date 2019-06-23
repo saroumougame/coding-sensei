@@ -7,16 +7,6 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './ecole.style';
 import scss from './ecole.module.scss';
-import Paper from '@material-ui/core/Paper';
-import AddIcon from '@material-ui/icons/Add';
-import Checkbox from '@material-ui/core/Checkbox'
-import Input from '@material-ui/core/Input';
-import Icon from '@material-ui/core/Icon';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import {changeSidenavToolbarText} from "../../actions/theme.actions";
 
 import { addProffAction } from '../../actions/ecole.actions';
 

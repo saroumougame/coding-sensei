@@ -37,7 +37,6 @@ const classesEleve = asyncComponent(() => import('./containers/eleves/classes/cl
 /* --------------------------------------------------------------------------------------------------------------------------  */
                                                     /*  IMPORT DES VUE DU  TEMPLATE  */
 /* --------------------------------------------------------------------------------------------------------------------------  */
-const AsyncAccount = asyncComponent(() => import('./containers/dashboards/ecommerce/ecommerce.component'));
 
 
 
@@ -75,16 +74,7 @@ const AsyncProgressExample = asyncComponent(() => import('./containers/elements/
 const AsyncLogin = asyncComponent(() => import('./containers/authentication/login/login.component'));
 const AsyncRegister = asyncComponent(() => import('./containers/authentication/register/register.component'));
 const AsyncRegisterForm = asyncComponent(() => import('./containers/authentication/register/registerForm.component'));
-const AsyncProfile = asyncComponent(() => import('./containers/authentication/profile/profile.component'));
-const AsyncLock = asyncComponent(() => import('./containers/authentication/lock/lock.component'));
-const AsyncForgot = asyncComponent(() => import('./containers/authentication/forgot-password/forgot-password.component'));
-// ERROR ROUTES
-const AsyncError404 = asyncComponent(() => import('./containers/errors/404.component'));
-const AsyncError500 = asyncComponent(() => import('./containers/errors/500.component'));
-const AsyncNotFound = asyncComponent(() => import('./containers/not-found/not-found.component'));
 // PAGES ROUTES
-const AsyncTypography = asyncComponent(() => import('./containers/pages/typography.component'));
-const AsyncColors = asyncComponent(() => import('./containers/pages/colors.component'));
 
 
 
@@ -106,10 +96,10 @@ const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
 /* --------------------------------------------------------------------------------------------------------------------------  */
                                                     /*  Composant route protegée */
 /* --------------------------------------------------------------------------------------------------------------------------  */
-const AppprotectedRoute = ({ roles: roles , logged: logged, roles_accepted: roles_accepted, component: Component, redir: redir, layout: Layout, ...rest }) => {
+const AppprotectedRoute = ({ roles , logged, roles_accepted, component: Component, redir, layout: Layout, ...rest }) => {
   var token = localStorage.getItem('token');
 
-  if(typeof(token) != 'undefined' && token != null){
+  if(typeof(token) !== 'undefined' && token !== null){
     logged = true;
   }
 

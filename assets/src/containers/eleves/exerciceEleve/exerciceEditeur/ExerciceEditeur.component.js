@@ -1,17 +1,11 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import withWidth from '@material-ui/core/withWidth';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
-import FontAwesome from 'react-fontawesome';
 import scss from './ExerciceEditeur.module.scss';
-import TextField from '@material-ui/core/TextField';
 import Modal from '@material-ui/core/Modal';
 import Loader from 'react-loader-spinner';
 import MonacoEditor from 'react-monaco-editor';
@@ -33,7 +27,7 @@ class ExerciceEditeur extends React.Component {
 
    getLoader() {
 
-    if(this.props.data.exerciceResultat == null){
+    if(this.props.data.exerciceResultat === null){
       return (
             <Loader 
                    type="Triangle"
@@ -62,11 +56,11 @@ class ExerciceEditeur extends React.Component {
    }
 
   getModalText () {
-     if(this.props.data.exerciceResultat == null){
+     if(this.props.data.exerciceResultat === null){
       return ' Nous compilons votre code.. veuillez patienter...';
-     }else if(this.props.data.exerciceResultat == false) {
+     }else if(this.props.data.exerciceResultat === false) {
         return 'Rater... veuillez réessayer';
-     }else if(this.props.data.exerciceResultat == true) {
+     }else if(this.props.data.exerciceResultat === true) {
         return 'Bravo, vous avez réussit';
      }
   }
@@ -109,7 +103,6 @@ class ExerciceEditeur extends React.Component {
 
 
 	 render() {
-     const code = this.state.code;
     const options = {
       selectOnLineNumbers: false,
       colorDecorators: true,

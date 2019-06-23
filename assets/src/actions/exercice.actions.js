@@ -1,4 +1,3 @@
-import history from '../history';
 export const ADD_PROFF_ACTION       = 'ajoute un proff';
 export const DELETE_PROFF_ACTION    = 'supprile les proff selectionnée';
 export const SHOW_FORM_ACTION       = 'montre le form ';
@@ -19,6 +18,7 @@ export  const SUBMIT_MODAL              = "SUBMIT_MODAL";
 export  const MODAL_FAIL                = "MODAL_FAIL";
 export  const MODAL_SUCESS              = "MODAL_SUCESS";
 export  const DISMISS_MODAL                = "DISMISS_MODAL";
+export  const GET_LISTE_EXERCICES_FOR_STUDENT  = "GET_LISTE_EXERCICES_FOR_STUDENT";
 
 export const addProffAction = form => ({
   type: ADD_PROFF_ACTION,
@@ -73,6 +73,10 @@ export const listeExercice = jsonExercices => ({
   type: GET_LISTE_EXERCICES,
   payload: jsonExercices
 });
+export const elevesExercice = jsonExercices => ({
+  type: GET_LISTE_EXERCICES_FOR_STUDENT,
+  payload: jsonExercices
+});
 
 
 export const setCurrentExoUser = exercice => ({
@@ -101,7 +105,6 @@ export const modalSuccessExercice = () => ({
 
 export const submitExerciceAction = (ExerciceContent) => {
   return (dispatch, getState) => { 
-
     const state = getState();
 
     let current_Exercice_User = state.exerciceData.current_Exercice_User.exercice['@id'];
@@ -124,9 +127,9 @@ export const submitExerciceAction = (ExerciceContent) => {
     .then(response => response.json())
     .then(json => {
       console.log(json);
-      if(json['@type'] == "hydra:Error"){
+      if(json['@type'] === "hydra:Error"){
         dispatch(modalFailExercice(json['hydra:description']));
-      }else if(json['@type'] == "Reponse" && json['success'] == false) {
+      }else if(json['@type'] === "Reponse" && json['success'] === false) {
         dispatch(modalFailExercice("Votre code est bon, mais le resultat attendu ne l'est pas.. veuillez réessayer"));
       }else {
         dispatch(modalSuccessExercice());
@@ -166,16 +169,39 @@ export const listeExerciceAction = () => {
     /*
   */
 }
+export const elevesExerciceAction = () => {
+
+  return (dispatch, getState) => { 
+
+    const state = getState();
+    let idEleve =  state.eleveData.SelectedEleve['@id'];
+    console.log({ssss:state});
+    /*
+*/
+    idEleve = idEleve.split('/')[2];
+    
+
+    //var formBody = JSON.stringify(details);
+    fetch(API_URL + '/exercices/user/' + idEleve, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization'  : 'Bearer ' + localStorage.getItem('token')
+      }
+    })
+    .then(response => response.json())
+    .then(json => {
+      dispatch(elevesExercice(json));
+    })
+    .catch((e) => dispatch());
+  }
+   
+}
 
 export const getExercicesEleve = () => {
 
   return (dispatch, getState) => { 
 
-    const state = getState();
-    let idClass =  state.classData.classeUser['@id'];
-/*
-  */
-    idClass = idClass.split('/')[2];
     
 
     //var formBody = JSON.stringify(details);
@@ -188,7 +214,6 @@ export const getExercicesEleve = () => {
     })
     .then(response => response.json())
     .then(json => {
-          console.log(json);
           dispatch(getExercicesEleveAction(json["hydra:member"]));
     })
     .catch((e) => dispatch());
@@ -220,16 +245,16 @@ export const getExercicesEleveAction = exercices => ({
 export const createExerciceAction = () => {
 
   return (dispatch, getState) => { 
-
     const state = getState();
+
     const idClass =  state.classData.currentClasse['@id'];
 /*
   */
 
     var ini = 0;
     var in_res = '{';
-    while (state.exerciceData.add_form_param_in["in_" + ini] != null){
-      if (state.exerciceData.add_form_param_in["in_" + ini] == 1){
+    while (state.exerciceData.add_form_param_in["in_" + ini] !== null){
+      if (state.exerciceData.add_form_param_in["in_" + ini] === 1){
         in_res += `${state.exerciceData.add_form_param_in["in_name_" + ini]} : ${state.exerciceData.add_form_param_in["in_value_" + ini]}`
       }
 //      if (state.exerciceData.add_form_param_in["in_" + ini] == 2){}
@@ -238,11 +263,11 @@ export const createExerciceAction = () => {
     in_res += '}';
     ini = 0;
     var out_res = '{';
-    while (state.exerciceData.add_form_param_in["out_" + ini] != null){
-      if (state.exerciceData.add_form_param_in["out_" + ini] == 2){
+    while (state.exerciceData.add_form_param_in["out_" + ini] !== null){
+      if (state.exerciceData.add_form_param_in["out_" + ini] === 2){
         out_res += `${state.exerciceData.add_form_param_in["out_name_" + ini]} : ${state.exerciceData.add_form_param_in["out_value_" + ini]}`
       }
-      if (state.exerciceData.add_form_param_in["out_" + ini] == 1){
+      if (state.exerciceData.add_form_param_in["out_" + ini] === 1){
         out_res += `${state.exerciceData.add_form_param_in["out_name_" + ini]} : ""`
 
       }

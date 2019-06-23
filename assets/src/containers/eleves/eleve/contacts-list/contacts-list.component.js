@@ -142,7 +142,7 @@ class ContactsList extends React.Component {
 
   getCustomClassList() {
 
-    if(this.state.updatedList == true){
+    if(this.state.updatedList === true){
 
       return this.props.data.classUpdatedList;
     }

@@ -6,21 +6,9 @@ import compose from 'recompose/compose';
 
 // Material components
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import withTheme from '@material-ui/core/styles/withTheme';
-import withWidth, { isWidthDown } from '@material-ui/core/withWidth';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup';
-import Switch from '@material-ui/core/Switch';
-
-import AppsIcon from '@material-ui/icons/Apps';
-import MenuIcon from '@material-ui/icons/Menu';
-import InvertColorsIcon from '@material-ui/icons/InvertColors';
+import withWidth from '@material-ui/core/withWidth';
 
 // Actions
 import { updateLayout, toggleSidenav, toggleNotifications } from '../../../actions/layout.actions';
@@ -30,26 +18,12 @@ import { changeTheme, changeThemeDirection } from '../../../actions/theme.action
 import { menuItems } from '../../../config';
 
 // Themes
-import themes from '../../../themes';
 import scss from '../../layout-front/layout-front.module.scss';
 
 function setTitle(items, currentPath) {
 
   return 'coding-sensei';
 
-  for (let i = 0; i < items.length; i += 1) {
-    if (items[i].href && items[i].href === currentPath) {
-      return items[i].title;
-    }
-
-    if (items[i].children) {
-      const result = setTitle(items[i].children, currentPath);
-      if (result) {
-        return result;
-      }
-    }
-  }
-  return null;
 }
 
 class ContentToolbar extends React.Component {
@@ -96,13 +70,8 @@ class ContentToolbar extends React.Component {
 
   render() {
     const {
-      width,
-      layout,
-      location,
-      theme
+      location
     } = this.props;
-
-    const showBurgerMenu = isWidthDown('sm', width) || !layout.sidenavOpen;
 
     return (
       <Toolbar className={scss['navbar']} >

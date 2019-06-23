@@ -11,29 +11,13 @@ import { Remove  } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
 import scss from './ecole.module.scss';
 import styles from './ecole.style';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Checkbox from '@material-ui/core/Checkbox'
-import Input from '@material-ui/core/Input';
-import Icon from '@material-ui/core/Icon';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import { NavLink } from 'react-router-dom';
 import TableauEcole from './ecole-table.component';
 import EcoleAddProffForm from './ecole-addProffForm.component';
 import { showformaction, deleteProffAction } from '../../actions/ecole.actions';
 
 class Ecole extends Component  {
 
-  constructor() {
-    super();
-
-  }
+ 
 
   addClick = () => {
     if(!this.props.data.expanded) {
@@ -67,7 +51,6 @@ class Ecole extends Component  {
   };
 
   render() {
-    let { classes } = this.props;
 
   return (
     <div className={[ scss['portal-pages__header']]}>

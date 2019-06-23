@@ -52,8 +52,8 @@ class SimpleModal extends React.Component {
     const { classes, titleButton, title, text, handleCloseModal , colorBtn } = this.props;
 
     return (
-      <div className={styles.div} >
-        <Button color={colorBtn} variant="contained"  onClick={this.handleOpen}>{titleButton}</Button>
+      <span className={styles.div} >
+        <a color={colorBtn} variant="contained"  onClick={this.handleOpen}>{titleButton}</a>
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
@@ -67,12 +67,9 @@ class SimpleModal extends React.Component {
             <Typography variant="subtitle1" id="simple-modal-description">
               {text}
             </Typography>
-          {/*
-            <SimpleModalWrapped />
-          */}
           </div>
         </Modal>
-      </div>
+      </span>
     );
   }
 }

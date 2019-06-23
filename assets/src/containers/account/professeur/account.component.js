@@ -101,7 +101,6 @@ class AccountProff extends React.Component {
 
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     data: {
       user:  state.authData.user,

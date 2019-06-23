@@ -10,8 +10,6 @@ import { deleteExercice } from '../../../actions/exercice.actions';
 class ShowExerice extends React.Component {
 
 	 render() {
-    console.log(this.props.data.current_Exercice_proff);
-    console.log('ici');
     var exo = this.props.data.current_Exercice_proff; 
 	 	return(
 	 		 <div className={scss['home-eleve-main']} >  

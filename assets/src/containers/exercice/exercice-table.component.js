@@ -73,10 +73,6 @@ class TableauExercice extends Component  {
     let { classes } = this.props;
     const { exos, isLoading } = this.state;
     var dataExo = exos['hydra:member'];
-
-    console.log(isLoading);
-  
-    console.log(exos['hydra:member']);
     if (isLoading) {
       return <p>Loading ...</p>;
     }

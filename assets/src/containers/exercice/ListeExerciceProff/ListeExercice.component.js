@@ -59,8 +59,7 @@ class listeEcercice extends React.Component {
 
 	 render() {
 
-    console.log(this.props.data.liste_exerciceData);
-	 	return(
+    return(
 	 		 <div className={scss['ListeExercices']} >  
          <List component="nav">
               {this.getListItem()}

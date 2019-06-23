@@ -18,17 +18,12 @@ class ListeCours extends React.Component {
 	 }
 
    showExercice(i) {
-     //console.log(i);
      this.props.setCurrentExoUser(i);
 
    }
 
    getListeExercices() {
-      //if(this.props.data.classeUser != null) {
-      //}
-        //this.props.getExercicesEleve();
        return this.props.data.liste_exercice_user.map((i) => {
-          console.log(i);
           return (
             <div className={scss['un-cour']} onClick={() => this.showExercice(i)} >
                {i.exercice.name}

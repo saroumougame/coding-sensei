@@ -21,8 +21,7 @@ export const getEleve = () => {
 
     const state = getState();
     const idClass =  state.classData.currentClasse['@id'];
-    console.log(idClass);
-
+    
 
     fetch(API_URL + idClass+'/users', {
       method: 'GET',

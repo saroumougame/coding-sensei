@@ -54,7 +54,6 @@ class ContactsList extends React.Component {
       onSelect
     } = this.props;
 
-    console.log(contact);
     return (
       <ListItem
         title={contact.name}
@@ -99,7 +98,6 @@ class ContactsList extends React.Component {
       selectedContact,
       onSelect
     } = this.props;
-    //console.log(contact);
     return (
       <ListItem
         title={contact.name}

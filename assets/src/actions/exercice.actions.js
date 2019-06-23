@@ -125,9 +125,7 @@ export const deleteExercice = () => {
 
     const state = getState();
     let idExercice =  state.exerciceData.current_Exercice_proff["@id"];
-    console.log(idExercice);
-/*
-  */
+    
     idExercice = idExercice.split('/')[2];
 
     //var formBody = JSON.stringify(details);
@@ -175,7 +173,6 @@ export const submitExerciceAction = (ExerciceContent) => {
     })
     .then(response => response.json())
     .then(json => {
-      console.log(json);
       if(json['@type'] === "hydra:Error"){
         dispatch(modalFailExercice(json['hydra:description']));
       }else if(json['@type'] === "Reponse" && json['success'] === false) {
@@ -224,9 +221,7 @@ export const elevesExerciceAction = () => {
 
     const state = getState();
     let idEleve =  state.eleveData.SelectedEleve['@id'];
-    console.log({ssss:state});
-    /*
-*/
+    
     idEleve = idEleve.split('/')[2];
     
 

@@ -84,8 +84,7 @@ constructor(props) {
    }
 
   render(){
-    console.log(this.props.data.current_Exercice_proff);
-  return (
+    return (
     <div className={classNames(scss['portal-contacts-no-contacts'])}>
       
       <Grid

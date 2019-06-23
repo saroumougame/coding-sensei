@@ -34,7 +34,6 @@ class ListeClassesProff extends React.Component {
   }
 
   render() {
-    console.log(this.props.data.currentClasse);
     var contactsList = this.props.data.classList;
     var currentClasse = this.props.data.currentClasse;
     return (

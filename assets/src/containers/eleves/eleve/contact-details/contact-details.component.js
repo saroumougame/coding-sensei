@@ -28,7 +28,6 @@ class ContactDetails extends React.Component {
     
 
   render() {
-      console.log(this);
       return (<Grid className={classNames(scss['portal-contact-details'] )}>
           <Grid 
           container

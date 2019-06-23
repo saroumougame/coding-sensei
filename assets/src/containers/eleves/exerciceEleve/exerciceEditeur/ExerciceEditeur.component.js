@@ -98,7 +98,6 @@ class ExerciceEditeur extends React.Component {
     editor.focus();
   }
   onChange(newValue, e) {
-    console.log('onChange', newValue, e);
   }
 
 

@@ -17,6 +17,7 @@ export  const SET_CURRENT_EXO_USER     = 'SET_CURRENT_EXO_USER';
 export  const UPDATE_TEXT_EXERCICE      = 'UPDATE_TEXT_EXERCICE';
 export  const SUBMIT_MODAL              = "SUBMIT_MODAL"; 
 export  const MODAL_FAIL                = "MODAL_FAIL";
+export  const MODAL_SUCESS              = "MODAL_SUCESS";
 export  const DISMISS_MODAL                = "DISMISS_MODAL";
 
 export const addProffAction = form => ({
@@ -88,17 +89,22 @@ export const updateExerciceAction = exerciceText => ({
 export const submitModalAction = () => ({
   type: SUBMIT_MODAL
 });
-export const modalFailExercice = () => ({
-  type: MODAL_FAIL
+export const modalFailExercice = exerciceFailText => ({
+  type: MODAL_FAIL,
+  payload: exerciceFailText
 });
 
+export const modalSuccessExercice = () => ({
+  type: MODAL_SUCESS
+});
 
 
 export const submitExerciceAction = (ExerciceContent) => {
   return (dispatch, getState) => { 
 
     const state = getState();
-    let current_Exercice_User = state.exerciceData.current_Exercice_User['@id'];
+
+    let current_Exercice_User = state.exerciceData.current_Exercice_User.exercice['@id'];
 
     
     var details =  {
@@ -119,11 +125,13 @@ export const submitExerciceAction = (ExerciceContent) => {
     .then(json => {
       console.log(json);
       if(json['@type'] == "hydra:Error"){
-        dispatch(modalFailExercice())
+        dispatch(modalFailExercice(json['hydra:description']));
+      }else if(json['@type'] == "Reponse" && json['success'] == false) {
+        dispatch(modalFailExercice("Votre code est bon, mais le resultat attendu ne l'est pas.. veuillez réessayer"));
       }else {
-        console.log('success');
+        dispatch(modalSuccessExercice());
+         //dispatch(listeExercice(json["hydra:member"]));
       }
-          //dispatch(listeExercice(json["hydra:member"]));
     })
     .catch((e) => dispatch());
   }
@@ -142,7 +150,6 @@ export const listeExerciceAction = () => {
     
 
     //var formBody = JSON.stringify(details);
-
     fetch(API_URL + '/classe/'+idClass+'/exercices', {
       method: 'GET',
       headers: {
@@ -156,6 +163,8 @@ export const listeExerciceAction = () => {
     })
     .catch((e) => dispatch());
   }
+    /*
+  */
 }
 
 export const getExercicesEleve = () => {
@@ -170,7 +179,22 @@ export const getExercicesEleve = () => {
     
 
     //var formBody = JSON.stringify(details);
-
+    fetch(API_URL + '/exercices/user', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization'  : 'Bearer ' + localStorage.getItem('token')
+      }
+    })
+    .then(response => response.json())
+    .then(json => {
+          console.log(json);
+          dispatch(getExercicesEleveAction(json["hydra:member"]));
+    })
+    .catch((e) => dispatch());
+  }
+    
+    /*
     fetch(API_URL + '/classe/'+idClass+'/exercices', {
       method: 'GET',
       headers: {
@@ -184,6 +208,7 @@ export const getExercicesEleve = () => {
     })
     .catch((e) => dispatch());
   }
+  */
 }
 
 export const getExercicesEleveAction = exercices => ({

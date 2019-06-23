@@ -27,23 +27,9 @@ class ExerciceEditeur extends React.Component {
         code: '// type your code...'
 	    }
 
-
-      /*
-   */
 	 }
 
-   componentDidMount() {
-    /*
-        let monTextArea = document.getElementById('text-area');
-        monTextArea.addEventListener('keydown', (e) => {
-        console.log(e.key);
-        if(e.key == "Tab") {
-          e.preventDefault();
-          this.props.updateExerciceAction(this.props.data.exerciceTexte+ '  ');
-        }
-      });
-      */
-   }
+
 
    getLoader() {
 
@@ -84,6 +70,11 @@ class ExerciceEditeur extends React.Component {
         return 'Bravo, vous avez réussit';
      }
   }
+
+  getModalTextFromReturn() {
+    return this.props.data.exerciceResultatText;
+  }
+
    getModalValidation () {
     return (
       <Modal
@@ -93,24 +84,23 @@ class ExerciceEditeur extends React.Component {
         >
           <div  className={scss['modal-paper']}>
 
-              <Typography variant="h6" id="modal-title">
+              <Typography variant="h4" id="modal-title">
                  {this.getModalText()}
+              </Typography>
+
+
+              <Typography variant="h6" color="error" className={scss['modal-text-fail']}>
+                 {this.getModalTextFromReturn()}
               </Typography>
 
                 {this.getLoader()}
                 {this.getDismissButton()}
-
-
-          {/*
-            <SimpleModalWrapped />
-          */}
           </div>
         </Modal>
       );
    }
 
   editorDidMount(editor, monaco) {
-    //console.log('editorDidMount', editor);
     editor.focus();
   }
   onChange(newValue, e) {
@@ -122,6 +112,7 @@ class ExerciceEditeur extends React.Component {
      const code = this.state.code;
     const options = {
       selectOnLineNumbers: false,
+      colorDecorators: true,
       minimap: {
         enabled: false
       }
@@ -134,7 +125,7 @@ class ExerciceEditeur extends React.Component {
            <MonacoEditor
             width="100%"
             height="400"
-            language="php"
+            language="javascript"
             theme="vs-black"
             value={this.props.data.exerciceTexte}
             options={options}
@@ -142,9 +133,9 @@ class ExerciceEditeur extends React.Component {
             editorDidMount={this.editorDidMount}
           />
         </div>
-     <Button variant="outlined"  onClick={this.submitTextAreat.bind(this)} color="primary" >
-        Tester mes resultats
-      </Button>
+         <Button variant="outlined"  onClick={this.submitTextAreat.bind(this)} color="primary" >
+            Tester mes resultats
+          </Button>
 	 		 </div>
 	 	);
 	 }
@@ -156,7 +147,8 @@ function mapStateToProps(state) {
       FormDataUpdateClassNom:           state.classData.FormDataUpdateClassNom,  
       exerciceTexte:                    state.exerciceData.exerciceTexte,
       exerciceModal:                    state.exerciceData.exerciceModal,
-      exerciceResultat:                state.exerciceData.exerciceResultat,
+      exerciceResultat:                 state.exerciceData.exerciceResultat,
+      exerciceResultatText:             state.exerciceData.exerciceResultatText,
 
     }
   };

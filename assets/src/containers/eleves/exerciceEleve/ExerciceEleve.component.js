@@ -13,6 +13,8 @@ import FontAwesome from 'react-fontawesome';
 import scss from './ExerciceEleve.module.scss';
 import TextField from '@material-ui/core/TextField';
 import ExerciceEditeur from './exerciceEditeur/ExerciceEditeur.component';
+
+
 class ExerciceEleve extends React.Component {
 
   	constructor(props) {
@@ -24,7 +26,6 @@ class ExerciceEleve extends React.Component {
 	 }
 
    getExerciceTitle() {
-    console.log(this.props.data.current_Exercice_User);
     if(this.props.data.current_Exercice_User != null){
       return this.props.data.current_Exercice_User['name'];
     }

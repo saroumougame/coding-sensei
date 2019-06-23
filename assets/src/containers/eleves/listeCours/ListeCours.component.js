@@ -39,11 +39,12 @@ class ListeCours extends React.Component {
       //}
         //this.props.getExercicesEleve();
        return this.props.data.liste_exercice_user.map((i) => {
+          console.log(i);
           return (
             <div className={scss['un-cour']} onClick={() => this.showExercice(i)} >
-               {i.name}
+               {i.exercice.name}
                <div>
-               {i.description}
+               {i.exercice.description}
                </div>
             </div>
             );

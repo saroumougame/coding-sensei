@@ -39,6 +39,12 @@ class listeEcercice extends React.Component {
 	 }
 
 
+   getDateRealisation(exercice) {
+      if(exercice.dateEnd == null) {
+        return 'Date limite: infinie';
+      }
+      return 'Date limite: '+ exercice.dateEnd;
+   }
 
    getListItem() {
       let count = 0;
@@ -47,13 +53,17 @@ class listeEcercice extends React.Component {
         count++;
         if(count > this.state.pagination){  
         return (
-            <ListItem key={count}  className={scss['UnExercice']} button onClick={this.props.customClick}>
+            <ListItem key={count}  className={scss['UnExercice']} button onClick={() => { this.props.customClick()}}>
               <ListItemIcon>
               {/*
                 <StarIcon />
               */}
               </ListItemIcon>
               <ListItemText inset primary={i.name}  secondary={i.description} />
+
+              <div>
+              {this.getDateRealisation(i)} 
+              </div>
             </ListItem>
           );
         }else {

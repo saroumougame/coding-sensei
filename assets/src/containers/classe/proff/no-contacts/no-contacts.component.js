@@ -111,9 +111,6 @@ class NoContacts extends React.Component {
   return (
     <div className={classNames(scss['portal-contacts-no-contacts'], classes['portal-contacts-no-contacts'])}>
 
-                  
-
-
               <Grid className={scss['grid_no_class']} container justify="center" alignContent="center">
               <p className={scss['text_no_class']}
               >Vous pouvez des à present creer une classe en cliquant <Modal2
@@ -147,3 +144,8 @@ NoContacts.propTypes = {
 };
 
 export default compose(withStyles(themeStyles, { withTheme: true }), connect(mapStateToProps, {addClass})) (NoContacts);
+
+
+
+
+

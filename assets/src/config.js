@@ -35,29 +35,30 @@ const iconStyle = {
   fontSize: 16
 };
 //BuildIcon
-export const menuItems = [{
-  title: 'Administration',
-  icon: <HomeIcon style={iconStyle} />,
-  children: [{
+export const menuItems = [
+
+  {
     title: 'Mon Compte',
     href: '/professeur/compte',
     icon: <DashboardIcon style={iconStyle} />
-  }, {
-    title: 'Ecole',
-    href: '/ecole',
-    icon: <ShoppingCartIcon style={iconStyle} />
-  } ,{
-  title: 'Mes classes',
-  href: '/professeur/classes',
-  icon: <DesktopWindowsIcon style={iconStyle} />
-} ,{
-    title: 'Mes Eleves',
-    href: '/apps/contacts',
-    icon: <FaceIcon style={iconStyle} />
-  }
-]
-}, 
+  },
+  {
+    title: 'Mes classes',
+    href: '/professeur/classes',
+    icon: <DesktopWindowsIcon style={iconStyle} />
+  }, 
+  {
+      title: 'Mes Exercices',
+      href: '/ecole',
+      icon: <ShoppingCartIcon style={iconStyle} />
+  },
+  {
+      title: 'Mes Eleves',
+      href: '/apps/contacts',
+      icon: <FaceIcon style={iconStyle} />
+  },
 
+/*
 {
   title: 'Template',
   type: 'header'
@@ -224,6 +225,7 @@ export const menuItems = [{
     href: '/errors/500'
   }]
 }
+*/
 /*
 */
 ];

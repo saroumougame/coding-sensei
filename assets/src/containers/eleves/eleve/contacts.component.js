@@ -5,7 +5,6 @@ import { withStyles } from '@material-ui/core/styles';
 import withWidth from '@material-ui/core/withWidth';
 import { connect } from 'react-redux';
 // Array of contacts to show on the left side.
-import contactsList from '../../../assets/data/apps/contacts/contacts.json';
 
 import ContactsList from './contacts-list/contacts-list.component';
 import ContactDetails from './contact-details/contact-details.component';

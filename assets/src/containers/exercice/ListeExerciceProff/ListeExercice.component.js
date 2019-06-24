@@ -1,29 +1,13 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { connect } from 'react-redux';
-import compose from 'recompose/compose';
-import withWidth from '@material-ui/core/withWidth';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
-import FontAwesome from 'react-fontawesome';
 import scss from './ListeExercice.module.scss';
-//import themeStyles from './home-eleve.style.js';
-import TextField from '@material-ui/core/TextField';
-
+import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import StarIcon from '@material-ui/icons/Star';
-
 import { listeExerciceAction } from '../../../actions/exercice.actions';
 
-
-const ListExo = ['Exercice 1 - constante PHP', 'Exercice 2 - variables PHP'];
 
 class listeEcercice extends React.Component {
 
@@ -45,11 +29,49 @@ class listeEcercice extends React.Component {
       }
       return 'Date limite: '+ exercice.dateEnd;
    }
+    handleExport(){
+      let liste = this.props.data.liste_exerciceData;
+      var res = '{';
+      console.log(this);
+      for (var i = 0; i < liste.length; i++){
+          res += `\n{\n
+    "name":"${liste[i].name}",\n
+    "description":"${liste[i].description}",\n
+    "inData":${JSON.stringify(liste[i].inData) },\n
+    "outData":${JSON.stringify(liste[i].outData)},\n 
+    "dateEnd":"${liste[i].dateEnd || ""}"\n 
+},`;
+      }
+      res.substring(0, res.length - 1);
+      res += '\n}\n';
 
+
+        var today = new Date();
+    var y = today.getFullYear();
+    // JavaScript months are 0-based.
+    var m = today.getMonth() + 1;
+    var d = today.getDate();
+    var h = today.getHours();
+    var mi = today.getMinutes();
+    var s = today.getSeconds();
+
+
+
+      var filename = "export_" + y + "-" + m + "-" + d + "_" + h + "-" + mi + "-" + s + ".coding-sensei"
+      var element = document.createElement('a');
+      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(res));
+      element.setAttribute('download', filename);
+      element.style.display = 'none';
+      document.body.appendChild(element);
+      element.click();
+      document.body.removeChild(element);
+      console.log(res);
+
+    }
    getListItem() {
       let count = 0;
       let liste = this.props.data.liste_exerciceData;
-      if(typeof(liste) != 'undefined' && typeof(liste) != undefined) { 
+      if(typeof(liste) !== 'undefined' && typeof(liste) !== undefined) { 
         return liste.map((i) => {
           count++;
           if(count > this.state.pagination){  
@@ -68,20 +90,21 @@ class listeEcercice extends React.Component {
               </ListItem>
             );
           }else {
-            return;
+            return <div></div>;
           }
         });
       }
    }    
-
+    
 	 render() {
 
-    console.log(this.props.data.liste_exerciceData);
-	 	return(
+    return(
 	 		 <div className={scss['ListeExercices']} >  
          <List component="nav">
               {this.getListItem()}
           </List>
+          <Button onClick={this.handleExport.bind(this)}>Export</Button>
+
 	 		 </div>
 	 	);
 	 }

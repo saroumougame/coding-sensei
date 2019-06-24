@@ -14,18 +14,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Chip from '@material-ui/core/Chip';
-/*
-import Paper from '@material-ui/core/Paper';
-import AddIcon from '@material-ui/icons/Add';
-import Checkbox from '@material-ui/core/Checkbox'
-import Input from '@material-ui/core/Input';
-import Icon from '@material-ui/core/Icon';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import {changeSidenavToolbarText} from "../../actions/theme.actions";
-*/
+
 
 import { addProffAction } from '../../actions/exercice.actions';
 
@@ -41,18 +30,6 @@ const MenuProps = {
   }
 };
 
-const names = [
-  "Oliver Hansen",
-  "Van Henry",
-  "April Tucker",
-  "Ralph Hubbard",
-  "Omar Alexander",
-  "Carlos Abbott",
-  "Miriam Wagner",
-  "Bradley Wilkerson",
-  "Virginia Andrews",
-  "Kelly Snyder"
-];
 
 const API = 'http://localhost:8089/';
 const DEFAULT_QUERY = 'exercices';
@@ -78,7 +55,7 @@ class ExerciceAddProffForm extends Component  {
   
   formSubmit() {
    
-    let form = {
+   /* let form = {
       "inData": [
         this.state.entree
       ],
@@ -90,8 +67,7 @@ class ExerciceAddProffForm extends Component  {
       "langagueSpecs":  'php',
       "fonction":  this.state.fonction,
       "classe": this.state.champClas
-    }
-console.log(form);
+    }*/
    // this.addExercices(form);
   }
 
@@ -137,10 +113,9 @@ console.log(form);
 
 iniExoClass(){
 
-  this.state.exoClas["hydra:member"].map(exoClass => {
-      
+  this.state.exoClas["hydra:member"].map(exoClass => {    
     this.state.name.push(exoClass.id)
-    console.log(this.state.name)
+    return '';
   },
   this.setState({ isLoading : false })
 
@@ -153,12 +128,9 @@ iniExoClass(){
   render() {
     let { classes } = this.props;
     const { isLoading } = this.state;
-    const exoClass = this.state.exoClas["hydra:member"];
    if(isLoading){
     return <p>Loading ...</p>;
    }
-   console.log(this.state.name);
-
     return (
         <div className={[ scss['form_add_proff_div']]}>
           Ajouter un exercice

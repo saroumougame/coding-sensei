@@ -11,7 +11,6 @@ const styles = theme => ({
 
 function doSomething(event) {
   // eslint-disable-next-line no-console
-  console.log(event.currentTarget.getAttribute('data-something'));
 }
 
 function FlatButtons(props) {

@@ -24,10 +24,9 @@ const userReducer = (state = defaultState, action) => {
           User: action.payload,
         }
       
-    break;
-    case LOGIN_FAIL: {
+    case LOGIN_FAIL: 
         return state;
-    } 
+    
     case DECONNEXION: {
       localStorage.removeItem('token');
       history.push('/');

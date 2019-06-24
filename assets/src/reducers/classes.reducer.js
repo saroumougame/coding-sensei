@@ -1,7 +1,4 @@
 import {
-  ADD_CLASS_BY_PROFF,
-  EDIT_CLASS_BY_PROFF,
-  SUPPRIMER_CLASS_BY_PROFF,
   UPDATE_CLASS_LIST,
   GET_ALL_CLASS__BY_PROFF,
   UPDATE_CLASS_NOM,
@@ -31,38 +28,31 @@ const classesReducer = (state = defaultState, action) => {
           classes: action.payload,
           UpdatedClasses: action.payload
         }
-
-    break; 
     case UPDATE_CLASS_LIST:
       return {
         ...state,
           UpdatedClasses: action.payload
       }
-    break;
     case UPDATE_CLASS_NOM:
       return {
         ...state,
           FormDataUpdateClassNom: action.payload
       }
-    break;
     case SETCURRENTCLASS : 
       return {
         ...state,
         currentClasse: action.payload
       }
-    break;
     case UPDATE_CLASS_USER : 
       return {
         ...state,
         classeUser: action.payload
       }
-    break;
     case SET_CLASS_STATS:
       return {
           ...state,
           stats: action.payload,
       }
-    break;
     default:
       return state;
   }

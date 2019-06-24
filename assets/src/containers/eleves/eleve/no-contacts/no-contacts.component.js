@@ -3,15 +3,13 @@ import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
+import withWidth from '@material-ui/core/withWidth';
 import classNames from 'classnames';
 import compose from 'recompose/compose';
 import { connect } from 'react-redux';
 import themeStyles from './no-contacts.theme.style';
 import scss from './no-contacts.module.scss';
-import UserTasksWidget from '../user-tasks-widget/user-tasks-widget.component';
 import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
 import ListeExercice from   '../../../exercice/ListeExerciceProff/ListeExercice.component' ;
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -42,7 +40,7 @@ constructor(props) {
    }
 
    getPaperContent() {
-      if(this.props.data.exercice_component == null){
+      if(this.props.data.exercice_component === null){
         return (
           <div className={scss['containerdiv']}>
                    <Typography className={scss['exercice-paper-title']} variant="headline" component="h3">
@@ -55,7 +53,7 @@ constructor(props) {
                   <ListeExercice customClick={(i) => {this.props.setCurrentExerciceProff(i);this.props.setExerciceComponentAction('edit'); }} />
           </div>
           );
-      }else if(this.props.data.exercice_component == 'add'){
+      }else if(this.props.data.exercice_component === 'add'){
         return (
             <div className={scss['containerdiv']}>
                    <Typography className={scss['exercice-paper-title']} variant="headline" component="h3">
@@ -68,7 +66,7 @@ constructor(props) {
                   <AddExerciceForm />
           </div>
           );
-      }else if(this.props.data.exercice_component == 'edit') {
+      }else if(this.props.data.exercice_component === 'edit') {
           return (
             <div className={scss['containerdiv']}>
                    <Typography className={scss['exercice-paper-title']} variant="headline" component="h3">
@@ -86,8 +84,7 @@ constructor(props) {
    }
 
   render(){
-    console.log(this.props.data.current_Exercice_proff);
-  return (
+    return (
     <div className={classNames(scss['portal-contacts-no-contacts'])}>
       
       <Grid

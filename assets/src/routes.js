@@ -29,6 +29,7 @@ const AsyncLanding= asyncComponent(() => import('./containers/landing/landing.co
 const AsyncEcole= asyncComponent(() => import('./containers/ecole/ecole.component'));
 const AccountProff= asyncComponent(() => import('./containers/account/professeur/account.component'));
 const ClassesProff= asyncComponent(() => import('./containers/classe/proff/contacts.component'));
+const ElevesProff= asyncComponent(() => import('./containers/eleves/eleve/allcontacts.component'));
 const AsyncExercice= asyncComponent(() => import('./containers/exercice/exercice.component'));
 //const AccountProff= asyncComponent(() => import('./containers/account/professeur/account.component'))
 const AsyncEleveHome= asyncComponent(() => import('./containers/eleves/home/home-eleve.component'));
@@ -37,7 +38,6 @@ const classesEleve = asyncComponent(() => import('./containers/eleves/classes/cl
 /* --------------------------------------------------------------------------------------------------------------------------  */
                                                     /*  IMPORT DES VUE DU  TEMPLATE  */
 /* --------------------------------------------------------------------------------------------------------------------------  */
-const AsyncAccount = asyncComponent(() => import('./containers/dashboards/ecommerce/ecommerce.component'));
 
 
 
@@ -53,7 +53,6 @@ const AsyncEmailApp = asyncComponent(() => import('./containers/apps/email/email
 const AsyncTodoApp = asyncComponent(() => import('./containers/apps/todo/todo.component'));
 const AsyncMapsApp = asyncComponent(() => import('./containers/apps/maps/maps.component'));
 const AsyncNotesApp = asyncComponent(() => import('./containers/apps/notes/notes.component'));
-const AsyncContactsApp = asyncComponent(() => import('./containers/apps/contacts/contacts.component'));
 const AsyncChatApp = asyncComponent(() => import('./containers/apps/chat/chat.component'));
 const AsyncCalendarApp = asyncComponent(() => import('./containers/apps/calendar/calendar.component'));
 // EXAMPLE ROUTES
@@ -75,16 +74,7 @@ const AsyncProgressExample = asyncComponent(() => import('./containers/elements/
 const AsyncLogin = asyncComponent(() => import('./containers/authentication/login/login.component'));
 const AsyncRegister = asyncComponent(() => import('./containers/authentication/register/register.component'));
 const AsyncRegisterForm = asyncComponent(() => import('./containers/authentication/register/registerForm.component'));
-const AsyncProfile = asyncComponent(() => import('./containers/authentication/profile/profile.component'));
-const AsyncLock = asyncComponent(() => import('./containers/authentication/lock/lock.component'));
-const AsyncForgot = asyncComponent(() => import('./containers/authentication/forgot-password/forgot-password.component'));
-// ERROR ROUTES
-const AsyncError404 = asyncComponent(() => import('./containers/errors/404.component'));
-const AsyncError500 = asyncComponent(() => import('./containers/errors/500.component'));
-const AsyncNotFound = asyncComponent(() => import('./containers/not-found/not-found.component'));
 // PAGES ROUTES
-const AsyncTypography = asyncComponent(() => import('./containers/pages/typography.component'));
-const AsyncColors = asyncComponent(() => import('./containers/pages/colors.component'));
 
 
 
@@ -106,10 +96,10 @@ const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
 /* --------------------------------------------------------------------------------------------------------------------------  */
                                                     /*  Composant route protegée */
 /* --------------------------------------------------------------------------------------------------------------------------  */
-const AppprotectedRoute = ({ roles: roles , logged: logged, roles_accepted: roles_accepted, component: Component, redir: redir, layout: Layout, ...rest }) => {
+const AppprotectedRoute = ({ roles , logged, roles_accepted, component: Component, redir, layout: Layout, ...rest }) => {
   var token = localStorage.getItem('token');
 
-  if(typeof(token) != 'undefined' && token != null){
+  if(typeof(token) !== 'undefined' && token !== null){
     logged = true;
   }
 
@@ -201,6 +191,7 @@ export default ({ logged , childProps, layout, roles }) => {
       <AppprotectedRoute path="/professeur" exact component={AsyncRegister} redir={AsyncLogin} props={childProps} layout={CompactLayout} roles={roles}  roles_accepted={role_user}/>
       <AppprotectedRoute path="/professeur/classes" exact component={ClassesProff} redir={AsyncLogin} props={childProps} layout={CompactLayout} roles={roles} roles_accepted={role_user} />
       <AppprotectedRoute path="/professeur/classes/add" exact component={ClassesProff} redir={AsyncLogin} props={childProps} layout={CompactLayout} roles={roles} roles_accepted={role_user} />
+      <AppprotectedRoute path="/apps/contacts" exact component={ElevesProff} redir={AsyncLogin} props={childProps} layout={CompactLayout} roles={roles} roles_accepted={role_user} />
 
 
       
@@ -219,7 +210,6 @@ export default ({ logged , childProps, layout, roles }) => {
       <AppRoute path="/apps/todo" exact component={AsyncTodoApp} props={childProps} layout={CompactLayout} />
       <AppRoute path="/apps/maps" exact component={AsyncMapsApp} props={childProps} layout={CompactLayout} />
       <AppRoute path="/apps/notes" exact component={AsyncNotesApp} props={childProps} layout={CompactLayout} />
-      <AppRoute path="/apps/contacts" exact component={AsyncContactsApp} props={childProps} layout={CompactLayout} />
       <AppRoute path="/apps/chat" exact component={AsyncChatApp} props={childProps} layout={CompactLayout} />
       <AppRoute path="/apps/calendar" exact component={AsyncCalendarApp} props={childProps} layout={CompactLayout} />
       <AppRoute path="/elements/autocomplete" exact component={AsyncAutocompleteExample} props={childProps} layout={CompactLayout} />

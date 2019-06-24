@@ -26,10 +26,8 @@ export const addClass = (nom) => {
   }
   
   var formBody = JSON.stringify(details);
-  console.log("ok0");
-
+ 
   return (dispatch, getState) => { 
-  console.log("ok1");
     fetch(API_URL + '/classes', {
       method: 'POST',
       headers: {
@@ -40,8 +38,7 @@ export const addClass = (nom) => {
     })
     .then(response => response.json())
     .then(json => {
-        console.log("ok2");
-
+ 
       dispatch(getClass());
     })
     .catch((e) => dispatch());

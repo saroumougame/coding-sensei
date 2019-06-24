@@ -50,7 +50,6 @@ class ContactsList extends React.Component {
   }
 
   onClickClassElement(contact) {
-    //console.log('laaaa');
     //this.props.setEleveAction(null);
     //this.props.onSelect(contact);
   }

@@ -7,7 +7,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
-import FontAwesome from 'react-fontawesome';
 
 import themeStyles from './content-footer.theme.style';
 

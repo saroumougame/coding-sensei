@@ -5,12 +5,7 @@ import classNames from 'classnames';
 import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
 import withWidth, { isWidthUp, isWidthDown } from '@material-ui/core/withWidth';
-import AppBar from '@material-ui/core/AppBar';
-
 import Sidenav from '../components/sidenav/sidenav.component';
-import NotificationSidenav from '../components/notification-sidenav/notification-sidenav.component';
-import ContentToolbar from '../components/content-toolbar/content-toolbar.component';
-import ContentFooter from '../components/content-footer/content-footer.component';
 import MenuSidenav from '../components/menu-sidenav/menu-sidenav.component';
 
 // Actions

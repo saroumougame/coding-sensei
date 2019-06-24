@@ -10,7 +10,6 @@ import history from '../../../history';
 
 import ContactsList from './contacts-list/contacts-list.component';
 import ContactDetails from './contact-details/contact-details.component';
-import NoContacts from './no-contacts/no-contacts.component';
 
 import themeStyles from './contacts.theme.style';
 import scss from './contacts.module.scss';
@@ -54,7 +53,7 @@ class Contacts extends React.Component {
             selectedContact={this.props.data.SelectedEleve} /> :
 
 <Grid className={scss['grid_no_class']} container direction="column" justify="center" alignContent="center">
-              <img className={scss['grid_no_class_img']} src="/assets/images/student.svg"/>
+              <img alt='' className={scss['grid_no_class_img']} src="/assets/images/student.svg"/>
               <p className={scss['text_no_class']}>
               Selectionnez un eleve pour commencer ou allez <a onClick={this.redirecttoclass}>ici</a> pour en creer un 
               </p>

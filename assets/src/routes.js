@@ -53,7 +53,6 @@ const AsyncEmailApp = asyncComponent(() => import('./containers/apps/email/email
 const AsyncTodoApp = asyncComponent(() => import('./containers/apps/todo/todo.component'));
 const AsyncMapsApp = asyncComponent(() => import('./containers/apps/maps/maps.component'));
 const AsyncNotesApp = asyncComponent(() => import('./containers/apps/notes/notes.component'));
-const AsyncContactsApp = asyncComponent(() => import('./containers/apps/contacts/contacts.component'));
 const AsyncChatApp = asyncComponent(() => import('./containers/apps/chat/chat.component'));
 const AsyncCalendarApp = asyncComponent(() => import('./containers/apps/calendar/calendar.component'));
 // EXAMPLE ROUTES

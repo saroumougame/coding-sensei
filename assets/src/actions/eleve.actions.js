@@ -42,7 +42,6 @@ export const getEleveByProf = () => {
 
   return (dispatch, getState) => { 
 
-    const state = getState();
     
 
     fetch(API_URL +'/teacher/students', {

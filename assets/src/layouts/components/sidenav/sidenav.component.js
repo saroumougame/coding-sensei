@@ -12,11 +12,6 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
-
-// Portal components
-import logoImage from '../../../assets/images/portal-logo.png';
-
-// Actions
 import { toggleSidenav } from '../../../actions/layout.actions';
 import { deconnexionAction} from '../../../actions/user.actions';
 

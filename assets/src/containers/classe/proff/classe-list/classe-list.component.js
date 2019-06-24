@@ -13,17 +13,11 @@ import Avatar from '@material-ui/core/Avatar';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 import Search from '@material-ui/icons/Search';
-import Person from '@material-ui/icons/Person';
-import location_city from '@material-ui/icons/LocationCity';
 import Group from '@material-ui/icons/Group';
-import AddIcon from '@material-ui/icons/Add';
-import Icon from '@material-ui/core/Icon';
-import Fab from '@material-ui/core/Fab';
 import Button from '@material-ui/core/Button';
 import themeStyles from './classe-list.theme.style';
 import scss from './classe-list.module.scss';
 import {UpdateClass}      from '../../../../actions/classes.actions';
-import Modal      from '../../../../actions/classes.actions';
 import Modal2 from '../../../../components/list.modal.component';
 import {addClass}      from '../../../../actions/classes.actions';
 
@@ -70,7 +64,7 @@ class ClassesList extends React.Component {
     );
 
     this.props.UpdateClass(updatedList);
-    if(e.target.value != ""){
+    if(e.target.value !== ""){
       this.setState({updatedList: true});
     }else{
        this.setState({updatedList: false});
@@ -135,8 +129,7 @@ class ClassesList extends React.Component {
   createMobileListItem = (contact) => {
     const {
       classes,
-      selectedContact,
-      onSelect
+      selectedContact
     } = this.props;
 
     return (
@@ -167,7 +160,6 @@ class ClassesList extends React.Component {
   createSearchTextField = () => {
     const {
       classes,
-      onSelect
     } = this.props;
 
     return (
@@ -193,10 +185,10 @@ class ClassesList extends React.Component {
   }
 
   getCustomClassList() {
-    if(this.state.updatedList == true){
+    if(this.state.updatedList === true){
       return this.props.data.classUpdatedList;
     }
-    if (this.props.data.classList  != undefined){
+    if (this.props.data.classList  !== undefined){
 
         return this.props.data.classList;
     }else{

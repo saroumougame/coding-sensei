@@ -2,30 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import compose from 'recompose/compose';
-import { connect } from 'react-redux';
 import classNames from 'classnames';
-import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
-import Avatar from '@material-ui/core/Avatar';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import TextField from '@material-ui/core/TextField';
-import Search from '@material-ui/icons/Search';
-import Person from '@material-ui/icons/Person';
-import location_city from '@material-ui/icons/LocationCity';
 import Group from '@material-ui/icons/Group';
 import AddIcon from '@material-ui/icons/Add';
-import Icon from '@material-ui/core/Icon';
-import Fab from '@material-ui/core/Fab';
-import Button from '@material-ui/core/Button';
 import Modal from '@material-ui/core/Modal';
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
+
 
 function getModalStyle() {
   const top = 50 ;
@@ -66,7 +50,7 @@ class SimpleModal extends React.Component {
   };
 
   render() {
-    const { classes, titleButton, title, text, handleCloseModal , colorBtn } = this.props;
+    const { classes, titleButton, title, text } = this.props;
 
     return (
       <div className={styles.div} >

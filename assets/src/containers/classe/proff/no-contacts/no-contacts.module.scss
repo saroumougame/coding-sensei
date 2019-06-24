@@ -155,7 +155,13 @@
 }
 .text_no_class span{
     color: #0854a9;
+    cursor: pointer;
 }
 .grid_no_class{
   height: 100%
+}
+.grid_no_class_img{
+  height: 100px;
+  width: 100px;
+  align-self: center;
 }

@@ -1,45 +1,12 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { connect } from 'react-redux';
-import compose from 'recompose/compose';
-import withWidth from '@material-ui/core/withWidth';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
-import FontAwesome from 'react-fontawesome';
 import scss from './AddExerciceForm.module.scss';
-//import themeStyles from './home-eleve.style.js';
 import TextField from '@material-ui/core/TextField';
-
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import StarIcon from '@material-ui/icons/Star';
-
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
+import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import Chip from '@material-ui/core/Chip';
-
 import { updateFormTitle, updateFormDesc, updateFormIn, updateFormOut, createExerciceAction } from '../../../actions/exercice.actions';
-
-const ListExo = ['Exercice 1 - constante PHP', 'Exercice 2 - variables PHP'];
-
-
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: 48 * 4.5 + 8,
-      width: 250
-    }
-  }
-};
 
 class AddExerciceForm extends React.Component {
 
@@ -70,7 +37,7 @@ class AddExerciceForm extends React.Component {
    getinvars(){
     return [...Array(this.state.quantityOfIn)].map((e, i) => {
         var res = <div></div>
-        if (this.props.data.FormDataIn["in_" + i]  == 1 || this.props.data.FormDataIn["in_" + i]  == 2 ){
+        if (this.props.data.FormDataIn["in_" + i]  === 1 || this.props.data.FormDataIn["in_" + i]  === 2 ){
           res = <span>
               <TextField
               id={"in_name_" + i}
@@ -97,7 +64,6 @@ class AddExerciceForm extends React.Component {
           </span>
         }
        return <Grid
-              container
               container
               direction="row"
               justify="flex-start"
@@ -126,7 +92,7 @@ class AddExerciceForm extends React.Component {
 getoutvars(){
     return [...Array(this.state.quantityOfOut)].map((e, i) =>{
       var res = <div></div>
-      if (this.props.data.FormDataIn["out_" + i]  == 1){
+      if (this.props.data.FormDataIn["out_" + i]  === 1){
         res = <TextField
               id={"out_name_" + i}
               value={this.props.data.FormDataIn["out_name_"+i]}
@@ -139,7 +105,7 @@ getoutvars(){
               }}
             />
       }
-      if (this.props.data.FormDataIn["out_" + i]  == 2){
+      if (this.props.data.FormDataIn["out_" + i]  === 2){
         res = <span>
                 <TextField
               id={"out_name_" + i}
@@ -167,7 +133,6 @@ getoutvars(){
             </span>
       }
       return <Grid
-              container
               container
               direction="row"
               justify="flex-start"
@@ -200,14 +165,14 @@ getoutvars(){
 
   }
   getDelIn(){
-        if (this.state.quantityOfIn == 0){
+        if (this.state.quantityOfIn === 0){
            return <div>add a Variable</div>;
          }
         return <div></div>;
        // return <Button className={[scss['delete']]} variant="contained"  onClick={() => {this.delinvars()}}>Supprimer</Button>;
   }
   getDelOut(){
-        if (this.state.quantityOfOut == 0){
+        if (this.state.quantityOfOut === 0){
            return <div>Aucune clause de validation</div>;
          }
         return <div></div>;

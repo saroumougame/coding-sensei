@@ -23,7 +23,6 @@ const customReducer = (state = defaultState, action) => {
         users: userTab,
         expanded: false,
       };
-      break;
     case SHOW_FORM_ACTION:
 
       let newepand = true;
@@ -35,7 +34,6 @@ const customReducer = (state = defaultState, action) => {
         ...state,
         expanded: newepand,
       };
-      break;
 
     case ADD_SELECTED_ACTION:
       let newTab = state.tabSelected;
@@ -43,29 +41,26 @@ const customReducer = (state = defaultState, action) => {
       return {...state,
         tabSelected: newTab
       };
-      break;
     case DELETE_SELECTED_ACTION:
       let newTabdeux = state.tabSelected;
       newTabdeux.splice(newTabdeux.indexOf(action.payload),1);
       return {...state,
         tabSelected: newTabdeux
       };
-      break;
     case DELETE_PROFF_ACTION:
       let newUser = [];
       state.users.map((i) => {
 
-        if(state.tabSelected.indexOf(i.id) == -1){
-          console.log(i.id);
+        if(state.tabSelected.indexOf(i.id) === -1){
           newUser.push(i);
         }
+        return '';
       });
 
       return {...state,
         users: newUser
       };
 
-      break;
     default:
       return state;
   }

@@ -18,19 +18,16 @@ const classesReducer = (state = defaultState, action) => {
           UpdatedEleves: action.payload
         }
 
-    break; 
     case UPDATE_ELEVE_LIST:
       return {
         ...state,
           UpdatedEleves: action.payload
       }
-    break;
     case SETELEVECONTACT : 
       return {
         ...state,
         SelectedEleve: action.payload
       }
-    break;
     default:
       return state;
   }

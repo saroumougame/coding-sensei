@@ -5,9 +5,7 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import withWidth      from '@material-ui/core/withWidth';
 // Array of contacts to show on the left side.
-import contactsListJson from '../../../assets/data/apps/contacts/contacts.json';
 import ClassesList    from './classe-list/classe-list.component';
-import ContactsList   from './contacts-list/contacts-list.component';
 import ContactDetails from './contact-details/contact-details.component';
 import NoContacts     from './no-contacts/no-contacts.component';
 import themeStyles    from './contacts.theme.style';
@@ -36,7 +34,6 @@ class ListeClassesProff extends React.Component {
   }
 
   render() {
-    console.log(this.props.data.currentClasse);
     var contactsList = this.props.data.classList;
     var currentClasse = this.props.data.currentClasse;
     return (

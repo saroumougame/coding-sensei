@@ -1,6 +1,4 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
@@ -9,27 +7,11 @@ import themeStyles from './contact-details.theme.style';
 import withWidth from '@material-ui/core/withWidth';
 import { withStyles } from '@material-ui/core/styles';
 import scss from './contact-details.module.scss';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
-import FontAwesome from 'react-fontawesome';
 import {FormUpdateClassNom, updateClass, deleteClass}      from '../../../../actions/classes.actions';
 
 
 import Eleve   from '../../../eleves/eleve/contacts.component';
 
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    height: 140,
-    width: 100,
-  },
-  control: {
-    padding: theme.spacing.unit * 2,
-  },
-});
 
 class ContactDetails extends React.Component {
 
@@ -47,7 +29,7 @@ class ContactDetails extends React.Component {
   }
 
   formSubmit() {
-      if(this.props.data.FormDataUpdateClassNom != ''){
+      if(this.props.data.FormDataUpdateClassNom !== ''){
         this.props.onSelect(null);
         this.props.updateClass(this.props.data.FormDataUpdateClassNom, this.props.selectedContact.id);    
       }
@@ -56,7 +38,6 @@ class ContactDetails extends React.Component {
 
   render(){
   const {
-    selectedContact,
     classes
   } = this.props;
 

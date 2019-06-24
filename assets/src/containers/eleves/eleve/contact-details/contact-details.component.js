@@ -5,14 +5,12 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import compose from 'recompose/compose';
-import themeStyles from './contact-details.theme.style';
 import withWidth from '@material-ui/core/withWidth';
 import { withStyles } from '@material-ui/core/styles';
 import scss from './contact-details.module.scss';
-import FontAwesome from 'react-fontawesome';
-import Avatar from '@material-ui/core/Avatar';
 import { connect } from 'react-redux';
-
+import { elevesExerciceAction } from '../../../../actions/exercice.actions';
+import Paper from '@material-ui/core/Paper';
 class ContactDetails extends React.Component {
 
     constructor(props) {
@@ -22,44 +20,51 @@ class ContactDetails extends React.Component {
         eleve: null,
         composantClicker: null,
       }
+      this.props.elevesExerciceAction();
+
     }
 
-    getListeExoOuExo() {
-
-      if(this.state.composantClicker == null){
-
-        return (
-          <div onClick={() => { this.setState({composantClicker: 36})}}>
-          exo
-          </div>
-          );
-      }
-      else {
-        return (
-            <div onClick={() => { this.setState({composantClicker: null})}}>
-              exercice {this.state.composantClicker};
-            </div>
-
-          );
-      }
-    }
+    
 
   render() {
-    console.log(this.props.data.exerciceTexte);
-          return (
-            <div className={classNames(scss['portal-contact-details'] )}>
-              <div
-          
-              >
-              test
+      return (<Grid className={classNames(scss['portal-contact-details'] )}>
+          <Grid 
+          container
+        direction="row"
+                justify="space-between"
 
-              {this.getListeExoOuExo()}
+          className={classNames(scss['portal-contact-details-header'] )}>
+          <div>
+            <Typography variant="headline">{this.props.selectedContact.firstName.toUpperCase()} {this.props.selectedContact.lastName.toUpperCase()}</Typography>
+            <Typography variant="subtitle1"><b>email : </b>{this.props.selectedContact.email}</Typography>
+          </div>
 
+          <div className={classNames(scss['portal-contact-details-header-score'] )}>97 %</div>
+          </Grid>
 
-              </div>
-            </div>
-          );
-};
+          <div>
+             { this.props.data.exerciceTexte.map(element=>{ 
+              //console.log(element);
+              var { name, description, endDate, createdAt } = element.exercice;
+              if (createdAt){
+                createdAt = (new Date(createdAt.date)).toLocaleDateString();
+              }
+              if (endDate){
+                endDate = (new Date(endDate.date)).toLocaleDateString();
+              }
+              return(
+                <Paper className={classNames(scss['portal-contact-content-paper'])}>
+                  <div><b>Nom : </b>{name}</div>
+                  <div><b>Description: </b>{description}</div>
+                  <div><b>fin: </b>{endDate}</div>
+                  <div><b>creation: </b>{createdAt}</div>
+                </Paper>
+              );
+            })}
+          </div>
+
+        </Grid>);
+  };
 
 };
 
@@ -67,7 +72,7 @@ class ContactDetails extends React.Component {
 function mapStateToProps(state) {
   return {
     data: {
-      exerciceTexte:                    state.exerciceData.liste_exercice,
+      exerciceTexte: state.exerciceData.current_student_data,
     }
   };
 }
@@ -82,4 +87,4 @@ ContactDetails.propTypes = {
 };
 
 export default compose(withWidth(), withStyles( { withTheme: true }),
-  connect(mapStateToProps))(ContactDetails);
+  connect(mapStateToProps, {elevesExerciceAction}))(ContactDetails);

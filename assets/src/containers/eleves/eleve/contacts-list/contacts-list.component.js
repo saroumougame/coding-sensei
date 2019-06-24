@@ -54,7 +54,6 @@ class ContactsList extends React.Component {
       onSelect
     } = this.props;
 
-    console.log(contact);
     return (
       <ListItem
         title={contact.name}
@@ -99,7 +98,6 @@ class ContactsList extends React.Component {
       selectedContact,
       onSelect
     } = this.props;
-    //console.log(contact);
     return (
       <ListItem
         title={contact.name}
@@ -142,7 +140,7 @@ class ContactsList extends React.Component {
 
   getCustomClassList() {
 
-    if(this.state.updatedList == true){
+    if(this.state.updatedList === true){
 
       return this.props.data.classUpdatedList;
     }
@@ -153,6 +151,7 @@ class ContactsList extends React.Component {
     const {
       classes,
       width,
+      noAdd
     } = this.props;
 
     return (
@@ -165,7 +164,8 @@ class ContactsList extends React.Component {
               this.createDesktopListItem(contact) :
               this.createMobileListItem(contact);
           })}
-        <CreateEleveModal />
+          {noAdd?<span></span>:<CreateEleveModal />}
+        
         </List>
       </div>
     );

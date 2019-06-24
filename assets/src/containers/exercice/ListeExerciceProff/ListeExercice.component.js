@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import scss from './ListeExercice.module.scss';
+import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -28,7 +29,45 @@ class listeEcercice extends React.Component {
       }
       return 'Date limite: '+ exercice.dateEnd;
    }
+    handleExport(){
+      let liste = this.props.data.liste_exerciceData;
+      var res = '{';
+      console.log(this);
+      for (var i = 0; i < liste.length; i++){
+          res += `\n{\n
+    "name":"${liste[i].name}",\n
+    "description":"${liste[i].description}",\n
+    "inData":${JSON.stringify(liste[i].inData) },\n
+    "outData":${JSON.stringify(liste[i].outData)},\n 
+    "dateEnd":"${liste[i].dateEnd || ""}"\n 
+},`;
+      }
+      res.substring(0, res.length - 1);
+      res += '\n}\n';
 
+
+        var today = new Date();
+    var y = today.getFullYear();
+    // JavaScript months are 0-based.
+    var m = today.getMonth() + 1;
+    var d = today.getDate();
+    var h = today.getHours();
+    var mi = today.getMinutes();
+    var s = today.getSeconds();
+
+
+
+      var filename = "export_" + y + "-" + m + "-" + d + "_" + h + "-" + mi + "-" + s + ".coding-sensei"
+      var element = document.createElement('a');
+      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(res));
+      element.setAttribute('download', filename);
+      element.style.display = 'none';
+      document.body.appendChild(element);
+      element.click();
+      document.body.removeChild(element);
+      console.log(res);
+
+    }
    getListItem() {
       let count = 0;
       let liste = this.props.data.liste_exerciceData;
@@ -56,7 +95,7 @@ class listeEcercice extends React.Component {
         });
       }
    }    
-
+    
 	 render() {
 
     return(
@@ -64,6 +103,8 @@ class listeEcercice extends React.Component {
          <List component="nav">
               {this.getListItem()}
           </List>
+          <Button onClick={this.handleExport.bind(this)}>Export</Button>
+
 	 		 </div>
 	 	);
 	 }

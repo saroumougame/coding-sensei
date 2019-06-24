@@ -2,9 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 import withWidth from '@material-ui/core/withWidth';
 import { connect } from 'react-redux';
 // Array of contacts to show on the left side.
+import history from '../../../history';
 
 import ContactsList from './contacts-list/contacts-list.component';
 import ContactDetails from './contact-details/contact-details.component';
@@ -26,13 +28,15 @@ class Contacts extends React.Component {
     this.props.getEleveByProf();
   }
 
-
+  redirecttoclass = () => {
+    history.push('/professeur/classes');
+  }
 
   selectContact = contact => () => {
     //this.setState({ selectedContact: contact });
     this.props.setEleveAction(contact);
   }
-
+  
   render() {
     var contactsList = this.props.data.elevesList;
     return (
@@ -42,11 +46,21 @@ class Contacts extends React.Component {
           selectedContact={this.props.data.SelectedEleve}
           list={contactsList}
           onSelect={this.selectContact}
+          noAdd
         />
 
         {this.props.data.SelectedEleve ?
           <ContactDetails
-            selectedContact={this.props.data.SelectedEleve} /> : <NoContacts />}
+            selectedContact={this.props.data.SelectedEleve} /> :
+
+<Grid className={scss['grid_no_class']} container justify="center" alignContent="center">
+              <p className={scss['text_no_class']}>
+              Selectionnez un eleve pour commencer ou allez <a onClick={this.redirecttoclass}>ici</a> pour en creer un 
+              </p>
+              </Grid>
+
+
+            }
       </div>
     );
   }

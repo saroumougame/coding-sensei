@@ -151,6 +151,7 @@ class ContactsList extends React.Component {
     const {
       classes,
       width,
+      noAdd
     } = this.props;
 
     return (
@@ -163,7 +164,8 @@ class ContactsList extends React.Component {
               this.createDesktopListItem(contact) :
               this.createMobileListItem(contact);
           })}
-        <CreateEleveModal />
+          {noAdd?<span></span>:<CreateEleveModal />}
+        
         </List>
       </div>
     );

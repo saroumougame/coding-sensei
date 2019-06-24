@@ -80,8 +80,8 @@ class NoContacts extends React.Component {
     <div className={classNames(scss['portal-contacts-no-contacts'], classes['portal-contacts-no-contacts'])}>
 
               <Grid className={scss['grid_no_class']} container justify="center" alignContent="center">
-              <p className={scss['text_no_class']}
-              >Vous pouvez des à present creer une classe en cliquant <Modal2
+              <p className={scss['text_no_class']}>
+              Vous pouvez des à present creer une classe en cliquant <Modal2
                       colorBtn='default'
                       titleButton='ici'
                       title="Ajouter une classe"

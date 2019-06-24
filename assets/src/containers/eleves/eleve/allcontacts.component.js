@@ -53,7 +53,8 @@ class Contacts extends React.Component {
           <ContactDetails
             selectedContact={this.props.data.SelectedEleve} /> :
 
-<Grid className={scss['grid_no_class']} container justify="center" alignContent="center">
+<Grid className={scss['grid_no_class']} container direction="column" justify="center" alignContent="center">
+              <img className={scss['grid_no_class_img']} src="/assets/images/student.svg"/>
               <p className={scss['text_no_class']}>
               Selectionnez un eleve pour commencer ou allez <a onClick={this.redirecttoclass}>ici</a> pour en creer un 
               </p>

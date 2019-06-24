@@ -79,7 +79,8 @@ class NoContacts extends React.Component {
   return (
     <div className={classNames(scss['portal-contacts-no-contacts'], classes['portal-contacts-no-contacts'])}>
 
-              <Grid className={scss['grid_no_class']} container justify="center" alignContent="center">
+              <Grid  className={scss['grid_no_class']} container direction="column" justify="center" alignContent="center">
+              <img className={scss['grid_no_class_img']} src="/assets/images/class.svg"/>
               <p className={scss['text_no_class']}>
               Vous pouvez des à present creer une classe en cliquant <Modal2
                       colorBtn='default'

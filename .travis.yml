@@ -10,14 +10,14 @@ cache:
   - node_modules
 script:
   - cd assets
-  - npm install
-  - npm run build
+  #- npm install
+  #- npm run build
 deploy:
   # deploy dev
   - provider: script
     script: bash ./deploy.sh
     on:
-branch: dev
+    branch: master
   # deploy prod
   #- provider: script
     #script: bash scripts/deploy.sh production

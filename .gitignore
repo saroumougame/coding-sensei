@@ -43,5 +43,9 @@ skyflow/
 
 docker/
 assets/node_modules/
+assets/package-lock.json
+assets/npm-debug.log*
+assets/yarn-debug.log*
+assets/yarn-error.log*
 
 config/packages/lexik_jwt_authentication\.yaml

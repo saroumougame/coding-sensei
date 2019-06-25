@@ -47,5 +47,8 @@ assets/package-lock.json
 assets/npm-debug.log*
 assets/yarn-debug.log*
 assets/yarn-error.log*
-
+assets/public/build/*
+assets/public/build
+assets/package-lock.json
+assets/
 config/packages/lexik_jwt_authentication\.yaml

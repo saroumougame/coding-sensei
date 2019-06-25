@@ -1,6 +1,10 @@
 language: node_js
 node_js:
   - "stable"
+addons:
+  apt:
+    packages:
+    - sshpass
 cache:
   directories:
   - node_modules
@@ -9,13 +13,13 @@ script:
   - npm install
   - npm run build
 deploy:
-  # deploy develop to the staging environment
+  # deploy dev
   - provider: script
-    script: bash scripts/deploy.sh staging
+    script: bash ./deploy.sh
     on:
-      branch: develop
-  # deploy master to production
-  - provider: script
-    script: bash scripts/deploy.sh production
-    on:
-      branch: master
+branch: dev
+  # deploy prod
+  #- provider: script
+    #script: bash scripts/deploy.sh production
+    #on:
+      #branch: master

@@ -22,7 +22,7 @@ import scss from '../../layout-front/layout-front.module.scss';
 
 function setTitle(items, currentPath) {
 
-  return 'coding-sensei';
+  return 'coding-senseis';
 
 }
 

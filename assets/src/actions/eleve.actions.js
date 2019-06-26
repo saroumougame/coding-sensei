@@ -1,4 +1,4 @@
-export 	const API_URL         = 'http://51.38.38.246:8080';
+       const API_URL                  = 'http://api.coding-sensei.fr';
 export  const SETELEVECONTACT = "SET ELEVE CONTACT";
 export  const GETELEVEBYCLASS = "GET ELEVE BYCLASS";
 

@@ -5,7 +5,7 @@ export const ADD_SELECTED_ACTION    = 'Ajoute  à la selection';
 export const DELETE_SELECTED_ACTION = 'retire à la selection';
 
 
-export 	const API_URL                  = 'http://51.38.38.246:8080';
+       const API_URL                  = 'http://api.coding-sensei.fr';
 export  const UPDATE_FORM_TITLE        = 'UPDATE_FORM_TITLE';
 export  const UPDATE_FORM_DESC         = 'UPDATE_FORM_DESC';
 export  const UPDATE_FORM_PARAM_IN     = 'UPDATE_FORM_PARAM_IN';

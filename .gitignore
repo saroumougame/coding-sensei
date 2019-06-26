@@ -50,5 +50,4 @@ assets/yarn-error.log*
 assets/public/build/*
 assets/public/build
 assets/package-lock.json
-assets/
 config/packages/lexik_jwt_authentication\.yaml

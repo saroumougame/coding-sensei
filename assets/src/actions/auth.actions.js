@@ -19,7 +19,7 @@ export const LOGIN_FAIL              = "LOGIN_FAIL";
 export const EXPIRED                 = "EXPIRED";
 export const GET_USER                 = "GET_USER";
 
-       const API_URL                  = 'http://51.38.38.246:8080';
+       const API_URL                  = 'http://api.coding-sensei.fr';
 
 export const inscriptionEtapeAction = etape => ({
   type: INSCRIPTION_ETAPES,

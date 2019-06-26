@@ -15,7 +15,7 @@ script:
 deploy:
   # deploy dev
   - provider: script
-    script: bash scripts/deploy.sh
+    script: bash deploy.sh
     on:
       branch: developpement
   # deploy prod

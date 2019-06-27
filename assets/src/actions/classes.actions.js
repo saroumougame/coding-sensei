@@ -9,8 +9,8 @@ export const UPDATE_CLASS_NOM         = 'modifier le nom de la classe';
 export const SETCURRENTCLASS          = 'SET CURRENT CLASS';
 export const SET_CLASS_STATS          = 'sets stats for teacher';
 export const UPDATE_CLASS_USER        = 'UPDATE_CLASS_USER';
-       const API_URL                  = 'http://51.38.38.246:8080';
        const ID_PROFF                 = '/users/1';
+       const API_URL                  = 'https://api.coding-sensei.fr';
 //export const ADD_CLASS_BY_PROFF = 'Ajoute  à la selection';
 
 export const setClasseAction = classe => ({

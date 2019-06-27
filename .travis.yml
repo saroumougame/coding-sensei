@@ -10,6 +10,7 @@ cache:
   - node_modules
 script:
   - cd assets
+  - ls
   #- npm install
   #- npm run build
 deploy:

@@ -1,0 +1,26 @@
+language: node_js
+node_js:
+  - "stable"
+addons:
+  apt:
+    packages:
+    - sshpass
+cache:
+  directories:
+  - node_modules
+script:
+  - cd assets
+  - ls
+  #- npm install
+  #- npm run build
+deploy:
+  # deploy dev
+  - provider: script
+    script: bash deploy.sh
+    on:
+      branch: developpement
+  # deploy prod
+  #- provider: script
+    #script: bash scripts/deploy.sh production
+    #on:
+      #branch: master

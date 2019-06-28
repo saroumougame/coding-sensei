@@ -1,4 +1,4 @@
-       const API_URL                  = 'https://api.coding-sensei.fr';
+import { API_URL } from '../config';
 export  const SETELEVECONTACT = "SET ELEVE CONTACT";
 export  const GETELEVEBYCLASS = "GET ELEVE BYCLASS";
 

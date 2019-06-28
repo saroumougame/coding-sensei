@@ -1,4 +1,5 @@
 import history from '../history';
+import { API_URL } from '../config';
 export  const INSCRIPTION_ETAPES = "changer_étapes";
 
 export const AUTH_NOM_PROFF           = "FORM NOM PROFF";
@@ -9,17 +10,16 @@ export const AUTH_LOGIN_EMAIL         = "FORM LOGIN EMAIL";
 export const AUTH_LOGIN_PASSWORD      = "FORM LOGIN PASSWORD";
 export const LOGIN                    = "LOGIN";
 export const REGISTER                 = "REGISTER";
-export const REGISTER_FAIL           = "REGISTER_FAIL";
+export const REGISTER_FAIL            = "REGISTER_FAIL";
 export const SNACK_REGISTER           = "SNACK_REGISTER";
 export const LOGIN_SNACK              = "LOGIN_SNACK";
 export const LOGIN_SNACK_CLOSE        = "LOGIN_SNACK_CLOSE";
 export const LOGIN_SPINNER_START      = "LOGIN_SPINNER_START";
 export const LOGIN_SPINNER_STOP       = "LOGIN_SPINNER_STOP";
-export const LOGIN_FAIL              = "LOGIN_FAIL";
-export const EXPIRED                 = "EXPIRED";
+export const LOGIN_FAIL               = "LOGIN_FAIL";
+export const EXPIRED                  = "EXPIRED";
 export const GET_USER                 = "GET_USER";
 
-const API_URL                  = 'https://api.coding-sensei.fr';
 
 export const inscriptionEtapeAction = etape => ({
   type: INSCRIPTION_ETAPES,

@@ -25,31 +25,31 @@ class ContactDetails extends React.Component {
     }
 
 
- getExoByEleve(){
+//  getExoByEleve(){
 
-      var token = localStorage.getItem('token');
+//       var token = localStorage.getItem('token');
     
-      return (dispatch, getState) => { 
-        fetch(API_URL + '/currentuser', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization' : 'Bearer '+token
-          }
-        })
-        .then(response => response.json())
-        .then(json => {
+//       return (dispatch, getState) => { 
+//         fetch(API_URL + '/currentuser', {
+//           method: 'GET',
+//           headers: {
+//             'Content-Type': 'application/json',
+//             'Authorization' : 'Bearer '+token
+//           }
+//         })
+//         .then(response => response.json())
+//         .then(json => {
     
-            if(json.roles.includes('ROLE_TEACHER')) {
-              history.push('/account');
-            }else if(json.roles.includes('ROLE_STUDENT')) {
-              history.push('/home');
-            }
-          dispatch(loginAction(json));
-        })
-        .catch((e) => dispatch());
-      }
-    }
+//             if(json.roles.includes('ROLE_TEACHER')) {
+//               history.push('/account');
+//             }else if(json.roles.includes('ROLE_STUDENT')) {
+//               history.push('/home');
+//             }
+//           dispatch(loginAction(json));
+//         })
+//         .catch((e) => dispatch());
+//       }
+//     }
 
     getListeExoOuExo() {
 

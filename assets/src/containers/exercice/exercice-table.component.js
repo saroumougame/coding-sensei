@@ -22,7 +22,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Chip from '@material-ui/core/Chip';
 
-const API = 'http://51.38.38.246:8080';
+const API = 'http://api.coding-sensei.fr';
 const DEFAULT_QUERY = 'exercices';
 
 

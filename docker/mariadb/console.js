@@ -1,5 +1,3 @@
-'use strict';
-
 // mariadb
 
 module.exports = {
@@ -28,12 +26,12 @@ module.exports = {
         {
             message: "Database storage location. Relative to the current directory.",
             name: "database_storage_location",
-            default: "../.database/my_app",
+            default: "./skyflow/database/mariadb",
         },
     ],
 
     messages: {
-        info: [
+        writeln: [
             'Database information:',
             'Host: {{ container_name }}',
             'Database name: {{ database_name }}',
@@ -42,6 +40,5 @@ module.exports = {
             'Root password: {{ root_password }}',
         ],
     }
-
 
 };

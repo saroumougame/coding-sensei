@@ -16,3 +16,32 @@
 ###> symfony/web-server-bundle ###
 /.web-server-pid
 ###< symfony/web-server-bundle ###
+
+###> lexik/jwt-authentication-bundle ###
+/config/jwt/*.pem
+###< lexik/jwt-authentication-bundle ###
+
+assets/node_modules/
+
+*.lock
+
+\.idea/
+
+
+###> ide ###
+.idea
+.idea/
+###< ide ###
+
+composer\.lock
+
+\.docker-sync/
+
+skyflow/
+
+\.DS_Store
+
+docker/
+assets/node_modules/
+
+config/packages/lexik_jwt_authentication\.yaml

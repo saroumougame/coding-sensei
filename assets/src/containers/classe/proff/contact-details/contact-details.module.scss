@@ -1,0 +1,159 @@
+.portal-contact-details {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
+
+.portal-contact-paper-grid {
+    height: 35vh;
+    width: 35vw;
+}
+
+.class-detail-header {
+ //background-color: #fff;
+
+  width: 95% !important;
+  min-height: 5vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.portal-contact-details__header {
+  background-color: #eaefff; 
+  // Add a background image or use the default animation
+  min-height: 15vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  z-index: 1;
+
+  &:before, &:after {
+   // content: "";
+   // position: absolute;
+    width: 160px;
+    height: 160px;
+    transform-origin: 0 0;
+    top: 100%;
+    transform: translate3d(-50%, -50%, 0);
+    left: 96px;
+    border-radius: 50%;
+    opacity: 0;
+  }
+
+
+/*
+  &:before {
+    animation: portal-contact-details__header-before  .6s ease-out forwards 1;
+    animation-delay: .2s;
+  }
+  &:after {
+    animation: portal-contact-details__header-after  .4s ease-out  forwards 1;
+    animation-delay: .4s;
+  }
+*/
+}
+
+@keyframes portal-contact-details__header-before {
+  0% {
+    width: 160px;
+    height: 160px;
+    opacity: 0;
+  }
+  100% {
+    width: 75vw;
+    height: 75vw;
+    opacity: 1;
+  }
+}
+
+@keyframes portal-contact-details__header-after {
+  0% {
+    width: 160px;
+    height: 160px;
+    opacity: 0;
+  }
+  100% {
+    width: 35vw;
+    height: 35vw;
+    opacity: 1;
+  }
+}
+
+.portal-contact-details__content {
+  position: relative;
+  height: 100%;
+  z-index: 2;
+}
+
+.portal-contact-details__avatar-container {
+  position: relative;
+  text-align: center;
+  margin-top: -90px;
+}
+
+.portal-contact-details__avatar {
+  width: 160px;
+  display: inline-block;
+  img {
+    border-radius: 50%;
+    border-radius: 50%;
+    border-width: 16px;
+    border-style: solid;
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+
+.portal-contact-details__extra {
+  min-width: 160px;
+  font-size: .8em;
+  z-index: 5;
+  position: relative;
+  text-align: center;
+  p {
+    margin-bottom: 0;
+    margin-top: 0;
+    line-height: 24px;
+  }
+  a {
+    text-decoration: none;
+    padding: 12px;
+  }
+}
+
+.portal-contact-details__main {
+  z-index: 5;
+  position: relative;
+  padding-top: 36px;
+}
+.portal-contacts-detail-update-contact {
+  margin-top: 25px;
+  margin-left: 10px;
+}
+
+
+.class-detail-header-part-deux {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+}
+.portal-contacts-detail-delete-button-contact {
+  height: 30%;
+}
+
+.class-name-paper {
+  background-color: #eaefff; 
+  padding: 30px;
+}
+
+.class-name-paper-central {
+  
+  @extend .class-name-paper;
+  margin: 15px;
+}

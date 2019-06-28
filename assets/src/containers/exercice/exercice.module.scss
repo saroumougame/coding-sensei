@@ -1,0 +1,118 @@
+.portal-pages__header {
+  height: 100vh;
+  width: 100%;
+  background: rgba(0,0,0,0.050);
+  display: flex;
+  justify-content: center;
+  align-item: center;
+}
+
+
+.portal-pages__content-inner {
+  margin-top: -200px;
+  padding: 60px;
+  box-shadow: 0px -40px 100px -50px rgba(0, 0, 0, 0.3), -20px 0px 40px -50px rgba(0, 0, 0, 0.2), 20px 0px 40px -50px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: portal-pages__content-inner .3s forwards 1 ease-in-out;
+}
+
+.portal-pages__header-icon {
+  margin-top: 0;
+  margin-bottom: 50px;
+  animation: portal-pages__header-icon 4s infinite ease-in-out;
+  font-weight: 200;
+  font-size: 64px;
+  height: 33%;
+  width: 24%;
+}
+
+.portal-pages__color_option {
+  height: 60px;
+  padding-right: 16px;
+}
+
+.portal-pages__color_examples {
+  margin: 60px 0px;
+}
+
+@keyframes portal-pages__header-icon {
+  0%, 100% {
+    stroke: #03A9F4;
+    color: #03A9F4;
+  }
+  75% {
+    stroke: #FF4081;
+    color: #FF4081;
+  }
+}
+
+@keyframes portal-pages__content-inner {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.portal-pages__container {
+  display: flex;
+  width: 50%;
+  height: 70%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.btn_fab {
+  width: 41px;
+  height: 41px;
+  margin-top: 25px;
+  margin-bottom: 15px;
+  margin-left: 15px;
+}
+
+.btn_fab-right {
+  width: 41px;
+  height: 41px;
+  margin-top: 25px;
+  margin-bottom: 15px;
+  margin-right: 15px;
+}
+
+.form_add_proff_div {
+  min-width: 550px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.form_add_proff_form {
+  width: 68%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 25px;
+}
+.exercice-tableHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.exercice-paper{
+  padding-top: 1%;
+  padding-left: 3%;
+  padding-right: 3%;
+  padding-bottom: 2%;
+}
+.exercice-paper-title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

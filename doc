@@ -1,0 +1,19 @@
+FOSUSER
+
+email  			  == fos_user_registration_form[email]
+Nom				  == fos_user_registration_form[username]
+Mot de Passe      == fos_user_registration_form[plainPassword][first]
+mot de passe2	  == fos_user_registration_form[plainPassword][second]
+
+Registration
+
+Prenom			  == user_registration_prenom
+Code_ecole	      == 0(indépandant) -- 1-10000(ecoles)
+
+---------------------------------------------------------------------
+
+
+auth
+nom:     nicolas
+email:   n.tiesenhausen@gmail.com
+mdp:     nico

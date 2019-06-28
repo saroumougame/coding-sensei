@@ -22,14 +22,33 @@ class ListeCours extends React.Component {
 
    }
 
+   getDateLimit(exo) {
+    if(exo.dateEnd == null) {
+      return 'Pas de date limite';
+    }
+   }
+
    getListeExercices() {
        return this.props.data.liste_exercice_user.map((i) => {
+          console.log(i.reponse);
+
+
           return (
             <div className={scss['un-cour']} onClick={() => this.showExercice(i)} >
-               {i.exercice.name}
+                <div>
+                {i.exercice.name}
+                </div>
                <div>
+               {this.getDateLimit(i.exercice)}
+               {/*
+              <Typography variant="headline" component="h5">
+                
+              </Typography>
                {i.exercice.description}
+                */}
                </div>
+
+
             </div>
             );
         });

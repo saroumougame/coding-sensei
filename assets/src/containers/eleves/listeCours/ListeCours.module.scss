@@ -4,6 +4,9 @@
 	height: 100px;
 	width: 90%;
 	background-color: white;
+	padding: 8px;
+	margin-left: 3px;
+	margin-right: 3px;
 }
 
 .un-cour:hover {
@@ -15,5 +18,8 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	max-height: 76vh;
+	overflow-x: hidden;
+	overflow-y: scroll; 
 
 }

@@ -61,6 +61,10 @@ class AccountProff extends React.Component {
   }
   }
 
+  editAccount(){
+    history.push('/account/edit');
+}
+
   render() {
     console.log(this.props.data.stats);
       return (
@@ -80,9 +84,10 @@ class AccountProff extends React.Component {
               justify="space-between"
               alignItems="center">
             <h2>Mon Profile</h2>
-            <Button color="primary" className={scss['button']}>
-              Editer Mon profile >>
-            </Button>
+
+           <Button color="primary" className={scss['button']} onClick={() => {this.editAccount()}}>
+             Voir mes classes >>
+           </Button>
           </Grid>
           <p>Nom:            {this.props.data.user != null ?this.props.data.user.lastName[0].toUpperCase() + this.props.data.user.lastName.substring(1).toLowerCase(): ""}</p>
           <p>Prenom:         {this.props.data.user != null ?this.props.data.user.firstName[0].toUpperCase() + this.props.data.user.firstName.substring(1).toLowerCase(): ""}</p>

@@ -8,14 +8,13 @@
 .class-list {
 	width: 17%;
 	background-color: #efefef;
-	height: 100%;
 	padding-top: 20px;
 	box-shadow: 5px 5px 5px grey;
 
 }
 
 .main-class-list {
-	height: 90vh;
+	height: calc(100vh - 110px);
 	margin-left: 5px;
 	margin-bottom: 15px;
 	display: flex;

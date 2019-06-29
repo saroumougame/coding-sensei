@@ -14,8 +14,10 @@ const LayoutLoader = (props) => {
 
   return (
     <div className={classes.loaderWrapper}>
+  {/*
       <CircularProgress className={classes.progress} size={50} />
       Loading...
+  */}
     </div>
   );
 };

@@ -48,7 +48,7 @@ class ClassicLayout extends React.Component {
           </AppBar>
           <div className={scss['layout-classic-content-wrapper']}>
             <div className={scss['layout-classic-content']}>
-             <img src={logoImage} className={scss['front-image-background']} alt="logo" />
+             <img src={logoImage} className={scss['front-image-background']} alt="" />
               {children}
             </div>
           </div>

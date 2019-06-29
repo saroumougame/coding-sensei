@@ -26,6 +26,7 @@ import NoLayout from './layouts/layout-none/layout-none.component';
 /* --------------------------------------------------------------------------------------------------------------------------  */
 //  MAIN APP ROUTES
 const AsyncLanding= asyncComponent(() => import('./containers/landing/landing.component'));
+const AsyncTarifs= asyncComponent(() => import('./containers/tarifs/tarifs.component'));
 const AsyncEcole= asyncComponent(() => import('./containers/ecole/ecole.component'));
 const AccountProff= asyncComponent(() => import('./containers/account/professeur/account.component'));
 const ClassesProff= asyncComponent(() => import('./containers/classe/proff/contacts.component'));
@@ -176,6 +177,7 @@ export default ({ logged , childProps, layout, roles }) => {
               Routes landing. Inscription.
   */}
       <AppRoute path="/" exact component={AsyncLanding} props={childProps} layout={activeLayout}     roles={roles}                            />
+      <AppRoute path="/tarifs" exact component={AsyncTarifs} props={childProps} layout={activeLayout}     roles={roles}                            />
       <AppRoute path="/ecole" exact component={AsyncEcole} props={childProps} layout={activeLayout} roles={roles}                             />
       <AppRoute path="/login" exact component={AsyncLogin} props={childProps} layout={activeLayout} roles={roles}                             />
       <AppRoute path="/inscription" exact component={AsyncRegister} props={childProps} layout={activeLayout} roles={roles}                    />

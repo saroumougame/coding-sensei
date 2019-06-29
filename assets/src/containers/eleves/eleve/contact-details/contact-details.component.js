@@ -26,7 +26,31 @@ class ContactDetails extends React.Component {
       this.props.elevesScoreAction();
     }
 
-    
+  getListeExercices() {
+    if(this.props.data.exerciceTexte != null){
+      console.log(this.props.data.exerciceTexte);
+        return this.props.data.exerciceTexte.map(element=>{ 
+          console.log(element.reponse);
+              //console.log(element);
+              var { name, description, endDate, createdAt } = element.exercice;
+              if (createdAt){
+                createdAt = (new Date(createdAt.date)).toLocaleDateString();
+              }
+              if (endDate){
+                endDate = (new Date(endDate.date)).toLocaleDateString();
+              }
+              return(
+                <Paper key={name} className={classNames(scss['portal-contact-content-paper'])}>
+                  <div><b>Nom : </b>{name}</div>
+                  <div><b>Description: </b>{description}</div>
+                  <div><b>fin: </b>{endDate}</div>
+                  <div><b>creation: </b>{createdAt}</div>
+                </Paper>
+              );
+            })
+    }
+      
+  }
 
   render() {
       return (<Grid className={classNames(scss['portal-contact-details'] )}>
@@ -56,27 +80,7 @@ class ContactDetails extends React.Component {
           </Grid>
 
           <div>
-
-
-             { this.props.data.exerciceTexte.map(element=>{ 
-              //console.log(element);
-              var { name, description, endDate, createdAt } = element.exercice;
-              if (createdAt){
-                createdAt = (new Date(createdAt.date)).toLocaleDateString();
-              }
-              if (endDate){
-                endDate = (new Date(endDate.date)).toLocaleDateString();
-              }
-              return(
-                
-                <Paper className={classNames(scss['portal-contact-content-paper'])}>
-                  <div><b>Nom : </b>{name}</div>
-                  <div><b>Description: </b>{description}</div>
-                  <div><b>fin: </b>{endDate}</div>
-                  <div><b>creation: </b>{createdAt}</div>
-                </Paper>
-              );
-            })}
+            {this.getListeExercices()}
           </div>
 
         </Grid>);

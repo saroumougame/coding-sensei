@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import { updateFormTitle, updateFormDesc, updateFormIn, updateFormOut, createExerciceAction, importAction, importExo} from '../../../actions/exercice.actions';
+import { updateFormTitle, updateDate, updateFormDesc, updateFormIn, updateFormOut, createExerciceAction, importAction, importExo } from '../../../actions/exercice.actions';
 
 class AddExerciceForm extends React.Component {
 
@@ -258,10 +258,28 @@ getoutvars(){
               Ajouter une clause de validation
             </Button>
             <div className={[scss['grid_container']]}>
-                        { this.getoutvars()}
+            { this.getoutvars()}
             { this.getDelOut()}
             </div>
-<Button className={[scss['vld']]} variant="contained" color="primary"  onClick={() => {this.formSubmit()}}>
+             <div className={[scss['grid-container-date']]}>
+                   <TextField
+                    id="date"
+                    label="date limite"
+                    type="date"
+                    //defaultValue="2017-01-01"
+                    value={this.props.data.formDate}
+                    onChange={(e) => {this.props.updateDate(e.target.value)}}
+                    //className={classes.textField}
+                    InputLabelProps={{
+                      shrink: true
+                    }}
+                  />
+
+            </div>
+            <Button className={[scss['button_add']]} variant="contained"  onClick={() => {this.props.updateDate('0000-00-00')}}>
+             definir la date limit comme illimitée
+            </Button>
+              <Button className={[scss['vld']]} variant="contained" color="primary"  onClick={() => {this.formSubmit()}}>
               Valider
             </Button>
           </form>
@@ -280,8 +298,10 @@ function mapStateToProps(state) {
       FormDataDesc:                     state.exerciceData.add_form_description,
       FormDataIn:                       state.exerciceData.add_form_param_in,
       FormDataOut:                      state.exerciceData.add_form_param_out,
+      formDate:                         state.exerciceData.formDate,
     }
   };
 }
 export default 
+  connect(mapStateToProps,  {updateDate, updateFormTitle, updateFormDesc, updateFormIn, updateFormOut, createExerciceAction, importAction, importExo})(AddExerciceForm);
   connect(mapStateToProps,  {updateFormTitle, updateFormDesc, updateFormIn, updateFormOut, createExerciceAction, importAction, importExo})(AddExerciceForm);

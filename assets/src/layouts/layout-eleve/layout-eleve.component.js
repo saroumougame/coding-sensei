@@ -58,8 +58,6 @@ class EleveLayout extends React.Component {
                   }else if(newValue === 1){
                     history.push('/home');
                   }else if(newValue === 2){
-                    history.push('/home');
-                  }else if(newValue === 3){
                     this.props.deconnexionAction();
                   }
 

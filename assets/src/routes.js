@@ -8,6 +8,7 @@ import asyncComponent from './components/async.component';
 import Front from './layouts/layout-front/layout-front.component';
 import Classic from './layouts/layout-classic/layout-classic.component';
 import Eleve from './layouts/layout-eleve/layout-eleve.component';
+import editprofComponent from './containers/account/editprof/editprof.component';
 
 
 /* ------------------------------ TEMPLATE  ----------------------------------------------------------------------------------- */
@@ -26,11 +27,15 @@ import NoLayout from './layouts/layout-none/layout-none.component';
 /* --------------------------------------------------------------------------------------------------------------------------  */
 //  MAIN APP ROUTES
 const AsyncLanding= asyncComponent(() => import('./containers/landing/landing.component'));
+const AsyncTarifs= asyncComponent(() => import('./containers/tarifs/tarifs.component'));
 const AsyncEcole= asyncComponent(() => import('./containers/ecole/ecole.component'));
 const AccountProff= asyncComponent(() => import('./containers/account/professeur/account.component'));
+const EditProf= asyncComponent(() => import('./containers/account/editprof/editprof.component'));
+
 const ClassesProff= asyncComponent(() => import('./containers/classe/proff/contacts.component'));
 const ElevesProff= asyncComponent(() => import('./containers/eleves/eleve/allcontacts.component'));
 const AsyncExercice= asyncComponent(() => import('./containers/exercice/exercice.component'));
+const MesExercices = asyncComponent(() => import('./containers/exercice/mes-exercices/mes-exercices.component'));
 //const AccountProff= asyncComponent(() => import('./containers/account/professeur/account.component'))
 const AsyncEleveHome= asyncComponent(() => import('./containers/eleves/home/home-eleve.component'));
 const classesEleve = asyncComponent(() => import('./containers/eleves/classes/classes-eleve.component'));
@@ -176,6 +181,7 @@ export default ({ logged , childProps, layout, roles }) => {
               Routes landing. Inscription.
   */}
       <AppRoute path="/" exact component={AsyncLanding} props={childProps} layout={activeLayout}     roles={roles}                            />
+      <AppRoute path="/tarifs" exact component={AsyncTarifs} props={childProps} layout={activeLayout}     roles={roles}                            />
       <AppRoute path="/ecole" exact component={AsyncEcole} props={childProps} layout={activeLayout} roles={roles}                             />
       <AppRoute path="/login" exact component={AsyncLogin} props={childProps} layout={activeLayout} roles={roles}                             />
       <AppRoute path="/inscription" exact component={AsyncRegister} props={childProps} layout={activeLayout} roles={roles}                    />
@@ -186,17 +192,22 @@ export default ({ logged , childProps, layout, roles }) => {
               Routes Proteger.
         --------------------------------------------------------------------------------------------------------------------------------------------------- 
   */} 
+
+  
+    <AppprotectedRoute path="/mes-exercices"  logged={logged} exact component={MesExercices} props={childProps} layout={CompactLayout} roles={roles}        roles_accepted={role_user} />
+     
       <AppprotectedRoute path="/account"  logged={logged} exact component={AccountProff} props={childProps} layout={CompactLayout} roles={roles}        roles_accepted={role_user} />
       <AppprotectedRoute path="/professeur/compte" logged={logged}  exact component={AccountProff} props={childProps} layout={CompactLayout} roles={roles}  roles_accepted={role_user} />
       <AppprotectedRoute path="/professeur" exact component={AsyncRegister} redir={AsyncLogin} props={childProps} layout={CompactLayout} roles={roles}  roles_accepted={role_user}/>
       <AppprotectedRoute path="/professeur/classes" exact component={ClassesProff} redir={AsyncLogin} props={childProps} layout={CompactLayout} roles={roles} roles_accepted={role_user} />
       <AppprotectedRoute path="/professeur/classes/add" exact component={ClassesProff} redir={AsyncLogin} props={childProps} layout={CompactLayout} roles={roles} roles_accepted={role_user} />
       <AppprotectedRoute path="/apps/contacts" exact component={ElevesProff} redir={AsyncLogin} props={childProps} layout={CompactLayout} roles={roles} roles_accepted={role_user} />
-
+      <AppprotectedRoute path="/account/edit"  logged={logged} exact component={EditProf} props={childProps} layout={CompactLayout} roles={roles}        roles_accepted={role_user} />
+      {/* <AppprotectedRoute path="/account/edit" exact component={EditProf} props={childProps} layout={activeLayout}     roles={roles}                   roles_accepted={role_user}         /> */}
 
       
       <AppprotectedRoute path="/home"  logged={logged} exact component={AsyncEleveHome} props={childProps} layout={EleveLayout} roles={roles}           roles_accepted={role_eleve} />
-      <AppprotectedRoute path="/classes"  logged={logged} exact component={classesEleve} props={childProps} layout={EleveLayout} roles={roles}           roles_accepted={role_eleve} />
+      <AppprotectedRoute path="/classes"  logged={logged} exact component={classesEleve} props={childProps} layout={EleveLayout} roles={roles}           roles_accepted={role_user} />
    {/*
         --------------------------------------------------------------------------------------------------------------------------------------------    
         --------------------------------------------------------------------------------------------------------------------------------------------

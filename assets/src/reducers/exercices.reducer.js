@@ -1,25 +1,28 @@
 import { UPDATE_FORM_TITLE, UPDATE_FORM_DESC, UPDATE_FORM_PARAM_IN, UPDATE_FORM_PARAM_OUT, 
   GET_LISTE_EXERCICES, GET_LISTE_EXERCICES_USER, SET_CURRENT_EXO_USER, UPDATE_TEXT_EXERCICE,
-SUBMIT_MODAL, MODAL_FAIL, DISMISS_MODAL, MODAL_SUCESS,GET_LISTE_EXERCICES_FOR_STUDENT, SET_CURRENT_EXO_PROFF, SETEXERCICECOMPONENT, IMPORT, GET_GRADE_FOR_STUDENT} from '../actions/exercice.actions';
+SUBMIT_MODAL, MODAL_FAIL, DISMISS_MODAL, MODAL_SUCESS,GET_LISTE_EXERCICES_FOR_STUDENT,
+ SET_CURRENT_EXO_PROFF, SETEXERCICECOMPONENT, UPDATEDATEEXOCREATE, ALL_EXERCICE_PROFF, IMPORT, GET_GRADE_FOR_STUDENT} from '../actions/exercice.actions';
 
 export const UPDATE_ELEVE_LIST      = "UPDATE_ELEVE_LIST";
 
 
 const defaultState = {
-        'add_form_titre'        : '',
-        'add_form_description'  : '',
-        'add_form_param_in'     : '',
-        'add_form_param_out'    : '',
-        'liste_exercice'        : [],
-        'liste_exercice_user'   : [],
-        'current_Exercice_User' : null,
-        'current_Exercice_proff': null,
-        'exerciceTexte'         : '\n',
-        'exerciceModal'         : false,
-        'exerciceResultat'      : null,
-        'current_student_data'  : [],
-        'exerciceResultatText'  : '',
-        'exercice_component'    : null,
+        'add_form_titre'         : '',
+        'add_form_description'   : '',
+        'add_form_param_in'      : '',
+        'add_form_param_out'     : '',
+        'liste_exercice'         : [],
+        'liste_exercice_user'    : [],
+        'current_Exercice_User'  : null,
+        'current_Exercice_proff' : null,
+        'exerciceTexte'          : '\n',
+        'exerciceModal'          : false,
+        'exerciceResultat'       : null,
+        'current_student_data'   : [],
+        'exerciceResultatText'   : '',
+        'exercice_component'     : null,
+        'formDate'               : '000-00-00',
+        'liste_exercice_complete': [],
         'importExo'             : null,
         'grade'                 : []
 };
@@ -36,6 +39,17 @@ const exerciceReducer = (state = defaultState, action) => {
           ...state,
           current_student_data: action.payload,
         }
+    case ALL_EXERCICE_PROFF: 
+        return {
+          ...state,
+          liste_exercice_complete: action.payload,
+        }
+    case UPDATEDATEEXOCREATE: {
+        return {
+          ...state,
+          formDate: action.payload,
+        }      
+    }
     case  UPDATE_FORM_DESC:
         return {
           ...state,

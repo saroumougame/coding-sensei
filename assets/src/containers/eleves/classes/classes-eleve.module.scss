@@ -6,17 +6,16 @@
 }
 
 .class-list {
-width: 17%;
+	width: 17%;
+	background-color: #efefef;
+	height: 100%;
+	padding-top: 20px;
+	box-shadow: 5px 5px 5px grey;
 
-background-color: #efefef;
-
-
-height: 100%;
 }
 
 .main-class-list {
-	height: 90%;
-	margin-top: 10px;
+	height: 90vh;
 	margin-left: 5px;
 	margin-bottom: 15px;
 	display: flex;

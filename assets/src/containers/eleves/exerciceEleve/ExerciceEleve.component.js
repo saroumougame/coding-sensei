@@ -5,6 +5,7 @@ import compose from 'recompose/compose';
 import withWidth from '@material-ui/core/withWidth';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 import scss from './ExerciceEleve.module.scss';
 import ExerciceEditeur from './exerciceEditeur/ExerciceEditeur.component';
 
@@ -37,9 +38,18 @@ class ExerciceEleve extends React.Component {
    getExerciceTitle() {
     if(this.props.data.current_Exercice_User != null){
       //console.log(this.props.data.current_Exercice_User.exercice);
-      return this.props.data.current_Exercice_User.exercice['name'];
+      return <Typography variant="headline" component="h3">{this.props.data.current_Exercice_User.exercice['name']}</Typography>
     }
-    return 'Cliquer sur un exercice pour commencer';
+    return <Grid 
+                container
+                direction="column"
+                justify="center"
+                alignItems="center"
+                className={scss['no-exercice']}>
+                <div>
+                  Cliquer sur un exercice pour commencer
+                </div>
+              </Grid>
    }
 
    getExerciceDescription() {
@@ -88,9 +98,7 @@ class ExerciceEleve extends React.Component {
 	 render() {
 	 	return(
 	 		 <div  className={scss['exercice-zone']} >  
-              <Typography variant="headline" component="h3">
                 {this.getExerciceTitle()}
-              </Typography>
 
               <div className={scss['paper_data_in']}>
                 {this.getExerciceDescription()}

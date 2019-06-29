@@ -34,7 +34,7 @@ export const menuItems = [
   }, 
   {
       title: 'Mes Exercices',
-      href: '/ecole',
+      href: '/mes-exercices',
       icon: <ShoppingCartIcon style={iconStyle} />
   },
   {

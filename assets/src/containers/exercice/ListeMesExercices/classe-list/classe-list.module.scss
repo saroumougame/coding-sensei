@@ -1,0 +1,21 @@
+.portal-contacts-list__item {
+  cursor: pointer;
+  height: 80px;
+  padding: 0 16px;
+}
+
+.portal-contacts-list__item__text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.list-white{
+	background-color: #fff;	
+}
+
+.portal-search-field {
+  padding-bottom: 20px;
+}
+.classe_cree_le {
+	padding-top: 10px;
+}

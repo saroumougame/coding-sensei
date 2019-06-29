@@ -22,7 +22,7 @@ export  const MODAL_FAIL                = "MODAL_FAIL";
 export  const MODAL_SUCESS              = "MODAL_SUCESS";
 export  const DISMISS_MODAL                = "DISMISS_MODAL";
 export  const GET_LISTE_EXERCICES_FOR_STUDENT  = "GET_LISTE_EXERCICES_FOR_STUDENT";
-
+export  const ALL_EXERCICE_PROFF       = 'ALL_EXERCICE_PROFF';
 
 
 export const updateDate = date => ({
@@ -195,6 +195,31 @@ export const submitExerciceAction = (ExerciceContent) => {
 }
 
 
+export const allExerciceProff = exoList => ({
+  type: ALL_EXERCICE_PROFF,
+  payload: exoList
+});
+
+//export cons
+export const getAllExercices = () => {
+  console.log('yaaaaaaaa');
+    return (dispatch, getState) => { 
+      
+      fetch(API_URL + '/exercices', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization'  : 'Bearer ' + localStorage.getItem('token')
+        }
+      })
+      .then(response => response.json())
+      .then(json => {
+            dispatch(allExerciceProff(json["hydra:member"]));
+      })
+      .catch((e) => dispatch());
+    }
+}
+
 export const listeExerciceAction = () => {
 
   return (dispatch, getState) => { 
@@ -327,10 +352,10 @@ export const createExerciceAction = () => {
 
     while (typeof(state.exerciceData.add_form_param_in["out_" + ini]) != undefined && typeof(state.exerciceData.add_form_param_in["out_" + ini]) != 'undefined'){
       if (state.exerciceData.add_form_param_in["out_" + ini] === 2){
-        out_res += `${state.exerciceData.add_form_param_in["out_name_" + ini]} : ${state.exerciceData.add_form_param_in["out_value_" + ini]}`
+        out_res += `"${state.exerciceData.add_form_param_in["out_name_" + ini]}" : ${state.exerciceData.add_form_param_in["out_value_" + ini]}`
       }
       if (state.exerciceData.add_form_param_in["out_" + ini] === 1){
-        out_res += `${state.exerciceData.add_form_param_in["out_name_" + ini]} : ""`
+        out_res += `"${state.exerciceData.add_form_param_in["out_name_" + ini]}" : ""`
 
       }
       ini++;
@@ -341,6 +366,7 @@ export const createExerciceAction = () => {
     let dateLimite = null
     if(state.exerciceData.formDate != '0000-00-00') {
       dateLimite = state.exerciceData.formDate;
+      
     }
 
     var details = {

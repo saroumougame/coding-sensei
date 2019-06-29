@@ -13,13 +13,10 @@ class ListeCours extends React.Component {
     	this.state = {
     		eleve: null
 	    }
-
-
 	 }
 
    showExercice(i) {
      this.props.setCurrentExoUser(i);
-
    }
 
    getDateLimit(exo) {
@@ -29,17 +26,26 @@ class ListeCours extends React.Component {
    }
 
    parseDate(uneDate) {
-    return uneDate.substring(0, 10);
+    if(uneDate != null){
+      return uneDate.substring(0, 10);
+    }
    }
+   
    getTentatives(reponses) {
     return reponses.length;
    }
+
    getListeExercices() {
     if(typeof(this.props.data.liste_exercice_user) == undefined || typeof(this.props.data.liste_exercice_user) == 'undefined'){
       return;
     }
+
        return this.props.data.liste_exercice_user.map((i) => {
-  
+
+          if(i.exercice.archive === true) {
+            return;
+          }
+          console.log(i.reponse);
           if(typeof(i.reponse[0]) != 'undefined' && typeof(i.reponse[0]) != undefined){
             if(i.reponse[0].success == true) {
               return (

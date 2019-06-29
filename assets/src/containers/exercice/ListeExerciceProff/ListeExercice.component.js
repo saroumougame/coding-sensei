@@ -73,6 +73,9 @@ class listeEcercice extends React.Component {
       let liste = this.props.data.liste_exerciceData;
       if(typeof(liste) !== 'undefined' && typeof(liste) !== undefined) { 
         return liste.map((i) => {
+          if(i.archive == true){
+            return;
+          }
           count++;
           if(count > this.state.pagination){  
           return (

@@ -121,6 +121,7 @@ export const modalSuccessExercice = () => ({
 
 export const deleteExercice = () => {
 
+
   return (dispatch, getState) => { 
 
     const state = getState();
@@ -128,23 +129,26 @@ export const deleteExercice = () => {
     
     idExercice = idExercice.split('/')[2];
 
+    var details =  {
+      "archive": true
+    }
+    var formBody = JSON.stringify(details);
     //var formBody = JSON.stringify(details);
     fetch(API_URL + '/exercices/'+idExercice, {
-      method: 'DELETE',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         'Authorization'  : 'Bearer ' + localStorage.getItem('token')
-      }
+      },
+      body: formBody
     })
     .then(response => response.json())
     .then(json => {
           dispatch(setExerciceComponentAction(null));
-          dispatch(getExercicesEleve())
-          //dispatch(listeExercice(json["hydra:member"]));
+          //dispatch(getExercicesEleve())
+          dispatch(listeExerciceAction());
     })
     .catch((e) => dispatch());
-    /*
-*/
   }
 }
 
@@ -237,6 +241,8 @@ export const elevesExerciceAction = () => {
     })
     .then(response => response.json())
     .then(json => {
+      console.log('json:');
+      console.log(json);
       dispatch(elevesExercice(json));
     })
     .catch((e) => dispatch());

@@ -32,7 +32,6 @@ class ListeCours extends React.Component {
     return uneDate.substring(0, 10);
    }
    getTentatives(reponses) {
-    console.log(reponses);
     return reponses.length;
    }
    getListeExercices() {
@@ -40,10 +39,11 @@ class ListeCours extends React.Component {
       return;
     }
        return this.props.data.liste_exercice_user.map((i) => {
+  
           if(typeof(i.reponse[0]) != 'undefined' && typeof(i.reponse[0]) != undefined){
             if(i.reponse[0].success == true) {
               return (
-                      <div className={scss['un-cour-valider']} onClick={() => this.showExercice(i)} >
+                      <div key={i.exercice.name} className={scss['un-cour-valider']} onClick={() => this.showExercice(i)} >
                           <div>
                           {i.exercice.name}
                           </div>
@@ -54,9 +54,8 @@ class ListeCours extends React.Component {
               );
             }
           }
-
           return (
-            <div className={scss['un-cour']} onClick={() => this.showExercice(i)} >
+            <div key={i.exercice.name} className={scss['un-cour']} onClick={() => this.showExercice(i)} >
                 <div>
                 {i.exercice.name}
                 </div>

@@ -9,8 +9,8 @@ import compose from 'recompose/compose';
 
 import { MuiThemeProvider, createMuiTheme, createGenerateClassName, jssPreset } from '@material-ui/core/styles';
 import { logginWithTokenAction } from './actions/user.actions.js';
+import {API_URL } from './api';
 import { getUser, getUserByToken } from './actions/auth.actions.js';
-
 import Routes from './routes';
 
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
@@ -26,7 +26,7 @@ class App extends React.Component {
       var token = localStorage.getItem('token');
       if(typeof(token) !== 'undefined' && token !== null){
         //this.props.getUser();
-        this.props.getUserByToken();
+        this.props.getUserByToken(API_URL);
       }
     }
 

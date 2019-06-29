@@ -1,5 +1,5 @@
 import history from '../history';
-import { API_URL } from '../config';
+import { API_URL } from '../api';
 import { getExercicesEleve } from './exercice.actions';
 export const ADD_CLASS_BY_PROFF       = 'add class by professeur';
 export const EDIT_CLASS_BY_PROFF      = 'supprile les proff selectionnée';

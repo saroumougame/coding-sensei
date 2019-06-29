@@ -28,10 +28,32 @@ class ListeCours extends React.Component {
     }
    }
 
+   parseDate(uneDate) {
+    return uneDate.substring(0, 10);
+   }
+   getTentatives(reponses) {
+    console.log(reponses);
+    return reponses.length;
+   }
    getListeExercices() {
+    if(typeof(this.props.data.liste_exercice_user) == undefined || typeof(this.props.data.liste_exercice_user) == 'undefined'){
+      return;
+    }
        return this.props.data.liste_exercice_user.map((i) => {
-          console.log(i.reponse);
-
+          if(typeof(i.reponse[0]) != 'undefined' && typeof(i.reponse[0]) != undefined){
+            if(i.reponse[0].success == true) {
+              return (
+                      <div className={scss['un-cour-valider']} onClick={() => this.showExercice(i)} >
+                          <div>
+                          {i.exercice.name}
+                          </div>
+                         <div>
+                          Exercice Valider le {this.parseDate(i.reponse[0].updatedAt)}
+                         </div>
+                      </div>
+              );
+            }
+          }
 
           return (
             <div className={scss['un-cour']} onClick={() => this.showExercice(i)} >
@@ -39,13 +61,10 @@ class ListeCours extends React.Component {
                 {i.exercice.name}
                 </div>
                <div>
-               {this.getDateLimit(i.exercice)}
-               {/*
-              <Typography variant="headline" component="h5">
-                
-              </Typography>
-               {i.exercice.description}
-                */}
+                  {this.getDateLimit(i.exercice)}
+                <div>
+                         nombre de tentatives :{this.getTentatives(i.reponse)}
+                </div>
                </div>
 
 

@@ -1,5 +1,5 @@
 import history from '../history';
-import { API_URL } from '../config';
+import { API_URL } from '../api';
 export  const INSCRIPTION_ETAPES = "changer_étapes";
 
 export const AUTH_NOM_PROFF           = "FORM NOM PROFF";
@@ -146,7 +146,6 @@ export const login = (email, password) => {
 export const getUserByToken = () => {
 
   var token = localStorage.getItem('token');
-
   return (dispatch, getState) => { 
     fetch(API_URL + '/currentuser', {
       method: 'GET',
@@ -186,7 +185,7 @@ export const expiredAction = () => ({
 export const getUser = () => {
 
   var token = localStorage.getItem('token');
-
+  
   return (dispatch, getState) => { 
     fetch(API_URL + '/currentuser', {
       method: 'GET',

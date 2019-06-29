@@ -7,7 +7,6 @@ import FaceIcon from '@material-ui/icons/Face';
 
 import themes from './themes';
 
-export const API_URL = 'https://api.coding-sensei.fr';
 
 export const configuredTheme = themes[0].theme;
 

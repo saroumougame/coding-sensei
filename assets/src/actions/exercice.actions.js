@@ -1,3 +1,4 @@
+import { API_URL } from '../api';
 export const ADD_PROFF_ACTION       = 'ajoute un proff';
 export const DELETE_PROFF_ACTION    = 'supprile les proff selectionnée';
 export const SHOW_FORM_ACTION       = 'montre le form ';
@@ -5,7 +6,6 @@ export const ADD_SELECTED_ACTION    = 'Ajoute  à la selection';
 export const DELETE_SELECTED_ACTION = 'retire à la selection';
 
 
-       const API_URL                  = 'http://api.coding-sensei.fr';
 export  const UPDATE_FORM_TITLE        = 'UPDATE_FORM_TITLE';
 export  const UPDATE_FORM_DESC         = 'UPDATE_FORM_DESC';
 export  const UPDATE_FORM_PARAM_IN     = 'UPDATE_FORM_PARAM_IN';

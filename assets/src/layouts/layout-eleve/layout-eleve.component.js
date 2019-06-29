@@ -56,7 +56,7 @@ class EleveLayout extends React.Component {
                   if(newValue === 0) {
                     history.push('/classes');
                   }else if(newValue === 1){
-                    history.push('/favoris');
+                    history.push('/home');
                   }else if(newValue === 2){
                     history.push('/home');
                   }else if(newValue === 3){
@@ -68,8 +68,10 @@ class EleveLayout extends React.Component {
                 showLabels
                 className={scss['layout-eleve-Menu']}
               >
-                <BottomNavigationAction label="Mes classes"       icon={<RestoreIcon className={scss['layout-eleve-Menu-icon']} />} />
+                <BottomNavigationAction label="Mes exercices"       icon={<RestoreIcon className={scss['layout-eleve-Menu-icon']} />} />
+              {/*
                 <BottomNavigationAction label="Favoris"         icon={<FavoriteIcon  className={scss['layout-eleve-Menu-icon']}/>} />
+              */}
                 <BottomNavigationAction label="Profil & settings" icon={<LocationOnIcon className={scss['layout-eleve-Menu-icon']} />} />
                 <BottomNavigationAction className={scss['layout-eleve-Menu-right']} label="Déconnexion" icon={<Https className={scss['layout-eleve-Menu-icon']} />} />
 

@@ -9,8 +9,10 @@ import withWidth from '@material-ui/core/withWidth';
 import { withStyles } from '@material-ui/core/styles';
 import scss from './contact-details.module.scss';
 import { connect } from 'react-redux';
-import { elevesExerciceAction } from '../../../../actions/exercice.actions';
+import { elevesExerciceAction, elevesScoreAction } from '../../../../actions/exercice.actions';
 import Paper from '@material-ui/core/Paper';
+import Collapse from '@material-ui/core/Collapse';
+
 class ContactDetails extends React.Component {
 
     constructor(props) {
@@ -21,7 +23,7 @@ class ContactDetails extends React.Component {
         composantClicker: null,
       }
       this.props.elevesExerciceAction();
-
+      this.props.elevesScoreAction();
     }
 
     
@@ -30,19 +32,32 @@ class ContactDetails extends React.Component {
       return (<Grid className={classNames(scss['portal-contact-details'] )}>
           <Grid 
           container
-        direction="row"
-                justify="space-between"
+          direction="row"
+          justify="space-between"
 
           className={classNames(scss['portal-contact-details-header'] )}>
           <div>
             <Typography variant="headline">{this.props.selectedContact.firstName.toUpperCase()} {this.props.selectedContact.lastName.toUpperCase()}</Typography>
             <Typography variant="subtitle1"><b>email : </b>{this.props.selectedContact.email}</Typography>
           </div>
-
-          <div className={classNames(scss['portal-contact-details-header-score'] )}>97 %</div>
+          <div>
+              <Grid 
+              container
+              direction="row"
+              justify="flex-end"
+              >
+              <div>
+                  <div>Exercices Reussi : {this.props.data.grade[1] || 0}</div>
+                  <div>Exercices Realisé : {this.props.data.grade[2] || 0}</div>
+              </div>
+              <div className={classNames(scss['portal-contact-details-header-score'] )}>{this.props.data.grade[0] || 0} %</div>
+          </Grid>
+          </div>
           </Grid>
 
           <div>
+
+
              { this.props.data.exerciceTexte.map(element=>{ 
               //console.log(element);
               var { name, description, endDate, createdAt } = element.exercice;
@@ -53,6 +68,7 @@ class ContactDetails extends React.Component {
                 endDate = (new Date(endDate.date)).toLocaleDateString();
               }
               return(
+                
                 <Paper className={classNames(scss['portal-contact-content-paper'])}>
                   <div><b>Nom : </b>{name}</div>
                   <div><b>Description: </b>{description}</div>
@@ -73,6 +89,7 @@ function mapStateToProps(state) {
   return {
     data: {
       exerciceTexte: state.exerciceData.current_student_data,
+      grade: state.exerciceData.grade
     }
   };
 }
@@ -87,4 +104,4 @@ ContactDetails.propTypes = {
 };
 
 export default compose(withWidth(), withStyles( { withTheme: true }),
-  connect(mapStateToProps, {elevesExerciceAction}))(ContactDetails);
+  connect(mapStateToProps, {elevesExerciceAction, elevesScoreAction}))(ContactDetails);

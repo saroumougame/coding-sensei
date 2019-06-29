@@ -22,6 +22,8 @@ export  const MODAL_FAIL                = "MODAL_FAIL";
 export  const MODAL_SUCESS              = "MODAL_SUCESS";
 export  const DISMISS_MODAL                = "DISMISS_MODAL";
 export  const GET_LISTE_EXERCICES_FOR_STUDENT  = "GET_LISTE_EXERCICES_FOR_STUDENT";
+export  const GET_GRADE_FOR_STUDENT  = "GET_GRADE_FOR_STUDENT";
+export  const IMPORT  = "IMPORT";
 
 
 
@@ -93,6 +95,10 @@ export const elevesExercice = jsonExercices => ({
   type: GET_LISTE_EXERCICES_FOR_STUDENT,
   payload: jsonExercices
 });
+export const elevesGrade = grade => ({
+  type: GET_GRADE_FOR_STUDENT,
+  payload: grade
+});
 
 
 export const setCurrentExoUser = exercice => ({
@@ -103,6 +109,10 @@ export const setCurrentExoUser = exercice => ({
 export const updateExerciceAction = exerciceText => ({
   type: UPDATE_TEXT_EXERCICE,
   payload: exerciceText
+});
+export const importExo = importData => ({
+  type: IMPORT,
+  payload: importData
 });
 
 
@@ -243,6 +253,35 @@ export const elevesExerciceAction = () => {
   }
    
 }
+export const elevesScoreAction = () => {
+
+  return (dispatch, getState) => { 
+
+    const state = getState();
+    let idEleve =  state.eleveData.SelectedEleve['@id'];
+    
+    idEleve = idEleve.split('/')[2];
+
+    //var formBody = JSON.stringify(details);
+    fetch(API_URL + '/user/' + idEleve + "/grade", {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization'  : 'Bearer ' + localStorage.getItem('token')
+      }
+    })
+    .then(response => response.json())
+    .then(json => {
+      console.log({
+        d: json
+      });
+      console.log(Object.values(json))
+      dispatch(elevesGrade(Object.values(json)));
+    })
+    .catch((e) => {});
+  }
+   
+}
 
 export const getExercicesEleve = () => {
 
@@ -294,8 +333,7 @@ export const createExerciceAction = () => {
     const state = getState();
 
     const idClass =  state.classData.currentClasse['@id'];
-/*
-  */
+
 
     var ini = 0;
     var in_res = '{';
@@ -345,5 +383,39 @@ export const createExerciceAction = () => {
          // dispatch(getEleve());
     })
     .catch((e) => dispatch());
+  }
+}
+
+
+export const importAction = () => {
+
+  return (dispatch, getState) => { 
+    const state = getState();
+
+    const idClass =  state.classData.currentClasse['@id'];
+    var e = "{\"data\": " + state.exerciceData.importExo + "}"
+    console.log(e);
+    console.log(JSON.parse(e));
+    var details = {
+      'data': JSON.parse(state.exerciceData.importExo),
+      'classe': idClass
+    }
+    var formBody = JSON.stringify(details);
+    console.log({
+      this: formBody
+    });
+    fetch(API_URL + '/exercices/multi', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization'  : 'Bearer ' + localStorage.getItem('token')
+      },
+      body: formBody
+    })
+    .then(response => response.json())
+    .then(json => {
+         // dispatch(getEleve());
+    })
+    .catch((e) => {});
   }
 }

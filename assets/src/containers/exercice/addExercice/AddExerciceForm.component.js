@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import { updateFormTitle, updateFormDesc, updateFormIn, updateFormOut, createExerciceAction } from '../../../actions/exercice.actions';
+import { updateFormTitle, updateFormDesc, updateFormIn, updateFormOut, createExerciceAction, importAction, importExo} from '../../../actions/exercice.actions';
 
 class AddExerciceForm extends React.Component {
 
@@ -16,8 +16,8 @@ class AddExerciceForm extends React.Component {
     	this.state = {
     		eleve: null,
         pagination: 0,
-        quantityOfIn: 1,
-        quantityOfOut: 0,
+        quantityOfIn: 0,
+        quantityOfOut: 1,
         selectedOption: []
 	    }
 	 } 
@@ -171,6 +171,32 @@ getoutvars(){
         return <div></div>;
        // return <Button className={[scss['delete']]} variant="contained"  onClick={() => {this.delinvars()}}>Supprimer</Button>;
   }
+  import(e){
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+      
+      var files = document.getElementById("raised-button-file").files; // FileList object
+
+      // files is a FileList of File objects. List some properties.
+      var res = [];
+      for (var i = 0, f; f = files[i]; i++) {
+        if (f) {
+            var that = this;
+            var reader = new FileReader();
+            reader.readAsText(f, "UTF-8");
+            reader.onload = function (evt) {
+                that.props.importExo(evt.target.result);
+                that.props.importAction();
+            }.bind(that);
+            reader.onerror = function (evt) {
+              alert("error reading file");
+            }
+        }
+
+      }
+    } else {
+      alert('The File APIs are not fully supported in this browser.');
+    }
+  }
   getDelOut(){
         if (this.state.quantityOfOut === 0){
            return <div>Aucune clause de validation</div>;
@@ -178,9 +204,28 @@ getoutvars(){
         return <div></div>;
         //return <Button className={[scss['delete']]}  onClick={() => {this.deloutvars()}}>Supprimer</Button>;
   }
-	 render() {
+
+	render() {
 	 	return(
-	 		 <div className={scss['ListeExercices']} >  
+	 		 <div className={scss['ListeExercices']} >
+          <div>
+            <input
+              accept="*.coding-sensei"
+              style={{ display: 'none' }}
+              id="raised-button-file"
+              multiple
+              type="file"
+            />
+            <label htmlFor="raised-button-file">
+              <Button variant="raised" component="span">
+                Choose file
+              </Button>   
+            </label> 
+            <Button variant="raised" component="span" onClick={(e) => {this.import(e)}}
+>
+                Import
+            </Button> 
+          </div>  
           <form className={[ scss['form_add_proff_form']]} noValidate autoComplete="off">
             <TextField
               id="titre"
@@ -239,4 +284,4 @@ function mapStateToProps(state) {
   };
 }
 export default 
-  connect(mapStateToProps,  {updateFormTitle, updateFormDesc, updateFormIn, updateFormOut, createExerciceAction})(AddExerciceForm);
+  connect(mapStateToProps,  {updateFormTitle, updateFormDesc, updateFormIn, updateFormOut, createExerciceAction, importAction, importExo})(AddExerciceForm);

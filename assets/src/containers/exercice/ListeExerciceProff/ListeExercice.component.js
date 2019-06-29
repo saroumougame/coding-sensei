@@ -31,19 +31,19 @@ class listeEcercice extends React.Component {
    }
     handleExport(){
       let liste = this.props.data.liste_exerciceData;
-      var res = '{';
-      console.log(this);
+      var res = '[';
       for (var i = 0; i < liste.length; i++){
           res += `\n{\n
     "name":"${liste[i].name}",\n
     "description":"${liste[i].description}",\n
     "inData":${JSON.stringify(liste[i].inData) },\n
     "outData":${JSON.stringify(liste[i].outData)},\n 
-    "dateEnd":"${liste[i].dateEnd || ""}"\n 
+    "dateEnd":"${liste[i].dateEnd || ""}",\n 
+    "langagueSpecs":"${liste[i].langagueSpecs || ""}"\n 
 },`;
       }
-      res.substring(0, res.length - 1);
-      res += '\n}\n';
+      res = res.substring(0, res.length - 1);
+      res += '\n]\n';
 
 
         var today = new Date();

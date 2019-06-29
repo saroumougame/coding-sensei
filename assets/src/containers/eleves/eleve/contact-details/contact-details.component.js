@@ -12,6 +12,13 @@ import { connect } from 'react-redux';
 import { elevesExerciceAction, elevesScoreAction } from '../../../../actions/exercice.actions';
 import Paper from '@material-ui/core/Paper';
 import Collapse from '@material-ui/core/Collapse';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import DoneIcon from '@material-ui/icons/Done';
+import ClearIcon from '@material-ui/icons/Clear';
+
 
 class ContactDetails extends React.Component {
 
@@ -25,27 +32,74 @@ class ContactDetails extends React.Component {
       this.props.elevesExerciceAction();
       this.props.elevesScoreAction();
     }
-
+  getExoIcon(success){
+    if (success){
+      return <DoneIcon/>
+    }
+    return <ClearIcon/>
+  }
   getListeExercices() {
     if(this.props.data.exerciceTexte != null){
       console.log(this.props.data.exerciceTexte);
         return this.props.data.exerciceTexte.map(element=>{ 
-          console.log(element.reponse);
-              //console.log(element);
               var { name, description, endDate, createdAt } = element.exercice;
+              var success = false;
+              var reponse = false;
+              for (var i = 0; i < element.reponse.length; i++) {
+                success = success || element.reponse[i].success;
+                if (! reponse){
+                  reponse = element.reponse[i];
+                  break;
+                }
+                var old_date = new Date(reponse.createdAt)
+                var new_date = new Date(element.reponse[i].createdAt)
+                if (reponse.success && element.reponse[i].success){
+                  if (old_date < new_date){
+                    reponse = element.reponse[i];
+                    break;
+                  }
+                }
+                if (old_date < new_date){
+                    reponse = element.reponse[i];
+                    break;
+                }
+              }
               if (createdAt){
                 createdAt = (new Date(createdAt.date)).toLocaleDateString();
               }
               if (endDate){
                 endDate = (new Date(endDate.date)).toLocaleDateString();
               }
+              console.log({
+                rep: reponse
+              });
               return(
-                <Paper key={name} className={classNames(scss['portal-contact-content-paper'])}>
+
+                <div>
+                <ExpansionPanel className={classNames(scss['portal-contact-content-panel'])}>
+                  <ExpansionPanelSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                    >
+                   <Grid 
+                container
+                direction="row"
+                justify="space-between"
+                alignItems="stretch">
+                <div><Typography>{name}</Typography></div>
+                <div>{this.getExoIcon(success)}</div>
+                </Grid>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+            
                   <div><b>Nom : </b>{name}</div>
                   <div><b>Description: </b>{description}</div>
-                  <div><b>fin: </b>{endDate}</div>
-                  <div><b>creation: </b>{createdAt}</div>
-                </Paper>
+                  <div><b>reponse: </b>{reponse.awnserCode}</div>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+                </div>
+                
               );
             })
     }
@@ -79,7 +133,7 @@ class ContactDetails extends React.Component {
           </div>
           </Grid>
 
-          <div>
+          <div className={classNames(scss['exo-listing'] )}>
             {this.getListeExercices()}
           </div>
 

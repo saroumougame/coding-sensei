@@ -99,7 +99,11 @@ class AccountProff extends React.Component {
               Voir mes classes >>
             </Button>
           </Grid>
-          {this.getStatsData()}
+          {/* <p>Vous gerez actuelement <span className={scss['info']}> {this.props.data.stats != null ?this.props.data.stats.class_count: ""} </span> classes</p>
+          <p>Votre classes la plus nombreuse est <span className={scss['info']}>{this.props.data.stats != null ?this.props.data.stats.biggest_class.name: ""}</span>. Elle contient <span className={scss['info']}>{this.props.data.stats != null ?this.props.data.stats.biggest_class.count: ""}</span> eleves.</p>
+          <p>Votre classes la moins nombreuse est <span className={scss['info']}>{this.props.data.stats != null ?this.props.data.stats.smallest_class.name: ""}</span>. Elle contient <span className={scss['info']}> {this.props.data.stats != null ?this.props.data.stats.smallest_class.count: ""}</span> eleves.</p>
+          <p>Votre classes la plus forte est <span className={scss['info']}>{this.props.data.stats != null ?this.props.data.stats.strongest_class.name: ""}</span> avec un score de <span className={scss['info']}>{this.props.data.stats != null ?this.props.data.stats.strongest_class.grade: ""}</span>.</p>
+          <p>Votre classes la moins faible est <span className={scss['info']}>{this.props.data.stats != null ?this.props.data.stats.weakest_class.name: ""}</span> avec un score de <span className={scss['info']}>{this.props.data.stats != null ?this.props.data.stats.weakest_class.grade: ""}</span>.</p> */}
 
             <Grid
               container
@@ -110,9 +114,11 @@ class AccountProff extends React.Component {
             <Button color="primary" className={scss['button']}  onClick={() => {this.voirMesEleves()}}>
               Voir mes eleves >>
             </Button>
-          </Grid> 
-          {this.getStudentData()}         
-  </Paper>
+          </Grid>          
+          {/* <p>Vous gerez actuelement <span className={scss['info']}> {this.props.data.stats != null ?this.props.data.stats.student_count: ""} </span> eleves</p>
+          <p>Votre eleve le plus faible est <span className={scss['info']}>{this.props.data.stats != null ?this.props.data.stats.weakest_student.name: ""}</span> avec un score de <span className={scss['info']}>{this.props.data.stats != null ?this.props.data.stats.weakest_student.grade: ""}</span>.</p>
+          <p>Votre eleve le plus fort est <span className={scss['info']}>{this.props.data.stats != null ?this.props.data.stats.strongest_student.name: ""}</span> avec un score de <span className={scss['info']}>{this.props.data.stats != null ?this.props.data.stats.strongest_student.grade: ""}</span>.</p> */}
+        </Paper>
       </Grid>
       <Grid item xs={1} />
     </Grid>

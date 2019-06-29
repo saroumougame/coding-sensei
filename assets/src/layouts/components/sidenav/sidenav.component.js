@@ -65,10 +65,11 @@ const Sidenav = (props) => {
           <Toolbar disableGutters>
             <span className="portal-flex" />
             <IconButton onClick={props.deconnexionAction}>
+            {/* <ChevronLeftIcon/> */}
                 <Typography variant="h5" color="inherit" noWrap>
                 Déconnexion
               </Typography>
-              <ChevronLeftIcon />
+           
             </IconButton>
           </Toolbar>
         </AppBar>

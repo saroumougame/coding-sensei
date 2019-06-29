@@ -19,16 +19,32 @@ class ExerciceEleve extends React.Component {
 	    }
 	 }
 
+   getVariableInData() {
+        //console.log(this.props.data.current_Exercice_User.exercice['inData']);
+        //let inData = JSON.parse(this.props.data.current_Exercice_User.exercice['inData']);
+        /*
+        return this.props.data.current_Exercice_User.exercice['inData'].map((item) => {
+          console.log(item);
+          return (
+            <div>item</div>
+            );
+        })
+        */
+
+
+   }
+
    getExerciceTitle() {
     if(this.props.data.current_Exercice_User != null){
-      return this.props.data.current_Exercice_User['name'];
+      //console.log(this.props.data.current_Exercice_User.exercice);
+      return this.props.data.current_Exercice_User.exercice['name'];
     }
     return 'Cliquer sur un exercice pour commencer';
    }
 
    getExerciceDescription() {
     if(this.props.data.current_Exercice_User != null){
-      return this.props.data.current_Exercice_User['description'];
+      return this.props.data.current_Exercice_User.exercice['description'];
     }
     return ;
    }
@@ -38,7 +54,7 @@ class ExerciceEleve extends React.Component {
       return (
           <Paper className={scss['paper-enoncer-data']}>
              <Typography variant="headline" component="h5">Variables d'entrée</Typography>
-           {this.props.data.current_Exercice_User['inData']}
+             {this.getVariableInData()}
           </Paper>
         );
     }
@@ -52,7 +68,7 @@ class ExerciceEleve extends React.Component {
              <Typography variant="headline" component="h5">
                 Sortie attendue
               </Typography>
-           {this.props.data.current_Exercice_User['outData']}
+           {this.props.data.current_Exercice_User.exercice['outData']}
           </Paper>
         );
     }
@@ -76,17 +92,14 @@ class ExerciceEleve extends React.Component {
                 {this.getExerciceTitle()}
               </Typography>
 
-              <div>
-              {this.getExerciceDescription()}
+              <div className={scss['paper_data_in']}>
+                {this.getExerciceDescription()}
               </div>
 
               <div className={scss['paper_data_in']}>
                 {this.getVariableIn()}
               </div>
 
-              <div className={scss['paper_data_in']}>
-                {this.getVariableOut()}
-              </div>
               <div>
                  {this.getEditor()}
               </div>

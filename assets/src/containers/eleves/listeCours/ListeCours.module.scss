@@ -1,9 +1,14 @@
 .un-cour {
 	margin-top: 30px;
 	border: 1px solid white;
-	height: 100px;
-	width: 90%;
+	height: 130px;
+	width: 87%;
 	background-color: white;
+	padding: 8px;
+	margin-left: 4px;
+	margin-right: 5px;
+	cursor: pointer;
+	border-radius: 4px;
 }
 
 .un-cour:hover {
@@ -15,5 +20,13 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	max-height: 76vh;
+	overflow-x: hidden;
+	overflow-y: scroll; 
+}
 
+.un-cour-valider {
+	@extend .un-cour;
+	background-color: #29cf29;
+	cursor: not-allowed !important;
 }

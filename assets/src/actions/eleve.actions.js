@@ -1,4 +1,4 @@
-import { API_URL } from '../config';
+import { API_URL } from '../api';
 export  const SETELEVECONTACT = "SET ELEVE CONTACT";
 export  const GETELEVEBYCLASS = "GET ELEVE BYCLASS";
 

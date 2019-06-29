@@ -22,14 +22,52 @@ class ListeCours extends React.Component {
 
    }
 
+   getDateLimit(exo) {
+    if(exo.dateEnd == null) {
+      return 'Pas de date limite';
+    }
+   }
+
+   parseDate(uneDate) {
+    return uneDate.substring(0, 10);
+   }
+   getTentatives(reponses) {
+    console.log(reponses);
+    return reponses.length;
+   }
    getListeExercices() {
+    if(typeof(this.props.data.liste_exercice_user) == undefined || typeof(this.props.data.liste_exercice_user) == 'undefined'){
+      return;
+    }
        return this.props.data.liste_exercice_user.map((i) => {
+          if(typeof(i.reponse[0]) != 'undefined' && typeof(i.reponse[0]) != undefined){
+            if(i.reponse[0].success == true) {
+              return (
+                      <div className={scss['un-cour-valider']} onClick={() => this.showExercice(i)} >
+                          <div>
+                          {i.exercice.name}
+                          </div>
+                         <div>
+                          Exercice Valider le {this.parseDate(i.reponse[0].updatedAt)}
+                         </div>
+                      </div>
+              );
+            }
+          }
+
           return (
             <div className={scss['un-cour']} onClick={() => this.showExercice(i)} >
-               {i.exercice.name}
+                <div>
+                {i.exercice.name}
+                </div>
                <div>
-               {i.exercice.description}
+                  {this.getDateLimit(i.exercice)}
+                <div>
+                         nombre de tentatives :{this.getTentatives(i.reponse)}
+                </div>
                </div>
+
+
             </div>
             );
         });

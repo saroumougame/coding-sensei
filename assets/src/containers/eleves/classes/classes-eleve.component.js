@@ -33,7 +33,7 @@ class classesEleve extends React.Component {
 	 		 <div className={scss['main-class-list']}> 
           <div className={scss['class-list']}>
               <Typography  className={scss['mes-formations']} variant="headline" component="h2">
-                Mes formations 
+                Ma formation :
               </Typography>
               <Typography  className={scss['mes-formations']} variant="headline" component="h3">
                 {this.getClassName()}

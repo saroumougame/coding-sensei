@@ -42,7 +42,6 @@ export const menuItems = [
       href: '/apps/contacts',
       icon: <FaceIcon style={iconStyle} />
   },
-
 /*
 {
   title: 'Template',
@@ -210,6 +209,7 @@ export const menuItems = [
     href: '/errors/500'
   }]
 }
+
 */
 /*
 */

@@ -24,6 +24,7 @@ class listeEcercice extends React.Component {
 
 
    getDateRealisation(exercice) {
+    console.log(exercice);
       if(exercice.dateEnd == null) {
         return 'Date limite: infinie';
       }

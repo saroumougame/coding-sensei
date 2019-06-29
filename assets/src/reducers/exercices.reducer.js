@@ -1,6 +1,7 @@
 import { UPDATE_FORM_TITLE, UPDATE_FORM_DESC, UPDATE_FORM_PARAM_IN, UPDATE_FORM_PARAM_OUT, 
   GET_LISTE_EXERCICES, GET_LISTE_EXERCICES_USER, SET_CURRENT_EXO_USER, UPDATE_TEXT_EXERCICE,
-SUBMIT_MODAL, MODAL_FAIL, DISMISS_MODAL, MODAL_SUCESS,GET_LISTE_EXERCICES_FOR_STUDENT, SET_CURRENT_EXO_PROFF, SETEXERCICECOMPONENT} from '../actions/exercice.actions';
+SUBMIT_MODAL, MODAL_FAIL, DISMISS_MODAL, MODAL_SUCESS,GET_LISTE_EXERCICES_FOR_STUDENT,
+ SET_CURRENT_EXO_PROFF, SETEXERCICECOMPONENT, UPDATEDATEEXOCREATE} from '../actions/exercice.actions';
 
 export const UPDATE_ELEVE_LIST      = "UPDATE_ELEVE_LIST";
 
@@ -19,7 +20,8 @@ const defaultState = {
         'exerciceResultat'      : null,
         'current_student_data'  : [],
         'exerciceResultatText'  : '',
-        'exercice_component'    : null
+        'exercice_component'    : null,
+        'formDate'              : '000-00-00'
 };
 
 const exerciceReducer = (state = defaultState, action) => {
@@ -34,6 +36,12 @@ const exerciceReducer = (state = defaultState, action) => {
           ...state,
           current_student_data: action.payload,
         }
+    case UPDATEDATEEXOCREATE: {
+        return {
+          ...state,
+          formDate: action.payload,
+        }      
+    }
     case  UPDATE_FORM_DESC:
         return {
           ...state,

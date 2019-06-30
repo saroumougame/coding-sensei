@@ -95,6 +95,7 @@ class LoginForm extends React.Component {
                   <CardContent>
                 {this.getSpinner()}
                     <TextField
+                      id='email'
                       label="Email Address"
                       value={this.props.data.auth_login_email}
                       fullWidth
@@ -102,6 +103,7 @@ class LoginForm extends React.Component {
                       onChange={this.handleEmailChange}
                     />
                     <TextField
+                    id='password'
                       label="Password"
                       fullWidth
                       value={this.props.data.auth_login_password}
@@ -112,7 +114,7 @@ class LoginForm extends React.Component {
                   </CardContent>
 
                   <CardActions className={scss['login-actions']}>
-                    <Button onClick={this.submitFormLogin} color="default" variant="contained">Login</Button>
+                    <Button id='envoyer' onClick={this.submitFormLogin} color="default" variant="contained">Login</Button>
                     <Button> Forgot Password</Button>
                   </CardActions>
                 </Card>

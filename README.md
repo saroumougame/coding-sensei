@@ -36,3 +36,14 @@ Merge master into origin2\developpement
 
 ```
 
+### Test Fonctionel Behat + selenium
+
+```
+java -Dwebdriver.gecko.driver=/usr/local/bin/geckodriver -jar selenium-server-standalone-3.0.1.jar
+
+./vendor/bin/behat --init
+
+./vendor/bin/behat
+
+```
+

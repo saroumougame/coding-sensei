@@ -170,8 +170,11 @@ export const getUserByToken = () => {
           history.push('/classes');
           }
         }else{
-          if (history.location.pathname.split("/")[1] !== "professeur") {
-          history.push('/account');
+          if (
+            history.location.pathname.split("/")[1] !== "professeur" &&
+            history.location.pathname.split("/")[1] !== "account"
+            ) {
+            history.push('/account');
           }
         }
         dispatch(getCurrentUser(json));

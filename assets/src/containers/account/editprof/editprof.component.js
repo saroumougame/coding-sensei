@@ -25,21 +25,24 @@ class EditProf extends React.Component {
     super(props);
 
     this.state = {
-      id: this.props.data.user['@id'],
-      nom: this.props.data.user.firstName,
-      prenom: this.props.data.user.lastName,
-      email: this.props.data.user.email,
-  
+      id: "",
+      nom: "",
+      prenom: "",
+      email: "",
     }
+    this.props.getUserByToken();
+
   }
   
   formSubmit() {
     let form = {
-      'firstName':  this.props.data.user.firstName,
-      'lastName':   this.props.data.user.lastName
-     // 'email':      this.props.data.user.email,
-
+      'firstName':  this.state.prenom,
+      'lastName':   this.state.nom,
     }
+    if (this.state.email !== ''){
+      form["password"] = this.state.email
+    } 
+       
   
     var formBody = JSON.stringify(form);
 
@@ -53,7 +56,7 @@ class EditProf extends React.Component {
     })
     .then(response => response.json())
     .then(json => {
-       
+      history.push('/account');
     })
     // .catch((e) => dispatch());
  
@@ -66,8 +69,17 @@ class EditProf extends React.Component {
     history.push('/account');
 }
 
+componentWillReceiveProps(nextProps){
+    this.setState({
+        id: nextProps.data.user['@id'],
+        nom: nextProps.data.user.lastName,
+        prenom: nextProps.data.user.firstName ,
+      });
+  }
   render() {
-    console.log(this.props.data.user['@id']);
+   
+
+
       return (
         
     <div className={styles.portalDashboardPageWrapper}>
@@ -84,7 +96,7 @@ class EditProf extends React.Component {
               id="nom"
               value={this.state.nom}
               onChange={(e) => {this.setState({nom: e.target.value});}}
-              label="Nom et prenom"
+              label="Nom"
               // className={classes.textField}
               margin="normal"
             /><br></br>
@@ -92,16 +104,16 @@ class EditProf extends React.Component {
               id="nom"
               value={this.state.prenom}
               onChange={(e) => {this.setState({prenom: e.target.value});}}
-              label="Nom et prenom"
+              label="Prenom"
               // className={classes.textField}
               margin="normal"
             />
             <br></br>
-       <TextField
+          <TextField
               id="nom"
               value={this.state.email}
               onChange={(e) => {this.setState({email: e.target.value});}}
-              label="Nom et prenom"
+              label="Mot de Passe"
               // className={classes.textField}
               margin="normal"
             />

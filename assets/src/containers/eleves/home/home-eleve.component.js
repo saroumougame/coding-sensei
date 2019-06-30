@@ -20,6 +20,8 @@ class HomeEleve extends React.Component {
 
 
 	 render() {
+    console.log(this.props.data.currentUser);
+
 	 	return(
 	 		 <div className={scss['home-eleve-main']} >  
 
@@ -48,6 +50,7 @@ function mapStateToProps(state) {
   return {
     data: {
       FormDataUpdateClassNom:           state.classData.FormDataUpdateClassNom,  
+      currentUser       :               state.authData.user,
     }
   };
 }

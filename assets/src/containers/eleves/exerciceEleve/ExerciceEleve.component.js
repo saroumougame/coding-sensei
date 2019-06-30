@@ -5,9 +5,14 @@ import compose from 'recompose/compose';
 import withWidth from '@material-ui/core/withWidth';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 import scss from './ExerciceEleve.module.scss';
 import ExerciceEditeur from './exerciceEditeur/ExerciceEditeur.component';
+import Prism from "prismjs";
 
+import "prismjs/components/prism-markup-templating.js";
+import "prismjs/components/prism-php.js";
+import "../../../prism.css";
 
 class ExerciceEleve extends React.Component {
 
@@ -19,27 +24,55 @@ class ExerciceEleve extends React.Component {
 	    }
 	 }
 
-   getVariableInData() {
-        //console.log(this.props.data.current_Exercice_User.exercice['inData']);
-        //let inData = JSON.parse(this.props.data.current_Exercice_User.exercice['inData']);
-        /*
-        return this.props.data.current_Exercice_User.exercice['inData'].map((item) => {
-          console.log(item);
-          return (
-            <div>item</div>
-            );
-        })
-        */
+  getVars(data){
+    
+    if (typeof data == "undefined"){
+        return [];
+    }
+    data = JSON.parse(data);
+    var res = [];
+    for (var key in data) {
+      if (data.hasOwnProperty(key)) {
+        res.push([key,data[key]]);
+      }
+    }
+    return res;
+  }
+  getVariableInData(inData){
+    console.log(inData);
+    inData = this.getVars(inData);
+     if (inData.length <= 0){
+      return <div></div>;
+    }
+    var data = [];
+    for (var i = 0; i < inData.length; i++ ){
+      data[i] = `$${inData[i][0]} = ${inData[i][1]}`;
+    }
+    var res = Prism.highlight(data.join("\n"), Prism.languages["php"]);
+     return <div>
+              <div><b>variables en entrée: </b></div>
+              <pre className="line-numbers"><code className="language-php" dangerouslySetInnerHTML={{__html: res}}></code></pre>
+            </div>;
 
+  }
+   
 
-   }
 
    getExerciceTitle() {
     if(this.props.data.current_Exercice_User != null){
       //console.log(this.props.data.current_Exercice_User.exercice);
-      return this.props.data.current_Exercice_User.exercice['name'];
+      return <Typography variant="headline" component="h3">{this.props.data.current_Exercice_User.exercice['name']}</Typography>
     }
-    return 'Cliquer sur un exercice pour commencer';
+    return <Grid 
+                container
+                direction="column"
+                justify="center"
+                alignItems="center"
+                className={scss['no-exercice']}>
+                <div>
+                  Cliquer sur un exercice pour commencer
+                </div>
+              </Grid>
    }
 
    getExerciceDescription() {
@@ -51,11 +84,11 @@ class ExerciceEleve extends React.Component {
 
    getVariableIn() {
     if(this.props.data.current_Exercice_User != null){
+      console.log(this.props.data.current_Exercice_User.exercice);
       return (
-          <Paper className={scss['paper-enoncer-data']}>
-             <Typography variant="headline" component="h5">Variables d'entrée</Typography>
-             {this.getVariableInData()}
-          </Paper>
+          <div>
+             {this.getVariableInData(this.props.data.current_Exercice_User.exercice.inData)}
+          </div>
         );
     }
     return ;
@@ -88,9 +121,7 @@ class ExerciceEleve extends React.Component {
 	 render() {
 	 	return(
 	 		 <div  className={scss['exercice-zone']} >  
-              <Typography variant="headline" component="h3">
                 {this.getExerciceTitle()}
-              </Typography>
 
               <div className={scss['paper_data_in']}>
                 {this.getExerciceDescription()}

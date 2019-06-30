@@ -90,7 +90,7 @@ class ContentToolbar extends React.Component {
             Qui somme nous ? 
           </Button>
           </NavLink>
-       <NavLink to="/">
+       <NavLink to="/tarifs">
           <Button variant="contained" >
             Tarifs
           </Button>

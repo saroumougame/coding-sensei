@@ -2,21 +2,20 @@
 	//margin-top: 25px;
 	margin-left: 10px;
 	text-align: center;
-	font-family: 'Roboto';
+	font-family: cursive;
 }
 
 .class-list {
-width: 15%;
+	width: 17%;
+	background-color: #efefef;
+	padding-top: 20px;
+	box-shadow: 5px 5px 5px grey;
+	font-family: cursive;
 
-background-color: #efefef;
-
-
-height: 100%;
 }
 
 .main-class-list {
-	height: 90%;
-	margin-top: 10px;
+	height: calc(100vh - 110px);
 	margin-left: 5px;
 	margin-bottom: 15px;
 	display: flex;

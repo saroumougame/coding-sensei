@@ -15,16 +15,22 @@ export  const GET_LISTE_EXERCICES_USER = 'GET_LISTE_EXERCICES_USER';
 export  const SET_CURRENT_EXO_USER     = 'SET_CURRENT_EXO_USER';
 export  const SET_CURRENT_EXO_PROFF    = 'SET_CURRENT_EXO_PROFF';
 export  const SETEXERCICECOMPONENT     = 'SETEXERCICECOMPONENT'; 
-
+export  const UPDATEDATEEXOCREATE      = 'UPDATEDATEEXOCREATE';
 export  const UPDATE_TEXT_EXERCICE      = 'UPDATE_TEXT_EXERCICE';
 export  const SUBMIT_MODAL              = "SUBMIT_MODAL"; 
 export  const MODAL_FAIL                = "MODAL_FAIL";
 export  const MODAL_SUCESS              = "MODAL_SUCESS";
 export  const DISMISS_MODAL                = "DISMISS_MODAL";
 export  const GET_LISTE_EXERCICES_FOR_STUDENT  = "GET_LISTE_EXERCICES_FOR_STUDENT";
+export  const ALL_EXERCICE_PROFF       = 'ALL_EXERCICE_PROFF';
+export  const GET_GRADE_FOR_STUDENT  = "GET_GRADE_FOR_STUDENT";
+export  const IMPORT  = "IMPORT";
 
 
-
+export const updateDate = date => ({
+  type: UPDATEDATEEXOCREATE,
+  payload: date  
+});
 
 export const setExerciceComponentAction = state => ({
   type: SETEXERCICECOMPONENT,
@@ -93,6 +99,10 @@ export const elevesExercice = jsonExercices => ({
   type: GET_LISTE_EXERCICES_FOR_STUDENT,
   payload: jsonExercices
 });
+export const elevesGrade = grade => ({
+  type: GET_GRADE_FOR_STUDENT,
+  payload: grade
+});
 
 
 export const setCurrentExoUser = exercice => ({
@@ -103,6 +113,10 @@ export const setCurrentExoUser = exercice => ({
 export const updateExerciceAction = exerciceText => ({
   type: UPDATE_TEXT_EXERCICE,
   payload: exerciceText
+});
+export const importExo = importData => ({
+  type: IMPORT,
+  payload: importData
 });
 
 
@@ -121,6 +135,7 @@ export const modalSuccessExercice = () => ({
 
 export const deleteExercice = () => {
 
+
   return (dispatch, getState) => { 
 
     const state = getState();
@@ -128,23 +143,26 @@ export const deleteExercice = () => {
     
     idExercice = idExercice.split('/')[2];
 
+    var details =  {
+      "archive": true
+    }
+    var formBody = JSON.stringify(details);
     //var formBody = JSON.stringify(details);
     fetch(API_URL + '/exercices/'+idExercice, {
-      method: 'DELETE',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         'Authorization'  : 'Bearer ' + localStorage.getItem('token')
-      }
+      },
+      body: formBody
     })
     .then(response => response.json())
     .then(json => {
           dispatch(setExerciceComponentAction(null));
-          dispatch(getExercicesEleve())
-          //dispatch(listeExercice(json["hydra:member"]));
+          //dispatch(getExercicesEleve())
+          dispatch(listeExerciceAction());
     })
     .catch((e) => dispatch());
-    /*
-*/
   }
 }
 
@@ -186,6 +204,30 @@ export const submitExerciceAction = (ExerciceContent) => {
   }
 }
 
+
+export const allExerciceProff = exoList => ({
+  type: ALL_EXERCICE_PROFF,
+  payload: exoList
+});
+
+//export cons
+export const getAllExercices = () => {
+    return (dispatch, getState) => { 
+      
+      fetch(API_URL + '/exercices', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization'  : 'Bearer ' + localStorage.getItem('token')
+        }
+      })
+      .then(response => response.json())
+      .then(json => {
+            dispatch(allExerciceProff(json["hydra:member"]));
+      })
+      .catch((e) => dispatch());
+    }
+}
 
 export const listeExerciceAction = () => {
 
@@ -243,6 +285,31 @@ export const elevesExerciceAction = () => {
   }
    
 }
+export const elevesScoreAction = () => {
+
+  return (dispatch, getState) => { 
+
+    const state = getState();
+    let idEleve =  state.eleveData.SelectedEleve['@id'];
+    
+    idEleve = idEleve.split('/')[2];
+
+    //var formBody = JSON.stringify(details);
+    fetch(API_URL + '/user/' + idEleve + "/grade", {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization'  : 'Bearer ' + localStorage.getItem('token')
+      }
+    })
+    .then(response => response.json())
+    .then(json => {
+      dispatch(elevesGrade(Object.values(json)));
+    })
+    .catch((e) => {});
+  }
+   
+}
 
 export const getExercicesEleve = () => {
 
@@ -294,43 +361,55 @@ export const createExerciceAction = () => {
     const state = getState();
 
     const idClass =  state.classData.currentClasse['@id'];
-/*
-  */
+
 
     var ini = 0;
     var in_res = '{';
-    while (state.exerciceData.add_form_param_in["in_" + ini] !== null){
+
+    while (typeof(state.exerciceData.add_form_param_in["in_" + ini]) != undefined && typeof(state.exerciceData.add_form_param_in["in_" + ini]) != 'undefined'){
       if (state.exerciceData.add_form_param_in["in_" + ini] === 1){
         in_res += `${state.exerciceData.add_form_param_in["in_name_" + ini]} : ${state.exerciceData.add_form_param_in["in_value_" + ini]}`
       }
 //      if (state.exerciceData.add_form_param_in["in_" + ini] == 2){}
       ini++;
-    }
+    
+   }
+    /*
+  */
     in_res += '}';
     ini = 0;
     var out_res = '{';
-    while (state.exerciceData.add_form_param_in["out_" + ini] !== null){
+
+    while (typeof(state.exerciceData.add_form_param_in["out_" + ini]) != undefined && typeof(state.exerciceData.add_form_param_in["out_" + ini]) != 'undefined'){
       if (state.exerciceData.add_form_param_in["out_" + ini] === 2){
-        out_res += `${state.exerciceData.add_form_param_in["out_name_" + ini]} : ${state.exerciceData.add_form_param_in["out_value_" + ini]}`
+        out_res += `"${state.exerciceData.add_form_param_in["out_name_" + ini]}" : ${state.exerciceData.add_form_param_in["out_value_" + ini]}`
       }
       if (state.exerciceData.add_form_param_in["out_" + ini] === 1){
-        out_res += `${state.exerciceData.add_form_param_in["out_name_" + ini]} : ""`
+        out_res += `"${state.exerciceData.add_form_param_in["out_name_" + ini]}" : ""`
 
       }
-
-
       ini++;
     }
     out_res += '}'
+
+    // héhé
+    let dateLimite = null
+    if(state.exerciceData.formDate != '0000-00-00') {
+      dateLimite = state.exerciceData.formDate;
+      
+    }
+
     var details = {
-    'name': 		 state.exerciceData.add_form_titre,
+    'name': 		  state.exerciceData.add_form_titre,
     'description':   state.exerciceData.add_form_description,
     'in':        	in_res,
     'out':     	 	out_res,
     'classe':        idClass,
-    'langagueSpecs' : "php"
-  }
+    'langagueSpecs' : "php",
+    'dateEnd'     : dateLimite
+   }
   var formBody = JSON.stringify(details);
+
 
     fetch(API_URL + '/exercices', {
       method: 'POST',
@@ -342,8 +421,37 @@ export const createExerciceAction = () => {
     })
     .then(response => response.json())
     .then(json => {
-         // dispatch(getEleve());
+         dispatch(setExerciceComponentAction(null));
     })
     .catch((e) => dispatch());
+  }
+}
+
+
+export const importAction = () => {
+
+  return (dispatch, getState) => { 
+    const state = getState();
+
+    const idClass =  state.classData.currentClasse['@id'];
+    var e = "{\"data\": " + state.exerciceData.importExo + "}"
+    var details = {
+      'data': JSON.parse(state.exerciceData.importExo),
+      'classe': idClass
+    }
+    var formBody = JSON.stringify(details);
+    fetch(API_URL + '/exercices/multi', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization'  : 'Bearer ' + localStorage.getItem('token')
+      },
+      body: formBody
+    })
+    .then(response => response.json())
+    .then(json => {
+         // dispatch(getEleve());
+    })
+    .catch((e) => {});
   }
 }

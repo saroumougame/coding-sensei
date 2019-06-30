@@ -1,6 +1,8 @@
 .exercice-zone {
 	width: 80%;
-	padding-left: 15px;
+	padding: 30px;
+	overflow: auto;
+	height: calc(100vh - 150px);
 }
 .paper_data_in {
 	margin-top: 15px;
@@ -8,4 +10,8 @@
 }
 .paper-enoncer-data {
 	padding: 10%;
+}
+.no-exercice{
+	height: 100%;
+	width: 100%;
 }

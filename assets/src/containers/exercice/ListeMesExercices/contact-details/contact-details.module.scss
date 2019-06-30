@@ -1,18 +1,36 @@
 .portal-contact-details {
   height: 100%;
   width: 100%;
-  overflow: auto;
+  overflow: hidden;
+}
+
+
+.portal-contact-paper-grid {
+    height: 35vh;
+    width: 35vw;
+}
+
+.class-detail-header {
+ background-color: #fff;
+
+  width: 95% !important;
+  min-height: 5vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .portal-contact-details__header {
   // Add a background image or use the default animation
-  min-height: 33vh;
+  min-height: 15vh;
   position: relative;
   overflow: hidden;
+  display: flex;
   z-index: 1;
+
   &:before, &:after {
     content: "";
-    position: absolute;
+   // position: absolute;
     width: 160px;
     height: 160px;
     transform-origin: 0 0;
@@ -22,6 +40,9 @@
     border-radius: 50%;
     opacity: 0;
   }
+
+
+/*
   &:before {
     animation: portal-contact-details__header-before  .6s ease-out forwards 1;
     animation-delay: .2s;
@@ -30,6 +51,7 @@
     animation: portal-contact-details__header-after  .4s ease-out  forwards 1;
     animation-delay: .4s;
   }
+*/
 }
 
 @keyframes portal-contact-details__header-before {
@@ -60,7 +82,7 @@
 
 .portal-contact-details__content {
   position: relative;
-  padding: 16px;
+  height: 100%;
   z-index: 2;
 }
 
@@ -108,26 +130,27 @@
   position: relative;
   padding-top: 36px;
 }
-.portal-contact-details {
-  
+.portal-contacts-detail-update-contact {
+  margin-top: 25px;
+  margin-left: 10px;
 }
-.portal-contact-details-header {
-  padding:15px;
-  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
-  margin-bottom: 10px;
+
+
+.class-detail-header-part-deux {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
 }
-.portal-contact-details-header-score{
-  font-size: xx-large;
-  align-self: center;
-   color: green;
+.portal-contacts-detail-delete-button-contact {
+  height: 30%;
 }
-.portal-contact-content-paper{
-  margin: 15px;
-  padding: 15px;
+
+.class-name-paper {
+  padding: 30px;
 }
-.exo-listing{
-  padding: 15px;
-}
-.portal-contact-content-panel{
-  margin-bottom: 10px;
+
+.class-name-paper-central {
+  @extend .class-name-paper;
+  margin-top: 15px;
 }

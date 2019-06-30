@@ -31,19 +31,19 @@ class listeEcercice extends React.Component {
    }
     handleExport(){
       let liste = this.props.data.liste_exerciceData;
-      var res = '{';
-      console.log(this);
+      var res = '[';
       for (var i = 0; i < liste.length; i++){
           res += `\n{\n
     "name":"${liste[i].name}",\n
     "description":"${liste[i].description}",\n
     "inData":${JSON.stringify(liste[i].inData) },\n
     "outData":${JSON.stringify(liste[i].outData)},\n 
-    "dateEnd":"${liste[i].dateEnd || ""}"\n 
+    "dateEnd":"${liste[i].dateEnd || ""}",\n 
+    "langagueSpecs":"${liste[i].langagueSpecs || ""}"\n 
 },`;
       }
-      res.substring(0, res.length - 1);
-      res += '\n}\n';
+      res = res.substring(0, res.length - 1);
+      res += '\n]\n';
 
 
         var today = new Date();
@@ -65,14 +65,16 @@ class listeEcercice extends React.Component {
       document.body.appendChild(element);
       element.click();
       document.body.removeChild(element);
-      console.log(res);
-
+     
     }
    getListItem() {
       let count = 0;
       let liste = this.props.data.liste_exerciceData;
       if(typeof(liste) !== 'undefined' && typeof(liste) !== undefined) { 
         return liste.map((i) => {
+          if(i.archive == true){
+            return;
+          }
           count++;
           if(count > this.state.pagination){  
           return (

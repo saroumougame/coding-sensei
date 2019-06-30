@@ -30,7 +30,6 @@ class ClassicLayout extends React.Component {
 
   // Update the layout state when a going from mobile to desktop and vice versa
   componentWillReceiveProps(nextProps) {
-    console.log("");
     if ((isWidthDown('sm', this.props.width) && isWidthUp('md', nextProps.width))) {
       this.props.toggleSidenavVariant('persistent');
       this.props.setSidenavOpen(true);

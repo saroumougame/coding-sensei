@@ -212,7 +212,6 @@ export const allExerciceProff = exoList => ({
 
 //export cons
 export const getAllExercices = () => {
-  console.log('yaaaaaaaa');
     return (dispatch, getState) => { 
       
       fetch(API_URL + '/exercices', {
@@ -280,8 +279,6 @@ export const elevesExerciceAction = () => {
     })
     .then(response => response.json())
     .then(json => {
-      console.log('json:');
-      console.log(json);
       dispatch(elevesExercice(json));
     })
     .catch((e) => dispatch());
@@ -307,10 +304,6 @@ export const elevesScoreAction = () => {
     })
     .then(response => response.json())
     .then(json => {
-      console.log({
-        d: json
-      });
-      console.log(Object.values(json))
       dispatch(elevesGrade(Object.values(json)));
     })
     .catch((e) => {});
@@ -374,7 +367,6 @@ export const createExerciceAction = () => {
     var in_res = '{';
 
     while (typeof(state.exerciceData.add_form_param_in["in_" + ini]) != undefined && typeof(state.exerciceData.add_form_param_in["in_" + ini]) != 'undefined'){
-      console.log('loooooop');
       if (state.exerciceData.add_form_param_in["in_" + ini] === 1){
         in_res += `${state.exerciceData.add_form_param_in["in_name_" + ini]} : ${state.exerciceData.add_form_param_in["in_value_" + ini]}`
       }
@@ -443,16 +435,11 @@ export const importAction = () => {
 
     const idClass =  state.classData.currentClasse['@id'];
     var e = "{\"data\": " + state.exerciceData.importExo + "}"
-    console.log(e);
-    console.log(JSON.parse(e));
     var details = {
       'data': JSON.parse(state.exerciceData.importExo),
       'classe': idClass
     }
     var formBody = JSON.stringify(details);
-    console.log({
-      this: formBody
-    });
     fetch(API_URL + '/exercices/multi', {
       method: 'POST',
       headers: {

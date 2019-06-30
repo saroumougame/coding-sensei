@@ -19,6 +19,12 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import DoneIcon from '@material-ui/icons/Done';
 import ClearIcon from '@material-ui/icons/Clear';
 
+import Prism from "prismjs";
+import "prismjs/components/prism-markup-templating.js";
+import "prismjs/components/prism-php.js";
+import "../../../../prism.css";
+
+
 
 class ContactDetails extends React.Component {
 
@@ -32,17 +38,77 @@ class ContactDetails extends React.Component {
       this.props.elevesExerciceAction();
       this.props.elevesScoreAction();
     }
+  componentDidMount() {
+    console.log("here");
+    Prism.highlightAll();
+  }
   getExoIcon(success){
     if (success){
       return <DoneIcon/>
     }
     return <ClearIcon/>
   }
+  getVars(data){
+    
+    
+    data = JSON.parse(data);
+    
+    var res = [];
+    for (var key in data) {
+      if (data.hasOwnProperty(key)) {
+        res.push([key,data[key]]);
+      }
+    }
+    return res;
+  }
+  getIn(inData){
+    inData = this.getVars(inData);
+    if (inData.length <= 0){
+      return <div></div>;
+    }
+    var data = [];
+    for (var i = 0; i < inData.length; i++ ){
+      data[i] = `$${inData[i][0]} = ${inData[i][1]}`;
+    }
+    var res = Prism.highlight(data.join("\n"), Prism.languages["php"]);
+     return <div>
+              <div><b>variables en entrée: </b></div>
+              <pre className="line-numbers"><code className="language-php" dangerouslySetInnerHTML={{__html: res}}></code></pre>
+            </div>;
+
+  }
+  getOut(outData){
+    outData = this.getVars(outData);
+    if (outData.length <= 0){
+      return <div></div>;
+    }
+    var data = [];
+    for (var i = 0; i < outData.length; i++ ){
+      data[i] = `${outData[i][0]} = ${outData[i][1]}`;
+    }
+    var res = Prism.highlight(data.join("\n"), Prism.languages["php"]);
+     return <div>
+              <div><b>Verification: </b></div>
+              <pre className="line-numbers"><code className="language-php" dangerouslySetInnerHTML={{__html: res}}></code></pre>
+            </div>;
+
+  }
+  getReponse(reponse, send){
+      if(send){
+      return <div>
+      <div><b>reponse: </b></div>
+                  <pre className="line-numbers"><code className="language-php" dangerouslySetInnerHTML={{__html: reponse}}></code></pre>
+      </div>;
+      }
+      return <div>
+      <div><b>reponse: </b></div>
+      <div>Il n'y a pas encore de reponse a cet exercice</div>
+      </div>; 
+  }
   getListeExercices() {
     if(this.props.data.exerciceTexte != null){
-      console.log(this.props.data.exerciceTexte);
         return this.props.data.exerciceTexte.map(element=>{ 
-              var { name, description, endDate, createdAt } = element.exercice;
+              var { name, description, endDate, createdAt, inData, outData } = element.exercice;
               var success = false;
               var reponse = false;
               for (var i = 0; i < element.reponse.length; i++) {
@@ -70,9 +136,8 @@ class ContactDetails extends React.Component {
               if (endDate){
                 endDate = (new Date(endDate.date)).toLocaleDateString();
               }
-              console.log({
-                rep: reponse
-              });
+              var rep = reponse.awnserCode ? Prism.highlight(reponse.awnserCode, Prism.languages["php"]) : "";
+           
               return(
 
                 <div>
@@ -92,10 +157,16 @@ class ContactDetails extends React.Component {
                 </Grid>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-            
-                  <div><b>Nom : </b>{name}</div>
-                  <div><b>Description: </b>{description}</div>
-                  <div><b>reponse: </b>{reponse.awnserCode}</div>
+            <Grid 
+                container
+                direction="column"
+                justify="flex-start"
+                alignItems="stretch">
+                  <div>{description}</div>
+                  {this.getIn(inData)}
+                  {this.getOut(outData)}
+                  {this.getReponse(rep, reponse.awnserCode)}
+                  </Grid>
               </ExpansionPanelDetails>
             </ExpansionPanel>
                 </div>

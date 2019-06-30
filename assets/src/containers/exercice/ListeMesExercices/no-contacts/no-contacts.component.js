@@ -14,22 +14,6 @@ import Modal2 from '../../../../components/modal.component';
 import Grid from '@material-ui/core/Grid';
 
 
-/*
-const NoContacts = (props) => {
-  const { classes } = props;
-          
-              <LineChartWidget title="Recent Sales" />
-                 
-              <TextField
-                id="matiere"
-                value={this.props.data.classPromotion}
-                onChange={(e) => {this.setState({matiere: e.target.value});}}
-                label="promotion"
-                className={classes.textField}
-                margin="normal"
-           />
-  */
-
 class NoContacts extends React.Component {
 
   constructor(props) {
@@ -42,48 +26,14 @@ class NoContacts extends React.Component {
     }
   }
 
- handleOpenModal = () => {
-    this.setState({ open: true });
-  };
 
-  handleCloseModal = () => {
-    this.setState({ open: false });
-  };
-
-
-  formSubmit () {
-    this.props.addClass(this.state.nom);
-  }
-
-  getAddClassForm() {
-    const { classes } = this.props;
-    return (
-          <form  noValidate autoComplete="off">
-            <TextField
-              id="nom"
-              value={this.state.nom}
-              onChange={(e) => {this.setState({nom: e.target.value});}}
-              label="Nom de la classe"
-              className={classes.textField}
-              margin="normal"
-            />
-            <Button variant="contained" color="primary" className={scss['portal-contacts-no-button-form']} onClick={() => {this.formSubmit()}}>
-              Crée la classe
-            </Button>
-          </form>
-      );
-  }
 
   render(){
     const { classes } = this.props;
   return (
     <div className={classNames(scss['portal-contacts-no-contacts'], classes['portal-contacts-no-contacts'])}>
+      ici
 
-              <Grid  className={scss['grid_no_class']} container direction="column" justify="center" alignContent="center">
-             
-  
-              </Grid>
-              
      
 
           

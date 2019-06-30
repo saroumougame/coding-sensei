@@ -20,6 +20,7 @@ import scss from './classe-list.module.scss';
 import {UpdateClass}      from '../../../../actions/classes.actions';
 import Modal2 from '../../../../components/list.modal.component';
 import {addClass}      from '../../../../actions/classes.actions';
+import { getUser, getUserByToken } from '../../../../actions/auth.actions.js';
 
 
 // migration de la liste de contact du local vers le state redux. 
@@ -35,6 +36,7 @@ class ClassesList extends React.Component {
       classeToCreate: 999,
       nom: ""
     }
+    this.props.getUserByToken();
   }
   getAddClassForm() {
     const { classes } = this.props;
@@ -124,7 +126,7 @@ class ClassesList extends React.Component {
     );
   };
   formSubmit () {
-    this.props.addClass(this.state.nom);
+    this.props.addClass(this.state.nom, this.props.data.user["@id"]);
   }
   createMobileListItem = (contact) => {
     const {
@@ -231,6 +233,7 @@ function mapStateToProps(state) {
     data: {
       classList:           state.classData.classes,  
       classUpdatedList:    state.classData.UpdatedClasses,
+      user:                state.authData.user,
 
  
     }
@@ -251,4 +254,4 @@ ClassesList.propTypes = {
 };
 
 export default compose(withWidth(), withStyles(themeStyles, { withTheme: true }),
- connect(mapStateToProps, {UpdateClass, addClass}) )(ClassesList);
+ connect(mapStateToProps, {UpdateClass, addClass, getUserByToken}) )(ClassesList);

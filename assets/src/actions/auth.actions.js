@@ -106,6 +106,43 @@ export const register = (nom, email, password) => {
   }
 };
 
+export const editProfile = (id, nom, prenom, password) => {
+  
+    var token = localStorage.getItem('token');
+
+    let form = {
+      'firstName':  prenom,
+      'lastName':   nom,
+    }
+    if (password !== ''){
+      form["password"] = password
+    }
+       
+  
+    var formBody = JSON.stringify(form);
+
+    
+
+    return dispatch => { 
+      fetch(API_URL + id, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization'  : 'Bearer ' + localStorage.getItem('token')
+        },
+        body: formBody
+      })
+      .then(response => response.json())
+      .then(json => {
+        if (history.location.pathname.split("/")[1] !== "home") {
+          history.push('/classes');
+        } else {
+          dispatch(getUserByToken())
+        }
+      })
+      .catch((e) =>  {});
+    }
+};
 export const login = (email, password) => {
     var data = {
     'username': email,
@@ -162,7 +199,6 @@ export const getUserByToken = () => {
        dispatch(expiredAction());
       }else {
         if(json.roles.includes('ROLE_STUDENT')){
-          console.log(history.location.pathname.split("/")[1]);
           if (
             history.location.pathname.split("/")[1] !== "home" &&
             history.location.pathname.split("/")[1] !== "classes"

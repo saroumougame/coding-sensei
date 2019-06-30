@@ -45,7 +45,6 @@ class ListeCours extends React.Component {
           if(i.exercice.archive === true) {
             return;
           }
-          console.log(i.reponse);
           if(typeof(i.reponse[0]) != 'undefined' && typeof(i.reponse[0]) != undefined){
             if(i.reponse[0].success == true) {
               return (

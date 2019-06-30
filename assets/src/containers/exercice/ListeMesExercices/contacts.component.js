@@ -32,7 +32,6 @@ class ListeClassesProff extends React.Component {
     this.props.listeExerciceAction();
     //this.props.refreshEleve(contact);
     */
-    console.log('icci 36');
     this.props.getAllExercices();
     this.setState({ selectedContact: contact });
   }
@@ -40,7 +39,6 @@ class ListeClassesProff extends React.Component {
   render() {
     var contactsList = this.props.data.classList;
     var currentClasse = this.props.data.currentClasse;
-    console.log(this.props.liste_exercice_comple);
     return (
       <div className={scss['contacts-wrapper']}>
 

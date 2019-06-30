@@ -202,6 +202,7 @@ export const getUser = () => {
         }else if(json.roles.includes('ROLE_STUDENT')) {
           history.push('/home');
         }
+
       dispatch(loginAction(json));
     })
     .catch((e) => dispatch());

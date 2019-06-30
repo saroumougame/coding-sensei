@@ -35,6 +35,7 @@ const EditProf= asyncComponent(() => import('./containers/account/editprof/editp
 const ClassesProff= asyncComponent(() => import('./containers/classe/proff/contacts.component'));
 const ElevesProff= asyncComponent(() => import('./containers/eleves/eleve/allcontacts.component'));
 const AsyncExercice= asyncComponent(() => import('./containers/exercice/exercice.component'));
+const MesExercices = asyncComponent(() => import('./containers/exercice/mes-exercices/mes-exercices.component'));
 //const AccountProff= asyncComponent(() => import('./containers/account/professeur/account.component'))
 const AsyncEleveHome= asyncComponent(() => import('./containers/eleves/home/home-eleve.component'));
 const classesEleve = asyncComponent(() => import('./containers/eleves/classes/classes-eleve.component'));
@@ -191,6 +192,10 @@ export default ({ logged , childProps, layout, roles }) => {
               Routes Proteger.
         --------------------------------------------------------------------------------------------------------------------------------------------------- 
   */} 
+
+  
+    <AppprotectedRoute path="/mes-exercices"  logged={logged} exact component={MesExercices} props={childProps} layout={CompactLayout} roles={roles}        roles_accepted={role_user} />
+     
       <AppprotectedRoute path="/account"  logged={logged} exact component={AccountProff} props={childProps} layout={CompactLayout} roles={roles}        roles_accepted={role_user} />
       <AppprotectedRoute path="/professeur/compte" logged={logged}  exact component={AccountProff} props={childProps} layout={CompactLayout} roles={roles}  roles_accepted={role_user} />
       <AppprotectedRoute path="/professeur" exact component={AsyncRegister} redir={AsyncLogin} props={childProps} layout={CompactLayout} roles={roles}  roles_accepted={role_user}/>

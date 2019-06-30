@@ -45,20 +45,40 @@
 }
 
 .layout-eleve-coontainer {
-  height: 93vh;
+  overflow: hidden;
 }
 
 .layout-eleve-Menu {
   height: 100px !important;
-  width: 100%;
+  background-color: rgba(0, 0, 0, 0) !important;
+  width: 25%;
 }
-
+.layout-eleve-coontainer-grid{
+  background-color: black;
+  color: white !important;
+  box-shadow: 5px 5px 5px grey;
+}
+.layout-eleve-coontainer-grid{
+  padding-left: 20px;
+  height: 110px;
+}
 .layout-eleve-Menu-icon {
   font-size: 4em !important;
-  color: rgba(40, 120, 179, 0.92) !important;
-
+  color: white !important;
 }
 
 .layout-eleve-Menu-right {
   margin-left: 20vw;
+}
+
+.layout-eleve-Menu-elem,
+.layout-eleve-Menu-right {
+  color: white !important;
+}
+
+.logo-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
 }

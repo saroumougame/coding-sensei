@@ -13,6 +13,7 @@ import scss from './layout-eleve.module.scss';
 import styles from './layout-eleve.style';
 
 import BottomNavigation from '@material-ui/core/BottomNavigation';
+import Grid from '@material-ui/core/Grid';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import RestoreIcon from '@material-ui/icons/Restore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -48,7 +49,13 @@ class EleveLayout extends React.Component {
       <div className={classNames(scss['layout-classic-wrapper'], classes.wrapper)}>
         <main className={scss['layout-classic-main']}>
             <div className={scss['layout-eleve-coontainer']}>
-
+              <Grid 
+              container
+              direction="row"
+              justify="space-between"
+              className={scss['layout-eleve-coontainer-grid']}
+              >
+              <div className={scss['logo-title']} ><h1>Coding Sensei</h1></div>
                <BottomNavigation
                 value={this.state.valueBottom}
                 onChange={(event, newValue) => {
@@ -58,8 +65,6 @@ class EleveLayout extends React.Component {
                   }else if(newValue === 1){
                     history.push('/home');
                   }else if(newValue === 2){
-                    history.push('/home');
-                  }else if(newValue === 3){
                     this.props.deconnexionAction();
                   }
 
@@ -68,14 +73,15 @@ class EleveLayout extends React.Component {
                 showLabels
                 className={scss['layout-eleve-Menu']}
               >
-                <BottomNavigationAction label="Mes exercices"       icon={<RestoreIcon className={scss['layout-eleve-Menu-icon']} />} />
+                <BottomNavigationAction className={scss['layout-eleve-Menu-elem']} label="Mes exercices"       icon={<RestoreIcon className={scss['layout-eleve-Menu-icon']} />} />
               {/*
                 <BottomNavigationAction label="Favoris"         icon={<FavoriteIcon  className={scss['layout-eleve-Menu-icon']}/>} />
               */}
-                <BottomNavigationAction label="Profil & settings" icon={<LocationOnIcon className={scss['layout-eleve-Menu-icon']} />} />
+                <BottomNavigationAction className={scss['layout-eleve-Menu-elem']} label="Profil & settings" icon={<LocationOnIcon className={scss['layout-eleve-Menu-icon']} />} />
                 <BottomNavigationAction className={scss['layout-eleve-Menu-right']} label="Déconnexion" icon={<Https className={scss['layout-eleve-Menu-icon']} />} />
 
               </BottomNavigation>
+              </Grid>
                {children}
             </div>
 

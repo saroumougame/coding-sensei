@@ -20,10 +20,10 @@ export const setClasseAction = classe => ({
 });
 
 // On ajoute une class pour un Nom avec L'id d'un proff ( en dur pour l'instant )
-export const addClass = (nom) => {
+export const addClass = (nom, id) => {
   var details = {
     'name': nom,
-    'teacher': ID_PROFF
+    'teacher': id
   }
   
   var formBody = JSON.stringify(details);

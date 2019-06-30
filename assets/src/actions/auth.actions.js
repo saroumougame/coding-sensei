@@ -162,7 +162,13 @@ export const getUserByToken = () => {
        dispatch(expiredAction());
       }else {
         if(json.roles.includes('ROLE_STUDENT')){
+          console.log(history.location.pathname.split("/")[1]);
+          if (
+            history.location.pathname.split("/")[1] !== "home" &&
+            history.location.pathname.split("/")[1] !== "classes"
+          ) {
           history.push('/classes');
+          }
         }else{
           if (history.location.pathname.split("/")[1] !== "professeur") {
           history.push('/account');

@@ -1,19 +1,23 @@
 .home-eleve-main {
-	height: 90%;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
+	width: 100%;
+	height: calc(100vh - 110px);
+	background-image: url("/assets/images/light-explosion.jpg");
+	background-size: 100% 40%;
+	background-repeat: no-repeat;
+	padding-top: 150px;
 }
 
-.home-eleve-paper-profil {
-	margin-top: 30px;
-	padding: 17px;
+
+.home-eleve-paper{
+	min-width: 70%;
+    overflow: auto;
+	padding: 30px;
+	overflow: -moz-scrollbars-none;
+	-ms-overflow-style: none;
 }
 
-.paper-profil-main {
-	margin-top: 30px;
-	padding: 17px;
-	width: 80%;
-	height: 70%;
+.home-eleve-paper::-webkit-scrollbar { width: 0 !important }
+.home-eleve-paper img{
+    height: 100px;
+    float: right;
 }

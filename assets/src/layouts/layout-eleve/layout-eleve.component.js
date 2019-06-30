@@ -55,7 +55,7 @@ class EleveLayout extends React.Component {
               justify="space-between"
               className={scss['layout-eleve-coontainer-grid']}
               >
-              <div><h1>Coding Sensei</h1></div>
+              <div className={scss['logo-title']} ><h1>Coding Sensei</h1></div>
                <BottomNavigation
                 value={this.state.valueBottom}
                 onChange={(event, newValue) => {

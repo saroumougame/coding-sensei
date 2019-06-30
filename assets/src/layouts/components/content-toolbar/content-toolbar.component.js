@@ -96,12 +96,12 @@ class ContentToolbar extends React.Component {
           </Button>
           </NavLink>
           <NavLink to="/inscription">
-          <Button  variant="contained" >
+          <Button  id="inscrire" variant="contained" >
             S'inscrire
           </Button>
           </NavLink>
           <NavLink to="/login">
-          <Button variant="contained" >
+          <Button id="seconnecter" variant="contained" >
             Se connecter
           </Button>
           </NavLink>

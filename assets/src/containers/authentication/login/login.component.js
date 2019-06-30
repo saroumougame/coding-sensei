@@ -96,7 +96,7 @@ const panelDirection = width === 'xs' ? 'column' : 'row';
               </CardContent>
               <NavLink to="/inscription">
               <CardActions>
-                <Button fullWidth color="default" variant="contained">Crée un compte</Button>
+                <Button fullWidth color="primary" variant="contained">Crée un compte</Button>
               </CardActions>
               </NavLink>
             </Card>

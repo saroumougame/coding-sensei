@@ -195,8 +195,10 @@ export const submitExerciceAction = (ExerciceContent) => {
         dispatch(modalFailExercice(json['hydra:description']));
       }else if(json['@type'] === "Reponse" && json['success'] === false) {
         dispatch(modalFailExercice("Votre code est bon, mais le resultat attendu ne l'est pas.. veuillez réessayer"));
+        dispatch(getExercicesEleve());
       }else {
         dispatch(modalSuccessExercice());
+        dispatch(getExercicesEleve());
          //dispatch(listeExercice(json["hydra:member"]));
       }
     })

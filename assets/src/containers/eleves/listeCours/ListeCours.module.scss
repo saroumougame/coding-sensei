@@ -28,3 +28,13 @@
 	background-color: #29cf29;
 	cursor: not-allowed !important;
 }
+
+.un-cour-bientot-disponible {
+	@extend .un-cour;
+	background-color: #898989;
+	cursor: not-allowed !important;
+}
+
+.date-tentatives{
+	padding-top: 5px;
+}

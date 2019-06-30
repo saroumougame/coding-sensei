@@ -26,7 +26,7 @@ class App extends React.Component {
       var token = localStorage.getItem('token');
       if(typeof(token) !== 'undefined' && token !== null){
         //this.props.getUser();
-        //this.props.getUserByToken(API_URL);
+        this.props.getUserByToken(API_URL);
       }
     }
 

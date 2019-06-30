@@ -85,8 +85,8 @@ class AccountProff extends React.Component {
               alignItems="center">
             <h2>Mon Profile</h2>
 
-           <Button color="primary" className={scss['button']} onClick={() => {this.editAccount()}}>
-             Voir mes classes >>
+           <Button id="editprofile" color="primary" className={scss['button']} onClick={() => {this.editAccount()}}>
+             Editer >>
            </Button>
           </Grid>
           <p>Nom:            {this.props.data.user != null ?this.props.data.user.lastName[0].toUpperCase() + this.props.data.user.lastName.substring(1).toLowerCase(): ""}</p>

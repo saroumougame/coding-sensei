@@ -141,6 +141,7 @@ class ContactsList extends React.Component {
   getCustomClassList() {
 
     if(this.state.updatedList === true){
+
       return this.props.data.classUpdatedList;
     }
     return this.props.data.elevesList;

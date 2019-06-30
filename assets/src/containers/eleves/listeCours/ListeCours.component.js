@@ -28,6 +28,22 @@ class ListeCours extends React.Component {
     //console.log(exo.dateEnd);
    }
 
+   datePassedExercice(exercice) {
+
+      var dateEnd = this.parseDate(exercice.dateEnd);
+      var today = new Date();
+      var dd = String(today.getDate()).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      var yyyy = today.getFullYear();
+      today = mm + '/' + dd + '/' + yyyy;
+      const date1 = new Date(today);
+      const date2 = new Date(dateEnd);
+
+      return false;
+      return  date1 <= date2;
+
+   }
+
 
    parseDate(uneDate) {
     if(uneDate != null){
@@ -76,7 +92,19 @@ class ListeCours extends React.Component {
           }
 
           //if()
-          //if(this.datePassedExercice(i.exercice))
+          if(this.datePassedExercice(i.exercice)) {
+              return (
+                      <div key={i.exercice.name} className={scss['un-cour-bientot-disponible']} onClick={() => this.showExercice(i)} >
+                          <div>
+                          {i.exercice.name}
+                          </div>
+                         <div>
+                          Exercice disponible le :
+                         </div>
+                      </div>
+              );
+          }
+          
           // si la date n'est pas encore passée 
           return (
 

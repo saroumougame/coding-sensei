@@ -48,7 +48,7 @@ class ClassesList extends React.Component {
               className={classes.textField}
               margin="normal"
             />
-            <Button variant="contained" color="primary" className={scss['portal-contacts-no-button-form']} onClick={() => {this.formSubmit()}}>
+            <Button id='addclasseform' variant="contained" color="primary" className={scss['portal-contacts-no-button-form']} onClick={() => {this.formSubmit()}}>
               Crée la classe
             </Button>
           </form>
@@ -214,7 +214,8 @@ class ClassesList extends React.Component {
               })}
               
               <Modal2
-                titleButton='Aouter une classe'
+                id='addclasse'
+                titleButton='Ajouter une classe'
                 title="Ajouter une classe"
                 text={this.getAddClassForm()}
               />

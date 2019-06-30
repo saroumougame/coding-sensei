@@ -55,6 +55,7 @@ class SimpleModal extends React.Component {
     return (
       <div className={styles.div} >
       <ListItem
+                id="addclassebtn"
                 title={"add_class"}
                 onClick={this.handleOpen}
                 divider

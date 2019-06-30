@@ -87,13 +87,14 @@ class HomeEleve extends React.Component {
     handleSend(){
       
     }
-	 render() {
-    if (this.state.nom != (this.props.data.user ? this.props.data.user.lastName : "")){
-      this.setState({
-        nom: this.props.data.user ? this.props.data.user.lastName : "",
-        prenom: this.props.data.user ? this.props.data.user.firstName : "",
+    componentWillReceiveProps(nextProps){
+    this.setState({
+        nom: nextProps.data.user.lastName,
+        prenom: nextProps.data.user.firstName ,
       });
-    }
+  }
+	 render() {
+   
     var user = this.props.data.user || {
       firstName: "",
       lastName: "",

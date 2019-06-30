@@ -22,12 +22,18 @@ class listeEcercice extends React.Component {
       this.props.listeExerciceAction();
 	 }
 
+  parseDate(uneDate) {
+    if(uneDate != null){
+      return uneDate.substring(0, 10);
+    }
+   }
 
    getDateRealisation(exercice) {
       if(exercice.dateEnd == null) {
         return 'Date limite: infinie';
       }
-      return 'Date limite: '+ exercice.dateEnd;
+      var MaData = exercice.dateEnd.substring(0, 10);
+      return 'Date limite: '+ MaData;
    }
     handleExport(){
       let liste = this.props.data.liste_exerciceData;

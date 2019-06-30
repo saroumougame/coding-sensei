@@ -24,31 +24,42 @@ class ContactDetails extends React.Component {
     }
   }
 
+
+  parseDate(uneDate) {
+    if(uneDate != null){
+      return uneDate.substring(0, 10);
+    }
+   }
+
+
   render(){
   const {
     classes,
     selectedContact
   } = this.props;
- 
-  console.log(selectedContact);
 
   return (
     <div className={classNames(scss['portal-contact-details'])}>
       <div className={scss['exercice-title']}>
         <Paper className={scss['paper-description']}>
-           <Typography component="h3">Titre: {selectedContact.name}</Typography>
+           <Typography component="h3">Titre: </Typography>
+           {selectedContact.name}
         </Paper>
         <Paper className={scss['paper-description']}>
-          <Typography component="h3">Description: {selectedContact.description}</Typography>
+          <Typography component="h3">Description: </Typography>
+          {selectedContact.description}
         </Paper>      
         <Paper className={scss['paper-description']}>
-            <Typography component="h3">Donnée en entrée: {selectedContact.inData}</Typography>
+            <Typography component="h3">Donnée en entrée: </Typography>
+            {selectedContact.inData}
         </Paper> 
         <Paper className={scss['paper-description']}>
-            <Typography component="h3">Donnée attendu en sortie: {selectedContact.outData}</Typography>
+            <Typography component="h3">Donnée attendu en sortie: </Typography>
+            {selectedContact.outData}
         </Paper> 
          <Paper className={scss['paper-description']}>
-            <Typography component="h3">Date limite: {selectedContact.dateEnd}</Typography>
+            <Typography component="h3">Date limite: </Typography>
+            {this.parseDate(selectedContact.dateEnd)}
         </Paper>        
         
       </div>

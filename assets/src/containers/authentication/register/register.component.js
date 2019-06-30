@@ -91,7 +91,7 @@ class Register extends React.Component {
                           Vous éte un Professeur.
                         </Typography>
                         <NavLink to="/inscription/professeur" >
-                        <Button color="default" variant="contained">S'inscrire</Button>
+                        <Button id="proffeseur" color="default" variant="contained">S'inscrire</Button>
                         <Button >Plus d'informations</Button>
                         </NavLink>
                       </CardContent>

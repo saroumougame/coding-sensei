@@ -35,8 +35,8 @@ class EditProf extends React.Component {
   
   formSubmit() {
     let form = {
-      'firstName':  this.props.data.user.firstName,
-      'lastName':   this.props.data.user.lastName
+      'firstName':  this.state.nom,
+      'lastName':   this.state.prenom
      // 'email':      this.props.data.user.email,
 
     }
@@ -84,7 +84,7 @@ class EditProf extends React.Component {
               id="nom"
               value={this.state.nom}
               onChange={(e) => {this.setState({nom: e.target.value});}}
-              label="Nom et prenom"
+              label="Prénom"
               // className={classes.textField}
               margin="normal"
             /><br></br>
@@ -92,7 +92,7 @@ class EditProf extends React.Component {
               id="nom"
               value={this.state.prenom}
               onChange={(e) => {this.setState({prenom: e.target.value});}}
-              label="Nom et prenom"
+              label="Nom"
               // className={classes.textField}
               margin="normal"
             />

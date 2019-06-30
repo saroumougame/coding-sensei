@@ -83,15 +83,6 @@ class LoginForm extends React.Component {
       return (
         
                 <Card className={scss.card}>
-               <Snackbar
-                        anchorOrigin={{ vertical, horizontal }}
-                        open={this.props.data.login_snack}
-                        onClose={this.props.login_snack_close}
-                        ContentProps={{
-                          'aria-describedby': 'message-id',
-                        }}
-                        message={<span id="message-id">{this.props.data.login_message}</span>}
-                      />
                   <CardContent>
                 {this.getSpinner()}
                     <TextField

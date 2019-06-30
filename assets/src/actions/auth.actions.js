@@ -102,7 +102,7 @@ export const register = (nom, email, password) => {
       }
 
     })
-    .catch((e) => dispatch());
+    .catch((e) => dispatch(login_snack("une erreur est survenue")));
   }
 };
 
@@ -138,9 +138,10 @@ export const editProfile = (id, nom, prenom, password) => {
           history.push('/classes');
         } else {
           dispatch(getUserByToken())
+          dispatch(login_snack("Votre Profile a bien été modifié"));
         }
       })
-      .catch((e) =>  {});
+      .catch((e) =>  dispatch(login_snack("une erreur est survenue")));
     }
 };
 export const login = (email, password) => {
@@ -163,19 +164,18 @@ export const login = (email, password) => {
     })
     .then(response => response.json() )
     .then(json => {
-
       if(typeof(json.token) !== 'undefined'){
         localStorage.setItem('token', json.token);
         dispatch(getUserByToken());
+
         
       }else {
-        history.push('/login?error=access');
-        dispatch(loginFailAction());
+        dispatch(login_snack("une erreur est survenue"));
       }
 
       return dispatch(login_spinner_stop());
     })
-    .catch((e) => dispatch(loginAction(false)));
+    .catch((e) => dispatch(login_snack("une erreur est survenue")));
   }
 }
 
@@ -216,7 +216,7 @@ export const getUserByToken = () => {
         dispatch(getCurrentUser(json));
       }
     })
-    .catch((e) => dispatch());
+    .catch((e) => dispatch(login_snack("une erreur est survenue")));
   }
 };
 

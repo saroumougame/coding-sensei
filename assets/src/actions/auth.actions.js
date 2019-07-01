@@ -207,6 +207,8 @@ export const getUserByToken = () => {
           }
         }else{
           if (
+            history.location.pathname.split("/")[1] !== "mes-exercices" &&
+            history.location.pathname.split("/")[1] !== "apps" &&
             history.location.pathname.split("/")[1] !== "professeur" &&
             history.location.pathname.split("/")[1] !== "account"
             ) {

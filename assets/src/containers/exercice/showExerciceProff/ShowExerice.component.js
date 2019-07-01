@@ -24,7 +24,8 @@ getVars(data){
     if (/^[\],:{}\s]*$/.test(data.replace(/\\["\\\/bfnrtu]/g, '@').
 replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
 replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
-      data = JSON.parse(data);
+           console.log(data);
+ data = JSON.parse(data);
     } else {
       data = {}
     }
@@ -43,7 +44,7 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
     }
     var data = [];
     for (var i = 0; i < inData.length; i++ ){
-      data[i] = `$${inData[i][0]} = ${inData[i][1]}`;
+      data[i] = `${inData[i][0]} = ${inData[i][1]}`;
     }
     var res = Prism.highlight(data.join("\n"), Prism.languages["php"]);
      return <div>

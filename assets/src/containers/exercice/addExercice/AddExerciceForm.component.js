@@ -77,7 +77,7 @@ class AddExerciceForm extends React.Component {
               id={"in_name_" + i}
               value={this.props.data.FormDataIn["in_name_"+i]}
               onChange={(e) => {this.handleChange(e)}}
-              label="Nom de la variable"
+              label="Nom"
               rows={5}
               rowsMax={20}
               inputProps={{
@@ -88,7 +88,7 @@ class AddExerciceForm extends React.Component {
           id={"in_value_" + i}
           value={this.props.data.FormDataIn["in_value_"+i]}
           onChange={(e) => {this.handleChange(e)}}
-          label="Valeur de la variable"
+          label="Valeur"
           rows={5}
           rowsMax={20}
           inputProps={{
@@ -115,7 +115,7 @@ class AddExerciceForm extends React.Component {
             <em>None</em>
           </MenuItem>
           <MenuItem value={1}>Variable</MenuItem>
-          {/*<MenuItem value={2}>Constante</MenuItem>*/}
+          <MenuItem value={2}>Constante</MenuItem>
         </Select>
         {res}        
       </Grid>
@@ -131,7 +131,7 @@ getoutvars(){
               id={"out_name_" + i}
               value={this.props.data.FormDataIn["out_name_"+i]}
               onChange={(e) => {this.handleChange(e)}}
-              label="La commande a executer"
+              label="Assertion"
               rows={5}
               rowsMax={20}
               inputProps={{
@@ -145,7 +145,7 @@ getoutvars(){
               id={"out_name_" + i}
               value={this.props.data.FormDataIn["out_name_"+i]}
               onChange={(e) => {this.handleChange(e)}}
-              label="L'expression a executer"
+              label="Assertion"
               rows={5}
               rowsMax={20}
               inputProps={{
@@ -157,7 +157,7 @@ getoutvars(){
             id={"out_value_" + i}
             value={this.props.data.FormDataIn["out_value_"+i]}
               onChange={(e) => {this.handleChange(e)}}
-              label="Valeur de retour de l'expression"
+              label="Valeur"
           rows={5}
           rowsMax={20}
           inputProps={{
@@ -182,8 +182,7 @@ getoutvars(){
           <MenuItem value="0" selected>
             <em>None</em>
           </MenuItem>
-          <MenuItem value={1}>Expression</MenuItem>
-          <MenuItem value={2}>Commande</MenuItem>
+          <MenuItem value={2}>Assert</MenuItem>
         </Select>
         {res}
       </Grid>
@@ -283,9 +282,12 @@ getoutvars(){
                       shrink: true
                     }}
                   />
-            <Button className={[scss['button_add']]} variant="contained"  onClick={() => {this.addInVariable()}}>
-              Ajouter un Element en entrée
+                  <Button className={[scss['button_add']]} variant="contained" color="primary"  onClick={() => {this.props.updateDate("0000-00-00")}}>
+              Definir comme date illimité
             </Button>
+            {/*<Button className={[scss['button_add']]} variant="contained"  onClick={() => {this.addInVariable()}}>
+              Ajouter un Element en entrée
+            </Button>*/}
             <div className={[scss['grid_container']]}>
                         { this.getinvars()}
             { this.getDelIn()}
@@ -301,6 +303,8 @@ getoutvars(){
             </div>
              
             
+              
+
               <Button className={[scss['vld']]} variant="contained" color="primary"  onClick={() => {this.formSubmit()}}>
               Valider
             </Button>

@@ -28,14 +28,11 @@ class ContactDetails extends React.Component {
     }
   }
 getVars(data){
-    
-    if (/^[\],:{}\s]*$/.test(data.replace(/\\["\\\/bfnrtu]/g, '@').
-replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
-replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
-      data = JSON.parse(data);
-    } else {
-      data = {}
-    }
+            console.log(data);
+
+   data = JSON.parse(data);
+        console.log(data);
+
     var res = [];
     for (var key in data) {
       if (data.hasOwnProperty(key)) {
@@ -46,12 +43,13 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
   }
   getIn(inData){
     inData = this.getVars(inData);
+    console.log(inData);
     if (inData.length <= 0){
       return <div></div>;
     }
     var data = [];
     for (var i = 0; i < inData.length; i++ ){
-      data[i] = `$${inData[i][0]} = ${inData[i][1]}`;
+      data[i] = `${inData[i][0]} = ${inData[i][1]}`;
     }
     var res = Prism.highlight(data.join("\n"), Prism.languages["php"]);
      return <div>

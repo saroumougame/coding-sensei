@@ -367,31 +367,41 @@ export const createExerciceAction = () => {
 
     var ini = 0;
     var in_res = '{';
-
+    var trim = false;
     while (typeof(state.exerciceData.add_form_param_in["in_" + ini]) != undefined && typeof(state.exerciceData.add_form_param_in["in_" + ini]) != 'undefined'){
+      trim = true;
       if (state.exerciceData.add_form_param_in["in_" + ini] === 1){
-        in_res += `${state.exerciceData.add_form_param_in["in_name_" + ini]} : ${state.exerciceData.add_form_param_in["in_value_" + ini]}`
+        in_res += `"$${state.exerciceData.add_form_param_in["in_name_" + ini]}" : ${state.exerciceData.add_form_param_in["in_value_" + ini]},`
       }
-//      if (state.exerciceData.add_form_param_in["in_" + ini] == 2){}
+      if (state.exerciceData.add_form_param_in["in_" + ini] == 2){
+         in_res += `"const ${state.exerciceData.add_form_param_in["in_name_" + ini]}" : ${state.exerciceData.add_form_param_in["in_value_" + ini]},`
+
+      }
       ini++;
-    
    }
-    /*
-  */
+   if (trim){
+        in_res = in_res.substring(0, in_res.length - 1);
+
+   }
     in_res += '}';
     ini = 0;
     var out_res = '{';
-
+trim = false;
     while (typeof(state.exerciceData.add_form_param_in["out_" + ini]) != undefined && typeof(state.exerciceData.add_form_param_in["out_" + ini]) != 'undefined'){
+      trim = true;
       if (state.exerciceData.add_form_param_in["out_" + ini] === 2){
-        out_res += `"${state.exerciceData.add_form_param_in["out_name_" + ini]}" : ${state.exerciceData.add_form_param_in["out_value_" + ini]}`
+        out_res += `"${state.exerciceData.add_form_param_in["out_name_" + ini]}" : ${state.exerciceData.add_form_param_in["out_value_" + ini]},`
       }
       if (state.exerciceData.add_form_param_in["out_" + ini] === 1){
-        out_res += `"${state.exerciceData.add_form_param_in["out_name_" + ini]}" : ""`
+        out_res += `"${state.exerciceData.add_form_param_in["out_name_" + ini]}" : "",`
 
       }
       ini++;
+    }  
+     if (trim){
+      out_res = out_res.substring(0, out_res.length - 1);
     }
+
     out_res += '}'
 
     // héhé
@@ -400,7 +410,6 @@ export const createExerciceAction = () => {
       dateLimite = state.exerciceData.formDate;
       
     }
-
     var details = {
     'name': 		  state.exerciceData.add_form_titre,
     'description':   state.exerciceData.add_form_description,
@@ -423,8 +432,12 @@ export const createExerciceAction = () => {
     })
     .then(response => response.json())
     .then(json => {
-      if (json["hydra:title"] != null){
+      if (json["hydra:title"] != null ){
         dispatch(login_snack("une erreur est survenue"))
+      } else if (json["title"] != null) {
+         dispatch(login_snack("element non autorisé"))
+
+
       }else{
         dispatch(setExerciceComponentAction(null));
         dispatch(login_snack("Exercice crée"))

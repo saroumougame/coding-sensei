@@ -32,7 +32,12 @@ class NoContacts extends React.Component {
     const { classes } = this.props;
   return (
     <div className={classNames(scss['portal-contacts-no-contacts'], classes['portal-contacts-no-contacts'])}>
-      ici
+      <Grid className={scss['grid_no_class']} container direction="column" justify="center" alignContent="center">
+              <img alt='' className={scss['grid_no_class_img']} src="/assets/images/exo.svg"/>
+              <p className={scss['text_no_class']}>
+              Selectionnez un exercice pour commencer ou allez <a onClick={this.redirecttoclass}>ici</a> pour en creer un 
+              </p>
+              </Grid>
 
      
 

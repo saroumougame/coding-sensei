@@ -67,7 +67,6 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
     return res;
   }
   getIn(inData){
-    console.log(inData);
     inData = this.getVars(inData);
     if (inData.length <= 0){
       return <div></div>;

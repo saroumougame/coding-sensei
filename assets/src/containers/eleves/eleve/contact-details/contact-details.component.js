@@ -39,7 +39,6 @@ class ContactDetails extends React.Component {
       this.props.elevesScoreAction();
     }
   componentDidMount() {
-    console.log("here");
     Prism.highlightAll();
   }
   getExoIcon(success){
@@ -49,11 +48,9 @@ class ContactDetails extends React.Component {
     return <ClearIcon/>
   }
   getVars(data){
-    
     if (/^[\],:{}\s]*$/.test(data.replace(/\\["\\\/bfnrtu]/g, '@').
 replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
 replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
-      console.log(data);
       data = JSON.parse(data);
     } else {
       data = {}
@@ -67,6 +64,7 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
     return res;
   }
   getIn(inData){
+    console.log(inData);
     inData = this.getVars(inData);
     if (inData.length <= 0){
       return <div></div>;

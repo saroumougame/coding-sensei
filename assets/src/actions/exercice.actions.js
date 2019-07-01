@@ -1,4 +1,5 @@
 import { API_URL } from '../api';
+import { login_snack } from './auth.actions';
 export const ADD_PROFF_ACTION       = 'ajoute un proff';
 export const DELETE_PROFF_ACTION    = 'supprile les proff selectionnée';
 export const SHOW_FORM_ACTION       = 'montre le form ';
@@ -162,7 +163,7 @@ export const deleteExercice = () => {
           //dispatch(getExercicesEleve())
           dispatch(listeExerciceAction());
     })
-    .catch((e) => dispatch());
+    .catch((e) => {});
   }
 }
 
@@ -202,7 +203,7 @@ export const submitExerciceAction = (ExerciceContent) => {
          //dispatch(listeExercice(json["hydra:member"]));
       }
     })
-    .catch((e) => dispatch());
+    .catch((e) => {});
   }
 }
 
@@ -227,7 +228,7 @@ export const getAllExercices = () => {
       .then(json => {
             dispatch(allExerciceProff(json["hydra:member"]));
       })
-      .catch((e) => dispatch());
+      .catch((e) => {});
     }
 }
 
@@ -256,7 +257,7 @@ export const listeExerciceAction = () => {
     .then(json => {
           dispatch(listeExercice(json["hydra:member"]));
     })
-    .catch((e) => dispatch());
+    .catch((e) => {});
   }
     /*
   */
@@ -283,7 +284,7 @@ export const elevesExerciceAction = () => {
     .then(json => {
       dispatch(elevesExercice(json));
     })
-    .catch((e) => dispatch());
+    .catch((e) => {});
   }
    
 }
@@ -331,7 +332,6 @@ export const getExercicesEleve = () => {
     .then(json => {
           dispatch(getExercicesEleveAction(json["hydra:member"]));
     })
-    .catch((e) => dispatch());
   }
     
     /*
@@ -423,9 +423,16 @@ export const createExerciceAction = () => {
     })
     .then(response => response.json())
     .then(json => {
-         dispatch(setExerciceComponentAction(null));
+      if (json["hydra:title"] != null){
+        dispatch(login_snack("une erreur est survenue"))
+      }else{
+        dispatch(setExerciceComponentAction(null));
+        dispatch(login_snack("Exercice crée"))
+
+      }
+      
     })
-    .catch((e) => dispatch());
+    .catch((e) => dispatch(login_snack("une erreur est survenue")));
   }
 }
 

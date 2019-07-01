@@ -1,6 +1,7 @@
 import history from '../history';
 import { API_URL } from '../api';
 import { getExercicesEleve } from './exercice.actions';
+import { login_snack } from './auth.actions';
 export const ADD_CLASS_BY_PROFF       = 'add class by professeur';
 export const EDIT_CLASS_BY_PROFF      = 'supprile les proff selectionnée';
 export const SUPPRIMER_CLASS_BY_ID    = 'supprime une class ';
@@ -42,7 +43,7 @@ export const addClass = (nom, id) => {
  
       dispatch(getClass());
     })
-    .catch((e) => dispatch());
+    .catch((e) => {});
   }
 };
 
@@ -64,10 +65,10 @@ export const updateClass = (nom, id) => {
     })
     .then(response => response.json())
     .then(json => {
-      // Une fois fini, on va récupérer les classe a nouveau.. 
-      dispatch(getClass());
+        dispatch(login_snack("Le nom de la class a été modifié"));
+        dispatch(getClass());
     })
-    .catch((e) => dispatch());
+    .catch((e) => {});
   }
 };
 
@@ -84,11 +85,11 @@ export const deleteClass = (id) => {
     })
     .then(response => response)
     .then(json => {
-      // Une fois fini, on va récupérer les classe a nouveau.. 
+      //dispatch(login_snack("Le nom de la class a été modifié"));
       history.push('/professeur/classes');
-      dispatch(getClass());
+      //dispatch(getClass());
     })
-    .catch((e) => dispatch());
+    .catch((e) => {});
   }
 };
 
@@ -108,7 +109,7 @@ export const getClass = () => {
 
       dispatch(getClassAction(json["hydra:member"]));
     })
-    .catch((e) => dispatch());
+    .catch((e) => {});
   }
 };
 
@@ -127,7 +128,7 @@ export const getClassStats = () => {
     
       dispatch(getClassStatsAction(json));
     })
-    .catch((e) => dispatch());
+    .catch((e) => {});
   }
 };
 
@@ -148,7 +149,7 @@ export const getClassUser = () => {
       dispatch(GetClassUser(json));
       dispatch(getExercicesEleve(json));
     })
-    .catch((e) => dispatch());
+    .catch((e) => {});
   }
 };
 

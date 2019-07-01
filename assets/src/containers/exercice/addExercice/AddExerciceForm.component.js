@@ -7,6 +7,31 @@ import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { updateFormTitle, updateDate, updateFormDesc, updateFormIn, updateFormOut, createExerciceAction, importAction, importExo } from '../../../actions/exercice.actions';
+import Modal from '@material-ui/core/Modal';
+function getModalStyle() {
+  const top = 50 ;
+  const left = 50 ;
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
+
+const styles = theme => ({
+  div: {
+    width: '30%'
+  },
+  paper: {
+    position: 'absolute',
+    width: theme.spacing.unit * 60,
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing.unit * 4,
+    outline: 'none',
+  },
+});
 
 class AddExerciceForm extends React.Component {
 
@@ -18,10 +43,19 @@ class AddExerciceForm extends React.Component {
         pagination: 0,
         quantityOfIn: 0,
         quantityOfOut: 1,
-        selectedOption: []
+        selectedOption: [],
+        open: false,
+        blue: false
 	    }
 	 } 
-   
+     handleOpen = () => {
+      this.setState({ open: true });
+    };
+
+    handleClose = () => {
+      this.setState({ open: false });
+    };
+  
    handleChange(event) {
       this.props.updateFormIn( {...this.props.data.FormDataIn, [event.target.name]: event.target.value} )
    }
@@ -196,6 +230,7 @@ getoutvars(){
     } else {
       alert('The File APIs are not fully supported in this browser.');
     }
+    this.setState({blue: true});
   }
   getDelOut(){
         if (this.state.quantityOfOut === 0){
@@ -204,28 +239,19 @@ getoutvars(){
         return <div></div>;
         //return <Button className={[scss['delete']]}  onClick={() => {this.deloutvars()}}>Supprimer</Button>;
   }
-
+  getIButton(){
+    if (this.state.blue){
+      return <Button variant="raised" color="primary" component="span" onClick={(e) => {this.import(e)}}>
+                Import
+            </Button> 
+    }
+    return <Button variant="raised" component="span" onClick={(e) => {this.import(e)}}>
+                Import
+            </Button> 
+  }
 	render() {
 	 	return(
 	 		 <div className={scss['ListeExercices']} >
-          <div>
-            <input
-              accept="*.coding-sensei"
-              style={{ display: 'none' }}
-              id="raised-button-file"
-              multiple
-              type="file"
-            />
-            <label htmlFor="raised-button-file">
-              <Button variant="raised" component="span">
-                Choose file
-              </Button>   
-            </label> 
-            <Button variant="raised" component="span" onClick={(e) => {this.import(e)}}
->
-                Import
-            </Button> 
-          </div>  
           <form className={[ scss['form_add_proff_form']]} noValidate autoComplete="off">
             <TextField
               id="titre"
@@ -245,6 +271,18 @@ getoutvars(){
               rowsMax={20}
               margin="normal"
             />
+            <TextField
+                    id="date"
+                    label="date limite"
+                    type="date"
+                    //defaultValue="2017-01-01"
+                    value={this.props.data.formDate}
+                    onChange={(e) => {this.props.updateDate(e.target.value)}}
+                    //className={classes.textField}
+                    InputLabelProps={{
+                      shrink: true
+                    }}
+                  />
             <Button className={[scss['button_add']]} variant="contained"  onClick={() => {this.addInVariable()}}>
               Ajouter un Element en entrée
             </Button>
@@ -261,29 +299,33 @@ getoutvars(){
             { this.getoutvars()}
             { this.getDelOut()}
             </div>
-             <div className={[scss['grid-container-date']]}>
-                   <TextField
-                    id="date"
-                    label="date limite"
-                    type="date"
-                    //defaultValue="2017-01-01"
-                    value={this.props.data.formDate}
-                    onChange={(e) => {this.props.updateDate(e.target.value)}}
-                    //className={classes.textField}
-                    InputLabelProps={{
-                      shrink: true
-                    }}
-                  />
-
-            </div>
-            <Button className={[scss['button_add']]} variant="contained"  onClick={() => {this.props.updateDate('0000-00-00')}}>
-             definir la date limit comme illimitée
-            </Button>
+             
+            
               <Button className={[scss['vld']]} variant="contained" color="primary"  onClick={() => {this.formSubmit()}}>
               Valider
             </Button>
-          </form>
+            <div>
+            <h3>Importer</h3>
+            <input
+              accept="*.coding-sensei"
+              style={{ display: 'none' }}
+              id="raised-button-file"
+              multiple
+              type="file"
+            />
+            <label htmlFor="raised-button-file">
+              <Button variant="raised" component="span">
+                Choisissez un ficher
+              </Button>   
+            </label> 
+             {this.getIButton()}
+            </div>
 
+          </form>
+          <div>
+
+          
+          </div>
             
 	 		 </div>
 	 	);

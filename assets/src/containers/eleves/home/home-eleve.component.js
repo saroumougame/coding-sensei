@@ -51,7 +51,6 @@ class HomeEleve extends React.Component {
 
   	constructor(props) {
     	super(props);
-      console.log(this);
     	
       this.props.getUserByToken();
       this.props.getClassUser();

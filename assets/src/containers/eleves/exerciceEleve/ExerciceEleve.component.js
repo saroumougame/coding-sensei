@@ -39,7 +39,6 @@ class ExerciceEleve extends React.Component {
     return res;
   }
   getVariableInData(inData){
-    console.log(inData);
     inData = this.getVars(inData);
      if (inData.length <= 0){
       return <div></div>;
@@ -60,7 +59,6 @@ class ExerciceEleve extends React.Component {
 
    getExerciceTitle() {
     if(this.props.data.current_Exercice_User != null){
-      //console.log(this.props.data.current_Exercice_User.exercice);
       return <Typography variant="headline" component="h3">{this.props.data.current_Exercice_User.exercice['name']}</Typography>
     }
     return <Grid 
@@ -84,7 +82,6 @@ class ExerciceEleve extends React.Component {
 
    getVariableIn() {
     if(this.props.data.current_Exercice_User != null){
-      console.log(this.props.data.current_Exercice_User.exercice);
       return (
           <div>
              {this.getVariableInData(this.props.data.current_Exercice_User.exercice.inData)}

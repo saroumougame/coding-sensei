@@ -66,7 +66,6 @@ class AccountProff extends React.Component {
 }
 
   render() {
-    console.log(this.props.data.stats);
       return (
         
     <div className={styles.portalDashboardPageWrapper}>

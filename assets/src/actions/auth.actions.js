@@ -250,7 +250,7 @@ export const getUser = () => {
 
       dispatch(loginAction(json));
     })
-    .catch((e) => dispatch());
+    .catch((e) => {});
   }
 };
 

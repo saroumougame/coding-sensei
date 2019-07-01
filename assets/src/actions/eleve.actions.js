@@ -35,7 +35,7 @@ export const getEleve = () => {
      // Une fois fini, on affiche toute les classes
       dispatch(getEleveAction(json["hydra:member"]));
     })
-    .catch((e) => dispatch());
+    .catch((e) => {});
   }
 };
 export const getEleveByProf = () => {
@@ -56,7 +56,7 @@ export const getEleveByProf = () => {
      // Une fois fini, on affiche toute les classes
       dispatch(getEleveAction(json["hydra:member"]));
     })
-    .catch((e) => dispatch());
+    .catch((e) => {});
   }
 };
 
@@ -89,7 +89,7 @@ export const AddUserEleveAction = (nom, email) => {
     .then(json => {
           dispatch(getEleve());
     })
-    .catch((e) => dispatch());
+    .catch((e) => {});
   }
 }
 

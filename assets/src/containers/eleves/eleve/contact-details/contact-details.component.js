@@ -50,9 +50,13 @@ class ContactDetails extends React.Component {
   }
   getVars(data){
     
-    
-    data = JSON.parse(data);
-    
+    if (/^[\],:{}\s]*$/.test(data.replace(/\\["\\\/bfnrtu]/g, '@').
+replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
+replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
+      data = JSON.parse(data);
+    } else {
+      data = {}
+    }
     var res = [];
     for (var key in data) {
       if (data.hasOwnProperty(key)) {
@@ -113,22 +117,25 @@ class ContactDetails extends React.Component {
               var reponse = false;
               for (var i = 0; i < element.reponse.length; i++) {
                 success = success || element.reponse[i].success;
+                
                 if (! reponse){
                   reponse = element.reponse[i];
-                  break;
+                  continue;
                 }
+
                 var old_date = new Date(reponse.createdAt)
                 var new_date = new Date(element.reponse[i].createdAt)
-                if (reponse.success && element.reponse[i].success){
-                  if (old_date < new_date){
+                if (!reponse.success && element.reponse[i].success){
                     reponse = element.reponse[i];
-                    break;
-                  }
+                    continue;
                 }
                 if (old_date < new_date){
-                    reponse = element.reponse[i];
-                    break;
+                  reponse = element.reponse[i];
+                  continue;
                 }
+                
+                
+                
               }
               if (createdAt){
                 createdAt = (new Date(createdAt.date)).toLocaleDateString();

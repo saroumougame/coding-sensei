@@ -38,7 +38,6 @@ constructor(props) {
         return " liste d'exercices ";
       }
 
-deleteClass
    }
   updateClass(){
     this.props.updateClass(this.state.currentClasse, this.props.data.currentClasse.id);
@@ -100,7 +99,6 @@ componentWillReceiveProps(nextProps) {
       });
   }
   render(){
-    console.log(this.props.data.currentClasse);
     return (
     <div className={classNames(scss['portal-contacts-no-contacts'])}>
       

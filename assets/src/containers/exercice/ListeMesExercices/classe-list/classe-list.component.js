@@ -86,10 +86,11 @@ class ClassesList extends React.Component {
      if(contact.dateEnd != null) {
       var dateFinExo = 'Date de début : '+contact.dateEnd.substring(0, 10);
      }
-
+     /*
      if(contact.archive) {
       return null;
      }
+     */
 
     return (
       <ListItem

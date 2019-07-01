@@ -88,8 +88,7 @@ class ClassesList extends React.Component {
      }
 
      if(contact.archive) {
-
-      return;
+      return null;
      }
 
     return (
@@ -186,7 +185,12 @@ class ClassesList extends React.Component {
 
   getCustomClassList() {
 
-    return this.props.data.liste_exercice_complete;
+    return this.props.data.liste_exercice_complete.filter(function(exo) {
+        if (exo.archive) {
+          return false; // skip
+        }
+        return true;
+      });
 /*
     if(this.state.updatedList === true){
       if (this.props.data.classUpdatedList  !== undefined){

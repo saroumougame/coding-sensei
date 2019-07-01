@@ -211,7 +211,7 @@ export default ({ logged , childProps, layout, roles }) => {
    {/*
         --------------------------------------------------------------------------------------------------------------------------------------------    
         --------------------------------------------------------------------------------------------------------------------------------------------
-  */}           
+             
       <AppRoute path="/dashboards/analytics" exact component={AsyncAnalyticsDashboard} props={childProps} layout={CompactLayout} />
       <AppRoute path="/dashboards/ecommerce" exact component={AsyncEcommerceDashboard} props={childProps} layout={CompactLayout} />
       <AppRoute path="/dashboards/crypto" exact component={AsyncCryptoDashboard} props={childProps} layout={CompactLayout} />
@@ -237,7 +237,7 @@ export default ({ logged , childProps, layout, roles }) => {
       <AppRoute path="/elements/steppers" exact component={AsyncSteppersExample} props={childProps} layout={CompactLayout} />
       <AppRoute path="/elements/buttons" exact component={AsyncButtonExample} props={childProps} layout={CompactLayout} />
       <AppRoute path="/elements/progress" exact component={AsyncProgressExample} props={childProps} layout={CompactLayout} />
-{/*
+*/}{/*
       <AppRoute path="/register" exact component={AsyncRegister} props={childProps} layout={NoLayout} />
       <AppRoute path="/profile" exact component={AsyncProfile} props={childProps} layout={activeLayout} />
       <AppRoute path="/lock" exact component={AsyncLock} props={childProps} layout={NoLayout} />

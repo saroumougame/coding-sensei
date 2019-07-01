@@ -43,11 +43,7 @@ class Register extends React.Component {
 
   componentWillMount() {
 
-    if(this.props.match.params.formulaire !== undefined){
       this.props.inscriptionEtapeAction(2);
-    }else {
-      this.props.inscriptionEtapeAction(1);
-    }
 
   }
 
@@ -92,7 +88,6 @@ class Register extends React.Component {
                         </Typography>
                         <NavLink to="/inscription/professeur" >
                         <Button id="proffeseur" color="default" variant="contained">S'inscrire</Button>
-                        <Button >Plus d'informations</Button>
                         </NavLink>
                       </CardContent>
                     </CardActionArea>

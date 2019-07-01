@@ -282,12 +282,12 @@ getoutvars(){
                       shrink: true
                     }}
                   />
-                  <Button className={[scss['button_add']]} variant="contained" color="primary"  onClick={() => {this.props.updateDate("0000-00-00")}}>
+                  {/*<Button className={[scss['button_add']]} variant="contained" color="primary"  onClick={() => {this.props.updateDate("0000-00-00")}}>
               Definir comme date illimité
-            </Button>
-            {/*<Button className={[scss['button_add']]} variant="contained"  onClick={() => {this.addInVariable()}}>
-              Ajouter un Element en entrée
             </Button>*/}
+            <Button className={[scss['button_add']]} variant="contained"  onClick={() => {this.addInVariable()}}>
+              Ajouter un Element en entrée
+            </Button>
             <div className={[scss['grid_container']]}>
                         { this.getinvars()}
             { this.getDelIn()}

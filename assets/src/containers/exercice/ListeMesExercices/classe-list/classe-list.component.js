@@ -181,11 +181,14 @@ class ClassesList extends React.Component {
   }
 
   getCustomClassList() {
-    return this.props.data.liste_exercice_complete;
 
 
     if(this.state.updatedList === true){
-      return this.props.data.classUpdatedList;
+      if (this.props.data.classUpdatedList  !== undefined){
+        return this.props.data.classUpdatedList;
+      }else{
+        return [];
+      }
     }
     if (this.props.data.classList  !== undefined){
 

@@ -85,7 +85,7 @@ const Landing = (props) => {
                 <div className={classNames( scss['photo'], scss['photo5'])}></div>  
                 <div className={classNames( scss['photo'], scss['photo6'])}></div>  
                 <div className={classNames( scss['photo'], scss['photo7'])}></div>
-                <div className={classNames( scss['photo'], scss['photo9'])}>IDE</div>  
+                <div className={classNames( scss['photo'], scss['photo9'])}></div>  
               </Grid>
           </Card>
           

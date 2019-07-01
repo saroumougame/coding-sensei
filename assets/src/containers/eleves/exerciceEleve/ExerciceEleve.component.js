@@ -50,7 +50,7 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
     }
     var data = [];
     for (var i = 0; i < inData.length; i++ ){
-      data[i] = `$${inData[i][0]} = ${inData[i][1]}`;
+      data[i] = `${inData[i][0]} = ${inData[i][1]}`;
     }
     var res = Prism.highlight(data.join("\n"), Prism.languages["php"]);
      return <div>

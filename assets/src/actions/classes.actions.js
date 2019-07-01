@@ -42,8 +42,10 @@ export const addClass = (nom, id) => {
     .then(json => {
  
       dispatch(getClass());
+      dispatch(login_snack("La classe a été crée"));
+
     })
-    .catch((e) => {});
+    .catch((e) => login_snack("Une erreur est survenue"));
   }
 };
 

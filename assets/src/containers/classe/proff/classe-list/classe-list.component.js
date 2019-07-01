@@ -239,8 +239,6 @@ function mapStateToProps(state) {
       classUpdatedList:    state.classData.UpdatedClasses,
       modalAddClass:       state.classData.modalAddClass,
       user:                state.authData.user,
-
- 
     }
   };
 }

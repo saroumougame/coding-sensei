@@ -54,7 +54,7 @@ export const addClass = (nom, id) => {
       dispatch(updateModalAddClass(false));
 
     })
-    .catch((e) => login_snack("Une erreur est survenue"));
+    .catch((e) => {dispatch(login_snack("Une erreur est survenue"))});
   }
 };
 

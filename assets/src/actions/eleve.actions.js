@@ -1,8 +1,16 @@
 import { API_URL } from '../api';
 import { login_snack } from './auth.actions';
-export  const SETELEVECONTACT = "SET ELEVE CONTACT";
-export  const GETELEVEBYCLASS = "GET ELEVE BYCLASS";
+export  const SETELEVECONTACT  = "SET ELEVE CONTACT";
+export  const GETELEVEBYCLASS  = "GET ELEVE BYCLASS";
+export  const UPDATEELEVEMODAL = "UPDATEELEVEMODAL";
 
+
+
+
+export const updateModalAddEleve = status => ({
+  type: UPDATEELEVEMODAL,
+  payload: status
+});
 
 export const setEleveAction = contact => ({
   type: SETELEVECONTACT,
@@ -90,9 +98,11 @@ export const AddUserEleveAction = (nom, email) => {
     .then(json => {
         if (json.title === 'An error occurred'){
           dispatch(login_snack(json.detail));
+          dispatch(updateModalAddEleve(false));
         } else {
           dispatch(login_snack("Eleve crée"));
           dispatch(getEleve());
+          dispatch(updateModalAddEleve(false));
 
         }
     })

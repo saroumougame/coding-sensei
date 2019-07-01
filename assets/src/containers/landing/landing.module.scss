@@ -85,8 +85,6 @@
 }
 
 .landing-description-p{
-
-  font-size: 1.5rem;
   margin-bottom: 15px;
 }
 
@@ -105,6 +103,15 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 15px;
+}
+
+.photo {
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+    background-size: auto 100%;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .login-actions {
@@ -131,3 +138,13 @@
 }
 
 
+.photo1{ background-image: url("/assets/images/logo/react.svg");}
+.photo2{ 
+  background-image: url("/assets/images/logo/redux.png");
+  background-size: 100% auto;
+}
+.photo3{ background-image: url("/assets/images/logo/apiplateform.png");}
+.photo4{ background-image: url("/assets/images/logo/docker.png");}
+.photo5{ background-image: url("/assets/images/logo/symfony.svg");}
+.photo6{ background-image: url("/assets/images/logo/travis.jpeg");}
+.photo7{ background-image: url("/assets/images/logo/prisme.png");}

@@ -39,7 +39,8 @@ const Landing = (props) => {
 
  
     <Grid item sm={10} xs={12}  className={scss.panel}>
-      <Grid container justify="space-around"  spacing={0}>
+   
+      <Grid container  justify="space-around"  spacing={0}>
         <Grid
           item
           sm={5}
@@ -52,13 +53,10 @@ const Landing = (props) => {
               AIDER VOS ELEVES A DEVENIR DEVOLOPPEUR
               </Typography>
               <Typography className={scss['landing-description-p']}  component="h3">
-                Vous voulez aider vos eleves a faire des exercies<br />
-          
-                Mare de faire des exams sur papier<br />
-          
-                Cree vos exercices de maniere simple.<br />
-            
-                Permettez a vos eleves de vous ameliorer<br />
+                Vous voulez aider vos élèves à faire des exercices ?<br/>
+                Mare de faire des examens sur papier ?<br/>
+                Créez vos exercices de manière simple.<br/>
+                Permettez à vos élèves de vous améliorer.<br/>
              </Typography> 
             </CardContent>
             <NavLink to="/inscription">
@@ -67,14 +65,33 @@ const Landing = (props) => {
             </CardActions>
             </NavLink>
           </Card>
+          
+
         </Grid>
-        <Grid
+       <Grid
           item
           sm={5}
           xs={12}
         >
-   
+           <Card className={classNames(scss.card, classes['primary-card'])}>
+              <Typography variant="headline" component="h2" gutterBottom>
+              CODING SENSEI C'EST AUSSI :
+              </Typography>
+              <Grid container justify="space-around">
+                <div className={classNames( scss['photo'], scss['photo1'])}></div>  
+                <div className={classNames( scss['photo'], scss['photo2'])}></div>  
+                <div className={classNames( scss['photo'], scss['photo3'])}></div>  
+                <div className={classNames( scss['photo'], scss['photo4'])}></div>  
+                <div className={classNames( scss['photo'], scss['photo5'])}></div>  
+                <div className={classNames( scss['photo'], scss['photo6'])}></div>  
+                <div className={classNames( scss['photo'], scss['photo7'])}></div>
+                <div className={classNames( scss['photo'], scss['photo9'])}>IDE</div>  
+              </Grid>
+          </Card>
+          
+
         </Grid>
+        
       </Grid>
     </Grid>
   </Grid>

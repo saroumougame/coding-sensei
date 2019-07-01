@@ -20,11 +20,12 @@ class ShowExerice extends React.Component {
     }
    }
 getVars(data){
-    
+     if (typeof data == "undefined"){
+        return [];
+    }
     if (/^[\],:{}\s]*$/.test(data.replace(/\\["\\\/bfnrtu]/g, '@').
 replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
 replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
-           console.log(data);
  data = JSON.parse(data);
     } else {
       data = {}

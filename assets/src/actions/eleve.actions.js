@@ -1,4 +1,5 @@
 import { API_URL } from '../api';
+import { login_snack } from './auth.actions';
 export  const SETELEVECONTACT = "SET ELEVE CONTACT";
 export  const GETELEVEBYCLASS = "GET ELEVE BYCLASS";
 
@@ -87,9 +88,17 @@ export const AddUserEleveAction = (nom, email) => {
     })
     .then(response => response.json())
     .then(json => {
+        if (json.title === 'An error occurred'){
+          dispatch(login_snack(json.detail));
+        } else {
+          dispatch(login_snack("Eleve crée"));
           dispatch(getEleve());
+
+        }
     })
-    .catch((e) => {});
+    .catch((e) => dispatch(login_snack("Une erreur est survenue")));
+
+
   }
 }
 

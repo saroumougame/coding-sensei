@@ -371,10 +371,10 @@ export const createExerciceAction = () => {
     while (typeof(state.exerciceData.add_form_param_in["in_" + ini]) != undefined && typeof(state.exerciceData.add_form_param_in["in_" + ini]) != 'undefined'){
       trim = true;
       if (state.exerciceData.add_form_param_in["in_" + ini] === 1){
-        in_res += `"$${state.exerciceData.add_form_param_in["in_name_" + ini]}" : ${state.exerciceData.add_form_param_in["in_value_" + ini]},`
+        in_res += `"$${state.exerciceData.add_form_param_in["in_name_" + ini]}" : "${state.exerciceData.add_form_param_in["in_value_" + ini]}",`
       }
       if (state.exerciceData.add_form_param_in["in_" + ini] == 2){
-         in_res += `"const ${state.exerciceData.add_form_param_in["in_name_" + ini]}" : ${state.exerciceData.add_form_param_in["in_value_" + ini]},`
+         in_res += `"const ${state.exerciceData.add_form_param_in["in_name_" + ini]}" : "${state.exerciceData.add_form_param_in["in_value_" + ini]}",`
 
       }
       ini++;

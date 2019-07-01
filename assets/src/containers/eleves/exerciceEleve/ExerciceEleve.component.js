@@ -29,8 +29,13 @@ class ExerciceEleve extends React.Component {
     if (typeof data == "undefined"){
         return [];
     }
-    data = JSON.parse(data);
-    var res = [];
+if (/^[\],:{}\s]*$/.test(data.replace(/\\["\\\/bfnrtu]/g, '@').
+replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
+replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
+ data = JSON.parse(data);
+    } else {
+      data = {}
+    }    var res = [];
     for (var key in data) {
       if (data.hasOwnProperty(key)) {
         res.push([key,data[key]]);

@@ -211,9 +211,7 @@ class ClassesList extends React.Component {
         {isWidthUp('sm', width) ? this.createSearchTextField() : ''}
           <List component="nav" className={classNames(classes.listWrapper)}>
               {this.getCustomClassList().map((contact) => {
-                  return isWidthUp('sm', width) ?
-                      this.createDesktopListItem(contact) :
-                      this.createMobileListItem(contact);
+                  return this.createDesktopListItem(contact);
               })}
               
               <Modal3

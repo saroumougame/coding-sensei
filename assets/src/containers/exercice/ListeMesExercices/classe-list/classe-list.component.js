@@ -87,7 +87,10 @@ class ClassesList extends React.Component {
       var dateFinExo = 'Date de début : '+contact.dateEnd.substring(0, 10);
      }
 
-     console.log(contact.dateEnd);
+     if(contact.archive) {
+      return null;
+     }
+
     return (
       <ListItem
         title={contact.name}
@@ -182,7 +185,13 @@ class ClassesList extends React.Component {
 
   getCustomClassList() {
 
-
+    return this.props.data.liste_exercice_complete.filter(function(exo) {
+        if (exo.archive) {
+          return false; // skip
+        }
+        return true;
+      });
+/*
     if(this.state.updatedList === true){
       if (this.props.data.classUpdatedList  !== undefined){
         return this.props.data.classUpdatedList;
@@ -197,7 +206,7 @@ class ClassesList extends React.Component {
 
       return [];
     }
-
+*/
   }
 
   render () {

@@ -34,6 +34,7 @@ class ListeClassesProff extends React.Component {
     var contactsList = this.props.data.liste_exercice_complete;
     var currentClasse = this.state.selectedContact;
 
+    console.log(contactsList);
     return (
       <div className={scss['contacts-wrapper']}>
 

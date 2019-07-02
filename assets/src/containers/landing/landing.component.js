@@ -50,18 +50,18 @@ const Landing = (props) => {
             <CardContent className={scss['signup-content']}>
               <img src={logoImage} className={scss['signup-logo']} alt="logo" />
               <Typography variant="headline" component="h2" gutterBottom>
-              AIDER VOS ELEVES A DEVENIR DEVOLOPPEUR
+              AIDER VOS ELEVES A DEVENIR DEVOLOPPEUR PHP
               </Typography>
               <Typography className={scss['landing-description-p']}  component="h3">
                 Vous voulez aider vos élèves à faire des exercices ?<br/>
                 Mare de faire des examens sur papier ?<br/>
                 Créez vos exercices de manière simple.<br/>
-                Permettez à vos élèves de vous améliorer.<br/>
+                Permettez à vos élèves de s'améliorer.<br/>
              </Typography> 
             </CardContent>
             <NavLink to="/inscription">
             <CardActions>
-              <Button fullWidth color="default" variant="raised">Crée un compte</Button>
+              <Button fullWidth color="primary" variant="raised">Crée un compte</Button>
             </CardActions>
             </NavLink>
           </Card>
@@ -85,7 +85,11 @@ const Landing = (props) => {
                 <div className={classNames( scss['photo'], scss['photo5'])}></div>  
                 <div className={classNames( scss['photo'], scss['photo6'])}></div>  
                 <div className={classNames( scss['photo'], scss['photo7'])}></div>
+                <div className={classNames( scss['photo'], scss['photo8'])}></div>  
                 <div className={classNames( scss['photo'], scss['photo9'])}></div>  
+                <div className={classNames( scss['photo'], scss['photo10'])}></div> 
+                <div className={classNames( scss['photo'], scss['photo11'])}></div>  
+                <div className={classNames( scss['photo'], scss['photo12'])}></div>  
               </Grid>
           </Card>
           

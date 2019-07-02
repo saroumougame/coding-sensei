@@ -112,7 +112,10 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
   }
   getListeExercices() {
     if(this.props.data.exerciceTexte != null){
-        return this.props.data.exerciceTexte.map(element=>{ 
+        return this.props.data.exerciceTexte.map(element=>{
+              if (element.exercice.archive){
+                return <div></div>;
+              }
               var { name, description, endDate, createdAt, inData, outData } = element.exercice;
               var success = false;
               var reponse = false;

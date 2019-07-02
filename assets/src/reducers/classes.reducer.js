@@ -4,7 +4,8 @@ import {
   UPDATE_CLASS_NOM,
   SETCURRENTCLASS,
   SET_CLASS_STATS,
-  UPDATE_CLASS_USER
+  UPDATE_CLASS_USER,
+  UPDATE_MODAL_STATUS
 } from '../actions/classes.actions';
 
 
@@ -16,7 +17,8 @@ const defaultState = {
     CreateClassPromotion: '',
     FormDataUpdateClassNom: '',
     classeUser: null,
-    stats: null
+    stats: null,
+    modalAddClass: false,
 };
 
 const classesReducer = (state = defaultState, action) => {
@@ -33,6 +35,11 @@ const classesReducer = (state = defaultState, action) => {
         ...state,
           UpdatedClasses: action.payload
       }
+    case UPDATE_MODAL_STATUS: 
+      return {
+        ...state,
+          modalAddClass: action.payload
+      }    
     case UPDATE_CLASS_NOM:
       return {
         ...state,

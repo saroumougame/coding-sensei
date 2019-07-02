@@ -10,8 +10,9 @@ import themeStyles from './create-eleve-modal.style.js';
 import TextField from '@material-ui/core/TextField';
 
 import Modal2 from '../../../components/list.modal.component';
+import Modal3 from '../../../components/list.modal-redux.component';
 import {FormUpdateClassNom, updateClass, deleteClass}     from '../../../actions/classes.actions';
-import { AddUserEleveAction }							from '../../../actions/eleve.actions';
+import { AddUserEleveAction, updateModalAddEleve }		from '../../../actions/eleve.actions';
 
 class CreateEleveModal extends React.Component {
 
@@ -116,12 +117,15 @@ class CreateEleveModal extends React.Component {
 	 render() {
 	 	return(
 	 		 <div> 
-                 <Modal2 
-                      titleButton='Ajouter un eleve'
-                      title="Ajouter d'un eleve"
-                      text={this.getAddEleveForm()}
 
-                  />
+               <Modal3
+                titleButton='Ajouter un eleve'
+                title="Ajouter d'un eleve"
+                text={this.getAddEleveForm()}
+                open={this.props.data.modalAddEleve}
+                customClick={() => {this.props.updateModalAddEleve(true)}}
+                customClose={() => {this.props.updateModalAddEleve(false)}}
+              />
 	 		 </div>
 	 	);
 	 }
@@ -130,9 +134,10 @@ class CreateEleveModal extends React.Component {
 function mapStateToProps(state) {
   return {
     data: {
-      FormDataUpdateClassNom:           state.classData.FormDataUpdateClassNom,  
+      FormDataUpdateClassNom:           state.classData.FormDataUpdateClassNom, 
+      modalAddEleve: 					state.eleveData.modalAddEleve
     }
   };
 }
 export default compose(withWidth(), withStyles(themeStyles, { withTheme: true }),
-  connect(mapStateToProps, {FormUpdateClassNom, updateClass, deleteClass, AddUserEleveAction}))(CreateEleveModal);
+  connect(mapStateToProps, {FormUpdateClassNom, updateClass, deleteClass, AddUserEleveAction, updateModalAddEleve}))(CreateEleveModal);

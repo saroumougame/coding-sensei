@@ -19,7 +19,8 @@ import themeStyles from './classe-list.theme.style';
 import scss from './classe-list.module.scss';
 import {UpdateClass}      from '../../../../actions/classes.actions';
 import Modal2 from '../../../../components/list.modal.component';
-import {addClass}      from '../../../../actions/classes.actions';
+import Modal3 from '../../../../components/list.modal-redux.component';
+import {addClass, updateModalAddClass}      from '../../../../actions/classes.actions';
 import { getUser, getUserByToken } from '../../../../actions/auth.actions.js';
 
 
@@ -210,15 +211,16 @@ class ClassesList extends React.Component {
         {isWidthUp('sm', width) ? this.createSearchTextField() : ''}
           <List component="nav" className={classNames(classes.listWrapper)}>
               {this.getCustomClassList().map((contact) => {
-                  return isWidthUp('sm', width) ?
-                      this.createDesktopListItem(contact) :
-                      this.createMobileListItem(contact);
+                  return this.createDesktopListItem(contact);
               })}
               
-              <Modal2
-                titleButton='Aouter une classe'
+              <Modal3
+                titleButton='Aouter une classes'
                 title="Ajouter une classe"
                 text={this.getAddClassForm()}
+                open={this.props.data.modalAddClass}
+                customClick={() => {this.props.updateModalAddClass(true)}}
+                customClose={() => {this.props.updateModalAddClass(false)}}
               />
 
           </List>
@@ -233,9 +235,8 @@ function mapStateToProps(state) {
     data: {
       classList:           state.classData.classes,  
       classUpdatedList:    state.classData.UpdatedClasses,
+      modalAddClass:       state.classData.modalAddClass,
       user:                state.authData.user,
-
- 
     }
   };
 }
@@ -254,4 +255,4 @@ ClassesList.propTypes = {
 };
 
 export default compose(withWidth(), withStyles(themeStyles, { withTheme: true }),
- connect(mapStateToProps, {UpdateClass, addClass, getUserByToken}) )(ClassesList);
+ connect(mapStateToProps, {UpdateClass, addClass, getUserByToken, updateModalAddClass}) )(ClassesList);

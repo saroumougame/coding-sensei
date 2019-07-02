@@ -21,24 +21,20 @@ class ListeClassesProff extends React.Component {
     super(props);
     // Don't call this.setState() here!
     this.state = { selectedContact: null };
-    this.props.getClass();
+    //this.props.getClass();
+    this.props.getAllExercices();
   }
 
   selectContact = contact => () => {
-    /*
-    this.props.setClasseAction(contact);
-    this.props.setEleveAction(null);
-    this.props.getEleve();
-    this.props.listeExerciceAction();
-    //this.props.refreshEleve(contact);
-    */
-    this.props.getAllExercices();
+    
     this.setState({ selectedContact: contact });
   }
 
   render() {
-    var contactsList = this.props.data.classList;
-    var currentClasse = this.props.data.currentClasse;
+    var contactsList = this.props.data.liste_exercice_complete;
+    var currentClasse = this.state.selectedContact;
+
+    console.log(contactsList);
     return (
       <div className={scss['contacts-wrapper']}>
 
@@ -51,7 +47,6 @@ class ListeClassesProff extends React.Component {
         {currentClasse ?
           <ContactDetails
             selectedContact={currentClasse}  onSelect={this.selectContact} /> : <NoContacts />}
-
       </div>
     );
   }

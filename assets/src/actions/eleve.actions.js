@@ -1,7 +1,16 @@
 import { API_URL } from '../api';
-export  const SETELEVECONTACT = "SET ELEVE CONTACT";
-export  const GETELEVEBYCLASS = "GET ELEVE BYCLASS";
+import { login_snack } from './auth.actions';
+export  const SETELEVECONTACT  = "SET ELEVE CONTACT";
+export  const GETELEVEBYCLASS  = "GET ELEVE BYCLASS";
+export  const UPDATEELEVEMODAL = "UPDATEELEVEMODAL";
 
+
+
+
+export const updateModalAddEleve = status => ({
+  type: UPDATEELEVEMODAL,
+  payload: status
+});
 
 export const setEleveAction = contact => ({
   type: SETELEVECONTACT,
@@ -35,7 +44,7 @@ export const getEleve = () => {
      // Une fois fini, on affiche toute les classes
       dispatch(getEleveAction(json["hydra:member"]));
     })
-    .catch((e) => dispatch());
+    .catch((e) => {});
   }
 };
 export const getEleveByProf = () => {
@@ -56,7 +65,7 @@ export const getEleveByProf = () => {
      // Une fois fini, on affiche toute les classes
       dispatch(getEleveAction(json["hydra:member"]));
     })
-    .catch((e) => dispatch());
+    .catch((e) => {});
   }
 };
 
@@ -87,9 +96,19 @@ export const AddUserEleveAction = (nom, email) => {
     })
     .then(response => response.json())
     .then(json => {
+        if (json.title === 'An error occurred'){
+          dispatch(login_snack(json.detail));
+          dispatch(updateModalAddEleve(false));
+        } else {
+          dispatch(login_snack("Eleve crée"));
           dispatch(getEleve());
+          dispatch(updateModalAddEleve(false));
+
+        }
     })
-    .catch((e) => dispatch());
+    .catch((e) => dispatch(login_snack("Une erreur est survenue")));
+
+
   }
 }
 

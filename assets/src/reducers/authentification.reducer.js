@@ -94,7 +94,7 @@ const authReducer = (state = defaultState, action) => {
           register_message: ''
       };
     case LOGIN_SNACK:
-          return {
+      return {
         ...state,
           login_snack:   true,
           login_message: action.payload,

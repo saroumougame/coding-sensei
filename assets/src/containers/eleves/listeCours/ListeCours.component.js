@@ -25,10 +25,14 @@ class ListeCours extends React.Component {
     } 
 
       return 'Disponible le : '+this.parseDate(exo.dateEnd);
-    //console.log(exo.dateEnd);
+   }
+
+   getDateLimitBeforeDispo(exo) {
+      return this.parseDate(exo.dateEnd);
    }
 
    datePassedExercice(exercice) {
+      if(exercice.dateEnd != null) {
 
       var dateEnd = this.parseDate(exercice.dateEnd);
       var today = new Date();
@@ -39,8 +43,10 @@ class ListeCours extends React.Component {
       const date1 = new Date(today);
       const date2 = new Date(dateEnd);
 
-      return false;
+      //return false;
       return  date1 <= date2;
+      }
+      return false;
 
    }
 
@@ -71,7 +77,6 @@ class ListeCours extends React.Component {
           //on loop sur les reponses 
           var BonneReponse = false;
           i.reponse.map((i) =>{
-            console.log(i);
             if(i.success == true) {
               BonneReponse  = true;
             } 
@@ -94,12 +99,12 @@ class ListeCours extends React.Component {
           //if()
           if(this.datePassedExercice(i.exercice)) {
               return (
-                      <div key={i.exercice.name} className={scss['un-cour-bientot-disponible']} onClick={() => this.showExercice(i)} >
+                      <div key={i.exercice.name} className={scss['un-cour-bientot-disponible']} >
                           <div>
                           {i.exercice.name}
                           </div>
                          <div>
-                          Exercice disponible le :
+                          Exercice disponible le : {this.getDateLimitBeforeDispo(i.exercice)}
                          </div>
                       </div>
               );

@@ -18,6 +18,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import AddExerciceForm from '../../../exercice/addExercice/AddExerciceForm.component';
 import ShowExerciceProff from '../../../exercice/showExerciceProff/ShowExerice.component';
 import { setCurrentExerciceProff, setExerciceComponentAction } from '../../../../actions/exercice.actions';
+import { updateClass,deleteClass } from '../../../../actions/classes.actions';
 
 class NoContacts extends React.Component {
     
@@ -25,7 +26,8 @@ class NoContacts extends React.Component {
 constructor(props) {    
   super(props);
       this.state = {
-        Exercice: null // null = show | add = add | edit = edit
+        Exercice: null, // null = show | add = add | edit = edit
+        currentClasse: null
       }
    }
 
@@ -36,9 +38,18 @@ constructor(props) {
         return " liste d'exercices ";
       }
 
-
    }
-
+  updateClass(){
+    this.props.updateClass(this.state.currentClasse, this.props.data.currentClasse.id);
+  }
+  deleteClass(){
+    this.props.deleteClass(this.props.data.currentClasse.id);
+  }
+  handleNameUpdate(e){
+    this.setState({
+        currentClasse: e.target.value
+      })
+  }
    getPaperContent() {
       if(this.props.data.exercice_component === null){
         return (
@@ -82,7 +93,11 @@ constructor(props) {
           );        
       }
    }
-
+componentWillReceiveProps(nextProps) {
+    this.setState({
+        currentClasse: nextProps.data.currentClasse.name
+      });
+  }
   render(){
     return (
     <div className={classNames(scss['portal-contacts-no-contacts'])}>
@@ -106,22 +121,25 @@ className={classNames(scss['class-detail-header-in-form'])}
         justify="space-between">
         <TextField
               id="nom"
-              onChange={this.handleNameUpdate}
+              onChange={this.handleNameUpdate.bind(this)}
               label="Nom de la classe"
               margin="normal"
-              value="test"
+              value={this.state.currentClasse}
               className={classNames(scss['class-detail-header-in-form-grid'])}
             />
-            <Button color="primary" className={scss['portal-contacts-detail-update-contact']} >
+            <Button color="primary" className={scss['portal-contacts-detail-update-contact']} 
+            onClick={this.updateClass.bind(this)}
+          >
                 <EditIcon/>
-              </Button>
+            </Button>
             </Grid>
             </form>
 
 
                     </div>
       
-            <Button color="secondary" className={scss['portal-contacts-detail-delete-button-contact']} >
+            <Button color="secondary" className={scss['portal-contacts-detail-delete-button-contact']}
+            onClick={this.deleteClass.bind(this)} >
                 <DeleteIcon/> 
             </Button>
       </Grid>
@@ -141,7 +159,8 @@ NoContacts.propTypes = {
 function mapStateToProps(state) {
   return {
     data: {
-      classList:           state.classData.classes,  
+      classList:           state.classData.classes,
+      currentClasse:           state.classData.currentClasse,  
       classUpdatedList:    state.classData.UpdatedClasses,
       current_Exercice_proff: state.exerciceData.current_Exercice_proff,
       exercice_component: state.exerciceData.exercice_component
@@ -149,4 +168,4 @@ function mapStateToProps(state) {
   };
 }
 export default compose(withWidth(), withStyles(themeStyles, { withTheme: true }),
- connect(mapStateToProps, {setCurrentExerciceProff, setExerciceComponentAction}) )(NoContacts);
+ connect(mapStateToProps, {setCurrentExerciceProff, setExerciceComponentAction,updateClass,deleteClass}) )(NoContacts);

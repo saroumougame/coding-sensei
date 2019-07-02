@@ -102,10 +102,48 @@ export const register = (nom, email, password) => {
       }
 
     })
-    .catch((e) => dispatch());
+    .catch((e) => dispatch(login_snack("une erreur est survenue")));
   }
 };
 
+export const editProfile = (id, nom, prenom, password) => {
+  
+    var token = localStorage.getItem('token');
+
+    let form = {
+      'firstName':  prenom,
+      'lastName':   nom,
+    }
+    if (password !== ''){
+      form["password"] = password
+    }
+       
+  
+    var formBody = JSON.stringify(form);
+
+    
+
+    return dispatch => { 
+      fetch(API_URL + id, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization'  : 'Bearer ' + localStorage.getItem('token')
+        },
+        body: formBody
+      })
+      .then(response => response.json())
+      .then(json => {
+        if (history.location.pathname.split("/")[1] !== "home") {
+          history.push('/classes');
+        } else {
+          dispatch(getUserByToken())
+          dispatch(login_snack("Votre Profile a bien été modifié"));
+        }
+      })
+      .catch((e) =>  dispatch(login_snack("une erreur est survenue")));
+    }
+};
 export const login = (email, password) => {
     var data = {
     'username': email,
@@ -126,19 +164,18 @@ export const login = (email, password) => {
     })
     .then(response => response.json() )
     .then(json => {
-
       if(typeof(json.token) !== 'undefined'){
         localStorage.setItem('token', json.token);
         dispatch(getUserByToken());
+
         
       }else {
-        history.push('/login?error=access');
-        dispatch(loginFailAction());
+        dispatch(login_snack("une erreur est survenue"));
       }
 
       return dispatch(login_spinner_stop());
     })
-    .catch((e) => dispatch(loginAction(false)));
+    .catch((e) => dispatch(login_snack("une erreur est survenue")));
   }
 }
 
@@ -162,7 +199,6 @@ export const getUserByToken = () => {
        dispatch(expiredAction());
       }else {
         if(json.roles.includes('ROLE_STUDENT')){
-          console.log(history.location.pathname.split("/")[1]);
           if (
             history.location.pathname.split("/")[1] !== "home" &&
             history.location.pathname.split("/")[1] !== "classes"
@@ -170,14 +206,19 @@ export const getUserByToken = () => {
           history.push('/classes');
           }
         }else{
-          if (history.location.pathname.split("/")[1] !== "professeur") {
-          history.push('/account');
+          if (
+            history.location.pathname.split("/")[1] !== "mes-exercices" &&
+            history.location.pathname.split("/")[1] !== "apps" &&
+            history.location.pathname.split("/")[1] !== "professeur" &&
+            history.location.pathname.split("/")[1] !== "account"
+            ) {
+            history.push('/account');
           }
         }
         dispatch(getCurrentUser(json));
       }
     })
-    .catch((e) => dispatch());
+    .catch((e) => dispatch(login_snack("une erreur est survenue")));
   }
 };
 
@@ -211,7 +252,7 @@ export const getUser = () => {
 
       dispatch(loginAction(json));
     })
-    .catch((e) => dispatch());
+    .catch((e) => {});
   }
 };
 

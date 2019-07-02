@@ -76,8 +76,6 @@ class ClassesList extends React.Component {
   }
 
     
-  
-
   createDesktopListItem = (contact) => {
     const {
       classes,
@@ -85,10 +83,19 @@ class ClassesList extends React.Component {
       onSelect
     } = this.props;
 
+     if(contact.dateEnd != null) {
+      var dateFinExo = 'Date de début : '+contact.dateEnd.substring(0, 10);
+     }
+     /*
+     if(contact.archive) {
+      return null;
+     }
+     */
+
     return (
       <ListItem
         title={contact.name}
-        key={contact.phone}
+        key={contact.name}
         className={classNames(
           scss['portal-contacts-list__item'],
           contact === selectedContact ? classes['portal-contacts-list__item--active'] : ''
@@ -103,7 +110,7 @@ class ClassesList extends React.Component {
         */}
         <ListItemText
           primary={contact.name}
-          secondary={'2019'}
+          secondary={dateFinExo}
           classes={{
             primary: contact === selectedContact ? classes['portal-contacts-list__item__text--active'] : '',
             secondary: classNames(
@@ -112,14 +119,7 @@ class ClassesList extends React.Component {
             )
           }}
         />
-        <ListItemIcon
-          className={classNames(
-            contact === selectedContact ? classes.portalContactsListItemIconActive : '',
-            classes.portalContactsListItemIcon)
-          }
-        >
-          <Group />
-        </ListItemIcon>
+
       </ListItem>
     );
   };
@@ -185,8 +185,20 @@ class ClassesList extends React.Component {
   }
 
   getCustomClassList() {
+
+    return this.props.data.liste_exercice_complete.filter(function(exo) {
+        if (exo.archive) {
+          return false; // skip
+        }
+        return true;
+      });
+/*
     if(this.state.updatedList === true){
-      return this.props.data.classUpdatedList;
+      if (this.props.data.classUpdatedList  !== undefined){
+        return this.props.data.classUpdatedList;
+      }else{
+        return [];
+      }
     }
     if (this.props.data.classList  !== undefined){
 
@@ -195,7 +207,7 @@ class ClassesList extends React.Component {
 
       return [];
     }
-
+*/
   }
 
   render () {
@@ -212,8 +224,6 @@ class ClassesList extends React.Component {
                       this.createDesktopListItem(contact) :
                       this.createMobileListItem(contact);
               })}
-            
-
           </List>
       </div>
     );
@@ -226,8 +236,8 @@ function mapStateToProps(state) {
     data: {
       classList:           state.classData.classes,  
       classUpdatedList:    state.classData.UpdatedClasses,
+      liste_exercice_complete: state.exerciceData.liste_exercice_complete
 
- 
     }
   };
 }

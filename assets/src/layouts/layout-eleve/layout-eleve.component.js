@@ -19,6 +19,8 @@ import RestoreIcon from '@material-ui/icons/Restore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import Https from '@material-ui/icons/Https';
+import Snackbar from '@material-ui/core/Snackbar';
+import { login_snack, login_snack_close } from '../../actions/auth.actions';
 
 import history from '../../history';
 
@@ -32,22 +34,37 @@ class EleveLayout extends React.Component {
     props.setSidenavOpen(variant === 'persistent');
 
        this.state = {
-        valueBottom: null
+        valueBottom: null,
+        login_snack: false
        }
   }
 
   // Update the layout state when a going from mobile to desktop and vice versa
   componentWillReceiveProps(nextProps) {
-   
+      this.setState({
+        login_snack: nextProps.layout.login_snack,
+        login_message: nextProps.layout.login_message 
+      })
   }
 
   render() {
     const { children, classes } = this.props;
 
-
+    var vertical = 'top';
+    var horizontal = 'right';
+    
     return (
       <div className={classNames(scss['layout-classic-wrapper'], classes.wrapper)}>
-        <main className={scss['layout-classic-main']}>
+        <Snackbar
+          anchorOrigin={{ vertical, horizontal }}
+          open={ this.state.login_snack}
+          onClose={this.props.login_snack_close}
+          ContentProps={{
+            'aria-describedby': 'message-id',
+          }}
+          message={<span id="message-id">{this.state.login_message}</span>}
+        />
+         <main className={scss['layout-classic-main']}>
             <div className={scss['layout-eleve-coontainer']}>
               <Grid 
               container
@@ -95,7 +112,9 @@ class EleveLayout extends React.Component {
 function mapStateToProps(state) {
   return {
     layout: {
-      sidenavOpen: state.layout.sidenavOpen
+      sidenavOpen: state.layout.sidenavOpen,
+      login_snack:                state.authData.login_snack,
+      login_message:              state.authData.login_message,
     }
   };
 }
@@ -115,7 +134,9 @@ export default compose(
     toggleSidenav,
     toggleSidenavVariant,
     setSidenavOpen,
-    deconnexionAction
+    deconnexionAction,
+    login_snack,
+    login_snack_close
   })
 )(EleveLayout);
 

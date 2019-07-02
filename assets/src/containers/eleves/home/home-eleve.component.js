@@ -19,7 +19,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
 import Modal from '@material-ui/core/Modal';
-import { getUser, getUserByToken } from '../../../actions/auth.actions.js';
+import { getUser, getUserByToken, editProfile } from '../../../actions/auth.actions.js';
 import PropTypes from 'prop-types';
 
 function getModalStyle() {
@@ -51,7 +51,6 @@ class HomeEleve extends React.Component {
 
   	constructor(props) {
     	super(props);
-
     	
       this.props.getUserByToken();
       this.props.getClassUser();
@@ -84,16 +83,20 @@ class HomeEleve extends React.Component {
     handleChangeRowsPerPage = event => {
       this.setState({ page: 0, rowsPerPage: event.target.value });
     };
-    handleSend(){
+    submitdata = () => {
       
-    }
-	 render() {
-    if (this.state.nom != (this.props.data.user ? this.props.data.user.lastName : "")){
+        this.props.editProfile(this.props.data.user['@id'], this.state.nom, this.state.prenom, this.state.mdp);
+      this.setState({ open: false });
+
+    };
+    componentWillReceiveProps(nextProps){
       this.setState({
-        nom: this.props.data.user ? this.props.data.user.lastName : "",
-        prenom: this.props.data.user ? this.props.data.user.firstName : "",
+        nom: nextProps.data.user.lastName,
+        prenom: nextProps.data.user.firstName ,
       });
     }
+	 render() {
+   
     var user = this.props.data.user || {
       firstName: "",
       lastName: "",
@@ -173,9 +176,9 @@ class HomeEleve extends React.Component {
               margin="normal"
             />
             <div>
-            <Button onClick={this.handleSend()} color="primary" autoFocus>
-              Send
-            </Button>
+              <Button onClick={this.submitdata} color="primary">
+                Send
+              </Button>
             </div>
             </Grid>
             </div>
@@ -207,7 +210,6 @@ class HomeEleve extends React.Component {
                 </TableHead>
                 <TableBody>
                   {ex.map(exercice => {
-                      console.log(exercice);
                     return (
                     <TableRow key={exercice.exo.exercice.name}>
                       <TableCell component="th" scope="row">
@@ -249,4 +251,4 @@ function mapStateToProps(state) {
   };
 }
 export default compose(withWidth(), withStyles(themeStyles, { withTheme: true }),
-  connect(mapStateToProps, {getUserByToken,getClassUser}))(HomeEleveWrapped);
+  connect(mapStateToProps, {getUserByToken,getClassUser, editProfile}))(HomeEleveWrapped);

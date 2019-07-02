@@ -39,7 +39,6 @@ class ContactDetails extends React.Component {
       this.props.elevesScoreAction();
     }
   componentDidMount() {
-    console.log("here");
     Prism.highlightAll();
   }
   getExoIcon(success){
@@ -49,10 +48,16 @@ class ContactDetails extends React.Component {
     return <ClearIcon/>
   }
   getVars(data){
-    
-    
-    data = JSON.parse(data);
-    
+     if (typeof data == "undefined"){
+        return [];
+    }
+    if (/^[\],:{}\s]*$/.test(data.replace(/\\["\\\/bfnrtu]/g, '@').
+replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
+replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
+      data = JSON.parse(data);
+    } else {
+      data = {}
+    }
     var res = [];
     for (var key in data) {
       if (data.hasOwnProperty(key)) {
@@ -68,7 +73,7 @@ class ContactDetails extends React.Component {
     }
     var data = [];
     for (var i = 0; i < inData.length; i++ ){
-      data[i] = `$${inData[i][0]} = ${inData[i][1]}`;
+      data[i] = `${inData[i][0]} = ${inData[i][1]}`;
     }
     var res = Prism.highlight(data.join("\n"), Prism.languages["php"]);
      return <div>
@@ -113,22 +118,25 @@ class ContactDetails extends React.Component {
               var reponse = false;
               for (var i = 0; i < element.reponse.length; i++) {
                 success = success || element.reponse[i].success;
+                
                 if (! reponse){
                   reponse = element.reponse[i];
-                  break;
+                  continue;
                 }
+
                 var old_date = new Date(reponse.createdAt)
                 var new_date = new Date(element.reponse[i].createdAt)
-                if (reponse.success && element.reponse[i].success){
-                  if (old_date < new_date){
+                if (!reponse.success && element.reponse[i].success){
                     reponse = element.reponse[i];
-                    break;
-                  }
+                    continue;
                 }
                 if (old_date < new_date){
-                    reponse = element.reponse[i];
-                    break;
+                  reponse = element.reponse[i];
+                  continue;
                 }
+                
+                
+                
               }
               if (createdAt){
                 createdAt = (new Date(createdAt.date)).toLocaleDateString();

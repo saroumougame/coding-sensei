@@ -29,8 +29,13 @@ class ExerciceEleve extends React.Component {
     if (typeof data == "undefined"){
         return [];
     }
-    data = JSON.parse(data);
-    var res = [];
+if (/^[\],:{}\s]*$/.test(data.replace(/\\["\\\/bfnrtu]/g, '@').
+replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
+replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
+ data = JSON.parse(data);
+    } else {
+      data = {}
+    }    var res = [];
     for (var key in data) {
       if (data.hasOwnProperty(key)) {
         res.push([key,data[key]]);
@@ -39,14 +44,13 @@ class ExerciceEleve extends React.Component {
     return res;
   }
   getVariableInData(inData){
-    console.log(inData);
     inData = this.getVars(inData);
      if (inData.length <= 0){
       return <div></div>;
     }
     var data = [];
     for (var i = 0; i < inData.length; i++ ){
-      data[i] = `$${inData[i][0]} = ${inData[i][1]}`;
+      data[i] = `${inData[i][0]} = ${inData[i][1]}`;
     }
     var res = Prism.highlight(data.join("\n"), Prism.languages["php"]);
      return <div>
@@ -60,7 +64,6 @@ class ExerciceEleve extends React.Component {
 
    getExerciceTitle() {
     if(this.props.data.current_Exercice_User != null){
-      //console.log(this.props.data.current_Exercice_User.exercice);
       return <Typography variant="headline" component="h3">{this.props.data.current_Exercice_User.exercice['name']}</Typography>
     }
     return <Grid 
@@ -84,7 +87,6 @@ class ExerciceEleve extends React.Component {
 
    getVariableIn() {
     if(this.props.data.current_Exercice_User != null){
-      console.log(this.props.data.current_Exercice_User.exercice);
       return (
           <div>
              {this.getVariableInData(this.props.data.current_Exercice_User.exercice.inData)}

@@ -154,3 +154,20 @@
   @extend .class-name-paper;
   margin-top: 15px;
 }
+
+.exercice-title {
+  height: 100%;
+}
+
+.paper-description {
+  width: 40%;
+  margin-bottom: 10px;
+  padding: 2%;
+}
+.exercice-paper{
+  padding: 30px;
+  min-height: 70vh;
+  max-height: 95vh;
+  min-width: 70%;
+  max-width: 95%;
+}
